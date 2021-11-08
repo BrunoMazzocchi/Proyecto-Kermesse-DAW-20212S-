@@ -1,13 +1,16 @@
 <?php
 
-class Lista_Precio{
+class Parroquia{
     //Atributos
     
-    private $id_lista_precio;
-    private $id_kermesse;
+    private $idParroquia;
     private $nombre;
-    private $descripcion;
-    private $estado;
+    private $direccion;
+    private $telefono;
+    private $parroco;
+    private $logo;
+    private $sitio_web;
+
 
     //Metodos
     public function _GET($k){return $this->$k;}
