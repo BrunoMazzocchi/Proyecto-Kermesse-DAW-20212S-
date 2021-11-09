@@ -1,9 +1,9 @@
 <?php
 
-include '../../entidades/kermesse.php';
-include '../../datos/dt_kermesse.php';
+include '../../entidades/parroquia.php';
+include '../../datos/dt_parroquia.php';
 
-$dtKerme = new Dt_Kermesse();
+$dtParro = new Dt_Parroquia();
 
 $varMsj = 0;
 if (isset($varMsj)) {
@@ -848,7 +848,7 @@ if (isset($varMsj)) {
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                                <li class="breadcrumb-item active">Kermesse</li>
+                                <li class="breadcrumb-item active">Parroquia</li>
                             </ol>
                         </div>
                     </div>
@@ -859,7 +859,7 @@ if (isset($varMsj)) {
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Kermesse</h3>
+                            <h3 class="card-title">Parroquia</h3>
 
                             <div class="card-body">
 
@@ -867,41 +867,28 @@ if (isset($varMsj)) {
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Kermesse ID</th>
                                             <th>Parroquia ID</th>
                                             <th>Nombre</th>
-                                            <th>Fecha Inicio</th>
-                                            <th>Fecha Final</th>
-                                            <th>Descripcion</th>
-                                            <th>Estado</th>
-                                            <th>Usuario creacion</th>
-                                            <th>Fecha creacion</th>
-                                            <th>Usuario modificacion</th>
-                                            <th>Fecha modificacion</th>
-                                            <th>Usuario eliminacion</th>
-                                            <th>Fecha eliminacion</th>
-
+                                            <th>Direccion</th>
+                                            <th>Telefono</th>
+                                            <th>Parrocol</th>
+                                            <th>Logo</th>
+                                            <th>Sitio Web</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
                                         <?php
-                                        foreach ($dtKerme->listKermesse() as $r) :
+                                        foreach ($dtParro->listParroquia() as $r) :
                                         ?>
                                             <tr>
-                                                <td><?php echo $r->__GET('id_kermesse') ?></td>
                                                 <td><?php echo $r->__GET('idParroquia') ?></td>
                                                 <td><?php echo $r->__GET('nombre') ?></td>
-                                                <td><?php echo $r->__GET('fInicio') ?></td>
-                                                <td><?php echo $r->__GET('fFinal') ?></td>
-                                                <td><?php echo $r->__GET('descripcion') ?></td>
-                                                <td><?php echo $r->__GET('estado') ?></td>
-                                                <td><?php echo $r->__GET('usuario_creacion') ?></td>
-                                                <td><?php echo $r->__GET('fecha_creacion') ?></td>
-                                                <td><?php echo $r->__GET('usuario_modificacion') ?></td>
-                                                <td><?php echo $r->__GET('fecha_modificacion') ?></td>
-                                                <td><?php echo $r->__GET('usuario_eliminacion') ?></td>
-                                                <td><?php echo $r->__GET('fecha_eliminacion') ?></td>
+                                                <td><?php echo $r->__GET('direccion') ?></td>
+                                                <td><?php echo $r->__GET('telefono') ?></td>
+                                                <td><?php echo $r->__GET('parroco') ?></td>
+                                                <td><?php echo $r->__GET('logo') ?></td>
+                                                <td><?php echo $r->__GET('sitio_web') ?></td>
 
                                             </tr>
                                         <?php
