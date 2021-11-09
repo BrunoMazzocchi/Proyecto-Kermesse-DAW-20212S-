@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 
 include '../../entidades/parroquia.php';
 include '../../datos/dt_parroquia.php';

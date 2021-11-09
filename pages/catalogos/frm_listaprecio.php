@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 
 include '../../entidades/lista_precio.php';
 include '../../datos/dt_listaprecio.php';
