@@ -862,6 +862,9 @@ if (isset($varMsj)) {
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
+                    <div class="form-group col-md-12" style="text-align: right;">
+                        <a href="frm_listaprecio_det.php" title="Registrar una nueva lista precio det" target="_blank"><i class="far fa-2x fa-plus-square"></i></a>
+                    </div>
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
@@ -869,7 +872,22 @@ if (isset($varMsj)) {
                                 <th>Lista Precio ID</th>
                                 <th>Producto ID</th>
                                 <th>Precio Venta</th>
-
+                            <tr>
+                                <td><?php echo $r->__GET('id_listaprecio_det') ?></td>
+                                <td><?php echo $r->__GET('id_lista_precio') ?></td>
+                                <td><?php echo $r->__GET('id_producto') ?></td>
+                                <td><?php echo $r->__GET('precio_venta') ?></td>
+                                <td> <a href="frm_editar_listaprecio_det.php?editCg=<?php echo $r->__GET('id_listaprecio_det'); ?>" target="blank">
+                                        <i class="far fa-edit" title="Editar Parroquia"></i></a>
+                                    &nbsp;&nbsp;
+                                    <a href="frm_view_listaprecio_det.php?viewCyG=<?php echo $r->__GET('id_listaprecio_det'); ?>" target="blank">
+                                        <i class="far fa-eye" title="Ver Lista Precio"></i></a>
+                                    &nbsp;&nbsp;
+                                    <a href="#" target="_blank">
+                                        <i class="far fa-trash-alt" title="Eliminar"></i>
+                                    </a>
+                                </td>
+                            </tr>
                             </tr>
                         </thead>
                         </thead>
@@ -877,17 +895,17 @@ if (isset($varMsj)) {
                         <tbody>
 
                             <?php
-                                        foreach ($dtParro->listListaPrecioDet() as $r) :
-                                            ?>
-                                                <tr>
-                                                    <td><?php echo $r->__GET('id_lista_precio') ?></td>
-                                                    <td><?php echo $r->__GET('id_lista_precio') ?></td>
-                                                    <td><?php echo $r->__GET('id_producto') ?></td>
-                                                    <td><?php echo $r->__GET('precio_venta') ?></td>
-    
-                                                </tr>
-                                            <?php
-                                            endforeach;
+                            foreach ($dtParro->listListaPrecioDet() as $r) :
+                            ?>
+                                <tr>
+                                    <td><?php echo $r->__GET('id_listaprecio_det') ?></td>
+                                    <td><?php echo $r->__GET('id_lista_precio') ?></td>
+                                    <td><?php echo $r->__GET('id_producto') ?></td>
+                                    <td><?php echo $r->__GET('precio_venta') ?></td>
+
+                                </tr>
+                            <?php
+                            endforeach;
                             ?>
 
                         <tfoot>

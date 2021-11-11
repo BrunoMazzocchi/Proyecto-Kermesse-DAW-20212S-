@@ -1,10 +1,13 @@
 <?php
+
 error_reporting(0);
 
-include '../../entidades/lista_precio.php';
-include '../../datos/dt_listaprecio.php';
+include '../../entidades/kermesse.php';
+include '../../datos/dt_kermesse.php';
+include '../../entidades/parroquia.php';
+include '../../datos/dt_parroquia.php';
 
-$dtParro = new Dt_ListaPrecio();
+$dtParro = new Dt_Kermesse();
 
 $varMsj = 0;
 if (isset($varMsj)) {
@@ -14,20 +17,18 @@ if (isset($varMsj)) {
 <!DOCTYPE html>
 <html lang="en">
 
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kermesse | Tabla Lista precio</title>
+    <title>AdminLTE 3 | General Form Elements</title>
 
-    <!-- Descargar y linkear -->
-
+    <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
@@ -391,8 +392,8 @@ if (isset($varMsj)) {
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item menu-open">
+                            <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-edit"></i>
                                 <p>
                                     Forms
@@ -401,7 +402,7 @@ if (isset($varMsj)) {
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="../forms/general.html" class="nav-link">
+                                    <a href="../forms/general.html" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>General Elements</p>
                                     </a>
@@ -426,8 +427,8 @@ if (isset($varMsj)) {
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item menu-open">
-                            <a href="#" class="nav-link active">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
                                     Tables
@@ -442,7 +443,31 @@ if (isset($varMsj)) {
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../tables/data.html" class="nav-link active">
+                                    <a href="tbl_parroquia.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Parroquia</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="tbl_listaPrecioDet.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Detalle precio</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="tbl_listaPrecio.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Lista de precio</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="tbl_kermesse.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Kermesse</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="../tables/data.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>DataTables</p>
                                     </a>
@@ -844,97 +869,113 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>DataTables</h1>
+                            <h1> View Kermesse</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                                <li class="breadcrumb-item active">Lista Precio</li>
+                                <li class="breadcrumb-item active">Lista Kermesse</li>
                             </ol>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Listas Precio</h3>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <div class="form-group col-md-12" style="text-align: right;">
-                        <a href="frm_listaprecio.php" title="Registrar un nuevo precio" target="_blank"><i class="far fa-2x fa-plus-square"></i></a>
-                    </div>
-                    <table id="example1" class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Lista Precio ID</th>
-                                <th>Kermesse ID</th>
-                                <th>Nombre</th>
-                                <th>Descripcion</th>
-                                <th>Estado</th>
-                            </tr>
-                        </thead>
-                        </thead>
 
-                        <tbody>
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- left column -->
+                        <div class="col-md-12">
+                            <!-- general form elements -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Kermesse</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <!-- form start -->
+                                <form>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label>Parroquia ID</label>
+                                            <input type="text" class="form-control" id="idParroquia" name="idParroquia" placeholder="ID de parroquia" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Nombre</label>
+                                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre de kermesse" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Fecha Inicio</label>
+                                            <input type="date" class="form-control" id="fInicio" name="fInicio" placeholder="Fecha inicio" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Fecha Final</label>
+                                            <input type="date" class="form-control" id="fFinal" name="fFinal" placeholder="Fecha final" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Descripcion</label>
+                                            <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Estado</label>
+                                            <input type="text" class="form-control" id="estado" name="estado" placeholder="Estado" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Estado</label>
+                                            <input type="text" class="form-control" id="estado" name="estado" placeholder="Estado" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Usuario Creacion</label>
+                                            <input type="text" class="form-control" id="usuario_creacion" name="usuario_creacion" placeholder="Usuario Creacion" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Fecha Creacion</label>
+                                            <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" placeholder="Fecha Creacion" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Usuario Modificacion</label>
+                                            <input type="number" class="form-control" id="usuario_modificacion" name="usuario_modificacion" placeholder="Usuario modificacion" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Fecha Modificacion</label>
+                                            <input type="date" class="form-control" id="fecha_modificacion" name="fecha_modificacion" placeholder="Fecha modificacion" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Usuario Eliminacion</label>
+                                            <input type="number" class="form-control" id="usuario_eliminacion" name="usuario_eliminacion" placeholder="Usuario eliminacion" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Fecha Eliminacion</label>
+                                            <input type="date" class="form-control" id="fecha_eliminacion" name="fecha_eliminacion" placeholder="Fecha eliminacion" required>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
 
-                            <?php
-                            foreach ($dtParro->listListaPrecio() as $r) :
-                            ?>
-                                <tr>
-                                    <td><?php echo $r->__GET('id_lista_precio') ?></td>
-                                    <td><?php echo $r->__GET('id_kermesse') ?></td>
-                                    <td><?php echo $r->__GET('nombre') ?></td>
-                                    <td><?php echo $r->__GET('descripcion') ?></td>
-                                    <td><?php echo $r->__GET('estado') ?></td>
-                                    <td> <a href="frm_editar_listaprecio.php?editCg=<?php echo $r->__GET('id_lista_precio'); ?>" target="blank">
-                                            <i class="far fa-edit" title="Editar Parroquia"></i></a>
-                                        &nbsp;&nbsp;
-                                        <a href="frm_view_listaprecio.php?viewCyG=<?php echo $r->__GET('id_lista_precio'); ?>" target="blank">
-                                            <i class="far fa-eye" title="Ver Lista Precio"></i></a>
-                                        &nbsp;&nbsp;
-                                        <a href="#" target="_blank">
-                                            <i class="far fa-trash-alt" title="Eliminar"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            <?php
-                            endforeach;
-                            ?>
+                                    <div class="card-footer">
+                                        <a href="tbl_kermesse.php"><i class="fas fa-arrow-left"></i> Atras</a>
 
-                        <tfoot>
-                            <tr>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.card -->
 
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-                <!-- /.card-body -->
+
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="float-right d-none d-sm-block">
+                <b>Version</b> 3.1.0-rc
             </div>
-            <!-- /.card -->
-        </div>
-        <!-- /.col -->
-    </div>
-    <!-- /.row -->
-    </div>
-    <!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-    <footer class="main-footer">
-        <div class="float-right d-none d-sm-block">
-            <b>Version</b> 3.1.0-rc
-        </div>
-        <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-    </footer>
+            <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+        </footer>
 
-
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
 
@@ -942,44 +983,19 @@ if (isset($varMsj)) {
     <script src="../../plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- DataTables  & Plugins -->
-    <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    <script src="../../plugins/jszip/jszip.min.js"></script>
-    <script src="../../plugins/pdfmake/pdfmake.min.js"></script>
-    <script src="../../plugins/pdfmake/vfs_fonts.js"></script>
-    <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-    <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
-    <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <!-- bs-custom-file-input -->
+    <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
+
     <script>
         $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
+            bsCustomFileInput.init();
         });
     </script>
-
 </body>
 
 </html>

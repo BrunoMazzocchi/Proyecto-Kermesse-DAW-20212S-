@@ -862,6 +862,9 @@ if (isset($varMsj)) {
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
+                    <div class="form-group col-md-12" style="text-align: right;">
+                        <a href="frm_kermesse.php" title="Registrar una nueva kermesse" target="_blank"><i class="far fa-2x fa-plus-square"></i></a>
+                    </div>
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
@@ -902,6 +905,16 @@ if (isset($varMsj)) {
                                     <td><?php echo $r->__GET('fecha_modificacion');  ?></td>
                                     <td><?php echo $r->__GET('usuario_eliminacion');  ?></td>
                                     <td><?php echo $r->__GET('fecha_eliminacion');  ?></td>
+                                    <td> <a href="frm_editar_kermesse.php?editCg=<?php echo $r->__GET('id_kermesse'); ?>" target="blank">
+                                            <i class="far fa-edit" title="Editar Kermesse"></i></a>
+                                        &nbsp;&nbsp;
+                                        <a href="frm_view_kermesse.php?viewCyG=<?php echo $r->__GET('id_kermesse'); ?>" target="blank">
+                                            <i class="far fa-eye" title="Ver Kermesse"></i></a>
+                                        &nbsp;&nbsp;
+                                        <a href="#" target="_blank">
+                                            <i class="far fa-trash-alt" title="Eliminar"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             <?php
                             endforeach;

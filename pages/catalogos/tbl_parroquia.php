@@ -861,6 +861,9 @@ if (isset($varMsj)) {
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
+                    <div class="form-group col-md-12" style="text-align: right;">
+                        <a href="frm_parroquia.php" title="Registrar una nueva parroquia" target="_blank"><i class="far fa-2x fa-plus-square"></i></a>
+                    </div>
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
@@ -888,7 +891,16 @@ if (isset($varMsj)) {
                                     <td><?php echo $r->__GET('parroco') ?></td>
                                     <td><?php echo $r->__GET('logo') ?></td>
                                     <td><?php echo $r->__GET('sitio_web') ?></td>
-
+                                    <td> <a href="frm_editar_parroquia.php?editCg=<?php echo $r->__GET('idParroquia'); ?>" target="blank">
+                                            <i class="far fa-edit" title="Editar Parroquia"></i></a>
+                                        &nbsp;&nbsp;
+                                        <a href="frm_view_kermesse.php?viewCyG=<?php echo $r->__GET('idParroquia'); ?>" target="blank">
+                                            <i class="far fa-eye" title="Ver Parroquia"></i></a>
+                                        &nbsp;&nbsp;
+                                        <a href="#" target="_blank">
+                                            <i class="far fa-trash-alt" title="Eliminar"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             <?php
                             endforeach;

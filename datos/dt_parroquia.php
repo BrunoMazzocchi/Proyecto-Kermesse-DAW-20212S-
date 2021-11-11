@@ -33,4 +33,27 @@ class Dt_Parroquia extends Conexion
             die($e->getMessage());
         }
     }
+
+    public function regParroquia(Parroquia $parroc)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $sql = "INSERT INTO dbkermesse.tbl_parroquia (idParroquia,nombre,direccion,telefono,parroco,logo,sitio_web)
+            VALUES (?,?,?,?,?,?,?)";
+            $this->myCon->prepare($sql)
+                ->execute(array(
+                    $parroc->__GET('idParroquia'),
+                    $parroc->__GET('nombre'),
+                    $parroc->__GET('direccion'),
+                    $parroc->__GET('telefono'),
+                    $parroc->__GET('parroco'),
+                    $parroc->__GET('logo'),
+                    $parroc->__GET('sitio_web')
+                ));
+
+            $this->myCon = parent::desconectar();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }

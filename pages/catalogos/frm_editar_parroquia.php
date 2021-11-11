@@ -1,16 +1,17 @@
 <?php
 error_reporting(0);
 
-include '../../entidades/listaprecio_det.php';
-include '../../datos/dt_listaprecio_det.php';
+include '../../entidades/parroquia.php';
+include '../../datos/dt_parroquia.php';
 
-$dtParro = new Dt_ListaPrecioDet();
+$dtParro = new Dt_Parroquia();
 
 $varMsj = 0;
 if (isset($varMsj)) {
   $varMsj = $_GET['msj'];
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -437,6 +438,30 @@ if (isset($varMsj)) {
                   </a>
                 </li>
                 <li class="nav-item">
+                  <a href="tbl_parroquia.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Parroquia</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="tbl_listaPrecioDet.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Detalle precio</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="tbl_listaPrecio.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Lista de precio</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="tbl_kermesse.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Kermesse</p>
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a href="../tables/data.html" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>DataTables</p>
@@ -839,12 +864,12 @@ if (isset($varMsj)) {
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Nueva Lista Precio Det</h1>
+              <h1>Parroquia</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                <li class="breadcrumb-item active">Registrar Lista Precio</li>
+                <li class="breadcrumb-item active">Editar Parroquia</li>
               </ol>
             </div>
           </div>
@@ -860,41 +885,54 @@ if (isset($varMsj)) {
               <!-- general form elements -->
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Registrar Lista Precio Det</h3>
+                  <h3 class="card-title">Editar Parroquia</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
                 <form>
                   <div class="card-body">
                     <div class="form-group">
-                      <label>Lista Precio ID</label>
-                      <input type="text" class="form-control" id="id_lista_precio" name="id_lista_precio" placeholder="Lista precio ID" required>
+                      <label>Nombre</label>
+                      <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre de parroquia" required>
                     </div>
                     <div class="form-group">
-                      <label>Producto ID</label>
-                      <input type="text" class="form-control" id="id_producto" name="id_producto" placeholder="Producto ID" required>
+                      <label>Direccion</label>
+                      <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion" required>
                     </div>
                     <div class="form-group">
-                      <label>Precio Venta</label>
-                      <input type="number" class="form-control" id="precio_venta" name="precio_venta" placeholder="Precio Venta" required>
+                      <label>Telefono</label>
+                      <input type="number" class="form-control" id="telefono" name="telefono" placeholder="Telefono" required>
                     </div>
                     <div class="form-group">
                       <label>Parroco</label>
                       <input type="text" class="form-control" id="parroco" name="parroco" placeholder="Parroco" required>
                     </div>
-                    <!-- /.card-body -->
-
-                    <div class="card-footer">
-                      <button type="submit" class="btn btn-primary">Submit</button>
-                      <button type="reset" class="btn btn-danger">Cancelar</button>
-
+                    <div class="form-group">
+                      <label>Logo</label>
+                      <div class="input-group">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="exampleInputFile" required>
+                          <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                        </div>
+                        <div class="input-group-append">
+                          <span class="input-group-text">Upload</span>
+                        </div>
+                      </div>
                     </div>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div>
+                  </div>
+                  <!-- /.card-body -->
+
+                  <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Editar</button>
+                    <button type="reset" class="btn btn-danger">Cancelar</button>
+                  </div>
                 </form>
               </div>
               <!-- /.card -->
-            </div>
-          </div>
-        </div>
 
 
       </section>
@@ -927,11 +965,13 @@ if (isset($varMsj)) {
   <!-- AdminLTE for demo purposes -->
   <script src="../../dist/js/demo.js"></script>
   <!-- Page specific script -->
+
   <script>
     $(function() {
       bsCustomFileInput.init();
     });
   </script>
+
 </body>
 
 </html>
