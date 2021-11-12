@@ -8,6 +8,7 @@ class vw_listapreciodet_listaprecio_producto{
     private $id_producto;
     private $precio_venta;
     private $nombreProducto;
+    private $nombreListaPrecio;
 
     //Metodos
     public function __GET($k){return $this->$k;}

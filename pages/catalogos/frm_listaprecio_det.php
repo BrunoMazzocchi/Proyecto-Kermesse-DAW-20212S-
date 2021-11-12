@@ -881,7 +881,7 @@ if (isset($varMsj)) {
                         foreach ($dtlist->listListaPrecioDet() as $r) :
                         ?>
                           <tr>
-                            <option value="<?php echo $r->__GET('id_lista_precio'); ?>"><?php echo $r->__GET('id_lista_precio'); ?></option>
+                            <option value="<?php echo $r->__GET('id_lista_precio'); ?>"><?php echo $r->__GET('nombreListaPrecio'); ?></option>
                           </tr>
                         <?php
                         endforeach;

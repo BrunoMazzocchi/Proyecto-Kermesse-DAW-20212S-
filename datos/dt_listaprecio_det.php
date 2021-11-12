@@ -19,6 +19,7 @@ class Dt_ListaPrecioDet extends Conexion
 
                 $lstPrecioDet->__SET('id_listaprecio_det', $r->id_listaprecio_det);
                 $lstPrecioDet->__SET('id_lista_precio', $r->id_lista_precio);
+                $lstPrecioDet->__SET('nombreListaPrecio', $r->nombreListaPrecio);
                 $lstPrecioDet->__SET('nombreProducto', $r->nombrProducto);
                 $lstPrecioDet->__SET('id_producto', $r->id_producto);
                 $lstPrecioDet->__SET('precio_venta', $r->precio_venta);
