@@ -4,7 +4,7 @@ error_reporting(0);
 include '../../entidades/lista_precio.php';
 include '../../datos/dt_listaprecio.php';
 
-$dtParro = new Dt_ListaPrecio();
+$dtlist = new Dt_ListaPrecio();
 
 $varMsj = 0;
 if (isset($varMsj)) {

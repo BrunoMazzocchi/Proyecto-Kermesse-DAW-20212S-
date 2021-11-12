@@ -7,7 +7,7 @@ include '../../datos/dt_kermesse.php';
 include '../../entidades/parroquia.php';
 include '../../datos/dt_parroquia.php';
 
-$dtParro = new Dt_Kermesse();
+$dtkerme = new Dt_Kermesse();
 
 $varMsj = 0;
 if (isset($varMsj)) {

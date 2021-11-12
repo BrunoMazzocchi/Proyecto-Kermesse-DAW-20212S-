@@ -4,7 +4,7 @@ error_reporting(0);
 include '../../entidades/kermesse.php';
 include '../../datos/dt_kermesse.php';
 
-$dtParro = new Dt_Kermesse();
+$dtKerme = new Dt_Kermesse();
 
 $varMsj = 0;
 if (isset($varMsj)) {
@@ -888,7 +888,7 @@ if (isset($varMsj)) {
                         <tbody>
 
                             <?php
-                            foreach ($dtParro->listKermesse() as $r) :
+                            foreach ($dtKerme->listKermesse() as $r) :
                             ?>
                                 <tr>
                                     <td><?php echo $r->__GET('id_kermesse') ?></td>
