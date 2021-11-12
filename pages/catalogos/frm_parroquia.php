@@ -865,7 +865,11 @@ if (isset($varMsj)) {
                 <!-- /.card-header -->
                 <!-- form start -->
                 <form>
-                  <div class="card-body">
+                <div class="card-body">
+                    <div class="form-group">
+                      <label >Numero de parroquia</label>
+                      <input type="number" class="form-control" id="idParroquia" name="idParroquia" placeholder="Numero de parroquia" required>
+                    </div>
                     <div class="form-group">
                       <label >Nombre</label>
                       <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre de parroquia" required>

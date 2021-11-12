@@ -4,7 +4,7 @@ error_reporting(0);
 include '../../entidades/kermesse.php';
 include '../../datos/dt_kermesse.php';
 
-$dtKerme = new Dt_Kermesse();
+$dtParro = new Dt_Kermesse();
 
 $varMsj = 0;
 if (isset($varMsj)) {
@@ -844,7 +844,7 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>DataTables</h1>
+                            <h1>Tablas</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -855,7 +855,6 @@ if (isset($varMsj)) {
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
-
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Kermesse</h3>
@@ -863,19 +862,19 @@ if (isset($varMsj)) {
                 <!-- /.card-header -->
                 <div class="card-body">
                     <div class="form-group col-md-12" style="text-align: right;">
-                        <a href="frm_kermesse.php" title="Registrar una nueva kermesse" target="_blank"><i class="far fa-2x fa-plus-square"></i></a>
+                        <a href="frm_parroquia.php" title="Registrar una nueva parroquia" target="_blank"><i class="far fa-2x fa-plus-square"></i></a>
                     </div>
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Kermesse ID</th>
-                                <th>Parroquia ID</th>
+                                <th>K ID</th>
+                                <th>P ID</th>
                                 <th>Nombre</th>
-                                <th>Fecha Inicio</th>
-                                <th>Fecha Final</th>
+                                <th>Fecha inicio</th>
+                                <th>Fecha final</th>
                                 <th>Descripcion</th>
                                 <th>Estado</th>
-                                <th>Usuario creacion</th>
+                                <th>Usuario Creacion</th>
                                 <th>Fecha creacion</th>
                                 <th>Usuario modificacion</th>
                                 <th>Fecha modificacion</th>
@@ -889,22 +888,23 @@ if (isset($varMsj)) {
                         <tbody>
 
                             <?php
-                            foreach ($kerme->listKermesse() as $r) :
+                            foreach ($dtParro->listKermesse() as $r) :
                             ?>
                                 <tr>
-                                    <td><?php echo $r->__GET('id_kermesse');  ?></td>
-                                    <td><?php echo $r->__GET('idParroquia');  ?></td>
-                                    <td><?php echo $r->__GET('nombre');  ?></td>
-                                    <td><?php echo $r->__GET('fInicio');  ?></td>
-                                    <td><?php echo $r->__GET('fFinal');  ?></td>
-                                    <td><?php echo $r->__GET('descripcion');  ?></td>
-                                    <td><?php echo $r->__GET('estado');  ?></td>
-                                    <td><?php echo $r->__GET('usuario_creacion');  ?></td>
-                                    <td><?php echo $r->__GET('fecha_creacion');  ?></td>
-                                    <td><?php echo $r->__GET('usuario_modificacion');  ?></td>
-                                    <td><?php echo $r->__GET('fecha_modificacion');  ?></td>
-                                    <td><?php echo $r->__GET('usuario_eliminacion');  ?></td>
-                                    <td><?php echo $r->__GET('fecha_eliminacion');  ?></td>
+                                    <td><?php echo $r->__GET('id_kermesse') ?></td>
+                                    <td><?php echo $r->__GET('idParroquia') ?></td>
+                                    <td><?php echo $r->__GET('nombre') ?></td>
+                                    <td><?php echo $r->__GET('fInicio') ?></td>
+                                    <td><?php echo $r->__GET('fFinal') ?></td>
+                                    <td><?php echo $r->__GET('descripcion') ?></td>
+                                    <td><?php echo $r->__GET('estado') ?></td>
+                                    <td><?php echo $r->__GET('usuario_creacion') ?></td>
+                                    <td><?php echo $r->__GET('fecha_creacion') ?></td>
+                                    <td><?php echo $r->__GET('usuario_modificacion') ?></td>
+                                    <td><?php echo $r->__GET('fecha_modificacion') ?></td>
+                                    <td><?php echo $r->__GET('usuario_eliminacion') ?></td>
+                                    <td><?php echo $r->__GET('fecha_eliminacion') ?></td>
+
                                     <td> <a href="frm_editar_kermesse.php?editCg=<?php echo $r->__GET('id_kermesse'); ?>" target="blank">
                                             <i class="far fa-edit" title="Editar Kermesse"></i></a>
                                         &nbsp;&nbsp;
@@ -922,11 +922,7 @@ if (isset($varMsj)) {
 
                         <tfoot>
                             <tr>
-                                <th>Rendering engine</th>
-                                <th>Browser</th>
-                                <th>Platform(s)</th>
-                                <th>Engine version</th>
-                                <th>CSS grade</th>
+
                             </tr>
                         </tfoot>
                     </table>
@@ -951,6 +947,7 @@ if (isset($varMsj)) {
         <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
     </footer>
 
+
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->
@@ -958,6 +955,7 @@ if (isset($varMsj)) {
     <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
+
     <!-- jQuery -->
     <script src="../../plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
