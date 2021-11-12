@@ -3,6 +3,7 @@ error_reporting(0);
 
 include '../../entidades/kermesse.php';
 include '../../datos/dt_kermesse.php';
+include '../../entidades/vw_kermesse_parroquia.php';
 
 $dtKerme = new Dt_Kermesse();
 
@@ -862,7 +863,7 @@ if (isset($varMsj)) {
                 <!-- /.card-header -->
                 <div class="card-body">
                     <div class="form-group col-md-12" style="text-align: right;">
-                        <a href="frm_parroquia.php" title="Registrar una nueva parroquia" target="_blank"><i class="far fa-2x fa-plus-square"></i></a>
+                        <a href="frm_kermesse.php" title="Registrar una nueva kermesse" target="_blank"><i class="far fa-2x fa-plus-square"></i></a>
                     </div>
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
@@ -893,7 +894,7 @@ if (isset($varMsj)) {
                                 <tr>
                                     <td><?php echo $r->__GET('id_kermesse') ?></td>
                                     <td><?php echo $r->__GET('idParroquia') ?></td>
-                                    <td><?php echo $r->__GET('nombre') ?></td>
+                                    <td><?php echo $r->__GET('nombreKermesse') ?></td>
                                     <td><?php echo $r->__GET('fInicio') ?></td>
                                     <td><?php echo $r->__GET('fFinal') ?></td>
                                     <td><?php echo $r->__GET('descripcion') ?></td>

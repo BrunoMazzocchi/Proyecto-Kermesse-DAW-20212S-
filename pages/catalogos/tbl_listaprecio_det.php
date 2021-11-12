@@ -17,7 +17,7 @@ if (isset($varMsj)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kermesse | Tabla Lista precio det</title>
+    <title>Kermesse | Tabla Lista precio</title>
 
     <!-- Descargar y linkear -->
 
@@ -855,39 +855,23 @@ if (isset($varMsj)) {
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
-
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Lista Precio Det</h3>
+                    <h3 class="card-title">Listas Precio Det</h3>
                 </div>
-                <!-- /.card-header -->
-                <div class="card-body">
+                               <!-- /.card-header -->
+                               <div class="card-body">
                     <div class="form-group col-md-12" style="text-align: right;">
-                        <a href="frm_listaprecio_det.php" title="Registrar una nueva lista precio det" target="_blank"><i class="far fa-2x fa-plus-square"></i></a>
+                        <a href="frm_listaprecio_det.php" title="Registrar una nueva lista precio" target="_blank"><i class="far fa-2x fa-plus-square"></i></a>
                     </div>
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Lista Precio Det ID</th>
-                                <th>Lista Precio ID</th>
-                                <th>Producto ID</th>
+                                <th>Lista Precio Det</th>
+                                <th>Lista precio</th>
+                                <th>Producto</th>
                                 <th>Precio Venta</th>
-                            <tr>
-                                <td><?php echo $r->__GET('id_listaprecio_det') ?></td>
-                                <td><?php echo $r->__GET('id_lista_precio') ?></td>
-                                <td><?php echo $r->__GET('id_producto') ?></td>
-                                <td><?php echo $r->__GET('precio_venta') ?></td>
-                                <td> <a href="frm_editar_listaprecio_det.php?editCg=<?php echo $r->__GET('id_listaprecio_det'); ?>" target="blank">
-                                        <i class="far fa-edit" title="Editar Parroquia"></i></a>
-                                    &nbsp;&nbsp;
-                                    <a href="frm_view_listaprecio_det.php?viewCyG=<?php echo $r->__GET('id_listaprecio_det'); ?>" target="blank">
-                                        <i class="far fa-eye" title="Ver Lista Precio"></i></a>
-                                    &nbsp;&nbsp;
-                                    <a href="#" target="_blank">
-                                        <i class="far fa-trash-alt" title="Eliminar"></i>
-                                    </a>
-                                </td>
-                            </tr>
+
                             </tr>
                         </thead>
                         </thead>
@@ -903,6 +887,16 @@ if (isset($varMsj)) {
                                     <td><?php echo $r->__GET('id_producto') ?></td>
                                     <td><?php echo $r->__GET('precio_venta') ?></td>
 
+                                    <td> <a href="frm_editar_listaprecio_det.php?editCg=<?php echo $r->__GET('id_listaprecio_det'); ?>" target="blank">
+                                            <i class="far fa-edit" title="Editar lista precio det"></i></a>
+                                        &nbsp;&nbsp;
+                                        <a href="frm_view_listaprecio_det.php?viewCyG=<?php echo $r->__GET('id_listaprecio_det'); ?>" target="blank">
+                                            <i class="far fa-eye" title="Ver Lista Precio Det"></i></a>
+                                        &nbsp;&nbsp;
+                                        <a href="#" target="_blank">
+                                            <i class="far fa-trash-alt" title="Eliminar"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             <?php
                             endforeach;
@@ -935,6 +929,7 @@ if (isset($varMsj)) {
         <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
     </footer>
 
+
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->
@@ -942,6 +937,7 @@ if (isset($varMsj)) {
     <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
+
     <!-- jQuery -->
     <script src="../../plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->

@@ -867,20 +867,56 @@ if (isset($varMsj)) {
                 <form>
                   <div class="card-body">
                     <div class="form-group">
-                      <label>Lista Precio ID</label>
-                      <input type="text" class="form-control" id="id_lista_precio" name="id_lista_precio" placeholder="Lista precio ID" required>
+                      <label>Lista Precio Det ID</label>
+                      <input type="number" class="form-control" id="id_lista_precio" name="id_lista_precio" placeholder="Lista precio Det ID" required>
                     </div>
                     <div class="form-group">
-                      <label>Producto ID</label>
-                      <input type="text" class="form-control" id="id_producto" name="id_producto" placeholder="Producto ID" required>
+                      <label>Seleccione una lista precio</label>
+                      <select id="id_kermesse" name="id_kermesse" class="form-control">
+                        <option value="">Seleccione...</option>
+
+
+                        <?php
+
+                        foreach ($dtlist->listListaPrecioDet() as $r) :
+                        ?>
+                          <tr>
+                            <option value="<?php echo $r->__GET('id_lista_precio'); ?>"><?php echo $r->__GET('id_lista_precio'); ?></option>
+                          </tr>
+                        <?php
+                        endforeach;
+
+                        ?>
+
+
+                      </select>
+
                     </div>
                     <div class="form-group">
-                      <label>Precio Venta</label>
-                      <input type="number" class="form-control" id="precio_venta" name="precio_venta" placeholder="Precio Venta" required>
+                      <label>Seleccione un producto</label>
+                      <select id="id_producto" name="id_producto" class="form-control">
+                        <option value="">Seleccione...</option>
+
+
+                        <?php
+
+                        foreach ($dtlist->listListaPrecioDet() as $r) :
+                        ?>
+                          <tr>
+                            <option value="<?php echo $r->__GET('id_producto'); ?>"><?php echo $r->__GET('nombreProducto'); ?></option>
+                          </tr>
+                        <?php
+                        endforeach;
+
+                        ?>
+
+
+                      </select>
+
                     </div>
                     <div class="form-group">
-                      <label>Parroco</label>
-                      <input type="text" class="form-control" id="parroco" name="parroco" placeholder="Parroco" required>
+                      <label>Precio de venta</label>
+                      <input type="number" class="form-control" id="precio_venta" name="precio_venta" placeholder="Agregue un precio de venta" required>
                     </div>
                     <!-- /.card-body -->
 

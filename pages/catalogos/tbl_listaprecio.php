@@ -859,19 +859,20 @@ if (isset($varMsj)) {
                 <div class="card-header">
                     <h3 class="card-title">Listas Precio</h3>
                 </div>
-                <!-- /.card-header -->
-                <div class="card-body">
+                               <!-- /.card-header -->
+                               <div class="card-body">
                     <div class="form-group col-md-12" style="text-align: right;">
-                        <a href="frm_listaprecio.php" title="Registrar un nuevo precio" target="_blank"><i class="far fa-2x fa-plus-square"></i></a>
+                        <a href="frm_listaprecio.php" title="Registrar una nueva lista precio" target="_blank"><i class="far fa-2x fa-plus-square"></i></a>
                     </div>
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>Lista Precio ID</th>
-                                <th>Kermesse ID</th>
+                                <th>Kermesse</th>
                                 <th>Nombre</th>
                                 <th>Descripcion</th>
                                 <th>Estado</th>
+
                             </tr>
                         </thead>
                         </thead>
@@ -887,11 +888,12 @@ if (isset($varMsj)) {
                                     <td><?php echo $r->__GET('nombre') ?></td>
                                     <td><?php echo $r->__GET('descripcion') ?></td>
                                     <td><?php echo $r->__GET('estado') ?></td>
+
                                     <td> <a href="frm_editar_listaprecio.php?editCg=<?php echo $r->__GET('id_lista_precio'); ?>" target="blank">
-                                            <i class="far fa-edit" title="Editar Parroquia"></i></a>
+                                            <i class="far fa-edit" title="Editar lista precio"></i></a>
                                         &nbsp;&nbsp;
                                         <a href="frm_view_listaprecio.php?viewCyG=<?php echo $r->__GET('id_lista_precio'); ?>" target="blank">
-                                            <i class="far fa-eye" title="Ver Lista Precio"></i></a>
+                                            <i class="far fa-eye" title="Ver lista precio"></i></a>
                                         &nbsp;&nbsp;
                                         <a href="#" target="_blank">
                                             <i class="far fa-trash-alt" title="Eliminar"></i>

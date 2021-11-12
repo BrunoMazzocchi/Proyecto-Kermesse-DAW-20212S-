@@ -867,21 +867,40 @@ if (isset($varMsj)) {
                 <form>
                   <div class="card-body">
                     <div class="form-group">
-                      <label >Kermesse ID</label>
-                      <input type="text" class="form-control" id="id_kermesse" name="id_kermesse" placeholder="Kermesse ID" required>
+                      <label>Seleccione una kermesse</label>
+                      <select id="id_kermesse" name="id_kermesse" class="form-control">
+                        <option value="">Seleccione...</option>
+
+
+                        <?php
+
+                        foreach ($dtlist->listListaPrecio() as $r) :
+                        ?>
+                          <tr>
+                            <option value="<?php echo $r->__GET('id_kermesse'); ?>"><?php echo $r->__GET('nombreKermesse'); ?></option>
+                          </tr>
+                        <?php
+                        endforeach;
+
+                        ?>
+
+
+                      </select>
+
                     </div>
                     <div class="form-group">
-                      <label >Nombre</label>
-                      <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
+                      <label>Lista ID</label>
+                      <input type="number" class="form-control" id="id_lista_precio" name="id_lista_precio" placeholder="Lista Precio ID" required>
                     </div>
                     <div class="form-group">
-                      <label >Descripcion</label>
+                      <label>Nombre de lista</label>
+                      <input type="text" class="form-control" id="nombreListaPrecio" name="nombreListaPrecio" placeholder="Nombre Lista Precio" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Descripcion</label>
                       <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" required>
                     </div>
-                    <div class="form-group">
-                      <label >Estado</label>
-                      <input type="number" class="form-control" id="estado" name="estado" placeholder="Estado" required>
-                    </div>
+                  </div>
                   <!-- /.card-body -->
 
                   <div class="card-footer">

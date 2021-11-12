@@ -1,6 +1,7 @@
 <?php
 include_once("conexion.php");
 include_once("../entidades/kermesse.php");
+include_once("../entidades/vw_kermesse_parroquia.php");
 
 class Dt_Kermesse extends Conexion
 {
@@ -9,17 +10,18 @@ class Dt_Kermesse extends Conexion
         try {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT * FROM dbkermesse.tbl_kermesse";
+            $querySQL = "SELECT * FROM dbkermesse.vw_kermesse_parroquia";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
 
             foreach ($stm->fetchAll(PDO::FETCH_OBJ) as $r) {
-                $kerme = new kermesse();
+                $kerme = new Kermesse();
 
                 $kerme->__SET('id_kermesse', $r->id_kermesse);
                 $kerme->__SET('idParroquia', $r->idParroquia);
-                $kerme->__SET('nombre', $r->nombre);
+                $kerme->__SET('nombreParroquia', $r->nombreParroquia);
+                $kerme->__SET('nombreKermesse', $r->nombreKermesse);
                 $kerme->__SET('fInicio', $r->fInicio);
                 $kerme->__SET('fFinal', $r->fFinal);
                 $kerme->__SET('descripcion', $r->descripcion);

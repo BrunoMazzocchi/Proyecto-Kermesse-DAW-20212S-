@@ -8,6 +8,8 @@ include '../../datos/dt_parroquia.php';
 
 $dtkerme = new Dt_Kermesse();
 
+
+
 $varMsj = 0;
 if (isset($varMsj)) {
   $varMsj = $_GET['msj'];
@@ -868,7 +870,7 @@ if (isset($varMsj)) {
                 <!-- form start -->
                 <form>
                   <div class="card-body">
-                  <div class="form-group">
+                    <div class="form-group">
                       <label>Kermesse ID</label>
                       <input type="text" class="form-control" id="id_kermesse" name="id_kermesse" placeholder="Numero de kermesse" required>
                     </div>
@@ -878,17 +880,23 @@ if (isset($varMsj)) {
                     </div>
                     <div class="form-group">
                       <label>Seleccione una parroquia</label>
-                      <select id="IdParroquia" name="idParroquia">
+                      <select id="IdParroquia" name="idParroquia" class="form-control">
                         <option value="">Seleccione...</option>
+
+
                         <?php
-                        foreach($kerme->listKermesse() as $r):
+
+                        foreach ($dtkerme->listKermesse() as $r) :
                         ?>
-                        <tr>
-                        <option value="<?php echo $r->__GET('idParroquia'); ?>"><?php echo $r->__GET('nombre'); ?></option>
-                        </tr>
+                          <tr>
+                            <option value="<?php echo $r->__GET('idParroquia'); ?>"><?php echo $r->__GET('nombreParroquia'); ?></option>
+                          </tr>
                         <?php
                         endforeach;
+
                         ?>
+
+
                       </select>
 
                     </div>
@@ -988,6 +996,9 @@ if (isset($varMsj)) {
       bsCustomFileInput.init();
     });
   </script>
+
+
+
 </body>
 
 </html>
