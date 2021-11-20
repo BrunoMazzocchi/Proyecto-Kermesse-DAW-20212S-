@@ -1,18 +1,18 @@
 <?php
 error_reporting(0);
 
-include '../../entidades/rol.php';
-include '../../datos/dt_rol.php';
+include '../../entidades/usuario.php';
+include '../../datos/dt_usuario.php';
 
-$dtRol = new Dt_rol();
+$dtUser = new Dt_usuario();
 
 $varMsj = 0;
-if(isset($varMsj))
-{
+if (isset($varMsj)) {
     $varMsj = $_GET['msj'];
 }
 ?>
-
+<!DOCTYPE html>
+<html lang="en">
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,17 +20,12 @@ if(isset($varMsj))
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kermesse | Tabla Roles</title>
+    <title>AdminLTE 3 | General Form Elements</title>
 
-    <!-- Descargar y linkear -->
-
+    <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
@@ -394,8 +389,8 @@ if(isset($varMsj))
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item menu-open">
+                            <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-edit"></i>
                                 <p>
                                     Forms
@@ -404,7 +399,7 @@ if(isset($varMsj))
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="../forms/general.html" class="nav-link">
+                                    <a href="../forms/general.html" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>General Elements</p>
                                     </a>
@@ -429,8 +424,8 @@ if(isset($varMsj))
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item menu-open">
-                            <a href="#" class="nav-link active">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
                                     Tables
@@ -445,7 +440,31 @@ if(isset($varMsj))
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../tables/data.html" class="nav-link active">
+                                    <a href="tbl_parroquia.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Parroquia</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="tbl_listaPrecioDet.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Detalle precio</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="tbl_listaPrecio.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Lista de precio</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="tbl_kermesse.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Kermesse</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="../tables/data.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>DataTables</p>
                                     </a>
@@ -847,102 +866,88 @@ if(isset($varMsj))
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Tablas</h1>
+                            <h1> View Usuario</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                                <li class="breadcrumb-item active">Roles</li>
+                                <li class="breadcrumb-item active">Lista Usuario</li>
                             </ol>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Roles</h3>
-                </div>
-                <div class="card-body">
-                    <div class="form-group col-md-12" style="text-align:right">
-                    <a href="frm_rol.php" title="Nuevo Rol" target="blank"><i class="far fa-plus-square"></i></a>
-                    </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <table id="example1" class="table table-bordered table-striped">
-                  <thead>
 
-                  <tr>
-                    <th>ID</th>
-                    <th>Descripcion</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                   
-                  </tr>
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- left column -->
+                        <div class="col-md-12">
+                            <!-- general form elements -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Usuario</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <!-- form start -->
+                                <form>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label>Codigo Usuario</label>
+                                            <input type="text" class="form-control" id="id_usuario" name="id_usuario" placeholder="Codigo de Usuario" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Username</label>
+                                            <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Username" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Contraseña</label>
+                                            <input type="text" class="form-control" id="pwd" name="pwd" placeholder="Contraseña" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Nombres</label>
+                                            <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Nombres" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Apellidos</label>
+                                            <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Apellidos" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input type="text" class="form-control" id="email" name="email" placeholder="Email" required>
+                                        </div>
+                                        <div class="form-group">
+                                             <label>Estado</label>
+                                             <input type="number" class="form-control" id="estado" placeholder="Estado"disabled>
+                                         </div>
+                                    </div>
 
-                  </thead>
+                                    <div class="card-footer">
+                                        <a href="tbl_usuario.php"><i class="fas fa-arrow-left"></i> Atras</a>
 
-                  <tbody>
-                    <?php
-                      foreach($dtRol->listRol() as $r):
-                    ?>
-                    <tr>
-                      <td><?php echo $r->_GET('id_rol'); ?></td>
-                      <td><?php echo $r->_GET('rol_descripcion'); ?></td>
-                      <td><?php echo $r->_GET('estado'); ?></td>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.card -->
 
-                      <td> <a href="frm_edit_rol.php" target="blank">
-                    <i class="far fa-edit" title="Editar Rol"></i></a>
-                    &nbsp;&nbsp;
-                    <a href="frm_view_rol.php" target="blank">
-                    <i class="far fa-eye" title="Ver Rol"></i></a>
-                    &nbsp;&nbsp;
-                    <a href="" target="_blank">
-                      <i class="far fa-trash-alt" title="Eliminar"></i>
-                    </a>
-                    </td>
-                    </tr>
-                    <?php
-                      endforeach;
-                    ?>
-                  </tbody>
 
-                  <tfoot>
-                  <tr>
-                    <th>ID</th>
-                    <th>Descripcion</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                   
-                  </tr>
-                  </tfoot>
-                    </table>
-                </div>
-                <!-- /.card-body -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="float-right d-none d-sm-block">
+                <b>Version</b> 3.1.0-rc
             </div>
-            <!-- /.card -->
-        </div>
-        <!-- /.col -->
-    </div>
-    <!-- /.row -->
-    </div>
-    <!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-    <footer class="main-footer">
-        <div class="float-right d-none d-sm-block">
-            <b>Version</b> 3.1.0-rc
-        </div>
-        <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-    </footer>
+            <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+        </footer>
 
-
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
 
@@ -950,44 +955,19 @@ if(isset($varMsj))
     <script src="../../plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- DataTables  & Plugins -->
-    <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    <script src="../../plugins/jszip/jszip.min.js"></script>
-    <script src="../../plugins/pdfmake/pdfmake.min.js"></script>
-    <script src="../../plugins/pdfmake/vfs_fonts.js"></script>
-    <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-    <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
-    <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <!-- bs-custom-file-input -->
+    <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
+
     <script>
         $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
+            bsCustomFileInput.init();
         });
     </script>
-
 </body>
 
 </html>

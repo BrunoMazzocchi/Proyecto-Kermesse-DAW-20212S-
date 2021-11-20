@@ -1,4 +1,20 @@
 <?php
+error_reporting(0);
+//IMPORTAMOS ENTIDADES Y DATOS
+include '../../entidades/rol.php';
+include '../../datos/dt_rol.php';
+
+include '../../entidades/opciones.php';
+include '../../datos/dt_opciones.php';
+
+$dtRol = new Dt_rol();
+$dtOp = new Dt_opciones();
+
+
+$varMsj = 0;
+if (isset($varMsj)) {
+    $varMsj = $_GET['msj'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -827,12 +843,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Editar Roles </h1>
+            <h1>Editar Rol Opcion</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Editar Rol</li>
+              <li class="breadcrumb-item active">Editar Rol Opcion</li>
             </ol>
           </div>
         </div>
@@ -848,23 +864,41 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Editar Rol</h3>
+                <h3 class="card-title">Editar Rol Opcion</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
               <form>
                 <div class="card-body">
                   <div class="form-group">
-                    <label>ID Rol</label>
-                    <input type="number" class="form-control" id="id_rol" name="id_rol"placeholder="Digite numero de rol">
+                    <label>ID Rol Opcion</label>
+                    <input type="number" class="form-control" id="id_rol_opciones" name="id_rol_opciones"placeholder="Digite numero de Rol Opcion">
                   </div>
                   <div class="form-group">
-                    <label>Descripcion</label>
-                    <input type="text" class="form-control" id="rol_descripcion" name="rol_descripcion"placeholder="Ingrese la descripcion">
+                    <label>Seleccione el Rol</label>
+                    <select class="form-control" id="id_rol" name="id_rol" required>
+                        <option value="">Seleccione...</option>
+                        <?php
+                            foreach($dtRol->listRol() as $r):
+                        ?>
+                        <option value="<?php echo $r->_GET('id_rol'); ?>"><?php echo $r->_GET('rol_descripcion'); ?></option>
+                        <?php
+                            endforeach;
+                            ?>
+                    </select>
                   </div>
                   <div class="form-group">
-                    <label>Estado</label>
-                    <input type="number" class="form-control" id="estado" name="estado"placeholder="Digite el estado">
+                    <label>Seleccione la Opcion</label>
+                    <select class="form-control" id="id_opciones" name="id_opciones" required>
+                        <option value="">Seleccione...</option>
+                        <?php
+                            foreach($dtOp->listOpciones() as $r):
+                        ?>
+                        <option value="<?php echo $r->_GET('id_opciones'); ?>"><?php echo $r->_GET('opcion_descripcion'); ?></option>
+                        <?php
+                            endforeach;
+                            ?>
+                    </select>
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -876,7 +910,7 @@
                 </div>
               </form>
               <div class="card-footer">
-                                        <a href="tbl_rol.php"><i class="fas fa-arrow-left"></i> Atras</a>
+                                        <a href="tbl_rol_opciones.php"><i class="fas fa-arrow-left"></i> Atras</a>
 
                                     </div>
             </div>

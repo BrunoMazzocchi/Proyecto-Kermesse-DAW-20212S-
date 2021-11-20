@@ -1,7 +1,7 @@
 <?php
 
 class Vw_rol_usuario{
-    private $id_rol_opciones;
+    private $id_rol_usuario;
     private $tbl_rol_id_rol;
     private $rol_descripcion;
     private $tbl_usuario_id_usuario;

@@ -16,7 +16,7 @@ class Dt_rol_usuario extends Conexion{
 
             foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r) {
                 $rolU = new Vw_rol_usuario();
-                $rolU->_SET('id_rol_opciones', $r->id_rol_opciones);
+                $rolU->_SET('id_rol_usuario', $r->id_rol_usuario);
                 $rolU->_SET('tbl_rol_id_rol', $r->tbl_rol_id_rol);
                 $rolU->_SET('rol_descripcion', $r->rol_descripcion);
                 $rolU->_SET('tbl_usuario_id_usuario', $r->tbl_usuario_id_usuario);

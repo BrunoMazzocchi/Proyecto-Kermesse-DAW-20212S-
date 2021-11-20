@@ -861,14 +861,21 @@ if (isset($varMsj)) {
                 <div class="card-header">
                     <h3 class="card-title">Rol Usuario</h3>
                 </div>
+                <div class="card-body">
+                    <div class="form-group col-md-12" style="text-align:right">
+                    <a href="frm_rol_usuario.php" title="Nuevo Rol" target="blank"><i class="far fa-plus-square"></i></a>
+                    </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>ID Rol Opciones</th>
+                                <th>ID Rol Usuario</th>
+                                <th>ID Rol</th>
                                 <th>Descripcion Rol</th>
+                                <th>ID Usuario</th>
                                 <th>Nombre de Usuario</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         </thead>
@@ -879,9 +886,22 @@ if (isset($varMsj)) {
                             foreach ($dtRolUser->listRolUser() as $r) :
                             ?>
                                 <tr>
-                                    <td><?php echo $r->__GET('id_rol_opciones') ?></td>
-                                    <td><?php echo $r->__GET('rol_descripcion') ?></td>
-                                    <td><?php echo $r->__GET('usuario') ?></td>
+                                    <td><?php echo $r->_GET('id_rol_usuario'); ?></td>
+                                    <td><?php echo $r->_GET('tbl_rol_id_rol'); ?></td>
+                                    <td><?php echo $r->_GET('rol_descripcion'); ?></td>
+                                    <td><?php echo $r->_GET('tbl_usuario_id_usuario'); ?></td>
+                                    <td><?php echo $r->_GET('usuario'); ?></td>
+
+                                    <td> <a href="frm_edit_rol_usuario.php" target="blank">
+                                    <i class="far fa-edit" title="Editar Rol Usuario"></i></a>
+                                    &nbsp;&nbsp;
+                                    <a href="frm_view_rol_usuario.php" target="blank">
+                                    <i class="far fa-eye" title="Ver Rol Usuario"></i></a>
+                                    &nbsp;&nbsp;
+                                    <a href="" target="_blank">
+                                    <i class="far fa-trash-alt" title="Eliminar"></i>
+                                    </a>
+                                    </td>
                                 </tr>
                             <?php
                             endforeach;
@@ -889,9 +909,12 @@ if (isset($varMsj)) {
 
                         <tfoot>
                             <tr>
-                                <th>ID Rol Opciones</th>
+                                <th>ID Rol Usuario</th>
+                                <th>ID Rol</th>
                                 <th>Descripcion Rol</th>
+                                <th>ID Usuario</th>
                                 <th>Nombre de Usuario</th>
+                                <th>Acciones</th>
                             </tr>
                         </tfoot>
                     </table>

@@ -862,33 +862,13 @@ if(isset($varMsj))
                 <div class="card-header">
                     <h3 class="card-title">Usuarios</h3>
                 </div>
+                <div class="card-body">
+                    <div class="form-group col-md-12" style="text-align:right">
+                    <a href="frm_usuario.php" title="Nuevo Usuario" target="blank"><i class="far fa-plus-square"></i></a>
+                    </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                     <table id="example1" class="table table-bordered table-striped">
-                    <style>
-                    #menu{
-                      background-color: white;
-                      float: right;
-                    }
-                    #menu ul{
-                      list-style: none;
-                      margin: 0px;
-                      padding: 0px;
-                    }
-                    #menu ul li{
-                      display: inline-block;
-                    }
-                    #menu ul li a{
-                      margin-right: 15px;
-                    }
-                  </style>
-                  <div id="menu">
-                    <ul>
-                      <li><a href="frm_usuario.php">Insertar datos</a></li>
-                      <li><a href="frm_edit_usuario.php">Editar datos</a></li>
-                      <li><a href="tbl_usuario.php">Ver datos</a></li>
-                    </ul>
-                  </div>
                   <thead>
 
                   <tr>
@@ -899,6 +879,7 @@ if(isset($varMsj))
                     <th>Apellidos</th>
                     <th>Email</th>
                     <th>Estado</th>
+                    <th>Acciones</th>
                    
                   </tr>
 
@@ -916,6 +897,16 @@ if(isset($varMsj))
                       <td><?php echo $r->_GET('apellidos'); ?></td>
                       <td><?php echo $r->_GET('email'); ?></td>
                       <td><?php echo $r->_GET('estado'); ?></td>
+                      <td> <a href="frm_edit_usuario.php" target="blank">
+                    <i class="far fa-edit" title="Editar Usuario"></i></a>
+                    &nbsp;&nbsp;
+                    <a href="frm_view_usuario.php" target="blank">
+                    <i class="far fa-eye" title="Ver Usuario"></i></a>
+                    &nbsp;&nbsp;
+                    <a href="" target="_blank">
+                      <i class="far fa-trash-alt" title="Eliminar"></i>
+                    </a>
+                    </td>
                     </tr>
                     <?php
                       endforeach;
@@ -931,6 +922,7 @@ if(isset($varMsj))
                     <th>Apellidos</th>
                     <th>Email</th>
                     <th>Estado</th>
+                    <th>Acciones</th>
                    
                   </tr>
                   </tfoot>
