@@ -5,11 +5,13 @@ include '../../entidades/parroquia.php';
 include '../../datos/dt_parroquia.php';
 
 $dtParro = new Dt_Parroquia();
-
-$varMsj = 0;
-if (isset($varMsj)) {
-  $varMsj = $_GET['msj'];
+$parroquia = new Parroquia();
+$varIdParroquia = 0;
+if (isset($varIdParroquia)) {
+  $varIdParroquia = $_GET['editC'];
 }
+
+$parroquia = $dtParro->obtenerParro($varIdParroquia);
 ?>
 
 <!DOCTYPE html>
@@ -889,11 +891,13 @@ if (isset($varMsj)) {
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form>
+                <form method="POST" action="../../negocio/ng_Parrroquia.php">
                   <div class="card-body">
                     <div class="form-group">
                       <label>Nombre</label>
-                      <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre de parroquia" required>
+                      <input type="text" value="<?php echo $parroquia->__GET('nombre') ?>" class="form-control" id="nombre" name="nombre" placeholder="Nombre de parroquia" readonly required>
+                      <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
+
                     </div>
                     <div class="form-group">
                       <label>Direccion</label>
@@ -908,22 +912,9 @@ if (isset($varMsj)) {
                       <input type="text" class="form-control" id="parroco" name="parroco" placeholder="Parroco" required>
                     </div>
                     <div class="form-group">
-                      <label>Logo</label>
-                      <div class="input-group">
-                        <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="exampleInputFile" required>
-                          <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                        </div>
-                        <div class="input-group-append">
-                          <span class="input-group-text">Upload</span>
-                        </div>
-                      </div>
+                      <label >Logo</label>
+                      <input type="text" class="form-control" id="logo" name="logo" placeholder="Logo web" required>
                     </div>
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                    </div>
-                  </div>
                   <!-- /.card-body -->
 
                   <div class="card-footer">
@@ -966,12 +957,27 @@ if (isset($varMsj)) {
   <script src="../../dist/js/demo.js"></script>
   <!-- Page specific script -->
 
+
   <script>
     $(function() {
       bsCustomFileInput.init();
     });
   </script>
 
+    <script>
+      function setValoresParroquia() {
+      $("#nombre").val("<?php echo $parroquia->__GET('nombre') ?>")
+      $("#direccion").val("<?php echo $parroquia->__GET('direccion') ?>")
+      $("#telefono").val("<?php echo $parroquia->__GET('telefono') ?>")
+      $("#parroco").val("<?php echo $parroquia->__GET('parroco') ?>")
+      $("#logo").val("<?php echo $parroquia->__GET('logo') ?>")
+      $("#sitio_web").val("<?php echo $parroquia->__GET('sitio_web') ?>")
+    }
+    $(document).ready(function() {
+          setValoresParroquia();
+        });
+  </script>
+  </script>
 </body>
 
 </html>

@@ -5,11 +5,14 @@ include '../../entidades/parroquia.php';
 include '../../datos/dt_parroquia.php';
 
 $dtParro = new Dt_Parroquia();
-
-$varMsj = 0;
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
+$parroquia = new Parroquia();
+$varIdParroquia = 0;
+if (isset($varIdParroquia)) {
+  $varIdParroquia = $_GET['viewC'];
 }
+
+$parroquia = $dtParro->obtenerParro($varIdParroquia);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -895,23 +898,27 @@ if (isset($varMsj)) {
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label>Nombre</label>
-                                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre de parroquia" required>
+                                            <input readonly type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre de parroquia" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Direccion</label>
-                                            <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion" required>
+                                            <input readonly type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Telefono</label>
-                                            <input type="number" class="form-control" id="telefono" name="telefono" placeholder="Telefono" required>
+                                            <input readonly type="number" class="form-control" id="telefono" name="telefono" placeholder="Telefono" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Parroco</label>
-                                            <input type="text" class="form-control" id="parroco" name="parroco" placeholder="Parroco" required>
+                                            <input readonly type="text" class="form-control" id="parroco" name="parroco" placeholder="Parroco" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Logo</label>
-
+                                            <input readonly type="text" class="form-control" id="logo" name="logo" placeholder="Logo" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Sitio Web</label>
+                                            <input readonly type="text" class="form-control" id="sitio_web" name="sitio_web" placeholder="sitio_web" required>
                                         </div>
                                     </div>
 
@@ -960,6 +967,19 @@ if (isset($varMsj)) {
             bsCustomFileInput.init();
         });
     </script>
+    <script>
+      function setValoresParroquia() {
+      $("#nombre").val("<?php echo $parroquia->__GET('nombre') ?>")
+      $("#direccion").val("<?php echo $parroquia->__GET('direccion') ?>")
+      $("#telefono").val("<?php echo $parroquia->__GET('telefono') ?>")
+      $("#parroco").val("<?php echo $parroquia->__GET('parroco') ?>")
+      $("#logo").val("<?php echo $parroquia->__GET('logo') ?>")
+      $("#sitio_web").val("<?php echo $parroquia->__GET('sitio_web') ?>")
+    }
+    $(document).ready(function() {
+          setValoresParroquia();
+        });
+  </script>
 </body>
 
 </html>
