@@ -1,26 +1,23 @@
 <?php
 error_reporting(0);
 
-include '../../entidades/rol.php';
-include '../../datos/dt_rol.php';
+include '../../datos/dt_rol_opciones.php';
+include '../../entidades/vw_rol_opciones.php';
 
-$dtRol = new Dt_rol();
+$dtRolOp = new Dt_rol_opciones();
 
 $varMsj = 0;
-if(isset($varMsj))
-{
+if (isset($varMsj)) {
     $varMsj = $_GET['msj'];
 }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kermesse | Tabla Roles</title>
+    <title>Kermesse | Tabla Rol Opciones</title>
 
     <!-- Descargar y linkear -->
 
@@ -852,7 +849,7 @@ if(isset($varMsj))
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                                <li class="breadcrumb-item active">Roles</li>
+                                <li class="breadcrumb-item active">Rol Opcion</li>
                             </ol>
                         </div>
                     </div>
@@ -860,68 +857,43 @@ if(isset($varMsj))
             </section>
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Roles</h3>
+                    <h3 class="card-title">Rol Opcion</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
+                
                     <table id="example1" class="table table-bordered table-striped">
-                    <style>
-                    #menu{
-                      background-color: white;
-                      float: right;
-                    }
-                    #menu ul{
-                      list-style: none;
-                      margin: 0px;
-                      padding: 0px;
-                    }
-                    #menu ul li{
-                      display: inline-block;
-                    }
-                    #menu ul li a{
-                      margin-right: 15px;
-                    }
-                  </style>
-                  <div id="menu">
-                    <ul>
-                      <li><a href="frm_ rol.php">Insertar datos</a></li>
-                      <li><a href="frm_edit_rol.php">Editar datos</a></li>
-                      <li><a href="tbl_rol.php">Ver datos</a></li>
-                    </ul>
-                  </div>
-                  <thead>
+                        <thead>
+                            <tr>
+                                <th>ID Rol Opciones</th>
+                                <th>Descripcion Rol</th>
+                                <th>Descripcion Opcion</th>
+                            </tr>
+                        </thead>
+                        </thead>
 
-                  <tr>
-                    <th>ID</th>
-                    <th>Descripcion</th>
-                    <th>Estado</th>
-                   
-                  </tr>
+                        <tbody>
 
-                  </thead>
+                            <?php
+                            foreach ($dtRolOp->listRolOp() as $r) :
+                            ?>
+                                <tr>
+                                    <td><?php echo $r->__GET('id_rol_opciones') ?></td>
+                                    <td><?php echo $r->__GET('rol_descripcion') ?></td>
+                                    <td><?php echo $r->__GET('opcion_descripcion') ?></td>
+                            
+                                </tr>
+                            <?php
+                            endforeach;
+                            ?>
 
-                  <tbody>
-                    <?php
-                      foreach($dtRol->listRol() as $r):
-                    ?>
-                    <tr>
-                      <td><?php echo $r->_GET('id_rol'); ?></td>
-                      <td><?php echo $r->_GET('rol_descripcion'); ?></td>
-                      <td><?php echo $r->_GET('estado'); ?></td>
-                    </tr>
-                    <?php
-                      endforeach;
-                    ?>
-                  </tbody>
-
-                  <tfoot>
-                  <tr>
-                  <th>ID</th>
-                    <th>Descripcion</th>
-                    <th>Estado</th>
-                   
-                  </tr>
-                  </tfoot>
+                        <tfoot>
+                            <tr>
+                                <th>ID Rol Opciones</th>
+                                <th>Descripcion Rol</th>
+                                <th>Descripcion Opcion</th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
                 <!-- /.card-body -->

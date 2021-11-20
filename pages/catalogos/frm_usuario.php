@@ -844,7 +844,7 @@
       <div class="container-fluid">
         <div class="row">
           <!-- left column -->
-          <div class="col-md-6">
+          <div class="col-md-12">
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
@@ -877,10 +877,6 @@
                   <div class="form-group">
                     <label>Email</label>
                     <input type="text" class="form-control" id="" name=""placeholder="Ingrese el email">
-                  </div>
-                  <div class="form-group">
-                    <label>Estado</label>
-                    <input type="number" class="form-control" id="estado" name="estado"placeholder="Digite el estado">
                   </div>
                 </div>
                 <!-- /.card-body -->
