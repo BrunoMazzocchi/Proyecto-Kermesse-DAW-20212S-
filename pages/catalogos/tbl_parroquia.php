@@ -901,7 +901,7 @@ if (isset($varMsj)) {
                                         <a href="frm_view_parroquia.php?viewC=<?php echo $r->__GET('idParroquia') ?>" target="blank">
                                             <i class="far fa-eye" title="Ver Parroquia"></i></a>
                                         &nbsp;&nbsp;
-                                        <a href="#" target="_blank">
+                                        <a href="../../negocio/ng_Parroquia.php?delC=<?php echo $r->__GET('idParroquia') ?>" target="_blank">
                                             <i class="far fa-trash-alt" title="Eliminar"></i>
                                         </a>
                                     </td>
@@ -984,8 +984,14 @@ if (isset($varMsj)) {
             if (mensaje == '3') {
                 sucessAlert('Exito', 'Los datos han sido editado exitosamente!');
             }
+            if (mensaje == '5') {
+                sucessAlert('Exito', 'Los datos han sido eliminado exitosamente!');
+            }
             if (mensaje == '2' || mensaje == '4') {
                 errorAlert('Error', 'Error', 'Revise los datos e intente nuevamente!');
+            }
+            if (mensaje == '6') {
+                errorAlert ('Error', 'Verifique que exista el dato');
             }
 
 
