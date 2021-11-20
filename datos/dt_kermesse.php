@@ -40,5 +40,29 @@ class Dt_Kermesse extends Conexion
         } catch (Exception $e) {
             die($e->getMessage());
         }
+
+    }
+
+    public function regKermesse(Kermesse $kerme)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $sql = "INSERT INTO tbl_kermesse (id_kermesse, idParroquia, nombre, fInicio, fFinal, descripcion, estado, usuario_creacion, fecha_creacion, usuario_modificacion, fecha_modificacion)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+            $this->myCon->prepare($sql)
+                ->execute(array(
+                    $kerme->__GET('id_kermesse'),
+                    $kerme->__GET('idParroquia'),
+                    $kerme->__GET('nombre'),
+                    $kerme->__GET('fInicio'),
+                    $kerme->__GET('fFinal'),
+                    $kerme->__GET('descripcion'),
+                    $kerme->__GET('estado')
+                ));
+
+            $this->myCon = parent::desconectar();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
     }
 }

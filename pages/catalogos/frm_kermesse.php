@@ -868,11 +868,13 @@ if (isset($varMsj)) {
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form>
+                <form  method="POST" action="../../negocio/ng_Kermesse.php">
                   <div class="card-body">
                     <div class="form-group">
                       <label>Kermesse ID</label>
-                      <input type="text" class="form-control" id="id_kermesse" name="id_kermesse" placeholder="Numero de kermesse" required>
+                      <input type="number" class="form-control" id="id_kermesse" name="id_kermesse" placeholder="Numero de kermesse" required>
+                      <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
+
                     </div>
                     <div class="form-group">
                       <label>Nombre</label>
@@ -912,44 +914,12 @@ if (isset($varMsj)) {
                       <label>Descripcion</label>
                       <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" required>
                     </div>
-                    <div class="form-group">
-                      <label>Estado</label>
-                      <input type="text" class="form-control" id="estado" name="estado" placeholder="Estado" required>
-                    </div>
-                    <div class="form-group">
-                      <label>Estado</label>
-                      <input type="text" class="form-control" id="estado" name="estado" placeholder="Estado" required>
-                    </div>
-                    <div class="form-group">
-                      <label>Usuario Creacion</label>
-                      <input type="text" class="form-control" id="usuario_creacion" name="usuario_creacion" placeholder="Usuario Creacion" required>
-                    </div>
-                    <div class="form-group">
-                      <label>Fecha Creacion</label>
-                      <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" placeholder="Fecha Creacion" required>
-                    </div>
-                    <div class="form-group">
-                      <label>Usuario Modificacion</label>
-                      <input type="number" class="form-control" id="usuario_modificacion" name="usuario_modificacion" placeholder="Usuario modificacion" required>
-                    </div>
-                    <div class="form-group">
-                      <label>Fecha Modificacion</label>
-                      <input type="date" class="form-control" id="fecha_modificacion" name="fecha_modificacion" placeholder="Fecha modificacion" required>
-                    </div>
-                    <div class="form-group">
-                      <label>Usuario Eliminacion</label>
-                      <input type="number" class="form-control" id="usuario_eliminacion" name="usuario_eliminacion" placeholder="Usuario eliminacion" required>
-                    </div>
-                    <div class="form-group">
-                      <label>Fecha Eliminacion</label>
-                      <input type="date" class="form-control" id="fecha_eliminacion" name="fecha_eliminacion" placeholder="Fecha eliminacion" required>
-                    </div>
 
                   </div>
                   <!-- /.card-body -->
 
                   <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
                     <button type="reset" class="btn btn-danger">Cancelar</button>
 
                   </div>
