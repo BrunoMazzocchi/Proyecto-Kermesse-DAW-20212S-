@@ -862,7 +862,7 @@ if(isset($varMsj))
       <div class="container-fluid">
         <div class="row">
           <!-- left column -->
-          <div class="col-md-6">
+          <div class="col-md-12">
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
@@ -872,36 +872,8 @@ if(isset($varMsj))
               <!-- form start -->
               <form>
                 <div class="card-body">
-                  <div class="form-group">
-                    <label>Fecha Gasto</label>
-                    <input type="date" class="form-control" id="fechaGasto" name = "fechaGasto"placeholder="Ingrese la fecha">
-                  </div>
-                  <div class="form-group">
-                    <label>Concepto</label>
-                    <input type="text" class="form-control" id="concepto" name = "concepto"placeholder="Concepto">
-                  </div>
-                  <div class="form-group">
-                    <label>Monto</label>
-                    <input type="number" class="form-control" id="monto" placeholder="Monto">
-                  </div>
-                  <div class="form-group">
-                    <label>Fecha Creacion</label>
-                    <input type="date" class="form-control" id="fecha_creacion" placeholder="Fecha de creacion">
-                  </div>
-                  <div class="form-group">
-                    <label>Fecha modificacion</label>
-                    <input type="date" class="form-control" id="fecha_modificacion" placeholder="Fecha de modificacion">
-                  </div>
-                  <div class="form-group">
-                    <label>Fecha eliminacion</label>
-                    <input type="date" class="form-control" id="fecha_eliminacion" placeholder="Fecha de eliminacion">
-                  </div>
-                  <div class="form-group">
-                    <label>Estado</label>
-                    <input type="number" class="form-control" id="estado" placeholder="Estado">
-                  </div>
-                  <div class="form-group">
-                    <label>Selecciona la Categoria</label>
+                <div class="form-group">
+                    <label>Seleccione la categoria</label>
                     <select name="nombre_categoria" id="id_categoria_gastos" required>
                       <option value="">Categorias</option>
                      
@@ -920,6 +892,43 @@ if(isset($varMsj))
 
 
                     </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Seleccione la categoria</label>
+                    <select name="nombre_categoria" id="id_categoria_gastos" required>
+                      <option value="">Categorias</option>
+                     
+                      <?php
+                  foreach($dtcg -> ListaCG() as $r):
+                  ?>
+
+                  <tr>
+                    <option value="<?php echo $r->__GET('id_categoria_gastos');  ?>"><?php echo $r->__GET('nombre_categoria');  ?></option>
+                 
+                
+                  </tr>
+                  <?php
+                  endforeach;
+                  ?>
+
+
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Fecha Gasto</label>
+                    <input type="date" class="form-control" id="fechaGasto" name = "fechaGasto"placeholder="Ingrese la fecha">
+                  </div>
+                  <div class="form-group">
+                    <label>Concepto</label>
+                    <input type="text" class="form-control" id="concepto" name = "concepto"placeholder="Concepto">
+                  </div>
+                  <div class="form-group">
+                    <label>Monto</label>
+                    <input type="number" class="form-control" id="monto" placeholder="Monto">
+                  </div>
+                  <div class="form-group">
+                    <label>Estado</label>
+                    <input type="number" class="form-control" id="estado" placeholder="Estado">
                   </div>
                 </div>
                   

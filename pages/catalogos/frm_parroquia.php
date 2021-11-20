@@ -864,11 +864,12 @@ if (isset($varMsj)) {
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form>
+                <form method="POST" action="../../negocio/ng_Parroquia.php">
                 <div class="card-body">
                     <div class="form-group">
                       <label >Numero de parroquia</label>
                       <input type="number" class="form-control" id="idParroquia" name="idParroquia" placeholder="Numero de parroquia" required>
+                      <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
                     </div>
                     <div class="form-group">
                       <label >Nombre</label>
@@ -887,26 +888,29 @@ if (isset($varMsj)) {
                       <input type="text" class="form-control" id="parroco" name="parroco" placeholder="Parroco" required>
                     </div>
                     <div class="form-group">
+                      <label >Sitio web</label>
+                      <input type="text" class="form-control" id="sitio_web" name="sitio_web" placeholder="Sitio web" required>
+                    </div>
+                    <div class="form-group">
+                      <label >Logo</label>
+                      <input type="text" class="form-control" id="logo" name="logo" placeholder="Logo web" required>
+                    </div>
+                    <!-- <div class="form-group">
                       <label>Logo</label>
                       <div class="input-group">
                         <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="exampleInputFile" required>
-                          <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                          <input type="file" class="custom-file-input" name="logo" id="logo" required>
+                          <label class="custom-file-label" for="logo">Choose file</label>
                         </div>
                         <div class="input-group-append">
                           <span class="input-group-text">Upload</span>
                         </div>
                       </div>
-                    </div>
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                    </div>
-                  </div>
+                    </div> -->
                   <!-- /.card-body -->
 
                   <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
                     <button type="reset" class="btn btn-danger">Cancelar</button>
                   </div>
                 </form>
