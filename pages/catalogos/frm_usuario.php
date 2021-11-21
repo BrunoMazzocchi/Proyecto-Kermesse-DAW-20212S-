@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <!-- jAlert -->
+  <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
@@ -852,31 +854,32 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form>
+              <form method="POST" action="../../negocio/ng_usuario.php">
                 <div class="card-body">
                   <div class="form-group">
                     <label>ID Usuario</label>
                     <input type="number" class="form-control" id="id_usuario" name="id_usuario"placeholder="Digite numero de usuario">
+                    <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
                   </div>
                   <div class="form-group">
                     <label>Usuario</label>
-                    <input type="text" class="form-control" id="" name=""placeholder="Ingrese el usuario">
+                    <input type="text" class="form-control" id="usuario" name="usuario"placeholder="Ingrese el usuario">
                   </div>
                   <div class="form-group">
                     <label>Contresaña</label>
-                    <input type="text" class="form-control" id="" name=""placeholder="Ingrese la contraseña">
+                    <input type="text" class="form-control" id="pwd" name="pwd"placeholder="Ingrese la contraseña">
                   </div>
                   <div class="form-group">
                     <label>Nombres</label>
-                    <input type="text" class="form-control" id="" name=""placeholder="Ingrese los nombres">
+                    <input type="text" class="form-control" id="nombres" name="nombres"placeholder="Ingrese los nombres">
                   </div>
                   <div class="form-group">
                     <label>Apellidos</label>
-                    <input type="text" class="form-control" id="" name=""placeholder="Ingrese los apellidos">
+                    <input type="text" class="form-control" id="apellidos" name="apellidos"placeholder="Ingrese los apellidos">
                   </div>
                   <div class="form-group">
                     <label>Email</label>
-                    <input type="text" class="form-control" id="" name=""placeholder="Ingrese el email">
+                    <input type="text" class="form-control" id="email" name="email"placeholder="Ingrese el email">
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -916,6 +919,9 @@
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- bs-custom-file-input -->
 <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<!-- jAlert -->
+<script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+    <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> //optional!! </script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->

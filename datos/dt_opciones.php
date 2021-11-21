@@ -28,4 +28,28 @@ class Dt_opciones extends Conexion{
             die($e->getMessage());
         }
     }
+
+    
+    public function RegistrarOpc(Opciones $opc){
+        try
+        {
+            $this->myCon = parent::conectar();
+            $sql = "INSERT INTO dbkermesse.tbl_opciones (id_opciones,opcion_descripcion,estado)
+            VALUES (?,?,?)";
+
+            $this->myCon->prepare($sql)
+             ->execute(array(
+                $opc->_GET('id_opciones'),
+                $opc->_GET('opcion_descripcion'),
+                $opc->_GET('estado')
+             ));
+
+             $this->myCon = parent::desconectar();
+        }
+        catch (Exception $e)
+        {
+            die($e->getMessage());
+        }
+
+    }
 }

@@ -32,4 +32,31 @@ class Dt_usuario extends Conexion{
             die($e->getMessage());
         }
     }
+
+    public function RegistrarUsers(Usuario $us){
+        try
+        {
+            $this->myCon = parent::conectar();
+            $sql = "INSERT INTO dbkermesse.tbl_usuario (id_usuario,usuario,pwd,nombres,apellidos,email,estado)
+            VALUES(?,?,?,?,?,?,?);";
+
+            $this->myCon->prepare($sql)
+             ->execute(array(
+                $us->_GET('id_usuario'),
+                $us->_GET('usuario'),
+                $us->_GET('pwd'),
+                $us->_GET('nombres'),
+                $us->_GET('apellidos'),
+                $us->_GET('email'),
+                $us->_GET('estado'),
+             ));
+
+             $this->myCon = parent::desconectar();
+        }
+        catch (Exception $e)
+        {
+            die($e->getMessage());
+        }
+
+    }
 }

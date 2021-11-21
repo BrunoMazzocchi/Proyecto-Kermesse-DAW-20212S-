@@ -31,4 +31,5 @@ class Dt_rol_opciones extends Conexion{
             die($e->getMessage());
         }
     }
+
 }
