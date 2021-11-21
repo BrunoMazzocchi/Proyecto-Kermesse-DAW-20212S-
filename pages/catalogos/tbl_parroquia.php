@@ -19,12 +19,28 @@ if (isset($varMsj)) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AdminLTE 3 | General Form Elements</title>
 
+<<<<<<< HEAD
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+=======
+    <!-- Descargar y linkear -->
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- jAlert -->
+    <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+>>>>>>> 5cdfcb357d594b6e37abeeef5972a475361e624f
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -277,8 +293,11 @@ if (isset($varMsj)) {
     <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
 
     <!-- jAlert -->
-    <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"></script>
     <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+    <script src="../../plugins/jAlert/dist/jAlert-functions.min.js">
+        //optional!! 
+    </script>
+
 
 
     <!-- AdminLTE App -->
@@ -290,42 +309,40 @@ if (isset($varMsj)) {
         $(document).ready(function() {
             var mensaje = 0;
             mensaje = "<?php echo $varMsj ?>";
-
-            if (mensaje == '1') {
-                sucessAlert('Exito', 'Los datos han sido registrados exitosamente!');
+            if (mensaje == "1") {
+                successAlert('Exito', 'Los datos han sido registrado exitosamente');
             }
-            if (mensaje == '3') {
-                sucessAlert('Exito', 'Los datos han sido editado exitosamente!');
+            if (mensaje == "2" || mensaje == '4') {
+                errorAlert('Error', 'Revise los datos e intente de nuevo');
             }
-            if (mensaje == '5') {
-                sucessAlert('Exito', 'Los datos han sido eliminado exitosamente!');
+            if (mensaje == "3") {
+                successAlert('Exito', 'Los datos han sido editado exitosamente');
             }
-            if (mensaje == '2' || mensaje == '4') {
-                errorAlert('Error', 'Error', 'Revise los datos e intente nuevamente!');
+            if (mensaje == "5") {
+                successAlert('Exito', 'Los datos han sido eliminado exitosamente');
             }
-            if (mensaje == '6') {
-                errorAlert ('Error', 'Verifique que exista el dato');
+            if (mensaje == "6") {
+                errorAlert('Error', 'Revise que los datos existan');
             }
-
 
             $(function() {
                 $("#example1").DataTable({
                     "responsive": true,
                     "lengthChange": false,
                     "autoWidth": false,
-                    "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+                    "buttons": ["excel", "pdf"]
                 }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
                 $('#example2').DataTable({
-                     "paging": true,
-                     "lengthChange": false,
-                     "searching": false,
-                     "ordering": true,
-                     "info": true,
-                     "autoWidth": false,
-                     "responsive": true,
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": false,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                    "responsive": true,
                 });
             });
-        });
+        }); // FIN DOC READY FUN
     </script>
 
 </body>
