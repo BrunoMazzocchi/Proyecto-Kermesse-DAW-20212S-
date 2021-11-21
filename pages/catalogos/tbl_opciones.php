@@ -891,15 +891,16 @@ if(isset($varMsj))
                       <td><?php echo $r->_GET('id_opciones'); ?></td>
                       <td><?php echo $r->_GET('opcion_descripcion'); ?></td>
                       <td><?php echo $r->_GET('estado'); ?></td>
-                      <td> <a href="frm_edit_opciones.php" target="blank">
-                    <i class="far fa-edit" title="Editar Opcion"></i></a>
-                    &nbsp;&nbsp;
-                    <a href="frm_view_opciones.php" target="blank">
-                    <i class="far fa-eye" title="Ver Opcion"></i></a>
-                    &nbsp;&nbsp;
-                    <a href="" target="_blank">
-                      <i class="far fa-trash-alt" title="Eliminar"></i>
-                    </a>
+                      <td> 
+                        <a href="frm_edit_opciones.php?EditO=<?php echo $r->_GET('id_opciones');?>" target="_blank">
+                        <i class="far fa-edit" title="Editar Opcion"></i></a>
+                        &nbsp;&nbsp;
+                        <a href="frm_view_opciones.php?viewO=<?php echo $r->_GET('id_opciones');?>" target="_blank">
+                        <i class="far fa-eye" title="Ver Opcion"></i></a>
+                        &nbsp;&nbsp;
+                        <a href="" target="_blank">
+                        <i class="far fa-trash-alt" title="Eliminar"></i>
+                        </a>
                     </td>
                     </tr>
                     <?php
@@ -982,11 +983,15 @@ if(isset($varMsj))
                         mensaje = "<?php echo $varMsj?>";
                         if(mensaje == "1")
                         {
-                            successAlert('Exito', 'Los datos han sido registradis exitosamente');
+                            successAlert('Exito', 'Los datos han sido registrados exitosamente');
                         }
-                        if(mensaje == "2")
+                        if(mensaje == "2"|| mensaje =="4")
                         {
                             errorAlert('Error', 'Revise los datos e intente de nuevo');
+                        }
+                        if(mensaje == "3")
+                        {
+                            successAlert('Exito', 'Los datos han sido actualizados exitosamente');
                         }
                         
 

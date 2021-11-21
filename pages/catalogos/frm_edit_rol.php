@@ -1,4 +1,17 @@
 <?php
+  include '../../entidades/rol.php';
+  include '../../datos/dt_rol.php';
+
+  $dtRol = new Dt_rol();
+  $rol = new Rol();
+
+  $varIdrol = 0;
+  if (isset($varIdrol)) {
+    $varIdrol = $_GET['editR'];
+  } 
+
+  $rol = $dtRol->obtenerRol($varIdrol);
+
 ?>
 
 <!DOCTYPE html>
@@ -852,19 +865,16 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form>
+              <form method="POST" action="../../negocio/ng_rol.php">
                 <div class="card-body">
                   <div class="form-group">
                     <label>ID Rol</label>
-                    <input type="number" class="form-control" id="id_rol" name="id_rol"placeholder="Digite numero de rol">
+                    <input type="number" value="<?php echo $rol->_GET('id_rol'); ?>" class="form-control" id="id_rol" name="id_rol"placeholder="Digite numero de rol" readonly>
+                    <input type="hidden" value="2" name="txtaccion" id="txtaccion"/>
                   </div>
                   <div class="form-group">
                     <label>Descripcion</label>
-                    <input type="text" class="form-control" id="rol_descripcion" name="rol_descripcion"placeholder="Ingrese la descripcion">
-                  </div>
-                  <div class="form-group">
-                    <label>Estado</label>
-                    <input type="number" class="form-control" id="estado" name="estado"placeholder="Digite el estado">
+                    <input type="text" value="<?php echo $rol->_GET('rol_descripcion'); ?>" class="form-control" id="rol_descripcion" name="rol_descripcion"placeholder="Ingrese la descripcion">
                   </div>
                 </div>
                 <!-- /.card-body -->

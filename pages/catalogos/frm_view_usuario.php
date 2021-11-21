@@ -5,11 +5,14 @@ include '../../entidades/usuario.php';
 include '../../datos/dt_usuario.php';
 
 $dtUser = new Dt_usuario();
+$user = new Usuario();
 
-$varMsj = 0;
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
-}
+$varIdUs = 0;
+  if (isset($varIdUs)) {
+    $varIdUs = $_GET['viewU'];
+  } 
+
+  $user = $dtUser->obtenerUser($varIdUs);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -895,31 +898,31 @@ if (isset($varMsj)) {
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label>Codigo Usuario</label>
-                                            <input type="text" class="form-control" id="id_usuario" name="id_usuario" placeholder="Codigo de Usuario" required>
+                                            <input type="text" value="<?php echo $user->_GET('id_usuario'); ?>" class="form-control" id="id_usuario" name="id_usuario" placeholder="Codigo de Usuario" disabled>
                                         </div>
                                         <div class="form-group">
                                             <label>Username</label>
-                                            <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Username" required>
+                                            <input type="text" value="<?php echo $user->_GET('usuario'); ?>" class="form-control" id="usuario" name="usuario" placeholder="Username" disabled>
                                         </div>
                                         <div class="form-group">
                                             <label>Contraseña</label>
-                                            <input type="text" class="form-control" id="pwd" name="pwd" placeholder="Contraseña" required>
+                                            <input type="text" value="<?php echo $user->_GET('pwd'); ?>" class="form-control" id="pwd" name="pwd" placeholder="Contraseña" disabled>
                                         </div>
                                         <div class="form-group">
                                             <label>Nombres</label>
-                                            <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Nombres" required>
+                                            <input type="text" value="<?php echo $user->_GET('nombres'); ?>" class="form-control" id="nombres" name="nombres" placeholder="Nombres" disabled>
                                         </div>
                                         <div class="form-group">
                                             <label>Apellidos</label>
-                                            <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Apellidos" required>
+                                            <input type="text" value="<?php echo $user->_GET('apellidos'); ?>" class="form-control" id="apellidos" name="apellidos" placeholder="Apellidos" disabled>
                                         </div>
                                         <div class="form-group">
                                             <label>Email</label>
-                                            <input type="text" class="form-control" id="email" name="email" placeholder="Email" required>
+                                            <input type="text" value="<?php echo $user->_GET('email'); ?>" class="form-control" id="email" name="email" placeholder="Email" disabled>
                                         </div>
                                         <div class="form-group">
                                              <label>Estado</label>
-                                             <input type="number" class="form-control" id="estado" placeholder="Estado"disabled>
+                                             <input type="number" value="<?php echo $user->_GET('estado'); ?>" class="form-control" id="estado" placeholder="Estado"disabled>
                                          </div>
                                     </div>
 

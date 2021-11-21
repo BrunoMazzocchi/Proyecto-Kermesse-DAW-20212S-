@@ -1,4 +1,18 @@
 <?php
+error_reporting(0);
+
+include '../../entidades/opciones.php';
+include '../../datos/dt_opciones.php';
+
+$dtOp = new Dt_opciones();
+$opc = new Opciones();
+
+$varIdop = 0;
+  if (isset($varIdop)) {
+    $varIdop = $_GET['EditO'];
+  } 
+
+  $opc = $dtOp->obtenerOpc($varIdop);
 ?>
 
 <!DOCTYPE html>
@@ -852,19 +866,17 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form>
+              <form method="POST" action="../../negocio/ng_opciones.php"> 
                 <div class="card-body">
                   <div class="form-group">
                     <label>ID Opciones</label>
-                    <input type="number" class="form-control" id="id_opciones" name="id_opciones"placeholder="Digite numero de opcion">
+                    <input type="number" value="<?php echo $opc->_GET('id_opciones'); ?>" class="form-control" id="id_opciones" name="id_opciones"placeholder="Digite numero de opcion" readonly>
+                    <input type="hidden" value="2" name="txtaccion" id="txtaccion"/>
+
                   </div>
                   <div class="form-group">
                     <label>Descripcion</label>
-                    <input type="text" class="form-control" id="opcion_descripcion" name="opcion_descripcion"placeholder="Ingrese la descripcion">
-                  </div>
-                  <div class="form-group">
-                    <label>Estado</label>
-                    <input type="number" class="form-control" id="estado" name="estado"placeholder="Digite el estado">
+                    <input type="text" value="<?php echo $opc->_GET('opcion_descripcion'); ?>" class="form-control" id="opcion_descripcion" name="opcion_descripcion"placeholder="Ingrese la descripcion">
                   </div>
                 </div>
                 <!-- /.card-body -->

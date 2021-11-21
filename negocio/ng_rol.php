@@ -30,7 +30,27 @@ if ($_POST)
                 die($e->getMessage());
             }
             break;
-            default:
+            
+        case '2':
+            try
+            {
+                $rol->_SET('id_rol',$_POST['id_rol']);
+                $rol->_SET('rol_descripcion',$_POST['rol_descripcion']);
+                $rol->_SET('estado', '2');
+
+
+                $dtRol->editRol($rol);
+                header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_rol.php?msj=3");
+            }
+            catch (Exception $e)
+            {
+                header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_rol.php?msj=4");
+                die($e->getMessage());
+            }
+            
+            break;
+            
+        default:
             #code...
             break;
 
