@@ -7,14 +7,24 @@ include '../../datos/dt_rol.php';
 include '../../entidades/usuario.php';
 include '../../datos/dt_usuario.php';
 
+include '../../entidades/vw_rol_usuario.php';
+include '../../datos/dt_rol_usuario.php';
+include '../../entidades/rol_usuario.php';
+
 $dtRol = new Dt_rol();
 $dtUser = new Dt_usuario();
 
 
-$varMsj = 0;
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
+$dtRolUser = new Dt_rol_usuario();
+$rolUs = new Rol_usuario();
+
+$varIdRolU = 0;
+if (isset($varIdRolU)) {
+    $varIdRolU = $_GET['EditRU'];
 }
+
+$rolUs = $dtRolUser->obtenerRolUser($varIdRolU);
+
 ?>
 
 <!DOCTYPE html>
@@ -868,16 +878,17 @@ if (isset($varMsj)) {
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form>
+              <form method="POST" action="../../negocio/ng_rol_usuario.php">
                 <div class="card-body">
                   <div class="form-group">
                     <label>ID Rol Usuario</label>
-                    <input type="number" class="form-control" id="id_rol_usuario" name="id_rol_usuario"placeholder="Digite numero de Rol Usuario">
+                    <input type="number"  value="<?php echo $rolUs->_GET('id_rol_usuario'); ?>" class="form-control" id="id_rol_usuario" name="id_rol_usuario"placeholder="Digite numero de Rol Usuario">
+                    <input type="hidden" value="2" name="txtaccion" id="txtaccion"/>
                   </div>
                   <div class="form-group">
                     <label>Seleccione el Rol</label>
-                    <select class="form-control" id="id_rol" name="id_rol" required>
-                        <option value="">Seleccione...</option>
+                    <select class="form-control" id="tbl_rol_id_rol" name="tbl_rol_id_rol" required>
+                        <option value=""><?php echo $rolUs->_GET('rol_descripcion'); ?>.</option>
                         <?php
                             foreach($dtRol->listRol() as $r):
                         ?>
@@ -889,8 +900,8 @@ if (isset($varMsj)) {
                   </div>
                   <div class="form-group">
                     <label>Seleccione el Usuario</label>
-                    <select class="form-control" id="id_usuario" name="id_usuario" required>
-                        <option value="">Seleccione...</option>
+                    <select class="form-control" id="tbl_usuario_id_usuario" name="tbl_usuario_id_usuario" required>
+                        <option value=""><?php echo $rolUs->_GET('usuario'); ?>.</option>
                         <?php
                             foreach($dtUser->listUsuario() as $r):
                         ?>

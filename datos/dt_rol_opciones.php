@@ -55,4 +55,59 @@ class Dt_rol_opciones extends Conexion{
         }
 
     }
+
+    public function editRolOp(Rol_opciones $rolOpc)
+    {
+        try
+        {
+            $this->myCon = parent::conectar();
+            $sql = "UPDATE dbkermesse.rol_opciones SET
+            tbl_rol_id_rol = ?,
+            tbl_opciones_id_opciones = ?
+            WHERE id_rol_opciones = ?;";
+
+            $this->myCon->prepare($sql)
+             ->execute(
+            array(
+                $rolOpc->_GET('tbl_rol_id_rol'),
+                $rolOpc->_GET('tbl_opciones_id_opciones'),
+                $rolOpc->_GET('id_rol_opciones')
+             )
+            );
+             $this->myCon = parent::desconectar();
+        }
+        catch (Exception $e)
+        {
+            die($e->getMessage());
+        }
+
+    }
+
+    public function obtenerRolOp($id)
+    {
+        try
+        {   
+            $this->myCon = parent::conectar();
+            $querySQL = "SELECT * FROM dbkermesse.vw_rol_opciones WHERE id_rol_opciones = ?;";
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute(array($id));
+
+            $r = $stm->fetch(PDO::FETCH_OBJ);
+
+            $rolOp = new Vw_rol_opciones();
+
+            $rolOp->_SET('id_rol_opciones', $r->id_rol_opciones);
+            $rolOp->_SET('tbl_rol_id_rol', $r->tbl_rol_id_rol);
+            $rolOp->_SET('rol_descripcion', $r->rol_descripcion);
+            $rolOp->_SET('tbl_opciones_id_opciones', $r->tbl_opciones_id_opciones);
+            $rolOp->_SET('opcion_descripcion', $r->opcion_descripcion);
+
+            $this->myCon = parent::desconectar();
+            return $rolOp;
+        }
+        catch (Exception $e)
+        {
+            die($e->getMessage());
+        }
+    }
 }
