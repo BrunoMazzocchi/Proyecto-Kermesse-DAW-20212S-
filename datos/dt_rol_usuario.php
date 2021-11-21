@@ -31,4 +31,29 @@ class Dt_rol_usuario extends Conexion{
             die($e->getMessage());
         }
     }
+
+    public function RegistrarRolUser(Rol_usuario $rolUs){
+        try
+        {
+            $this->myCon = parent::conectar();
+            $sql = "INSERT INTO dbkermesse.rol_usuario(id_rol_usuario,tbl_usuario_id_usuario,tbl_rol_id_rol)
+            VALUES (?,?,?);";
+
+            $this->myCon->prepare($sql)
+             ->execute(array(
+                $rolUs->_GET('id_rol_usuario'),
+                $rolUs->_GET('tbl_usuario_id_usuario'),
+                $rolUs->_GET('tbl_rol_id_rol')
+             ));
+
+             $this->myCon = parent::desconectar();
+        }
+        catch (Exception $e)
+        {
+            die($e->getMessage());
+        }
+
+    }
+
+
 }

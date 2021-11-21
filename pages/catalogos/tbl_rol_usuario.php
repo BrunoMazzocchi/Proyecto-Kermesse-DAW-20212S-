@@ -978,6 +978,20 @@ if (isset($varMsj)) {
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
     <script>
+        $(document).ready(function()
+        {
+            var mensaje = 0;
+                        mensaje = "<?php echo $varMsj?>";
+                        if(mensaje == "1")
+                        {
+                            successAlert('Exito', 'Los datos han sido registradis exitosamente');
+                        }
+                        if(mensaje == "2")
+                        {
+                            errorAlert('Error', 'Revise los datos e intente de nuevo');
+                        }
+                        
+
         $(function() {
             $("#example1").DataTable({
                 "responsive": true,
@@ -995,6 +1009,7 @@ if (isset($varMsj)) {
                 "responsive": true,
             });
         });
+    }); // FIN DOC READY FUN
     </script>
 
 </body>

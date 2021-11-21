@@ -32,4 +32,27 @@ class Dt_rol_opciones extends Conexion{
         }
     }
 
+    
+    public function RegistrarRolOpc(Rol_opciones $rolOp){
+        try
+        {
+            $this->myCon = parent::conectar();
+            $sql = "INSERT INTO dbkermesse.rol_opciones(id_rol_opciones,tbl_rol_id_rol,tbl_opciones_id_opciones)
+            VALUES (?,?,?);";
+
+            $this->myCon->prepare($sql)
+             ->execute(array(
+                $rolOp->_GET('id_rol_opciones'),
+                $rolOp->_GET('tbl_rol_id_rol'),
+                $rolOp->_GET('tbl_opciones_id_opciones')
+             ));
+
+             $this->myCon = parent::desconectar();
+        }
+        catch (Exception $e)
+        {
+            die($e->getMessage());
+        }
+
+    }
 }

@@ -870,15 +870,16 @@ if (isset($varMsj)) {
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form>
+              <form method="POST" action="../../negocio/ng_rol_usuario.php">
                 <div class="card-body">
                   <div class="form-group">
                     <label>ID Rol Usuario</label>
                     <input type="number" class="form-control" id="id_rol_usuario" name="id_rol_usuario"placeholder="Digite numero de Rol Usuario">
+                    <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
                   </div>
                   <div class="form-group">
                     <label>Seleccione el Rol</label>
-                    <select class="form-control" id="id_rol" name="id_rol" required>
+                    <select class="form-control" id="tbl_rol_id_rol" name="tbl_rol_id_rol" required>
                         <option value="">Seleccione...</option>
                         <?php
                             foreach($dtRol->listRol() as $r):
@@ -891,7 +892,7 @@ if (isset($varMsj)) {
                   </div>
                   <div class="form-group">
                     <label>Seleccione el Usuario</label>
-                    <select class="form-control" id="id_usuario" name="id_usuario" required>
+                    <select class="form-control" id="tbl_usuario_id_usuario" name="tbl_usuario_id_usuario" required>
                         <option value="">Seleccione...</option>
                         <?php
                             foreach($dtUser->listUsuario() as $r):
