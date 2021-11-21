@@ -52,4 +52,59 @@ class Dt_rol extends Conexion{
         }
 
     }
+
+    public function editRol(Rol $rol)
+    {
+        try
+        {
+            $this->myCon = parent::conectar();
+            $sql = "UPDATE dbkermesse.tbl_rol SET
+            rol_descripcion = ?,
+            estado = ?
+            WHERE id_rol = ?;";
+
+            $this->myCon->prepare($sql)
+             ->execute(
+            array(
+                $rol->_GET('rol_descripcion'),
+                $rol->_GET('estado'),
+                $rol->_GET('id_rol')
+             )
+            );
+             $this->myCon = parent::desconectar();
+        }
+        catch (Exception $e)
+        {
+            die($e->getMessage());
+        }
+
+    }
+
+    public function obtenerRol($id)
+    {
+        try
+        {   
+            $this->myCon = parent::conectar();
+            $querySQL = "SELECT * FROM dbkermesse.tbl_rol WHERE id_rol = ?;";
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute(array($id));
+
+            $r = $stm->fetch(PDO::FETCH_OBJ);
+
+            $rol = new Rol();
+
+            $rol->_SET('id_rol', $r->id_rol);
+            $rol->_SET('rol_descripcion', $r->rol_descripcion);
+            $rol->_SET('estado', $r->estado);
+
+            $this->myCon = parent::desconectar();
+            return $rol;
+        }
+        catch (Exception $e)
+        {
+            die($e->getMessage());
+        }
+    }
+
+
 }

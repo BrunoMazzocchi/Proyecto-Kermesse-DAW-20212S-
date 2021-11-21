@@ -5,11 +5,14 @@ include '../../entidades/opciones.php';
 include '../../datos/dt_opciones.php';
 
 $dtOp = new Dt_opciones();
+$opc = new Opciones();
 
-$varMsj = 0;
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
-}
+$varIdop = 0;
+  if (isset($varIdop)) {
+    $varIdop = $_GET['viewO'];
+  } 
+
+  $opc = $dtOp->obtenerOpc($varIdop);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -895,15 +898,15 @@ if (isset($varMsj)) {
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label>Codigo Opcion</label>
-                                            <input type="text" class="form-control" id="id_opciones" name="id_opciones" placeholder="Codigo de Opcion" required>
+                                            <input type="text"  value="<?php echo $opc->_GET('id_opciones'); ?>" class="form-control" id="id_opciones" name="id_opciones" placeholder="Codigo de Opcion" disabled required>
                                         </div>
                                         <div class="form-group">
                                             <label>Descripcion</label>
-                                            <input type="text" class="form-control" id="rol_descripcion" name="rol_descripcion" placeholder="Descripcion" required>
+                                            <input type="text" value="<?php echo $opc->_GET('opcion_descripcion'); ?>" class="form-control" id="opcion_descripcion" name="opcion_descripcion" placeholder="Descripcion" disabled required>
                                         </div>
                                         <div class="form-group">
                                              <label>Estado</label>
-                                             <input type="number" class="form-control" id="estado" placeholder="Estado"disabled>
+                                             <input type="number" value="<?php echo $opc->_GET('estado'); ?>" class="form-control" id="estado" placeholder="Estado"disabled>
                                          </div>
                                     </div>
 

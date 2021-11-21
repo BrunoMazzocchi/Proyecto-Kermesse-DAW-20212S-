@@ -59,4 +59,69 @@ class Dt_usuario extends Conexion{
         }
 
     }
+
+    public function editUser(Usuario $us)
+    {
+        try
+        {
+            $this->myCon = parent::conectar();
+            $sql = "UPDATE dbkermesse.tbl_usuario SET
+            usuario = ?,
+            pwd = ?,
+            nombres = ?,
+            apellidos = ?,
+            email = ?,
+            estado = ?
+            WHERE id_usuario = ?;";
+
+            $this->myCon->prepare($sql)
+             ->execute(
+            array(
+                $us->_GET('usuario'),
+                $us->_GET('pwd'),
+                $us->_GET('nombres'),
+                $us->_GET('apellidos'),
+                $us->_GET('email'),
+                $us->_GET('estado'),
+                $us->_GET('id_usuario')
+             )
+            );
+             $this->myCon = parent::desconectar();
+        }
+        catch (Exception $e)
+        {
+            die($e->getMessage());
+        }
+
+    }
+
+    public function obtenerUser($id)
+    {
+        try
+        {   
+            $this->myCon = parent::conectar();
+            $querySQL = "SELECT * FROM dbkermesse.tbl_usuario WHERE id_usuario = ?;";
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute(array($id));
+
+            $r = $stm->fetch(PDO::FETCH_OBJ);
+
+            $us = new Usuario();
+
+            $us->_SET('id_usuario', $r->id_usuario);
+            $us->_SET('usuario', $r->usuario);
+            $us->_SET('pwd', $r->pwd);
+            $us->_SET('nombres', $r->nombres);
+            $us->_SET('apellidos', $r->apellidos);
+            $us->_SET('email', $r->email);
+            $us->_SET('estado', $r->estado);
+
+            $this->myCon = parent::desconectar();
+            return $us;
+        }
+        catch (Exception $e)
+        {
+            die($e->getMessage());
+        }
+    }
 }

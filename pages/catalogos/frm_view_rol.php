@@ -5,11 +5,15 @@ include '../../entidades/rol.php';
 include '../../datos/dt_rol.php';
 
 $dtRol = new Dt_rol();
+$rol = new Rol();
 
-$varMsj = 0;
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
-}
+  $varIdrol = 0;
+  if (isset($varIdrol)) {
+    $varIdrol = $_GET['viewR'];
+  } 
+
+  $rol = $dtRol->obtenerRol($varIdrol);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -887,24 +891,24 @@ if (isset($varMsj)) {
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Rol</h3>
+                                    <h3 class="card-title">Visualizar Rol</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
                                 <form>
                                     <div class="card-body">
-                                        <div class="form-group">
-                                            <label>Codigo Rol</label>
-                                            <input type="text" class="form-control" id="id_rol" name="id_rol" placeholder="Codigo de Rol" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Descripcion</label>
-                                            <input type="text" class="form-control" id="rol_descripcion" name="rol_descripcion" placeholder="Descripcion" required>
-                                        </div>
-                                        <div class="form-group">
-                                             <label>Estado</label>
-                                             <input type="number" class="form-control" id="estado" placeholder="Estado"disabled>
-                                         </div>
+                                    <div class="form-group">
+                                        <label>ID Rol</label>
+                                        <input type="number" value="<?php echo $rol->_GET('id_rol'); ?>" class="form-control" id="id_rol" name="id_rol"placeholder="Digite numero de rol" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Descripcion</label>
+                                        <input type="text" value="<?php echo $rol->_GET('rol_descripcion'); ?>" class="form-control" id="rol_descripcion" name="rol_descripcion"placeholder="Ingrese la descripcion" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Estado</label>
+                                        <input type="number" value="<?php echo $rol->_GET('estado'); ?>" class="form-control" id="estado" name="estado"placeholder="Digite el estado" disabled>
+                                    </div>
                                     </div>
                                     
 
