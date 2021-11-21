@@ -35,6 +35,7 @@ if ($_POST) {
             break;
         case '2':
             try {
+                $kerme->__SET('id_kermesse', $_POST['id_kermesse']);
                 $kerme->__SET('idParroquia', $_POST['idParroquia']);
                 $kerme->__SET('nombre', $_POST['nombre']);
                 $kerme->__SET('fInicio', $_POST['fInicio']);
@@ -55,11 +56,11 @@ if ($_POST) {
 
 if ($_GET) {
     try {
-        $parro->__SET('id_kermesse', $_GET['delC']);
-        $dtParro->deleteParroquia($parro->__GET('idParroquia'));
+        $kerme->__SET('id_kermesse', $_GET['delC']);
+        $dtKerme->deleteKerme($kerme->__GET('id_kermesse'));
 
-        header("Location:  /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_parroquia.php?msj=5");
+        header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_kermesse.php?msj=5");
     } catch (Exception $e) {
-        header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_parroquia.php?msj=6 ");
+        header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_kermesse.php?msj=6 ");
     }
 }

@@ -34,7 +34,30 @@ if ($_POST)
                 die($e->getMessage());
             }
             break;
-            default:
+
+        case '2':
+            try
+            {
+                $us->_SET('id_usuario',$_POST['id_usuario']);
+                $us->_SET('usuario', $_POST['usuario']);
+                $us->_SET('pwd', $_POST['pwd']);
+                $us->_SET('nombres', $_POST['nombres']);
+                $us->_SET('apellidos', $_POST['apellidos']);
+                $us->_SET('email', $_POST['email']);
+                $us->_SET('estado', '2');
+
+
+                $dtUs->editUser($us);
+                header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_usuario.php?msj=3");
+            }
+            catch (Exception $e)
+            {
+                header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_usuario.php?msj=4");
+                die($e->getMessage());
+            }
+            break;
+
+        default:
             #code...
             break;
 

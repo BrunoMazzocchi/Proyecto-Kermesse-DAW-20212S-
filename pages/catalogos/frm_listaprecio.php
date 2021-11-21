@@ -864,7 +864,7 @@ if (isset($varMsj)) {
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form>
+                <form method="POST" action="../../negocio/ng_ListaPrecio.php">
                   <div class="card-body">
                     <div class="form-group">
                       <label>Seleccione una kermesse</label>
@@ -891,6 +891,7 @@ if (isset($varMsj)) {
                     <div class="form-group">
                       <label>Lista ID</label>
                       <input type="number" class="form-control" id="id_lista_precio" name="id_lista_precio" placeholder="Lista Precio ID" required>
+                      <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
                     </div>
                     <div class="form-group">
                       <label>Nombre de lista</label>
@@ -904,7 +905,7 @@ if (isset($varMsj)) {
                   <!-- /.card-body -->
 
                   <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
                     <button type="reset" class="btn btn-danger">Cancelar</button>
 
                   </div>

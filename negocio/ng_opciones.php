@@ -30,6 +30,23 @@ if ($_POST)
                 die($e->getMessage());
             }
             break;
+            case '2':
+                try
+                {
+                    $opc->_SET('id_opciones',$_POST['id_opciones']);
+                    $opc->_SET('opcion_descripcion',$_POST['opcion_descripcion']);
+                    $opc->_SET('estado', '2');
+    
+    
+                    $dtOpc->editOpc($opc);
+                    header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_opciones.php?msj=3");
+                }
+                catch (Exception $e)
+                {
+                    header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_opciones.php?msj=4");
+                    die($e->getMessage());
+                }
+                break;
             default:
             #code...
             break;

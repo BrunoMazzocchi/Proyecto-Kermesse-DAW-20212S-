@@ -55,6 +55,7 @@ class Dt_Kermesse extends Conexion
 
             $kerme->__SET('id_kermesse', $r->id_kermesse);
             $kerme->__SET('idParroquia', $r->idParroquia);
+            $kerme->__SET('nombreParroquia', $r->nombreParroquia);
             $kerme->__SET('nombreKermesse', $r->nombreKermesse);
             $kerme->__SET('fInicio', $r->fInicio);
             $kerme->__SET('fFinal', $r->fFinal);

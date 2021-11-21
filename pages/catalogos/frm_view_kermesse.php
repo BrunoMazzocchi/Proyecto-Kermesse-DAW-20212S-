@@ -9,10 +9,13 @@ include '../../datos/dt_parroquia.php';
 
 $dtkerme = new Dt_Kermesse();
 
-$varMsj = 0;
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
+$kermesse = new Kermesse();
+$varIdKermesse = 0;
+if (isset($varIdKermesse)) {
+    $varIdKermesse = $_GET['viewC'];
 }
+
+$kermesse = $dtkerme->obtenerKerme($varIdKermesse);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -898,7 +901,7 @@ if (isset($varMsj)) {
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label>Kermesse ID</label>
-                                            <input readonly type="text" class="form-control" id="idParroquia" name="idParroquia" placeholder="ID de parroquia" required>
+                                            <input readonly type="text" class="form-control" id="id_kermesse" name="id_kermesse" placeholder="ID de parroquia" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Parroquia</label>
@@ -968,6 +971,21 @@ if (isset($varMsj)) {
             bsCustomFileInput.init();
         });
     </script>
+
+    <script>
+        function setValoresKermesse() { 
+            $("#id_kermesse").val("<?php echo $kermesse->__GET('id_kermesse') ?>")
+            $("#idParroquia").val("<?php echo $kermesse->__GET('nombreParroquia') ?>")
+            $("#nombre").val("<?php echo $kermesse->__GET('nombreKermesse') ?>")
+            $("#fInicio").val("<?php echo $kermesse->__GET('fInicio') ?>")
+            $("#fFinal").val("<?php echo $kermesse->__GET('fFinal') ?>")
+            $("#descripcion").val("<?php echo $kermesse->__GET('descripcion') ?>")
+        }
+        $(document).ready(function() {
+            setValoresKermesse();
+        });
+    </script>
+    
 </body>
 
 </html>

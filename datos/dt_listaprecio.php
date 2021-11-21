@@ -33,4 +33,25 @@ class Dt_ListaPrecio extends Conexion
             die($e->getMessage());
         }
     }
+
+    public function regListaPrecio(Lista_Precio $lstPrecio){
+        try {
+            $this->myCon = parent::conectar();
+            $sql = "INSERT INTO dbkermesse.vw_listaprecio_kermesse (id_lista_precio, nombrekermesse, id_kermesse, nombre, descripcion, estado
+            VALUES (?,?,?,?,?,?)";
+            $this->myCon->prepare($sql)
+            ->execute(array(
+
+                $lstPrecio->__GET('id_lista_precio'),
+                $lstPrecio->__GET('id_kermesse'),
+                $lstPrecio->__GET('nombre'),
+                $lstPrecio->__GET('descripcion'),
+                $lstPrecio->__GET('estado')
+                ));
+
+            $this->myCon = parent::desconectar();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }

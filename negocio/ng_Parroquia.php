@@ -29,13 +29,13 @@ if ($_POST) {
             break;
         case '2':
             try {
+                $parro->__SET('idParroquia', $_POST['idParroquia']);
                 $parro->__SET('nombre', $_POST['nombre']);
                 $parro->__SET('direccion', $_POST['direccion']);
                 $parro->__SET('telefono', $_POST['telefono']);
                 $parro->__SET('parroco', $_POST['parroco']);
                 $parro->__SET('logo', $_POST['logo']);
                 $parro->__SET('sitio_web', $_POST['sitio_web']);
-                $parro->__SET('idParroquia', $_POST['idParroquia']);
                 $dtParro->editParro($parro);
                 header("Location: ProyectoKermesse/Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_parroquia.php?msj=3");
             } catch (Exception $e) {

@@ -893,10 +893,15 @@ $parroquia = $dtParro->obtenerParro($varIdParroquia);
                 <!-- form start -->
                 <form method="POST" action="../../negocio/ng_Parroquia.php">
                   <div class="card-body">
+                  <div class="form-group">
+                      <label>ID parroquia</label>
+                      <input type="text" value="<?php echo $parroquia->__GET('idParroquia') ?>" class="form-control" id="idParroquia" name="idParroquia" placeholder="Nombre de parroquia" readonly required>
+                      <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
+
+                    </div>
                     <div class="form-group">
                       <label>Nombre</label>
-                      <input type="text" value="<?php echo $parroquia->__GET('nombre') ?>" class="form-control" id="nombre" name="nombre" placeholder="Nombre de parroquia" readonly required>
-                      <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
+                      <input type="text" value="<?php echo $parroquia->__GET('nombre') ?>" class="form-control" id="nombre" name="nombre" placeholder="Nombre de parroquia"  required>
 
                     </div>
                     <div class="form-group">
@@ -914,6 +919,10 @@ $parroquia = $dtParro->obtenerParro($varIdParroquia);
                     <div class="form-group">
                       <label >Logo</label>
                       <input type="text" class="form-control" id="logo" name="logo" placeholder="Logo web" required>
+                    </div>
+                    <div class="form-group">
+                      <label >Sitio web</label>
+                      <input type="text" class="form-control" id="sitio_web" name="sitio_web" placeholder="Sitio web" required>
                     </div>
                   <!-- /.card-body -->
 

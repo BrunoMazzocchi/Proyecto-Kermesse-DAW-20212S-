@@ -52,4 +52,57 @@ class Dt_opciones extends Conexion{
         }
 
     }
+
+    public function editOpc(Opciones $opc)
+    {
+        try
+        {
+            $this->myCon = parent::conectar();
+            $sql = "UPDATE dbkermesse.tbl_opciones SET
+            opcion_descripcion = ?,
+            estado = ?
+            WHERE id_opciones = ?;";
+
+            $this->myCon->prepare($sql)
+             ->execute(
+            array(
+                $opc->_GET('opcion_descripcion'),
+                $opc->_GET('estado'),
+                $opc->_GET('id_opciones')
+             )
+            );
+             $this->myCon = parent::desconectar();
+        }
+        catch (Exception $e)
+        {
+            die($e->getMessage());
+        }
+
+    }
+
+    public function obtenerOpc($id)
+    {
+        try
+        {   
+            $this->myCon = parent::conectar();
+            $querySQL = "SELECT * FROM dbkermesse.tbl_opciones WHERE id_opciones = ?;";
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute(array($id));
+
+            $r = $stm->fetch(PDO::FETCH_OBJ);
+
+            $opc = new Opciones();
+
+            $opc->_SET('id_opciones', $r->id_opciones);
+            $opc->_SET('opcion_descripcion', $r->opcion_descripcion);
+            $opc->_SET('estado', $r->estado);
+
+            $this->myCon = parent::desconectar();
+            return $opc;
+        }
+        catch (Exception $e)
+        {
+            die($e->getMessage());
+        }
+    }
 }
