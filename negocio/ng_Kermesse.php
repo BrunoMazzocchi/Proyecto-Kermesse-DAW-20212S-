@@ -7,6 +7,7 @@ include_once('../datos/dt_kermesse.php');
 
 $kerme = new Kermesse();
 $dtKerme = new Dt_Kermesse();
+date_default_timezone_set("America/Managua");
 
 if ($_POST) {
     $varAccion = $_POST['txtaccion'];
@@ -19,8 +20,11 @@ if ($_POST) {
                 $kerme->__SET('fInicio', $_POST['fInicio']);
                 $kerme->__SET('fFinal', $_POST['fFinal']);
                 $kerme->__SET('descripcion', $_POST['descripcion']);
-                $kerme->__SET('fFinal', $_POST['fFinal']);
-                $kerme->__SET('estado', $_POST['estado']);
+                $kerme->__SET('estado', 1);
+                $kerme->__SET('usuario_creacion', 1);
+                $kerme->__SET('fecha_creacion', date("Y-m-d H:i:s"));
+
+
 
 
                 $dtKerme->regKermesse($kerme);
@@ -31,18 +35,19 @@ if ($_POST) {
             break;
         case '2':
             try {
-                $parro->__SET('idParroquia', $_POST['idParroquia']);
-                $parro->__SET('nombre', $_POST['nombre']);
-                $parro->__SET('direccion', $_POST['direccion']);
-                $parro->__SET('telefono', $_POST['telefono']);
-                $parro->__SET('parroco', $_POST['parroco']);
-                $parro->__SET('logo', $_POST['logo']);
-                $parro->__SET('sitio_web', $_POST['sitio_web']);
-
-                $dtParro->editParro($parro);
-                header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_parroquia.php?msj=3");
+                $kerme->__SET('idParroquia', $_POST['idParroquia']);
+                $kerme->__SET('nombre', $_POST['nombre']);
+                $kerme->__SET('fInicio', $_POST['fInicio']);
+                $kerme->__SET('fFinal', $_POST['fFinal']);
+                $kerme->__SET('descripcion', $_POST['descripcion']);
+                $kerme->__SET('estado', 2);
+                $kerme->__SET('usuario_modificacion', 1);
+                $kerme->__SET('fecha_modificacion', date("Y-m-d H:i:s"));
+                
+                $dtKerme->editKerme($kerme);
+                header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_kermesse.php?msj=3");
             } catch (Exception $e) {
-                header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_parroquia.php?msj=4 ");
+                header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_kermesse.php?msj=4 ");
             }
             break;
     }
@@ -50,7 +55,7 @@ if ($_POST) {
 
 if ($_GET) {
     try {
-        $parro->__SET('idParroquia', $_GET['delC']);
+        $parro->__SET('id_kermesse', $_GET['delC']);
         $dtParro->deleteParroquia($parro->__GET('idParroquia'));
 
         header("Location:  /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_parroquia.php?msj=5");

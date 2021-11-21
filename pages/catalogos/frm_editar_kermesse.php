@@ -9,11 +9,15 @@ include '../../datos/dt_parroquia.php';
 
 $dtkerme = new Dt_Kermesse();
 
-$varMsj = 0;
-if (isset($varMsj)) {
-  $varMsj = $_GET['msj'];
+$kermesse = new Kermesse();
+$varIdKermesse = 0;
+if (isset($varIdKermesse)) {
+    $varIdKermesse = $_GET['editC'];
 }
+
+$kermesse = $dtkerme->obtenerKerme($varIdKermesse);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -892,11 +896,34 @@ if (isset($varMsj)) {
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form>
+                                <form method="POST" action="../../negocio/ng_Kermesse.php">
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label>Parroquia ID</label>
-                                            <input type="text" class="form-control" id="idParroquia" name="idParroquia" placeholder="ID de parroquia" required>
+                                            <label>Kermesse ID</label>
+                                            <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
+                                            <input type="text" readonly class="form-control" id="id_kermesse" name="id_kermesse" placeholder="ID de parroquia" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Seleccione una parroquia</label>
+                                            <select id="IdParroquia" name="idParroquia" class="form-control">
+                                                <option value="">Seleccione...</option>
+
+
+                                                <?php
+
+                                                foreach ($dtkerme->listKermesse() as $r) :
+                                                ?>
+                                                    <tr>
+                                                        <option value="<?php echo $r->__GET('idParroquia'); ?>"><?php echo $r->__GET('nombreParroquia'); ?></option>
+                                                    </tr>
+                                                <?php
+                                                endforeach;
+
+                                                ?>
+
+
+                                            </select>
+
                                         </div>
                                         <div class="form-group">
                                             <label>Nombre</label>
@@ -913,38 +940,6 @@ if (isset($varMsj)) {
                                         <div class="form-group">
                                             <label>Descripcion</label>
                                             <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Estado</label>
-                                            <input type="text" class="form-control" id="estado" name="estado" placeholder="Estado" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Estado</label>
-                                            <input type="text" class="form-control" id="estado" name="estado" placeholder="Estado" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Usuario Creacion</label>
-                                            <input type="text" class="form-control" id="usuario_creacion" name="usuario_creacion" placeholder="Usuario Creacion" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Fecha Creacion</label>
-                                            <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" placeholder="Fecha Creacion" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Usuario Modificacion</label>
-                                            <input type="number" class="form-control" id="usuario_modificacion" name="usuario_modificacion" placeholder="Usuario modificacion" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Fecha Modificacion</label>
-                                            <input type="date" class="form-control" id="fecha_modificacion" name="fecha_modificacion" placeholder="Fecha modificacion" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Usuario Eliminacion</label>
-                                            <input type="number" class="form-control" id="usuario_eliminacion" name="usuario_eliminacion" placeholder="Usuario eliminacion" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Fecha Eliminacion</label>
-                                            <input type="date" class="form-control" id="fecha_eliminacion" name="fecha_eliminacion" placeholder="Fecha eliminacion" required>
                                         </div>
                                     </div>
                                     <!-- /.card-body -->
@@ -989,12 +984,27 @@ if (isset($varMsj)) {
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
 
+
     <script>
         $(function() {
             bsCustomFileInput.init();
         });
     </script>
 
+    <script>
+        function setValoresParroquia() {
+            $("#id_kermesse").val("<?php echo $kermesse->__GET('id_kermesse') ?>")
+            $("#idParroquia").val("<?php echo $kermesse->__GET('nombreParroquia') ?>")
+            $("#nombre").val("<?php echo $kermesse->__GET('nombreKermesse') ?>")
+            $("#fInicio").val("<?php echo $kermesse->__GET('fInicio') ?>")
+            $("#fFinal").val("<?php echo $kermesse->__GET('fFinal') ?>")
+            $("#descripcion").val("<?php echo $kermesse->__GET('descripcion') ?>")
+        }
+        $(document).ready(function() {
+            setValoresParroquia();
+        });
+    </script>
+    </script>
 </body>
 
 </html>
