@@ -897,56 +897,28 @@ if (isset($varMsj)) {
                                 <form>
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label>Parroquia ID</label>
-                                            <input type="text" class="form-control" id="idParroquia" name="idParroquia" placeholder="ID de parroquia" required>
+                                            <label>Kermesse ID</label>
+                                            <input readonly type="text" class="form-control" id="idParroquia" name="idParroquia" placeholder="ID de parroquia" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Parroquia</label>
+                                            <input readonly type="text" class="form-control" id="idParroquia" name="idParroquia" placeholder="Nombre de kermesse" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Nombre</label>
-                                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre de kermesse" required>
+                                            <input readonly type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre de kermesse" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Fecha Inicio</label>
-                                            <input type="date" class="form-control" id="fInicio" name="fInicio" placeholder="Fecha inicio" required>
+                                            <input readonly type="date" class="form-control" id="fInicio" name="fInicio" placeholder="Fecha inicio" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Fecha Final</label>
-                                            <input type="date" class="form-control" id="fFinal" name="fFinal" placeholder="Fecha final" required>
+                                            <input readonly type="date" class="form-control" id="fFinal" name="fFinal" placeholder="Fecha final" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Descripcion</label>
-                                            <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Estado</label>
-                                            <input type="text" class="form-control" id="estado" name="estado" placeholder="Estado" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Estado</label>
-                                            <input type="text" class="form-control" id="estado" name="estado" placeholder="Estado" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Usuario Creacion</label>
-                                            <input type="text" class="form-control" id="usuario_creacion" name="usuario_creacion" placeholder="Usuario Creacion" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Fecha Creacion</label>
-                                            <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" placeholder="Fecha Creacion" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Usuario Modificacion</label>
-                                            <input type="number" class="form-control" id="usuario_modificacion" name="usuario_modificacion" placeholder="Usuario modificacion" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Fecha Modificacion</label>
-                                            <input type="date" class="form-control" id="fecha_modificacion" name="fecha_modificacion" placeholder="Fecha modificacion" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Usuario Eliminacion</label>
-                                            <input type="number" class="form-control" id="usuario_eliminacion" name="usuario_eliminacion" placeholder="Usuario eliminacion" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Fecha Eliminacion</label>
-                                            <input type="date" class="form-control" id="fecha_eliminacion" name="fecha_eliminacion" placeholder="Fecha eliminacion" required>
+                                            <input readonly type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" required>
                                         </div>
                                     </div>
                                     <!-- /.card-body -->

@@ -891,7 +891,7 @@ $parroquia = $dtParro->obtenerParro($varIdParroquia);
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="POST" action="../../negocio/ng_Parrroquia.php">
+                <form method="POST" action="../../negocio/ng_Parroquia.php">
                   <div class="card-body">
                     <div class="form-group">
                       <label>Nombre</label>

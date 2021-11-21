@@ -28,10 +28,8 @@ if (isset($varMsj)) {
     <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-
-    <!-- JAlert -->
+    <!-- jAlert -->
     <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
-
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
@@ -964,8 +962,11 @@ if (isset($varMsj)) {
     <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
 
     <!-- jAlert -->
-    <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"></script>
     <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+    <script src="../../plugins/jAlert/dist/jAlert-functions.min.js">
+        //optional!! 
+    </script>
+
 
 
     <!-- AdminLTE App -->
@@ -977,42 +978,40 @@ if (isset($varMsj)) {
         $(document).ready(function() {
             var mensaje = 0;
             mensaje = "<?php echo $varMsj ?>";
-
-            if (mensaje == '1') {
-                sucessAlert('Exito', 'Los datos han sido registrados exitosamente!');
+            if (mensaje == "1") {
+                successAlert('Exito', 'Los datos han sido registrado exitosamente');
             }
-            if (mensaje == '3') {
-                sucessAlert('Exito', 'Los datos han sido editado exitosamente!');
+            if (mensaje == "2" || mensaje == '4') {
+                errorAlert('Error', 'Revise los datos e intente de nuevo');
             }
-            if (mensaje == '5') {
-                sucessAlert('Exito', 'Los datos han sido eliminado exitosamente!');
+            if (mensaje == "3") {
+                successAlert('Exito', 'Los datos han sido editado exitosamente');
             }
-            if (mensaje == '2' || mensaje == '4') {
-                errorAlert('Error', 'Error', 'Revise los datos e intente nuevamente!');
+            if (mensaje == "5") {
+                successAlert('Exito', 'Los datos han sido eliminado exitosamente');
             }
-            if (mensaje == '6') {
-                errorAlert ('Error', 'Verifique que exista el dato');
+            if (mensaje == "6") {
+                errorAlert('Error', 'Revise que los datos existan');
             }
-
 
             $(function() {
                 $("#example1").DataTable({
                     "responsive": true,
                     "lengthChange": false,
                     "autoWidth": false,
-                    "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+                    "buttons": ["excel", "pdf"]
                 }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
                 $('#example2').DataTable({
-                     "paging": true,
-                     "lengthChange": false,
-                     "searching": false,
-                     "ordering": true,
-                     "info": true,
-                     "autoWidth": false,
-                     "responsive": true,
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": false,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                    "responsive": true,
                 });
             });
-        });
+        }); // FIN DOC READY FUN
     </script>
 
 </body>
