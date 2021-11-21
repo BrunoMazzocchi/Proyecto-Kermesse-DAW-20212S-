@@ -915,7 +915,7 @@ if (isset($varMsj)) {
                                         <a href="frm_view_kermesse.php?viewC=<?php echo $r->__GET('id_kermesse'); ?>" target="blank">
                                             <i class="far fa-eye" title="Ver Kermesse"></i></a>
                                         &nbsp;&nbsp;
-                                        <a href="#" target="_blank">
+                                        <a href="../../negocio/ng_Kermesse.php?delC=<?php echo $r->__GET('id_kermesse') ?>" target="_blank">
                                             <i class="far fa-trash-alt" title="Eliminar"></i>
                                         </a>
                                     </td>
