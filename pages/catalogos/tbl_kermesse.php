@@ -980,6 +980,27 @@ if (isset($varMsj)) {
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
     <script>
+
+        $(document).ready(function() {
+            var mensaje = 0;
+            mensaje = "<?php echo $varMsj ?>";
+
+            if (mensaje == '1') {
+                sucessAlert('Exito', 'Los datos han sido registrados exitosamente!');
+            }
+            if (mensaje == '3') {
+                sucessAlert('Exito', 'Los datos han sido editado exitosamente!');
+            }
+            if (mensaje == '5') {
+                sucessAlert('Exito', 'Los datos han sido eliminado exitosamente!');
+            }
+            if (mensaje == '2' || mensaje == '4') {
+                errorAlert('Error', 'Error', 'Revise los datos e intente nuevamente!');
+            }
+            if (mensaje == '6') {
+                errorAlert ('Error', 'Verifique que exista el dato');
+            }
+
         $(function() {
             $("#example1").DataTable({
                 "responsive": true,
@@ -996,6 +1017,7 @@ if (isset($varMsj)) {
                 "autoWidth": false,
                 "responsive": true,
             });
+        });
         });
     </script>
 
