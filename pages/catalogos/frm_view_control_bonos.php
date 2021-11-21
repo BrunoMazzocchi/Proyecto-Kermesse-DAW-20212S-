@@ -8,7 +8,7 @@ $dtcb = new Dt_Control_Bonos();
 $bono = new Tbl_Control_Bonos();
 $varIdBono = 0;
 if (isset($varIdBono)) {
-    $varIdBono = $_GET['viewC'];
+    $varIdBono = $_GET['viewB'];
 }
 
 $bono = $dtcb ->obtenerBono($varIdBono);

@@ -1,21 +1,21 @@
 <?php
-error_reporting(0);
-//IMPORTAMOS ENTIDADES Y DATOS
-include '../../entidades/control_bonos.php';
-include '../../datos/dt_control_bonos.php';
 
-$dtcb = new dt_control_bonos();
+//error_reporting(0);
+
+include '../../datos/dt_moneda.php';
+include '../../entidades/tbl_moneda.php';
+
+$dtMon = new Dt_moneda;
 
 $varMsj = 0;
-if (isset($varMsj)) {
+if(isset($varMsj))
+{
     $varMsj = $_GET['msj'];
 }
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,7 +28,6 @@ if (isset($varMsj)) {
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
-
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
   <!-- Navbar -->
@@ -103,7 +102,7 @@ if (isset($varMsj)) {
                with font-awesome or any other icon font library -->
           <li class="nav-header">TABLAS</li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_denominacion.php" class="nav-link">
+            <a href="../catalogos/visualizacion/tbl_denominacion.php" class="nav-link">
               <i class="nav-icon fas fa-search-dollar"></i>
               <p>
                 Denominación
@@ -111,7 +110,7 @@ if (isset($varMsj)) {
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_Moneda.php" class="nav-link">
+            <a href="../catalogos/visualizacion/tbl_Moneda.php" class="nav-link">
               <i class="nav-icon fas fa-coins"></i>
               <p>
                 Moneda
@@ -119,7 +118,7 @@ if (isset($varMsj)) {
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_productos.php" class="nav-link">
+            <a href="../catalogos/visualizacion/tbl_productos.php" class="nav-link">
               <i class="nav-icon fas fa-shopping-basket"></i>
               <p>
                 Productos
@@ -127,7 +126,7 @@ if (isset($varMsj)) {
             </a>
           </li>
           <li class="nav-item">
-            <a href="../../pages/catalogos/tbl_gastos.php" class="nav-link">
+            <a href="../../pages/catalogos/visualizacion/tbl_gastos.php" class="nav-link">
               <i class="nav-icon fas fa-file-invoice-dollar"></i>
               <p>
                 Gastos
@@ -135,7 +134,7 @@ if (isset($varMsj)) {
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_parroquia.php" class="nav-link">
+            <a href="../catalogos/visualizacion/tbl_parroquia.php" class="nav-link">
               <i class="nav-icon fas fa-church"></i>
               <p>
                 Parroquia
@@ -143,7 +142,7 @@ if (isset($varMsj)) {
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_kermesse.php" class="nav-link">
+            <a href="../catalogos/visualizacion/tbl_kermesse.php" class="nav-link">
               <i class="nav-icon fas fa-map-pin"></i>
               <p>
                 Kermesse
@@ -156,25 +155,6 @@ if (isset($varMsj)) {
     <!-- /.sidebar -->
   </aside>
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <section class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1>Bonos</h1>
-            </div>
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="tbl_control_bonos.php">Inicio</a></li>
-                <li class="breadcrumb-item active">Editar Bonos</li>
-              </ol>
-            </div>
-          </div>
-        </div><!-- /.container-fluid -->
-      </section>
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -182,82 +162,77 @@ if (isset($varMsj)) {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Nuevo Bono</h1>
+            <h1>DataTables</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Registrar Bono</li>
+              <li class="breadcrumb-item active">Moneda</li>
             </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
 
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
+
         <div class="row">
-          <!-- left column -->
-          <div class="col-md-12">
-            <!-- general form elements -->
-            <div class="card card-primary">
+          <div class="col-12">
+            <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Registrar Bono</h3>
-              </div>
-              <!-- /.card-header -->
-              <!-- form start -->
-              <form method="POST" action="../../negocio/ng_Bono.php">
-              <div class="card-body">
-                  <div class="form-group">
-                    <label> ID </label>
-                    <input type="number" class="form-control" id="id_control_bono" name= "id_control_bono"  maxlenght= "2" placeholder="Ingrese el ID" title= "Ingrese el ID" required>
-                    <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
-                  </div>
-
-                  <div class="form-group">
-                    <label>Nombre</label>
-                    <input type="text" class="form-control" id="nombre" name= "nombre"  maxlenght= "45" placeholder="Ingrese el nombre del Bono" title= "Ingrese el nombre del Bono" required>
-                  </div>
-
-                  <div class="form-group">
-                    <label>Valor</label>
-                    <input type="number" class="form-control" id="valor" name= "valor" step="any" maxlenght= "10" placeholder="Ingrese el valor del Bono" title= "Ingrese el valor del Bono" required>
-                  </div>
-
-                  <div class="form-group">
-                    <label>Estado</label>
-                    <input type="number" class="form-control" id="estado" name= "estado"  maxlenght= "1"
-                    placeholder="Ingrese el estado del Bono" title= "Ingrese el estado del Bono" required>
-
-                  
+              <h3 class="card-title">Moneda</h3>
                 </div>
-                  
-              </div>
+                <div class="card-body">
+                <div  class="form-group col-md-12" style="text-align:right">
+                    <a href="frm_gastos.php" title="Nuevo Gasto" target="blank"><i class="far fa-plus-square"></i>Nuevo Gasto</a>
+                    </div>
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
 
-                <!-- /.card-body -->
+                  <tr>
+                    <th>ID Moneda</th>
+                    <th>Nombre</th>
+                    <th>Simbolo</th>
+                    <th>Estado</th>
+                  </tr>
 
-                <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Guardar</button>
-                  <button type="reset" class="btn btn-danger">Cancelar</button>
+                  </thead>
+
+                  <tbody>
+
+                  <?php
+                  foreach($dtMon-> listMoneda() as $r):
+                  ?>
+
+                  <tr>
+                    <td><?php echo $r->_GET('id_moneda');  ?></td>
+                    <td><?php echo $r->_GET('nombre');  ?></td>
+                    <td><?php echo $r->_GET('simbolo');  ?></td>
+                    <td><?php echo $r->_GET('estado'); ?></td>
+                 
+                    <td> <a href="frm_edit_moneda.php?editM=<?php echo $r->_GET('id_moneda');?>" target="blank">
+                    <i class="fas fa-edit" title="Editar Moneda"></i></a>
+                    &nbsp;&nbsp;
+                    <a href="frm_view_moneda.php?viewM=<?php echo $r->_GET('id_moneda');?>" target="blank">
+                    <i class="fas fa-eye" title="Ver Moneda"></i></a>
+                    &nbsp;&nbsp;
+                    <a href="#" target="_blank">
+                      <i class="fas fa-trash-alt" title="Eliminar"></i>
+                    </a>
+                    </td>
+
+                  </tr>
+                  <?php
+                  endforeach;
+                  ?>
+
+
+                  </tbody>
+                  </table>
                 </div>
-              </form>
             </div>
-            <!-- /.card -->
-
-                
-          </div>        
-      </div>
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.1.0-rc
+        </div>
     </div>
-    <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer>
+
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -271,17 +246,48 @@ if (isset($varMsj)) {
 <script src="../../plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- bs-custom-file-input -->
-<script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+
+
+
+
+<script src="../../plugins/DataTables1.11.2/datatables.min.css"></script>
+<script src="../../plugins/DataTables1.11.2/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/JSZip-2.5.0/jszip.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/pdfmake-0.1.36/pdfmake.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/pdfmake-0.1.36/vfs_fonts.js"></script>
+<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/buttons.html5.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/buttons.print.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
+
+
+
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
 <!-- Page specific script -->
 <script>
-$(function () {
-  bsCustomFileInput.init();
-});
-</script>
+            $(function() {
+                $("#example1").DataTable({
+                    "responsive": true,
+                    "lengthChange": false,
+                    "autoWidth": false,
+                    "buttons": ["excel", "pdf"]
+                }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+                $('#example2').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": false,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                    "responsive": true,
+                });
+            });
+        </script>
 </body>
 </html>

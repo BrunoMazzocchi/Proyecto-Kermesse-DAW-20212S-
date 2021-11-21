@@ -1,6 +1,5 @@
 <?php
 include_once("conexion.php");
-include_once("../entidades/tbl_denominacion.php");
 
 class Dt_denominacion extends Conexion{
 
@@ -63,13 +62,13 @@ class Dt_denominacion extends Conexion{
             $r = $stm->fetch(PDO::FETCH_OBJ);
             $denom = new Tbl_Denominacion();
 
-                $denom->__SET('id_Denominacion',$r->id_Denominacion);
                 $denom->__SET('idMoneda', $r->idMoneda);
                 $denom->__SET('valor', $r->valor);
                 $denom->__SET('valor_letras', $r->valor_letras);
                 $denom->__SET('estado', $r->estado);
+                $denom->__SET('id_Denominacion',$r->id_Denominacion);
 
-            $this->myCon = parent::desconectar();
+                $this->myCon = parent::desconectar();
             return $denom;
         } catch (Exception $e) {
             die($e->getMessage());
@@ -81,16 +80,18 @@ class Dt_denominacion extends Conexion{
         try{
             $this->myCon = parent::conectar();
             $sql = "UPDATE tbl_denominacion SET
-            id_Denominacion = ?,
             idMoneda = ?, 
             valor = ?, 
-            valor_letras = ? WHERE id_Denominacion = ?";
+            valor_letras = ?,
+            estado = ? WHERE id_Denominacion = ?";
             $this->myCon->prepare($sql)
                 ->execute(array(
-                    $denom->__GET('id_Denominacion'),
+
                     $denom->__GET('idMoneda'),
                     $denom->__GET('valor'),
-                    $denom->__GET('valor_letras')
+                    $denom->__GET('valor_letras'),
+                    $denom->__GET('estado'),
+                    $denom->__GET('id_Denominacion')
                 ));
         }
         catch (Exception $e) {

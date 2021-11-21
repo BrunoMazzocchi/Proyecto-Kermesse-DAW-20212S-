@@ -5,10 +5,10 @@ include '../../entidades/tbl_moneda.php';
 include '../../datos/dt_moneda.php';
 
 $dtMon = new Dt_moneda();
-
-$varMsj = 0;
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
+$mon = new Tbl_Moneda();
+$varIdMoneda = 0;
+if (isset($varIdMoneda)) {
+    $varIdMoneda = $_GET['editM'];
 }
 
 ?>
@@ -186,12 +186,13 @@ if (isset($varMsj)) {
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form>
+                                <form method ="POST" action="../../negocio/ng_Moneda.php">
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label>Moneda ID</label>
                                             <input type="text" class="form-control" id="id_moneda" name="id_moneda" placeholder="Moneda ID" required>
-                                        </div>
+                                            <input type="hidden" value="2" name="txtaccion" id="txtaccion"/>
+                                          </div>
                                         <div class="form-group">
                                             <label>Nombre</label>
                                             <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
@@ -201,7 +202,7 @@ if (isset($varMsj)) {
                                             <input type="number" class="form-control" id="simbolo" name="simbolo" placeholder="Simbolo" required>
                                         </div>
                                         <div class="form-group">
-                                            <label>Parroco</label>
+                                            <label>Estado</label>
                                             <input type="text" class="form-control" id="estado" name="estado" placeholder="estado" required>
                                         </div>
                                         <!-- /.card-body -->

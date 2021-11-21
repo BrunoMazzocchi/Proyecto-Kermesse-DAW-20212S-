@@ -8,7 +8,7 @@ $denom = new Dt_denominacion();
 $denominacion = new Tbl_Denominacion();
 $varIdDenom = 0;
 if (isset($varIdDenom)) {
-  $varIdDenom = $_GET['viewC'];
+  $varIdDenom = $_GET['viewD'];
 }
 
 $denominacion = $denom->obtenerDenominacion($varIdDenom);
