@@ -900,7 +900,7 @@ if (isset($varMsj)) {
                                     <a href="frm_view_rol_usuario.php?viewRU=<?php echo $r->_GET('id_rol_usuario');?>" target="blank">
                                     <i class="far fa-eye" title="Ver Rol Usuario"></i></a>
                                     &nbsp;&nbsp;
-                                    <a href="" target="_blank">
+                                    <a href="#" onclick="deleteRolUs(<?php echo $r->_GET('id_rol_usuario');?>);">
                                     <i class="far fa-trash-alt" title="Eliminar"></i>
                                     </a>
                                     </td>
@@ -978,6 +978,18 @@ if (isset($varMsj)) {
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
     <script>
+        function deleteRolUs(idRU)
+        {
+            confirm(function(e,btn)
+            {
+                e.preventDefault();
+                window.location.href = "../../negocio/ng_rol_usuario.php?delRU="+idRU;
+            },
+            function(e,btn)
+            {
+                e.preventDefault();      
+            });
+        }
         $(document).ready(function()
         {
             var mensaje = 0;
@@ -986,13 +998,17 @@ if (isset($varMsj)) {
                         {
                             successAlert('Exito', 'Los datos han sido registrados exitosamente');
                         }
-                        if(mensaje == "2" || mensaje == "4")
+                        if(mensaje == "2"|| mensaje == "4" || mensaje == "6")
                         {
                             errorAlert('Error', 'Revise los datos e intente de nuevo');
                         }
                         if(mensaje == "3")
                         {
                             successAlert('Exito', 'Los datos han sido actualizados exitosamente');
+                        }
+                        if(mensaje == "5")
+                        {
+                            successAlert('Exito', 'Los datos han sido eliminados exitosamente');
                         }
                         
 

@@ -8,7 +8,7 @@ class Dt_opciones extends Conexion{
         {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT * FROM dbkermesse.tbl_opciones;";
+            $querySQL = "SELECT * FROM dbkermesse.tbl_opciones WHERE estado <> 3;";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
@@ -99,6 +99,23 @@ class Dt_opciones extends Conexion{
 
             $this->myCon = parent::desconectar();
             return $opc;
+        }
+        catch (Exception $e)
+        {
+            die($e->getMessage());
+        }
+    }
+
+    public function deleteOpc($idOp)
+    {
+        try
+        {
+            $this->myCon = parent::conectar();
+            $querySQL = "UPDATE dbkermesse.tbl_opciones SET estado = 3 WHERE id_opciones = ?;";
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute(array($idOp));
+
+            $this->myCon = parent::desconectar();
         }
         catch (Exception $e)
         {

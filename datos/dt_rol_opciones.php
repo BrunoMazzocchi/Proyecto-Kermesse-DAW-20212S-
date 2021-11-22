@@ -110,4 +110,21 @@ class Dt_rol_opciones extends Conexion{
             die($e->getMessage());
         }
     }
+
+    public function deleteRolOp($idRO)
+    {
+        try
+        {
+            $this->myCon = parent::conectar();
+            $querySQL = "DELETE FROM dbkermesse.rol_opciones WHERE id_rol_opciones = ?;";
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute(array($idRO));
+
+            $this->myCon = parent::desconectar();
+        }
+        catch (Exception $e)
+        {
+            die($e->getMessage());
+        }
+    }
 }

@@ -51,3 +51,19 @@ if ($_POST)
 
     }
 }
+
+if ($_GET)
+{
+    try
+    {
+        $rolU->_SET('id_rol_usuario', $_GET['delRU']);
+        $dtRolUs->deleteRolUser($rolU->_GET('id_rol_usuario'));
+        header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_rol_usuario.php?msj=5");
+
+    }
+    catch(Exception $e)
+    {
+        header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_rol_usuario.php?msj=6");
+        die($e->getMessage());
+    }
+}

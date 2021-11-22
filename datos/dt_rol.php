@@ -9,7 +9,7 @@ class Dt_rol extends Conexion{
         {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT * FROM dbkermesse.tbl_rol;";
+            $querySQL = "SELECT * FROM dbkermesse.tbl_rol WHERE estado <> 3;";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
@@ -99,6 +99,23 @@ class Dt_rol extends Conexion{
 
             $this->myCon = parent::desconectar();
             return $rol;
+        }
+        catch (Exception $e)
+        {
+            die($e->getMessage());
+        }
+    }
+
+    public function deleteRol($idR)
+    {
+        try
+        {
+            $this->myCon = parent::conectar();
+            $querySQL = "UPDATE dbkermesse.tbl_rol SET estado = 3 WHERE id_rol = ?;";
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute(array($idR));
+
+            $this->myCon = parent::desconectar();
         }
         catch (Exception $e)
         {
