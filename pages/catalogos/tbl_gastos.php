@@ -102,7 +102,7 @@ if(isset($varMsj))
                with font-awesome or any other icon font library -->
           <li class="nav-header">TABLAS</li>
           <li class="nav-item">
-            <a href="../catalogos/visualizacion/tbl_denominacion.php" class="nav-link">
+            <a href="../catalogos/tbl_denominacion.php" class="nav-link">
               <i class="nav-icon fas fa-search-dollar"></i>
               <p>
                 Denominación
@@ -110,7 +110,7 @@ if(isset($varMsj))
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/visualizacion/tbl_Moneda.php" class="nav-link">
+            <a href="../catalogos/tbl_Moneda.php" class="nav-link">
               <i class="nav-icon fas fa-coins"></i>
               <p>
                 Moneda
@@ -118,7 +118,7 @@ if(isset($varMsj))
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/visualizacion/tbl_productos.php" class="nav-link">
+            <a href="../catalogos/tbl_productos.php" class="nav-link">
               <i class="nav-icon fas fa-shopping-basket"></i>
               <p>
                 Productos
@@ -126,7 +126,7 @@ if(isset($varMsj))
             </a>
           </li>
           <li class="nav-item">
-            <a href="../../pages/catalogos/visualizacion/tbl_gastos.php" class="nav-link">
+            <a href="../../pages/catalogos/tbl_gastos.php" class="nav-link">
               <i class="nav-icon fas fa-file-invoice-dollar"></i>
               <p>
                 Gastos
@@ -134,7 +134,7 @@ if(isset($varMsj))
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/visualizacion/tbl_parroquia.php" class="nav-link">
+            <a href="../catalogos/tbl_parroquia.php" class="nav-link">
               <i class="nav-icon fas fa-church"></i>
               <p>
                 Parroquia
@@ -142,7 +142,7 @@ if(isset($varMsj))
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/visualizacion/tbl_kermesse.php" class="nav-link">
+            <a href="../catalogos/tbl_kermesse.php" class="nav-link">
               <i class="nav-icon fas fa-map-pin"></i>
               <p>
                 Kermesse
@@ -158,6 +158,10 @@ if(isset($varMsj))
             </a>
           </li>
       </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
