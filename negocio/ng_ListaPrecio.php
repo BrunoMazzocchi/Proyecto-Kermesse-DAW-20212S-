@@ -15,7 +15,7 @@ if ($_POST) {
             try {
                 $lista->__SET('id_lista_precio', $_POST['id_lista_precio']);
                 $lista->__SET('id_kermesse', $_POST['id_kermesse']);
-                $lista->__SET('nombre', $_POST['nombre']);
+                $lista->__SET('nombre', $_POST['nombreListaPrecio']);
                 $lista->__SET('descripcion', $_POST['descripcion']);
                 $lista->__SET('estado', 1);
 
@@ -26,15 +26,13 @@ if ($_POST) {
             }
             break;
         case '2':
-            try {
-                $parro->__SET('idParroquia', $_POST['idParroquia']);
-                $parro->__SET('nombre', $_POST['nombre']);
-                $parro->__SET('direccion', $_POST['direccion']);
-                $parro->__SET('telefono', $_POST['telefono']);
-                $parro->__SET('parroco', $_POST['parroco']);
-                $parro->__SET('logo', $_POST['logo']);
-                $parro->__SET('sitio_web', $_POST['sitio_web']);
-                $dtParro->editParro($parro);
+            try {                
+                $lista->__SET('id_lista_precio', $_POST['id_lista_precio']);
+                $lista->__SET('id_kermesse', $_POST['id_kermesse']);
+                $lista->__SET('nombre', $_POST['nombre']);
+                $lista->__SET('descripcion', $_POST['descripcion']);
+                $lista->__SET('estado', 2);
+                $dtLista->editListaPrecio($lista);
                 header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_listaprecio.php?msj=3");
             } catch (Exception $e) {
                 header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_listaprecio.php?msj=4 ");
@@ -45,11 +43,11 @@ if ($_POST) {
 
 if ($_GET) {
     try {
-        $parro->__SET('idParroquia', $_GET['delC']);
-        $dtParro->deleteParroquia($parro->__GET('idParroquia'));
+        $lista->__SET('id_lista_precio', $_GET['delC']);
+        $dtLista->deleteLista($lista->__GET('id_lista_precio'));
 
-        header("Location:  /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_parroquia.php?msj=5");
+        header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_listaprecio.php?msj=5");
     } catch (Exception $e) {
-        header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_parroquia.php?msj=6 ");
+        header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_listaprecio.php?msj=6 ");
     }
 }
