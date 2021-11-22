@@ -29,7 +29,23 @@ if ($_POST)
                 die($e->getMessage());
             }
             break;
-            default:
+        case '2':
+            try
+            {
+                $rolOp->_SET('id_rol_opciones',$_POST['id_rol_opciones']);
+                $rolOp->_SET('tbl_rol_id_rol', $_POST['tbl_rol_id_rol']);
+                $rolOp->_SET('tbl_opciones_id_opciones', $_POST['tbl_opciones_id_opciones']);
+
+                $dtRolOp->editRolOp($rolOp);
+                header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_rol_opciones.php?msj=3");
+            }
+            catch (Exception $e)
+            {
+                header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_rol_opciones.php?msj=4");
+                die($e->getMessage());
+            }
+            break;
+        default:
             #code...
             break;
 

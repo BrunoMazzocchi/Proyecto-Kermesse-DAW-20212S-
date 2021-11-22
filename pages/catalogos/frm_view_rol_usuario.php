@@ -1,16 +1,20 @@
 <?php
-error_reporting(0);
+//error_reporting(0);
 //IMPORTAMOS ENTIDADES Y DATOS
 include '../../entidades/vw_rol_usuario.php';
 include '../../datos/dt_rol_usuario.php';
+include '../../entidades/rol_usuario.php';
 
 
 $dtRolUser = new Dt_rol_usuario();
+$rolUs = new Rol_usuario();
 
-$varMsj = 0;
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
+$varIdRolU = 0;
+if (isset($varIdRolU)) {
+    $varIdRolU = $_GET['viewRU'];
 }
+
+$rolUs = $dtRolUser->obtenerRolUser($varIdRolU);
 ?>
 
 <!DOCTYPE html>
@@ -169,12 +173,12 @@ if (isset($varMsj)) {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Editar Rol Usuario</h1>
+            <h1>Visualizar Rol Usuario</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Editar Rol Usuario</li>
+              <li class="breadcrumb-item active">Visualizar Rol Usuario</li>
             </ol>
           </div>
         </div>
@@ -190,7 +194,7 @@ if (isset($varMsj)) {
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Editar Rol Usuario</h3>
+                <h3 class="card-title">Visualizar Rol Usuario</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -198,24 +202,25 @@ if (isset($varMsj)) {
                 <div class="card-body">
                   <div class="form-group">
                     <label>ID Rol Usuario</label>
-                    <input type="number" class="form-control" id="id_rol_usuario" name="id_rol_usuario"placeholder="Digite numero de Rol Usuario">
+                    <input type="number" value="<?php echo $rolUs->_GET('id_rol_usuario'); ?>" class="form-control" id="id_rol_usuario" name="id_rol_usuario"placeholder="Digite numero de Rol Usuario" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label>Codigo Rol</label>
+                    <input type="number" value="<?php echo $rolUs->_GET('tbl_rol_id_rol'); ?>" class="form-control" id="tbl_rol_id_rol" name="tbl_rol_id_rol"placeholder="" disabled>
                   </div>
                   <div class="form-group">
                     <label>Descripcion Rol</label>
-                    <input type="number" class="form-control" id="rol_descripcion" name="rol_descripcion"placeholder="Digite la descripcion del Rol">
+                    <input type="text" value="<?php echo $rolUs->_GET('rol_descripcion'); ?>" class="form-control" id="rol_descripcion" name="rol_descripcion"placeholder="" disabled>
+                  </div><div class="form-group">
+                    <label>Codigo Usuario</label>
+                    <input type="number" value="<?php echo $rolUs->_GET('tbl_usuario_id_usuario'); ?>" class="form-control" id="tbl_usuario_id_usuario" name="tbl_usuario_id_usuario"placeholder="" disabled>
                   </div>
                   <div class="form-group">
                     <label>Username</label>
-                    <input type="number" class="form-control" id="usuario" name="usuario"placeholder="Digite el nombre de usuario">
+                    <input type="text" value="<?php echo $rolUs->_GET('usuario'); ?>" class="form-control" id="usuario" name="usuario"placeholder="" disabled>
                   </div>
                 </div>
                 <!-- /.card-body -->
-
-                <div class="card-footer">
-                  
-                  <button type="submit" class="btn btn-primary">Guardar</button>
-                  <button type="reset" class="btn btn-danger">Cancelar</button>
-                </div>
               </form>
               <div class="card-footer">
                                         <a href="tbl_rol_usuario.php"><i class="fas fa-arrow-left"></i> Atras</a>

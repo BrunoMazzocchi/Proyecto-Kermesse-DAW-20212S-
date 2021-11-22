@@ -7,14 +7,22 @@ include '../../datos/dt_rol.php';
 include '../../entidades/opciones.php';
 include '../../datos/dt_opciones.php';
 
+include '../../entidades/rol_opciones.php';
+include '../../datos/dt_rol_opciones.php';
+include '../../entidades/vw_rol_opciones.php';
+
 $dtRol = new Dt_rol();
 $dtOp = new Dt_opciones();
 
+$dtRolOpc = new Dt_rol_opciones();
+$rolOp = new Rol_opciones();
 
-$varMsj = 0;
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
+$varIdRolO = 0;
+if (isset($varIdRolO)) {
+    $varIdRolO = $_GET['EditRO'];
 }
+
+$rolOp = $dtRolOpc->obtenerRolOp($varIdRolO);
 ?>
 
 <!DOCTYPE html>
@@ -216,16 +224,17 @@ if (isset($varMsj)) {
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form>
+              <form method="POST" action="../../negocio/ng_rol_opciones.php">
                 <div class="card-body">
                   <div class="form-group">
                     <label>ID Rol Opcion</label>
-                    <input type="number" class="form-control" id="id_rol_opciones" name="id_rol_opciones"placeholder="Digite numero de Rol Opcion">
+                    <input type="number" value="<?php echo $rolOp->_GET('id_rol_opciones'); ?>" class="form-control" id="id_rol_opciones" name="id_rol_opciones"placeholder="Digite numero de Rol Opcion" readonly>
+                    <input type="hidden" value="2" name="txtaccion" id="txtaccion"/>
                   </div>
                   <div class="form-group">
                     <label>Seleccione el Rol</label>
-                    <select class="form-control" id="id_rol" name="id_rol" required>
-                        <option value="">Seleccione...</option>
+                    <select class="form-control" id="tbl_rol_id_rol" name="tbl_rol_id_rol" required>
+                        <option value=""><?php echo $rolOp->_GET('rol_descripcion'); ?></option>
                         <?php
                             foreach($dtRol->listRol() as $r):
                         ?>
@@ -237,8 +246,8 @@ if (isset($varMsj)) {
                   </div>
                   <div class="form-group">
                     <label>Seleccione la Opcion</label>
-                    <select class="form-control" id="id_opciones" name="id_opciones" required>
-                        <option value="">Seleccione...</option>
+                    <select class="form-control" id="tbl_opciones_id_opciones" name="tbl_opciones_id_opciones" required>
+                        <option value=""><?php echo $rolOp->_GET('opcion_descripcion'); ?></option>
                         <?php
                             foreach($dtOp->listOpciones() as $r):
                         ?>

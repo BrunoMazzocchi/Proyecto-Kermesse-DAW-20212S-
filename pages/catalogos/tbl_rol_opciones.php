@@ -212,10 +212,10 @@ if (isset($varMsj)) {
                                     <td><?php echo $r->_GET('rol_descripcion'); ?></td>
                                     <td><?php echo $r->_GET('tbl_opciones_id_opciones'); ?></td>
                                     <td><?php echo $r->_GET('opcion_descripcion'); ?></td>
-                                    <td> <a href="frm_edit_rol_opciones.php" target="blank">
+                                    <td> <a href="frm_edit_rol_opciones.php?EditRO=<?php echo $r->_GET('id_rol_opciones'); ?>" target="blank">
                                         <i class="far fa-edit" title="Editar Rol Opcion"></i></a>
                                         &nbsp;&nbsp;
-                                        <a href="frm_view_rol_opciones.php" target="blank">
+                                        <a href="frm_view_rol_opciones.php?viewRO=<?php echo $r->_GET('id_rol_opciones'); ?>" target="blank">
                                         <i class="far fa-eye" title="Ver Rol Opcion"></i></a>
                                         &nbsp;&nbsp;
                                         <a href="" target="_blank">
@@ -303,11 +303,15 @@ if (isset($varMsj)) {
                         mensaje = "<?php echo $varMsj?>";
                         if(mensaje == "1")
                         {
-                            successAlert('Exito', 'Los datos han sido registradis exitosamente');
+                            successAlert('Exito', 'Los datos han sido registrados exitosamente');
                         }
-                        if(mensaje == "2")
+                        if(mensaje == "2"|| mensaje == "4")
                         {
                             errorAlert('Error', 'Revise los datos e intente de nuevo');
+                        }
+                        if(mensaje == "3")
+                        {
+                            successAlert('Exito', 'Los datos han sido actualizados exitosamente');
                         }
                         
 
