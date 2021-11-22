@@ -152,6 +152,14 @@ $mon = $dtMon->obtenerMoneda($varIdMon);
               </p>
              </a>
            </li>
+           <li class="nav-item">
+            <a href="../catalogos/tbl_control_bonos.php" class="nav-link">
+              <i class="nav-icon fas fa-money-bill-wave"></i>
+              <p>
+                Bonos
+              </p>
+            </a>
+          </li>
        </nav>
         <!-- /.sidebar-menu -->
       </div>
