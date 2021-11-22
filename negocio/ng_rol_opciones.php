@@ -51,3 +51,19 @@ if ($_POST)
 
     }
 }
+
+if ($_GET)
+{
+    try
+    {
+        $rolOp->_SET('id_rol_opciones', $_GET['delRO']);
+        $dtRolOp->deleteRolOp($rolOp->_GET('id_rol_opciones'));
+        header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_rol_opciones.php?msj=5");
+
+    }
+    catch(Exception $e)
+    {
+        header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_rol_opciones.php?msj=6");
+        die($e->getMessage());
+    }
+}

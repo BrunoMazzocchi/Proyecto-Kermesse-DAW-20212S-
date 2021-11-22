@@ -207,11 +207,18 @@ if(isset($varMsj))
                   <tbody>
                     <?php
                       foreach($dtOpc->listOpciones() as $r):
+                        $estadoOpc = "";
+                        if ($r->_GET('estado') == 1 || $r->_GET('estado') == 2){
+                            $estadoOpc = "Activo";
+                        }
+                        else{
+                            $estadoOpc = "Inactivo";
+                        }
                     ?>
                     <tr>
                       <td><?php echo $r->_GET('id_opciones'); ?></td>
                       <td><?php echo $r->_GET('opcion_descripcion'); ?></td>
-                      <td><?php echo $r->_GET('estado'); ?></td>
+                      <td><?php echo $estadoOpc; ?></td>
                       <td> 
                         <a href="frm_edit_opciones.php?EditO=<?php echo $r->_GET('id_opciones');?>" target="_blank">
                         <i class="far fa-edit" title="Editar Opcion"></i></a>
@@ -219,7 +226,7 @@ if(isset($varMsj))
                         <a href="frm_view_opciones.php?viewO=<?php echo $r->_GET('id_opciones');?>" target="_blank">
                         <i class="far fa-eye" title="Ver Opcion"></i></a>
                         &nbsp;&nbsp;
-                        <a href="" target="_blank">
+                        <a href="#" onclick="deleteOpc(<?php echo $r->_GET('id_opciones');?>);">
                         <i class="far fa-trash-alt" title="Eliminar"></i>
                         </a>
                     </td>
@@ -298,6 +305,18 @@ if(isset($varMsj))
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
     <script>
+        function deleteOpc(idO)
+        {
+            confirm(function(e,btn)
+            {
+                e.preventDefault();
+                window.location.href = "../../negocio/ng_opciones.php?delO="+idO;
+            },
+            function(e,btn)
+            {
+                e.preventDefault();      
+            });
+        }
         $(document).ready(function()
         {
             var mensaje = 0;
@@ -306,13 +325,17 @@ if(isset($varMsj))
                         {
                             successAlert('Exito', 'Los datos han sido registrados exitosamente');
                         }
-                        if(mensaje == "2"|| mensaje =="4")
+                        if(mensaje == "2"|| mensaje =="4" || mensaje =="6")
                         {
                             errorAlert('Error', 'Revise los datos e intente de nuevo');
                         }
                         if(mensaje == "3")
                         {
                             successAlert('Exito', 'Los datos han sido actualizados exitosamente');
+                        }
+                        if(mensaje == "5")
+                        {
+                            successAlert('Exito', 'Los datos han sido eliminados exitosamente');
                         }
                         
 

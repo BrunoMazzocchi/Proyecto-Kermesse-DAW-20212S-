@@ -63,3 +63,19 @@ if ($_POST)
 
     }
 }
+
+if ($_GET)
+{
+    try
+    {
+        $us->_SET('id_usuario', $_GET['delU']);
+        $dtUs->deleteUser($us->_GET('id_usuario'));
+        header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_usuario.php?msj=5");
+
+    }
+    catch(Exception $e)
+    {
+        header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_usuario.php?msj=6");
+        die($e->getMessage());
+    }
+}

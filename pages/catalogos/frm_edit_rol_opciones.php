@@ -234,7 +234,7 @@ $rolOp = $dtRolOpc->obtenerRolOp($varIdRolO);
                   <div class="form-group">
                     <label>Seleccione el Rol</label>
                     <select class="form-control" id="tbl_rol_id_rol" name="tbl_rol_id_rol" required>
-                        <option value=""><?php echo $rolOp->_GET('rol_descripcion'); ?></option>
+                        <option value=""><?php echo $rolOp->_GET('rol_descripcion'); ?>.</option>
                         <?php
                             foreach($dtRol->listRol() as $r):
                         ?>
@@ -247,7 +247,7 @@ $rolOp = $dtRolOpc->obtenerRolOp($varIdRolO);
                   <div class="form-group">
                     <label>Seleccione la Opcion</label>
                     <select class="form-control" id="tbl_opciones_id_opciones" name="tbl_opciones_id_opciones" required>
-                        <option value=""><?php echo $rolOp->_GET('opcion_descripcion'); ?></option>
+                        <option value=""><?php echo $rolOp->_GET('opcion_descripcion'); ?>.</option>
                         <?php
                             foreach($dtOp->listOpciones() as $r):
                         ?>

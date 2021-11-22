@@ -196,8 +196,7 @@ if(isset($varMsj))
                   <tr>
                     <th>ID</th>
                     <th>Usuario</th>
-                    <th>Nombre</th>
-                    <th>Apellidos</th>
+                    <th>Nombre Completo</th>
                     <th>Email</th>
                     <th>Estado</th>
                     <th>Acciones</th>
@@ -209,22 +208,29 @@ if(isset($varMsj))
                   <tbody>
                     <?php
                       foreach($dtUser->listUsuario() as $r):
+                        $estadoUser = "";
+                        if ($r->_GET('estado') == 1 || $r->_GET('estado') == 2){
+                            $estadoUser = "Activo";
+                        }
+                        else{
+                            $estadoUser = "Inactivo";
+                        }
                     ?>
                     <tr>
                       <td><?php echo $r->_GET('id_usuario'); ?></td>
                       <td><?php echo $r->_GET('usuario'); ?></td>
-                      <td><?php echo $r->_GET('nombres'); ?></td>
-                      <td><?php echo $r->_GET('apellidos'); ?></td>
+                      <td><?php echo $r->_GET('nombres'); ?><?php echo ' ' ?><?php echo $r->_GET('apellidos'); ?></td>
                       <td><?php echo $r->_GET('email'); ?></td>
-                      <td><?php echo $r->_GET('estado'); ?></td>
-                      <td> <a href="frm_edit_usuario.php?EditU=<?php echo $r->_GET('id_usuario'); ?>" target="_blank">
+                      <td><?php echo $estadoUser; ?></td>
+                      <td> 
+                    <a href="frm_edit_usuario.php?EditU=<?php echo $r->_GET('id_usuario'); ?>" target="_blank">
                     <i class="far fa-edit" title="Editar Usuario"></i></a>
                     &nbsp;&nbsp;
                     <a href="frm_view_usuario.php?viewU=<?php echo $r->_GET('id_usuario'); ?>" target="_blank">
                     <i class="far fa-eye" title="Ver Usuario"></i></a>
                     &nbsp;&nbsp;
-                    <a href="" target="_blank">
-                      <i class="far fa-trash-alt" title="Eliminar"></i>
+                    <a href="#" onclick="deleteUser(<?php echo $r->_GET('id_usuario'); ?>);">
+                      <i class="far fa-trash-alt" title="Eliminar Usuario"></i>
                     </a>
                     </td>
                     </tr>
@@ -237,8 +243,7 @@ if(isset($varMsj))
                   <tr>
                     <th>ID</th>
                     <th>Usuario</th>
-                    <th>Nombre</th>
-                    <th>Apellidos</th>
+                    <th>Nombre Completo</th>
                     <th>Email</th>
                     <th>Estado</th>
                     <th>Acciones</th>
@@ -304,6 +309,18 @@ if(isset($varMsj))
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
     <script>
+        function deleteUser(idU)
+        {
+            confirm(function(e,btn)
+            {
+                e.preventDefault();
+                window.location.href = "../../negocio/ng_usuario.php?delU="+idU;
+            },
+            function(e,btn)
+            {
+                e.preventDefault();      
+            });
+        }
         $(document).ready(function()
         {
             var mensaje = 0;
@@ -312,13 +329,17 @@ if(isset($varMsj))
                         {
                             successAlert('Exito', 'Los datos han sido registrados exitosamente');
                         }
-                        if(mensaje == "2"|| mensaje =="4")
+                        if(mensaje == "2"|| mensaje == "4" || mensaje == "6")
                         {
                             errorAlert('Error', 'Revise los datos e intente de nuevo');
                         }
                         if(mensaje == "3")
                         {
                             successAlert('Exito', 'Los datos han sido actualizados exitosamente');
+                        }
+                        if(mensaje == "5")
+                        {
+                            successAlert('Exito', 'Los datos han sido eliminados exitosamente');
                         }
                         
 

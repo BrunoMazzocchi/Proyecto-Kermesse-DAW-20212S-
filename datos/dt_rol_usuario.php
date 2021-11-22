@@ -110,5 +110,22 @@ class Dt_rol_usuario extends Conexion{
         }
     }
 
+    public function deleteRolUser($idRU)
+    {
+        try
+        {
+            $this->myCon = parent::conectar();
+            $querySQL = "DELETE FROM dbkermesse.rol_usuario WHERE id_rol_usuario = ?;";
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute(array($idRU));
+
+            $this->myCon = parent::desconectar();
+        }
+        catch (Exception $e)
+        {
+            die($e->getMessage());
+        }
+    }
+
 
 }
