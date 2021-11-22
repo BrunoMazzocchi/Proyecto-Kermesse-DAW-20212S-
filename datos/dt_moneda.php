@@ -16,6 +16,8 @@ class Dt_moneda extends Conexion{
 
             foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r) {
                 $mon = new Tbl_Moneda();
+
+                $mon->_SET('id_moneda', $r->id_moneda);
                 $mon->_SET('nombre', $r->nombre);
                 $mon->_SET('simbolo', $r->simbolo);
                 $mon->_SET('estado', $r->estado);
@@ -26,6 +28,89 @@ class Dt_moneda extends Conexion{
         }
         catch (Exception $e)
         {
+            die($e->getMessage());
+        }
+    }
+
+    public function regMoneda(Tbl_Moneda $mon)
+    {
+        try
+        {
+            $this->myCon = parent::conectar();
+            $sql = "INSERT INTO tbl_moneda (id_moneda,nombre,simbolo,estado) 
+            VALUES (?,?,?,?)";
+            $this->myCon->prepare($sql)
+                ->execute(array(
+                    $mon->_GET('id_moneda'),
+                    $mon->_GET('nombre'),
+                    $mon->_GET('simbolo'),
+                    $mon->_GET('estado')
+
+                ));
+        }
+        catch (Exception $e)
+        {
+            die($e->getMessage());
+        }
+    }
+
+    public function obtenerMoneda($id)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $querySQL = "SELECT * FROM dbkermesse.tbl_moneda WHERE id_moneda = ?";
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute(array($id));
+
+            $r = $stm->fetch(PDO::FETCH_OBJ);
+            $mon = new Tbl_Moneda();
+
+            $mon->_SET('id_moneda', $r->id_moneda);
+            $mon->_SET('nombre', $r->nombre);
+            $mon->_SET('simbolo', $r->simbolo);
+            $mon->_SET('estado', $r->estado);
+
+            $this->myCon = parent::desconectar();
+            return $mon;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function editMoneda(Tbl_Moneda $mon)
+    {
+        try{
+            $this->myCon = parent::conectar();
+            $sql = "UPDATE tbl_control_bonos SET
+            nombre = ?,
+            simbolo = ?,
+            estado = ? WHERE id_bono = ?";
+            $this->myCon->prepare($sql)
+                ->execute(array(
+                    
+                    $mon->_GET('nombre'),
+                    $mon->_GET('valor'),
+                    $mon->_GET('simbolo'),
+                    $mon->_GET('id_bono')
+
+                ));
+        }
+        catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function deleteBono($id)
+    {
+        try
+        {
+            $this->myCon = parent::conectar();
+            $querySQL = "DELETE FROM tbl_moneda WHERE id_moneda = ?";
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute(array($id));
+            $this->myCon = parent::desconectar();
+        }
+        catch (Exception $e) {
             die($e->getMessage());
         }
     }

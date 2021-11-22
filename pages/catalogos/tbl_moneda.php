@@ -1,15 +1,16 @@
 <?php
-error_reporting(0);
 
-include '../../entidades/kermesse.php';
-include '../../datos/dt_kermesse.php';
-include '../../entidades/parroquia.php';
-include '../../datos/dt_parroquia.php';
+//error_reporting(0);
 
-$dtkerme = new Dt_Kermesse();
+include '../../datos/dt_moneda.php';
+include '../../entidades/tbl_moneda.php';
+
+$dtMon = new Dt_moneda;
+
 $varMsj = 0;
-if (isset($varMsj)) {
-  $varMsj = $_GET['msj'];
+if(isset($varMsj))
+{
+    $varMsj = $_GET['msj'];
 }
 ?>
 
@@ -169,151 +170,132 @@ if (isset($varMsj)) {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Nuevo Rol Opcion</h1>
+            <h1>DataTables</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Registrar Rol Opcion</li>
+              <li class="breadcrumb-item active">Moneda</li>
             </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <section class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1>Nueva kermesse</h1>
-            </div>
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                <li class="breadcrumb-item active">Registrar Kermesse</li>
-              </ol>
-            </div>
-          </div>
-        </div><!-- /.container-fluid -->
-      </section>
 
-      <!-- Main content -->
-      <section class="content">
-        <div class="container-fluid">
-          <div class="row">
-            <!-- left column -->
-            <div class="col-md-12">
-              <!-- general form elements -->
-              <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Registrar Kermesse</h3>
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+              <h3 class="card-title">Moneda</h3>
                 </div>
-                <!-- /.card-header -->
-                <!-- form start -->
-                <form  method="POST" action="../../negocio/ng_Kermesse.php">
-                  <div class="card-body">
-                    <div class="form-group">
-                      <label>Kermesse ID</label>
-                      <input type="number" class="form-control" id="id_kermesse" name="id_kermesse" placeholder="Numero de kermesse" required>
-                      <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
-
+                <div class="card-body">
+                <div  class="form-group col-md-12" style="text-align:right">
+                    <a href="frm_moneda.php" title="Nuevo Gasto" target="blank"><i class="far fa-plus-square"></i>Nuevo Gasto</a>
                     </div>
-                    <div class="form-group">
-                      <label>Nombre</label>
-                      <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre de kermesse" required>
-                    </div>
-                    <div class="form-group">
-                      <label>Seleccione una parroquia</label>
-                      <select id="IdParroquia" name="idParroquia" class="form-control">
-                        <option value="">Seleccione...</option>
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+
+                  <tr>
+                    <th>ID Moneda</th>
+                    <th>Nombre</th>
+                    <th>Simbolo</th>
+                    <th>Estado</th>
+                  </tr>
+
+                  </thead>
+
+                  <tbody>
+
+                  <?php
+                  foreach($dtMon-> listMoneda() as $r):
+                  ?>
+
+                  <tr>
+                    <td><?php echo $r->_GET('id_moneda');?></td>
+                    <td><?php echo $r->_GET('nombre');?></td>
+                    <td><?php echo $r->_GET('simbolo');?></td>
+                    <td><?php echo $r->_GET('estado');?></td>
+                 
+                    <td> <a href="frm_editar_moneda.php?editM=<?php echo $r->_GET('id_moneda');?>" target="blank">
+                    <i class="fas fa-edit" title="Editar Moneda"></i></a>
+                    &nbsp;&nbsp;
+                    <a href="frm_view_moneda.php?viewM=<?php echo $r->_GET('id_moneda');?>" target="blank">
+                    <i class="fas fa-eye" title="Ver Moneda"></i></a>
+                    &nbsp;&nbsp;
+                    <a href="#" target="_blank">
+                      <i class="fas fa-trash-alt" title="Eliminar"></i>
+                    </a>
+                    </td>
+
+                  </tr>
+                  <?php
+                  endforeach;
+                  ?>
 
 
-                        <?php
-
-                        foreach ($dtkerme->listKermesse() as $r) :
-                        ?>
-                          <tr>
-                            <option value="<?php echo $r->__GET('idParroquia'); ?>"><?php echo $r->__GET('nombreParroquia'); ?></option>
-                          </tr>
-                        <?php
-                        endforeach;
-
-                        ?>
-
-
-                      </select>
-
-                    </div>
-                    <div class="form-group">
-                      <label>Fecha Inicio</label>
-                      <input type="date" class="form-control" id="fInicio" name="fInicio" placeholder="Fecha inicio" required>
-                    </div>
-                    <div class="form-group">
-                      <label>Fecha Final</label>
-                      <input type="date" class="form-control" id="fFinal" name="fFinal" placeholder="Fecha final" required>
-                    </div>
-                    <div class="form-group">
-                      <label>Descripcion</label>
-                      <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" required>
-                    </div>
-
-                  </div>
-                  <!-- /.card-body -->
-
-                  <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                    <button type="reset" class="btn btn-danger">Cancelar</button>
-
-                  </div>
-                </form>
-              </div>
-              <!-- /.card -->
+                  </tbody>
+                  </table>
+                </div>
             </div>
-          </div>
         </div>
-
-
-      </section>
-      <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
-    <footer class="main-footer">
-      <div class="float-right d-none d-sm-block">
-        <b>Version</b> 3.1.0-rc
-      </div>
-      <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-    </footer>
 
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
-  </div>
-  <!-- ./wrapper -->
 
-  <!-- jQuery -->
-  <script src="../../plugins/jquery/jquery.min.js"></script>
-  <!-- Bootstrap 4 -->
-  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- bs-custom-file-input -->
-  <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="../../dist/js/adminlte.min.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="../../dist/js/demo.js"></script>
-  <!-- Page specific script -->
-  <script>
-    $(function() {
-      bsCustomFileInput.init();
-    });
-  </script>
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
 
+
+<script src="../../plugins/DataTables1.11.2/datatables.min.css"></script>
+<script src="../../plugins/DataTables1.11.2/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/JSZip-2.5.0/jszip.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/pdfmake-0.1.36/pdfmake.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/pdfmake-0.1.36/vfs_fonts.js"></script>
+<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/buttons.html5.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/buttons.print.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
+
+
+
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+<!-- Page specific script -->
+<script>
+            $(function() {
+                $("#example1").DataTable({
+                    "responsive": true,
+                    "lengthChange": false,
+                    "autoWidth": false,
+                    "buttons": ["excel", "pdf"]
+                }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+                $('#example2').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": false,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                    "responsive": true,
+                });
+            });
+        </script>
 </body>
-
 </html>

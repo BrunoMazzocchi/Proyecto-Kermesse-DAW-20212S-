@@ -1,7 +1,6 @@
 <?php
 
 include_once ("conexion.php");
-include_once("../entidades/tbl_control_bonos.php");
 
 class Dt_Control_Bonos extends Conexion {
 
@@ -16,14 +15,14 @@ public function listControlBonos(){
         $stm->execute(); 
 
         foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r){
-            $cb = new Tbl_Control_Bonos(); 
+            $bono = new Tbl_Control_Bonos(); 
 
-            $cb->__SET('id_bono', $r->id_bono);
-            $cb->__SET('nombre', $r->nombre);
-            $cb->__SET('valor', $r->valor);
-            $cb->__SET('estado', $r->estado); 
+            $bono->__SET('id_bono', $r->id_bono);
+            $bono->__SET('nombre', $r->nombre);
+            $bono->__SET('valor', $r->valor);
+            $bono->__SET('estado', $r->estado); 
 
-            $result[] = $cb; 
+            $result[] = $bono; 
         }
 
         $this->myCon = parent::desconectar(); 
@@ -35,17 +34,18 @@ public function listControlBonos(){
 
 }
 
-public function regBonos(Tbl_Control_Bonos $bono)
+public function regBono(Tbl_Control_Bonos $bono)
     {
         try {
             $this->myCon = parent::conectar();
-            $sql = "INSERT INTO tbl_control_bonos (id_bono,nombre,valor)
+            $sql = "INSERT INTO tbl_control_bonos (id_bono,nombre,valor,estado)
             VALUES (?,?,?)";
             $this->myCon->prepare($sql)
                 ->execute(array(
                     $bono->__GET('id_bono'),
                     $bono->__GET('nombre'),
-                    $bono->__GET('valor')
+                    $bono->__GET('valor'),
+                    $bono->__GET('estado')
                 ));
 
             $this->myCon = parent::desconectar();
@@ -83,11 +83,15 @@ public function regBonos(Tbl_Control_Bonos $bono)
             $this->myCon = parent::conectar();
             $sql = "UPDATE tbl_control_bonos SET
             nombre = ?,
-            direccion = ? WHERE id_bono = ?";
+            valor = ?,
+            estado = ? WHERE id_bono = ?";
             $this->myCon->prepare($sql)
                 ->execute(array(
+                    
                     $bono->__GET('nombre'),
-                    $bono->__GET('valor')
+                    $bono->__GET('valor'),
+                    $bono->__GET('estado'),
+                    $bono->__GET('id_bono')
 
                 ));
         }

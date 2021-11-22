@@ -8,7 +8,7 @@ $dtcb = new Dt_Control_Bonos();
 $bono = new Tbl_Control_Bonos();
 $varIdBono = 0;
 if (isset($varIdBono)) {
-    $varIdBono = $_GET['viewC'];
+    $varIdBono = $_GET['viewB'];
 }
 
 $bono = $dtcb ->obtenerBono($varIdBono);
@@ -152,6 +152,14 @@ $bono = $dtcb ->obtenerBono($varIdBono);
               </p>
              </a>
            </li>
+           <li class="nav-item">
+            <a href="../catalogos/tbl_control_bonos.php" class="nav-link">
+              <i class="nav-icon fas fa-money-bill-wave"></i>
+              <p>
+                Bonos
+              </p>
+            </a>
+          </li>
        </nav>
         <!-- /.sidebar-menu -->
       </div>

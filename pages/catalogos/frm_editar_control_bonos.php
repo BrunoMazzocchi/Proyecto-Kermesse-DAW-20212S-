@@ -1,5 +1,5 @@
 <?php
-//error_reporting(0);
+error_reporting(0);
 //IMPORTAMOS ENTIDADES Y DATOS
 include '../../entidades/tbl_control_bonos.php';
 include '../../datos/dt_control_bonos.php';
@@ -8,7 +8,7 @@ $dtcb = new Dt_Control_Bonos();
 $bono = new Tbl_Control_Bonos();
 $varIdBono = 0;
 if (isset($varIdBono)) {
-    $varIdBono = $_GET['viewC'];
+    $varIdBono = $_GET['editB'];
 }
 
 $bono = $dtcb->obtenerBono($varIdBono);
@@ -151,6 +151,14 @@ $bono = $dtcb->obtenerBono($varIdBono);
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_control_bonos.php" class="nav-link">
+              <i class="nav-icon fas fa-money-bill-wave"></i>
+              <p>
+                Bonos
+              </p>
+            </a>
+          </li>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
@@ -168,7 +176,7 @@ $bono = $dtcb->obtenerBono($varIdBono);
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="tbl_control_bonos.php">Inicio</a></li>
                 <li class="breadcrumb-item active">Editar Bonos</li>
               </ol>
             </div>
@@ -193,22 +201,25 @@ $bono = $dtcb->obtenerBono($varIdBono);
                   <div class="card-body">
                     <div class="form-group">
                       <label>ID Bono</label>
-                      <input type="text" value="<?php echo $bono->__GET('id_bono') ?>" class="form-control" id="id_bono" name="id_bono" placeholder="ID Bono" readonly required>
+                      <input readonly type="text" value="<?php echo $bono->__GET('id_bono') ?>" class="form-control" id="id_bono" name="id_bono" placeholder="ID Bono" readonly required>
                       <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
                     </div>
                     <div class="form-group">
                       <label>Nombre</label>
-                      <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
+                      <input type="text" value="<?php echo $bono->__GET('nombre');?>" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
                     </div>
                     <div class="form-group">
                       <label>Valor</label>
-                      <input type="number" class="form-control" id="valor" name="valor" placeholder="valor" required>
+                      <input type="number" value="<?php echo $bono->__GET('valor');?>" class="form-control" id="valor" name="valor" placeholder="Valor" required>
                     </div>
                   <!-- /.card-body -->
 
                   <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Editar</button>
                     <button type="reset" class="btn btn-danger">Cancelar</button>
+                  </div>
+                  <div class="card-footer">
+                    <a href="tbl_control_bonos.php"><i class="fas fa-arrow-left"></i> Atras</a>
                   </div>
                 </form>
               </div>
@@ -241,6 +252,16 @@ $bono = $dtcb->obtenerBono($varIdBono);
             bsCustomFileInput.init();
         });
     </script>
+    <script>
+      function setValoresBono() {
+      $("#id_bono").val("<?php echo $bono->__GET('id_bono') ?>")
+      $("#nombre").val("<?php echo $bono->__GET('nombre') ?>")
+      $("#valor").val("<?php echo $bono->__GET('valor') ?>")
+    }
+    $(document).ready(function() {
+          setValoresDenominacion();
+        });
+  </script>
 
 </body>
 

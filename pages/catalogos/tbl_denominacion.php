@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+//error_reporting(0);
 
 include '../../datos/dt_denominacion.php';
 include '../../entidades/tbl_denominacion.php';
@@ -147,6 +147,14 @@ if(isset($varMsj)) {
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_control_bonos.php" class="nav-link">
+              <i class="nav-icon fas fa-money-bill-wave"></i>
+              <p>
+                Bonos
+              </p>
+            </a>
+          </li>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
@@ -201,16 +209,16 @@ if(isset($varMsj)) {
                       foreach ($den->listDenominacion() as $r) :
                     ?>
                     <tr>
-                      <td><?php echo $r->_GET('id_Denominacion'); ?></td>
-                      <td><?php echo $r->_GET('idMoneda'); ?></td>
-                      <td><?php echo $r->_GET('valor'); ?></td>
-                      <td><?php echo $r->_GET('valor_letras'); ?></td>
-                      <td><?php echo $r->_GET('estado'); ?></td>
+                      <td><?php echo $r->__GET('id_Denominacion'); ?></td>
+                      <td><?php echo $r->__GET('idMoneda'); ?></td>
+                      <td><?php echo $r->__GET('valor'); ?></td>
+                      <td><?php echo $r->__GET('valor_letras'); ?></td>
+                      <td><?php echo $r->__GET('estado'); ?></td>
 
-                      <td> <a href="frm_editar_denominacion.php?editCg=<?php echo $r->_GET('id_Denominacion'); ?>" target="blank">
+                      <td> <a href="frm_editar_denominacion.php?editD=<?php echo $r->__GET('id_Denominacion'); ?>" target="blank">
                             <i class="fas fa-edit" title="Editar Denominacion"> Editar</i></a>
                       &nbsp;&nbsp;
-                      <a href="frm_view_denominacion.php?viewC=<?php echo $r->_GET('id_Denominacion'); ?>" target="blank">
+                      <a href="frm_view_denominacion.php?viewD=<?php echo $r->__GET('id_Denominacion'); ?>" target="blank">
                             <i class="fas fa-eye" title="Ver Denominacion"> Ver</i></a>
                       &nbsp;&nbsp;
                             <a href="#" target="_blank">

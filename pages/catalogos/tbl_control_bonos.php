@@ -150,6 +150,14 @@ if (isset($varMsj)) {
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_control_bonos.php" class="nav-link">
+              <i class="nav-icon fas fa-money-bill-wave"></i>
+              <p>
+                Bonos
+              </p>
+            </a>
+          </li>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
@@ -187,7 +195,6 @@ if (isset($varMsj)) {
                                 <thead>
                                     <tr>
                                         <th>ID Bono</th>
-                                        <th>Bono</th>
                                         <th>Nombre</th>
                                         <th>Valor</th>
                                         <th>Estado</th>
@@ -204,10 +211,10 @@ if (isset($varMsj)) {
                                         <td><?php echo $r->__GET('nombre');?></td>
                                         <td><?php echo $r->__GET('valor');?></td>
                                         <td><?php echo $r->__GET('estado');?></td>
-                                        <td> <a href="frm_editar_control_bonos.php?editC=<?php echo $r->__GET('id_bono'); ?>" target="blank">
+                                        <td> <a href="frm_editar_control_bonos.php?editB=<?php echo $r->__GET('id_bono'); ?>" target="blank">
                                             <i class="fas fa-edit" title="Editar Categoria"></i></a>
                                         &nbsp;&nbsp;
-                                        <a href="frm_view_control_bonos.php?viewC=<?php echo $r->__GET('id_bono'); ?>" target="blank">
+                                        <a href="frm_view_control_bonos.php?viewB=<?php echo $r->__GET('id_bono'); ?>" target="blank">
                                             <i class="fas fa-eye" title="Ver Bonos"></i></a>
                                         &nbsp;&nbsp;
                                         <a href="#" target="_blank">

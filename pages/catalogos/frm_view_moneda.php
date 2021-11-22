@@ -1,22 +1,23 @@
 <?php
 //error_reporting(0);
-//IMPORTAMOS ENTIDADES Y DATOS
+
 include '../../entidades/tbl_moneda.php';
 include '../../datos/dt_moneda.php';
 
 $dtMon = new Dt_moneda();
 $mon = new Tbl_Moneda();
-$varIdMoneda = 0;
-if (isset($varIdMoneda)) {
-    $varIdMoneda = $_GET['editM'];
+$varIdMon = 0;
+if (isset($varIdMon)) {
+  $varIdMon = $_GET['viewM'];
 }
 
-$mon = $dtMon->obtenerMoneda($varIdMoneda);
+$mon = $dtMon->obtenerMoneda($varIdMon);
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,6 +30,7 @@ $mon = $dtMon->obtenerMoneda($varIdMoneda);
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
+
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
   <!-- Navbar -->
@@ -47,16 +49,16 @@ $mon = $dtMon->obtenerMoneda($varIdMoneda);
     </ul>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
-      <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
+        <form class="form-inline ml-3">
+            <div class="input-group input-group-sm">
+                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-navbar" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -71,18 +73,18 @@ $mon = $dtMon->obtenerMoneda($varIdMoneda);
         </a>
       </li>
     </ul>
-  </nav>
-  <!-- /.navbar -->
+        </nav>
+        <!-- /.navbar -->
 
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="../../index.html" class="brand-link">
-      <img src="../../dist/img/Kermesse_Logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Kermesse</span>
-    </a>
+        <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+     <!-- Brand Logo -->
+      <a href="../../index.html" class="brand-link">
+        <img src="../../dist/img/Kermesse_Logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">Kermesse</span>
+      </a>
 
-    <!-- Sidebar -->
+            <!-- Sidebar -->
     <div class="sidebar">
       <!-- SidebarSearch Form -->
       <div class="form-inline">
@@ -163,10 +165,10 @@ $mon = $dtMon->obtenerMoneda($varIdMoneda);
     </div>
     <!-- /.sidebar -->
   </aside>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
+       </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+    </aside>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -175,12 +177,12 @@ $mon = $dtMon->obtenerMoneda($varIdMoneda);
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Moneda</h1>
+                            <h1> View Moneda</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                                <li class="breadcrumb-item active">Editar Moneda</li>
+                                <li class="breadcrumb-item active">Moneda</li>
                             </ol>
                         </div>
                     </div>
@@ -196,32 +198,33 @@ $mon = $dtMon->obtenerMoneda($varIdMoneda);
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Editar Moneda</h3>
+                                    <h3 class="card-title">Moneda</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form method ="POST" action="../../negocio/ng_Moneda.php">
+                                <form>
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label>Moneda ID</label>
-                                            <input readonly type="text" value="<?php echo $mon->_GET('id_moneda')?>" class="form-control" id="id_moneda" name="id_moneda" placeholder="Moneda ID" required>
-                                            <input type="hidden" value="2" name="txtaccion" id="txtaccion"/>
-                                          </div>
+                                            <label>ID Moneda</label>
+                                            <input readonly type="number" value="<?php echo $mon->_GET('id_moneda');?>" class="form-control" id="id_moneda" name="id_moneda" placeholder="ID Moneda" required>
+                                        </div>
                                         <div class="form-group">
                                             <label>Nombre</label>
-                                            <input type="text" value="<?php echo $mon->_GET('nombre')?>" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
+                                            <input readonly type="text" value="<?php echo $mon->_GET('nombre');?>" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Simbolo</label>
-                                            <input type="text" value="<?php echo $mon->_GET('simbolo')?>" class="form-control" id="simbolo" name="simbolo" placeholder="Simbolo" required>
+                                            <input readonly type="text" value="<?php echo $mon->_GET('simbolo');?>" class="form-control" id="simbolo" name="simbolo" placeholder="Simbolo" required>
                                         </div>
-                                        <!-- /.card-body -->
-                                        <div class="card-footer">
-                                            <button type="submit" class="btn btn-primary">Editar</button>
-                                            <button type="reset" class="btn btn-danger">Cancelar</button>
+                                        <div class="form-group">
+                                            <label>Estado</label>
+                                            <input readonly type="text" value="<?php echo $mon->_GET('estado');?>" class="form-control" id="estado" name="estado" placeholder="Estado" required>
                                         </div>
-                                      <div class="card-footer">
+                                    </div>
+
+                                    <div class="card-footer">
                                         <a href="tbl_moneda.php"><i class="fas fa-arrow-left"></i> Atras</a>
+
                                     </div>
                                 </form>
                             </div>
@@ -258,15 +261,14 @@ $mon = $dtMon->obtenerMoneda($varIdMoneda);
     </script>
     <script>
       function setValoresMoneda() {
-      $("#id_moneda").val("<?php echo $mon->_GET('id_Denominacion')?>")
-      $("#nombre").val("<?php echo $mon->_GET('nombre')?>")
-      $("#simbolo").val("<?php echo $mon->_GET('simbolo')?>")
+      $("#id_moneda").val("<?php echo $mon->_GET('id_moneda') ?>")
+      $("#nombre").val("<?php echo $mon->_GET('nombre') ?>")
+      $("#simbolo").val("<?php echo $mon->_GET('simbolo') ?>")
+      $("#estado").val("<?php echo $mon->_GET('estado') ?>")
     }
     $(document).ready(function() {
           setValoresMoneda();
         });
   </script>
-
-</body>
-
+  </body>
 </html>
