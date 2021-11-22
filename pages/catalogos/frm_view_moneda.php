@@ -1,21 +1,23 @@
 <?php
-error_reporting(0);
+//error_reporting(0);
 
-include '../../entidades/opciones.php';
-include '../../datos/dt_opciones.php';
+include '../../entidades/tbl_moneda.php';
+include '../../datos/dt_moneda.php';
 
-$dtOp = new Dt_opciones();
-$opc = new Opciones();
+$dtMon = new Dt_moneda();
+$mon = new Tbl_Moneda();
+$varIdMon = 0;
+if (isset($varIdMon)) {
+  $varIdMon = $_GET['viewM'];
+}
 
-$varIdop = 0;
-  if (isset($varIdop)) {
-    $varIdop = $_GET['viewO'];
-  } 
+$mon = $dtMon->obtenerMoneda($varIdMon);
 
-  $opc = $dtOp->obtenerOpc($varIdop);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,6 +30,7 @@ $varIdop = 0;
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
+
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
   <!-- Navbar -->
@@ -46,16 +49,16 @@ $varIdop = 0;
     </ul>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
-      <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
+        <form class="form-inline ml-3">
+            <div class="input-group input-group-sm">
+                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-navbar" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -70,18 +73,18 @@ $varIdop = 0;
         </a>
       </li>
     </ul>
-  </nav>
-  <!-- /.navbar -->
+        </nav>
+        <!-- /.navbar -->
 
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="../../index.html" class="brand-link">
-      <img src="../../dist/img/Kermesse_Logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Kermesse</span>
-    </a>
+        <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+     <!-- Brand Logo -->
+      <a href="../../index.html" class="brand-link">
+        <img src="../../dist/img/Kermesse_Logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">Kermesse</span>
+      </a>
 
-    <!-- Sidebar -->
+            <!-- Sidebar -->
     <div class="sidebar">
       <!-- SidebarSearch Form -->
       <div class="form-inline">
@@ -102,7 +105,7 @@ $varIdop = 0;
                with font-awesome or any other icon font library -->
           <li class="nav-header">TABLAS</li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_denominacion.php" class="nav-link">
+            <a href="../catalogos/visualizacion/tbl_denominacion.php" class="nav-link">
               <i class="nav-icon fas fa-search-dollar"></i>
               <p>
                 Denominación
@@ -110,7 +113,7 @@ $varIdop = 0;
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_Moneda.php" class="nav-link">
+            <a href="../catalogos/visualizacion/tbl_Moneda.php" class="nav-link">
               <i class="nav-icon fas fa-coins"></i>
               <p>
                 Moneda
@@ -118,7 +121,7 @@ $varIdop = 0;
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_productos.php" class="nav-link">
+            <a href="../catalogos/visualizacion/tbl_productos.php" class="nav-link">
               <i class="nav-icon fas fa-shopping-basket"></i>
               <p>
                 Productos
@@ -126,7 +129,7 @@ $varIdop = 0;
             </a>
           </li>
           <li class="nav-item">
-            <a href="../../pages/catalogos/tbl_gastos.php" class="nav-link">
+            <a href="../../pages/catalogos/visualizacion/tbl_gastos.php" class="nav-link">
               <i class="nav-icon fas fa-file-invoice-dollar"></i>
               <p>
                 Gastos
@@ -134,7 +137,7 @@ $varIdop = 0;
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_parroquia.php" class="nav-link">
+            <a href="../catalogos/visualizacion/tbl_parroquia.php" class="nav-link">
               <i class="nav-icon fas fa-church"></i>
               <p>
                 Parroquia
@@ -142,26 +145,18 @@ $varIdop = 0;
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_kermesse.php" class="nav-link">
+            <a href="../catalogos/visualizacion/tbl_kermesse.php" class="nav-link">
               <i class="nav-icon fas fa-map-pin"></i>
               <p>
-                Kermesse
+                 Kermesse
               </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_control_bonos.php" class="nav-link">
-              <i class="nav-icon fas fa-money-bill-wave"></i>
-              <p>
-                Bonos
-              </p>
-            </a>
-          </li>
-      </nav>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
+             </a>
+           </li>
+       </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+    </aside>
+
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -169,12 +164,12 @@ $varIdop = 0;
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1> View Opciones</h1>
+                            <h1> View Moneda</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                                <li class="breadcrumb-item active">Lista Opciones</li>
+                                <li class="breadcrumb-item active">Moneda</li>
                             </ol>
                         </div>
                     </div>
@@ -190,28 +185,32 @@ $varIdop = 0;
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Opciones</h3>
+                                    <h3 class="card-title">Moneda</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
                                 <form>
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label>Codigo Opcion</label>
-                                            <input type="text"  value="<?php echo $opc->_GET('id_opciones'); ?>" class="form-control" id="id_opciones" name="id_opciones" placeholder="Codigo de Opcion" disabled required>
+                                            <label>ID Moneda</label>
+                                            <input readonly type="number" value="<?php echo $mon->_GET('id_moneda');?>" class="form-control" id="id_moneda" name="id_moneda" placeholder="ID Moneda" required>
                                         </div>
                                         <div class="form-group">
-                                            <label>Descripcion</label>
-                                            <input type="text" value="<?php echo $opc->_GET('opcion_descripcion'); ?>" class="form-control" id="opcion_descripcion" name="opcion_descripcion" placeholder="Descripcion" disabled required>
+                                            <label>Nombre</label>
+                                            <input readonly type="text" value="<?php echo $mon->_GET('nombre');?>" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
                                         </div>
                                         <div class="form-group">
-                                             <label>Estado</label>
-                                             <input type="number" value="<?php echo $opc->_GET('estado'); ?>" class="form-control" id="estado" placeholder="Estado"disabled>
-                                         </div>
+                                            <label>Simbolo</label>
+                                            <input readonly type="text" value="<?php echo $mon->_GET('simbolo');?>" class="form-control" id="simbolo" name="simbolo" placeholder="Simbolo" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Estado</label>
+                                            <input readonly type="text" value="<?php echo $mon->_GET('estado');?>" class="form-control" id="estado" name="estado" placeholder="Estado" required>
+                                        </div>
                                     </div>
 
                                     <div class="card-footer">
-                                        <a href="tbl_opciones.php"><i class="fas fa-arrow-left"></i> Atras</a>
+                                        <a href="tbl_moneda.php"><i class="fas fa-arrow-left"></i> Atras</a>
 
                                     </div>
                                 </form>
@@ -222,14 +221,6 @@ $varIdop = 0;
             </section>
             <!-- /.content -->
         </div>
-        <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <div class="float-right d-none d-sm-block">
-                <b>Version</b> 3.1.0-rc
-            </div>
-            <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-        </footer>
-
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
@@ -255,6 +246,16 @@ $varIdop = 0;
             bsCustomFileInput.init();
         });
     </script>
-</body>
-
+    <script>
+      function setValoresMoneda() {
+      $("#id_moneda").val("<?php echo $mon->_GET('id_moneda') ?>")
+      $("#nombre").val("<?php echo $mon->_GET('nombre') ?>")
+      $("#simbolo").val("<?php echo $mon->_GET('simbolo') ?>")
+      $("#estado").val("<?php echo $mon->_GET('estado') ?>")
+    }
+    $(document).ready(function() {
+          setValoresMoneda();
+        });
+  </script>
+  </body>
 </html>

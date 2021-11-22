@@ -1,5 +1,5 @@
 <?php
-//error_reporting(0);
+error_reporting(0);
 //IMPORTAMOS ENTIDADES Y DATOS
 include '../../entidades/tbl_control_bonos.php';
 include '../../datos/dt_control_bonos.php';
@@ -193,7 +193,7 @@ $bono = $dtcb->obtenerBono($varIdBono);
                   <div class="card-body">
                     <div class="form-group">
                       <label>ID Bono</label>
-                      <input type="text" value="<?php echo $bono->__GET('id_bono') ?>" class="form-control" id="id_bono" name="id_bono" placeholder="ID Bono" readonly required>
+                      <input readonly type="text" value="<?php echo $bono->__GET('id_bono') ?>" class="form-control" id="id_bono" name="id_bono" placeholder="ID Bono" readonly required>
                       <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
                     </div>
                     <div class="form-group">
@@ -209,6 +209,9 @@ $bono = $dtcb->obtenerBono($varIdBono);
                   <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Editar</button>
                     <button type="reset" class="btn btn-danger">Cancelar</button>
+                  </div>
+                  <div class="card-footer">
+                    <a href="tbl_control_bonos.php"><i class="fas fa-arrow-left"></i> Atras</a>
                   </div>
                 </form>
               </div>

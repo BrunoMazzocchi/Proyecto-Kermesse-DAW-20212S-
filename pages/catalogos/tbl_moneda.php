@@ -102,7 +102,7 @@ if(isset($varMsj))
                with font-awesome or any other icon font library -->
           <li class="nav-header">TABLAS</li>
           <li class="nav-item">
-            <a href="../catalogos/visualizacion/tbl_denominacion.php" class="nav-link">
+            <a href="../catalogos/tbl_denominacion.php" class="nav-link">
               <i class="nav-icon fas fa-search-dollar"></i>
               <p>
                 Denominación
@@ -110,7 +110,7 @@ if(isset($varMsj))
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/visualizacion/tbl_Moneda.php" class="nav-link">
+            <a href="../catalogos/tbl_Moneda.php" class="nav-link">
               <i class="nav-icon fas fa-coins"></i>
               <p>
                 Moneda
@@ -118,7 +118,7 @@ if(isset($varMsj))
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/visualizacion/tbl_productos.php" class="nav-link">
+            <a href="../catalogos/tbl_productos.php" class="nav-link">
               <i class="nav-icon fas fa-shopping-basket"></i>
               <p>
                 Productos
@@ -126,7 +126,7 @@ if(isset($varMsj))
             </a>
           </li>
           <li class="nav-item">
-            <a href="../../pages/catalogos/visualizacion/tbl_gastos.php" class="nav-link">
+            <a href="../../pages/catalogos/tbl_gastos.php" class="nav-link">
               <i class="nav-icon fas fa-file-invoice-dollar"></i>
               <p>
                 Gastos
@@ -134,7 +134,7 @@ if(isset($varMsj))
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/visualizacion/tbl_parroquia.php" class="nav-link">
+            <a href="../catalogos/tbl_parroquia.php" class="nav-link">
               <i class="nav-icon fas fa-church"></i>
               <p>
                 Parroquia
@@ -142,10 +142,18 @@ if(isset($varMsj))
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/visualizacion/tbl_kermesse.php" class="nav-link">
+            <a href="../catalogos/tbl_kermesse.php" class="nav-link">
               <i class="nav-icon fas fa-map-pin"></i>
               <p>
                 Kermesse
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_control_bonos.php" class="nav-link">
+              <i class="nav-icon fas fa-money-bill-wave"></i>
+              <p>
+                Bonos
               </p>
             </a>
           </li>
@@ -183,7 +191,7 @@ if(isset($varMsj))
                 </div>
                 <div class="card-body">
                 <div  class="form-group col-md-12" style="text-align:right">
-                    <a href="frm_gastos.php" title="Nuevo Gasto" target="blank"><i class="far fa-plus-square"></i>Nuevo Gasto</a>
+                    <a href="frm_moneda.php" title="Nuevo Gasto" target="blank"><i class="far fa-plus-square"></i>Nuevo Gasto</a>
                     </div>
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
@@ -204,12 +212,12 @@ if(isset($varMsj))
                   ?>
 
                   <tr>
-                    <td><?php echo $r->_GET('id_moneda');  ?></td>
-                    <td><?php echo $r->_GET('nombre');  ?></td>
-                    <td><?php echo $r->_GET('simbolo');  ?></td>
-                    <td><?php echo $r->_GET('estado'); ?></td>
+                    <td><?php echo $r->_GET('id_moneda');?></td>
+                    <td><?php echo $r->_GET('nombre');?></td>
+                    <td><?php echo $r->_GET('simbolo');?></td>
+                    <td><?php echo $r->_GET('estado');?></td>
                  
-                    <td> <a href="frm_edit_moneda.php?editM=<?php echo $r->_GET('id_moneda');?>" target="blank">
+                    <td> <a href="frm_editar_moneda.php?editM=<?php echo $r->_GET('id_moneda');?>" target="blank">
                     <i class="fas fa-edit" title="Editar Moneda"></i></a>
                     &nbsp;&nbsp;
                     <a href="frm_view_moneda.php?viewM=<?php echo $r->_GET('id_moneda');?>" target="blank">

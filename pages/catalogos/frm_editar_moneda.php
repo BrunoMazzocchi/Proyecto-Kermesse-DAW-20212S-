@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+//error_reporting(0);
 //IMPORTAMOS ENTIDADES Y DATOS
 include '../../entidades/tbl_moneda.php';
 include '../../datos/dt_moneda.php';
@@ -10,6 +10,8 @@ $varIdMoneda = 0;
 if (isset($varIdMoneda)) {
     $varIdMoneda = $_GET['editM'];
 }
+
+$mon = $dtMon->obtenerMoneda($varIdMoneda);
 
 ?>
 
@@ -190,27 +192,25 @@ if (isset($varIdMoneda)) {
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label>Moneda ID</label>
-                                            <input type="text" class="form-control" id="id_moneda" name="id_moneda" placeholder="Moneda ID" required>
+                                            <input readonly type="text" value="<?php echo $mon->_GET('id_moneda')?>" class="form-control" id="id_moneda" name="id_moneda" placeholder="Moneda ID" required>
                                             <input type="hidden" value="2" name="txtaccion" id="txtaccion"/>
                                           </div>
                                         <div class="form-group">
                                             <label>Nombre</label>
-                                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
+                                            <input type="text" value="<?php echo $mon->_GET('nombre')?>" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Simbolo</label>
-                                            <input type="number" class="form-control" id="simbolo" name="simbolo" placeholder="Simbolo" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Estado</label>
-                                            <input type="text" class="form-control" id="estado" name="estado" placeholder="estado" required>
+                                            <input type="text" value="<?php echo $mon->_GET('simbolo')?>" class="form-control" id="simbolo" name="simbolo" placeholder="Simbolo" required>
                                         </div>
                                         <!-- /.card-body -->
-
                                         <div class="card-footer">
                                             <button type="submit" class="btn btn-primary">Editar</button>
                                             <button type="reset" class="btn btn-danger">Cancelar</button>
                                         </div>
+                                      <div class="card-footer">
+                                        <a href="tbl_moneda.php"><i class="fas fa-arrow-left"></i> Atras</a>
+                                    </div>
                                 </form>
                             </div>
                             <!-- /.card -->
@@ -219,14 +219,6 @@ if (isset($varIdMoneda)) {
             </section>
             <!-- /.content -->
         </div>
-        <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <div class="float-right d-none d-sm-block">
-                <b>Version</b> 3.1.0-rc
-            </div>
-            <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-        </footer>
-
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
@@ -252,6 +244,16 @@ if (isset($varIdMoneda)) {
             bsCustomFileInput.init();
         });
     </script>
+    <script>
+      function setValoresMoneda() {
+      $("#id_moneda").val("<?php echo $mon->_GET('id_Denominacion')?>")
+      $("#nombre").val("<?php echo $mon->_GET('nombre')?>")
+      $("#simbolo").val("<?php echo $mon->_GET('simbolo')?>")
+    }
+    $(document).ready(function() {
+          setValoresMoneda();
+        });
+  </script>
 
 </body>
 
