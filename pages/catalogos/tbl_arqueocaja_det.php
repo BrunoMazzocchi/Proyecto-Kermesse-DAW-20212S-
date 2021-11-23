@@ -1,16 +1,16 @@
 <?php
 error_reporting(0);
-//IMPORTAMOS ENTIDADES Y DATOS
-include '../../entidades/tbl_moneda.php';
-include '../../datos/dt_moneda.php';
 
-$dmtmon = new Dt_moneda();
+include '../../datos/dt_arqueocaja_det.php';
+include '../../entidades/arqueocaja_det.php';
+
+
+$ac= new Dt_Arqueocaja_Det();
 
 $varMsj = 0;
-if (isset($varMsj)) {
+if(isset($varMsj)) {
     $varMsj = $_GET['msj'];
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -105,7 +105,6 @@ if (isset($varMsj)) {
               <i class="nav-icon fas fa-search-dollar"></i>
               <p>
                 Denominación
-                <span class="badge badge-info right">2</span>
               </p>
             </a>
           </li>
@@ -165,71 +164,106 @@ if (isset($varMsj)) {
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_arqueocaja_det.php" class="nav-link">
+              <i class="nav-icon fas fa-object-group"></i>
+              <p>
+                ArqueoCaja Detalle
+              </p>
+            </a>
+          </li>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
   </aside>
 
-  <!-- Content Wrapper. Contains page content -->
+
+    <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Nueva Moneda</h1>
+            <h1>Arqueocaja</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Registrar Moneda</li>
+              <li class="breadcrumb-item active">Arqueocaja Detalle</li>
             </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
         <div class="row">
-          <!-- left column -->
-          <div class="col-md-6">
-            <!-- general form elements -->
-            <div class="card card-primary">
+          <div class="col-12">
+            <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Ingresar Moneda</h3>
-              </div>
-              <!-- /.card-header -->
-              <!-- form start -->
-              <form method="POST" action="../../negocio/ng_Moneda.php">
+              <h3 class="card-title">Arqueocaja Detalle</h3>
+                </div>
                 <div class="card-body">
-                  <div class="form-group">
-                    <label>ID Moneda</label>
-                    <input type="number" class="form-control" id="id_moneda" name="id_moneda"placeholder="Digite ID de moneda">
-                    <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
-                  </div>
-                  <div class="form-group">
-                    <label>Nombre</label>
-                    <input type="text" class="form-control" id="" name="nombre"placeholder="Ingrese el nombre de la moneda">
-                  </div>
-                  <div class="form-group">
-                    <label>Simbolo</label>
-                    <input type="text" class="form-control" id="" name="simbolo"placeholder="Ingrese el simbolo de la moneda">
-                  </div>
-                </div>
-                <!-- /.card-body -->
-
-                <div class="card-footer">
+                    <div class="form-group col-md-12" style="text-align: right;">
+                        <a href="frm_arqueocaja_det.php" title="Registrar un nuevo Arqueo de Caja" target="_blank"><i class="far fa-2x fa-plus-square"></i></a>
+                    </div>
+                    <table id="example1" class="table table-bordered table-striped">
                   
-                  <button type="submit" class="btn btn-primary">Guardar</button>
-                  <button type="reset" class="btn btn-danger">Cancelar</button>
-                </div>
-              </form>
-            </div>
-            <!-- /.card -->
+                  <thead>
+                  <tr>
+                    <th>ID Arqueocaja Det</th>
+                    <th>ID ArqueoCaja</th>
+                    <th>ID Moneda</th>
+                    <th>ID Denominacion</th>
+                    <th>Usuario Creacion</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                    <th>Accion</th>
+                  </tr>
 
+                  </thead>
+
+                  <tbody>
+                    <?php
+                      foreach($acd->listArqueocajaDet() as $r):
+                        $estado = "";
+                        if ($r->__GET('estado') == 1 || $r->__GET('estado') == 2){
+                          $estado = "Activo";
+                        }
+                        else{
+                          $estado = "Inactivo";
+                        }
+                    ?>
+                    <tr>
+                      <td><?php echo $r->_GET('id_ArqueoCaja_Det'); ?></td>
+                      <td><?php echo $r->_GET('idArqueoCaja'); ?></td>
+                      <td><?php echo $r->_GET('idMoneda'); ?></td>
+                      <td><?php echo $r->_GET('idDenominacion'); ?></td>
+                      <td><?php echo $r->_GET('usuario_creacion'); ?></td>
+                      <td><?php echo $r->_GET('cantidad'); ?></td>
+                      <td><?php echo $r->_GET('subtotal'); ?></td>
+                      <td><?php echo $estado; ?></td>
+
+                      <td> <a href="frm_editar_arqueocaja.php?editACD=<?php echo $r->_GET('id_ArqueoCaja_Det'); ?>" target="blank">
+                            <i class="fas fa-edit" title="Editar Arqueo Caja Detalle"> Editar</i></a>
+                      &nbsp;&nbsp;
+                      <a href="frm_view_arqueocaja.php?viewACD=<?php echo $r->_GET('id_ArqueoCaja'); ?>" target="blank">
+                            <i class="fas fa-eye" title="Ver Arqueo Caja Detalle"> Ver</i></a>
+                      &nbsp;&nbsp;
+                            <a href="#" target="_blank">
+                                <i class="fas fa-trash-alt" title="Eliminar Arqueo Caja Detalle"> Eliminar</i>
+                            </a>
+                      </td>
+                    </tr>
+                    <?php
+                      endforeach;
+                    ?>
+                  </tbody>
+                  </table>
+                </div>
+            </div>
+        </div>
+    </div>
             
     </section>
     <!-- /.content -->

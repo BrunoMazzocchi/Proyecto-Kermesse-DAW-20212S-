@@ -158,30 +158,20 @@ if (isset($varMsj)) {
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_arqueocaja.php" class="nav-link">
+              <i class="nav-icon fas fa-object-group"></i>
+              <p>
+                ArqueoCaja
+              </p>
+            </a>
+          </li>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
   </aside>
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <section class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1>Bonos</h1>
-            </div>
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="tbl_control_bonos.php">Inicio</a></li>
-                <li class="breadcrumb-item active">Editar Bonos</li>
-              </ol>
-            </div>
-          </div>
-        </div><!-- /.container-fluid -->
-      </section>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -219,7 +209,7 @@ if (isset($varMsj)) {
               <div class="card-body">
                   <div class="form-group">
                     <label> ID </label>
-                    <input type="number" class="form-control" id="id_control_bono" name= "id_control_bono"  maxlenght= "2" placeholder="Ingrese el ID" title= "Ingrese el ID" required>
+                    <input type="number" class="form-control" id="id_bono" name= "id_bono"  maxlenght= "2" placeholder="Ingrese el ID" title= "Ingrese el ID" required>
                     <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
                   </div>
 
@@ -232,14 +222,6 @@ if (isset($varMsj)) {
                     <label>Valor</label>
                     <input type="number" class="form-control" id="valor" name= "valor" step="any" maxlenght= "10" placeholder="Ingrese el valor del Bono" title= "Ingrese el valor del Bono" required>
                   </div>
-
-                  <div class="form-group">
-                    <label>Estado</label>
-                    <input type="number" class="form-control" id="estado" name= "estado"  maxlenght= "1"
-                    placeholder="Ingrese el estado del Bono" title= "Ingrese el estado del Bono" required>
-
-                  
-                </div>
                   
               </div>
 

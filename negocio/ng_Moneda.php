@@ -51,3 +51,19 @@ if ($_POST){
 
     
 }
+
+if ($_GET)
+            {
+                try
+                {
+                    $mon->_SET('id_moneda', $_GET['delM']);
+                    $dtMon->deleteMoneda($mon->_GET('id_moneda'));
+                    header("Location: ../pages/catalogos/tbl_moneda.php?msj=5");
+            
+                }
+                catch(Exception $e)
+                {
+                    header("Location: ../pages/catalogos/tbl_moneda.php?msj=6");
+                    die($e->getMessage());
+                }
+            }

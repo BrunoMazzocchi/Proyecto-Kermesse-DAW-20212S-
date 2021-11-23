@@ -36,13 +36,15 @@ class Dt_denominacion extends Conexion{
     {
         try {
             $this->myCon = parent::conectar();
-            $sql = "INSERT INTO tbl_denominacion (idMoneda,valor,valor_letras)
-            VALUES (?,?,?)";
+            $sql = "INSERT INTO tbl_denominacion (id_Denominacion,idMoneda,valor,valor_letras,estado)
+            VALUES (?,?,?,?,?)";
             $this->myCon->prepare($sql)
                 ->execute(array(
+                    $denom->__GET('id_Denominacion'),
                     $denom->__GET('idMoneda'),
                     $denom->__GET('valor'),
-                    $denom->__GET('valor_letras')
+                    $denom->__GET('valor_letras'),
+                    $denom->__GET('estado')
                 ));
 
             $this->myCon = parent::desconectar();
@@ -99,17 +101,18 @@ class Dt_denominacion extends Conexion{
         }
     }
 
-    public function deleteDenominacion($id)
+    public function deleteDenominacion($idD)
     {
         try
         {
             $this->myCon = parent::conectar();
-            $querySQL = "DELETE FROM tbl_denominacion WHERE id_Denominacion = ?";
+            $querySQL = "UPDATE tbl_denominacion SET estado = 3 WHERE id_Denominacion = ?";
             $stm = $this->myCon->prepare($querySQL);
-            $stm->execute(array($id));
+            $stm->execute(array($idD));
             $this->myCon = parent::desconectar();
         }
-        catch (Exception $e) {
+        catch(Exception $e)
+        {
             die($e->getMessage());
         }
     }

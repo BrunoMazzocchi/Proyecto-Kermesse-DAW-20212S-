@@ -39,7 +39,7 @@ public function regBono(Tbl_Control_Bonos $bono)
         try {
             $this->myCon = parent::conectar();
             $sql = "INSERT INTO tbl_control_bonos (id_bono,nombre,valor,estado)
-            VALUES (?,?,?)";
+            VALUES (?,?,?,?)";
             $this->myCon->prepare($sql)
                 ->execute(array(
                     $bono->__GET('id_bono'),
@@ -100,17 +100,18 @@ public function regBono(Tbl_Control_Bonos $bono)
         }
     }
 
-    public function deleteBono($id)
+    public function deleteBono($idB)
     {
         try
         {
             $this->myCon = parent::conectar();
-            $querySQL = "DELETE FROM tbl_control_bonos WHERE id_bono = ?";
+            $querySQL = "UPDATE tbl_control_bonos SET estado = 3 WHERE id_bono = ?";
             $stm = $this->myCon->prepare($querySQL);
-            $stm->execute(array($id));
+            $stm->execute(array($idB));
             $this->myCon = parent::desconectar();
         }
-        catch (Exception $e) {
+        catch(Exception $e)
+        {
             die($e->getMessage());
         }
     }

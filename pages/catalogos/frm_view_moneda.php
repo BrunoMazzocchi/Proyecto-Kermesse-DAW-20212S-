@@ -1,5 +1,5 @@
 <?php
-//error_reporting(0);
+error_reporting(0);
 
 include '../../entidades/tbl_moneda.php';
 include '../../datos/dt_moneda.php';
@@ -157,6 +157,14 @@ $mon = $dtMon->obtenerMoneda($varIdMon);
               <i class="nav-icon fas fa-money-bill-wave"></i>
               <p>
                 Bonos
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_arqueocaja.php" class="nav-link">
+              <i class="nav-icon fas fa-object-group"></i>
+              <p>
+                ArqueoCaja
               </p>
             </a>
           </li>

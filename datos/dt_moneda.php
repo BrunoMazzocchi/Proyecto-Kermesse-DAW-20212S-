@@ -100,17 +100,18 @@ class Dt_moneda extends Conexion{
         }
     }
 
-    public function deleteBono($id)
+    public function deleteMoneda($idB)
     {
         try
         {
             $this->myCon = parent::conectar();
-            $querySQL = "DELETE FROM tbl_moneda WHERE id_moneda = ?";
+            $querySQL = "UPDATE tbl_moneda SET estado = 3 WHERE id_moneda = ?";
             $stm = $this->myCon->prepare($querySQL);
-            $stm->execute(array($id));
+            $stm->execute(array($idB));
             $this->myCon = parent::desconectar();
         }
-        catch (Exception $e) {
+        catch(Exception $e)
+        {
             die($e->getMessage());
         }
     }

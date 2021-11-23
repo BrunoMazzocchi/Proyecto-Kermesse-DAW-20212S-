@@ -1,5 +1,5 @@
 <?php
-//error_reporting(0);
+error_reporting(0);
 
 include '../../datos/dt_denominacion.php';
 include '../../entidades/tbl_denominacion.php';
@@ -17,15 +17,21 @@ if(isset($varMsj)) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | General Form Elements</title>
+  <title>dbkermesse | Tabla Gastos</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../../plugins/DataTables1.11.2-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/DataTables1.11.2-/Responsive-2.2.9/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/DataTables1.11.2/Buttons-2.0.0/css/buttons.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
+
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
   <!-- Navbar -->
@@ -155,6 +161,14 @@ if(isset($varMsj)) {
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_arqueocaja.php" class="nav-link">
+              <i class="nav-icon fas fa-object-group"></i>
+              <p>
+                ArqueoCaja
+              </p>
+            </a>
+          </li>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
@@ -184,12 +198,12 @@ if(isset($varMsj)) {
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-              <h3 class="card-title">Denominacion</h3>
-                </div>
+                <h3 class="card-title">Tabla Denominacion</h3>
+              </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                     <div class="form-group col-md-12" style="text-align: right;">
-                        <a href="frm_denominacion.php" title="Registrar una nueva denominacion" target="_blank"><i class="far fa-2x fa-plus-square"></i></a>
+                        <a href="frm_denominacion.php" title="Nueva denominacion" target="_blank"><i class="far fa-2x fa-plus-square"></i>Nueva Denominacion</a>
                     </div>
                     <table id="example1" class="table table-bordered table-striped">
 
@@ -206,14 +220,21 @@ if(isset($varMsj)) {
 
                   <tbody>
                     <?php
-                      foreach ($den->listDenominacion() as $r) :
+                      foreach ($den->listDenominacion() as $r):
+                        $estado = "";
+                          if ($r->__GET('estado') == 1 || $r->__GET('estado') == 2){
+                            $estado = "Activo";
+                          }
+                          else{
+                            $estado = "Inactivo";
+                          }
                     ?>
                     <tr>
                       <td><?php echo $r->__GET('id_Denominacion'); ?></td>
                       <td><?php echo $r->__GET('idMoneda'); ?></td>
                       <td><?php echo $r->__GET('valor'); ?></td>
                       <td><?php echo $r->__GET('valor_letras'); ?></td>
-                      <td><?php echo $r->__GET('estado'); ?></td>
+                      <td><?php echo $estado; ?></td>
 
                       <td> <a href="frm_editar_denominacion.php?editD=<?php echo $r->__GET('id_Denominacion'); ?>" target="blank">
                             <i class="fas fa-edit" title="Editar Denominacion"> Editar</i></a>
@@ -221,9 +242,8 @@ if(isset($varMsj)) {
                       <a href="frm_view_denominacion.php?viewD=<?php echo $r->__GET('id_Denominacion'); ?>" target="blank">
                             <i class="fas fa-eye" title="Ver Denominacion"> Ver</i></a>
                       &nbsp;&nbsp;
-                            <a href="#" target="_blank">
-                                <i class="fas fa-trash-alt" title="Eliminar"> Eliminar</i>
-                            </a>
+                      <a href="#" onclick="deleteDenominacion(<?php echo $r->__GET('id_Denominacion'); ?>);">
+                            <i class="fas fa-trash-alt" title="Eliminar Denominacion"> Eliminar</i></a>
                       </td>
                       </tr>
                     <?php
@@ -253,43 +273,64 @@ if(isset($varMsj)) {
 <script src="../../plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
 <!-- DataTables  & Plugins -->
-<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    <script src="../../plugins/jszip/jszip.min.js"></script>
-    <script src="../../plugins/pdfmake/pdfmake.min.js"></script>
-    <script src="../../plugins/pdfmake/vfs_fonts.js"></script>
-    <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-    <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/datatables.min.css"></script>
+<script src="../../plugins/DataTables1.11.2/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/JSZip-2.5.0/jszip.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/pdfmake-0.1.36/pdfmake.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/pdfmake-0.1.36/vfs_fonts.js"></script>
+<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/buttons.html5.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/buttons.print.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
+<script src="../../plugins/jAlert/dist/jAlert.min.js">//optional!!</script>
+<script src="../../plugins/jAlert/dist/jAlert-functions.min.js"></script>
+
+
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
 <!-- Page specific script -->
 <script>
-        $(document).ready(function() {
-            var mensaje = 0;
-            mensaje = "<?php echo $varMsj ?>";
 
-            if (mensaje == '1') {
-                sucessAlert('Exito', 'Los datos han sido registrados exitosamente!');
+            function deleteDenominacion(idD)
+            {
+              confirm(function(e,btn)
+              {
+                e.preventDefault();
+                window.location.href = "../../negocio/ng_Denominacion.php?delD="+idD;
+              },
+              function(e,btn)
+              {
+                e.preventDefault();
+              });
             }
-            if (mensaje == '3') {
-                sucessAlert('Exito', 'Los datos han sido editado exitosamente!');
-            }
-            if (mensaje == '5') {
-                sucessAlert('Exito', 'Los datos han sido eliminado exitosamente!');
-            }
-            if (mensaje == '2' || mensaje == '4') {
-                errorAlert('Error', 'Error', 'Revise los datos e intente nuevamente!');
-            }
-            if (mensaje == '6') {
-                errorAlert ('Error', 'Verifique que exista el dato');
-            }
+
+        $(document).ready(function() {
+          var mensaje = 0;
+                        mensaje = "<?php echo $varMsj?>";
+                        if(mensaje == "1")
+                        {
+                            successAlert('Exito', 'Los datos han sido registrados exitosamente');
+                        }
+                        if(mensaje == "2" || mensaje =="4" || mensaje =="6")
+                        {
+                            errorAlert('Error', 'Revise los datos e intente de nuevo');
+                        }
+                        if(mensaje == "3")
+                        {
+                            successAlert('Exito', 'Los datos han sido actualizados exitosamente');
+                        }
+                        if(mensaje == "5")
+                        {
+                            successAlert('Exito', 'Los datos han sido eliminados exitosamente');
+                        }
 
 
             $(function() {

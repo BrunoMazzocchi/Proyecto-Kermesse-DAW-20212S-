@@ -1,17 +1,17 @@
 <?php
 //error_reporting(0);
 
-include '../../entidades/tbl_denominacion.php';
-include '../../datos/dt_denominacion.php';
+include '../../entidades/tbl_moneda.php';
+include '../../datos/dt_moneda.php';
 
-$denom = new Dt_denominacion();
-$denominacion = new Tbl_Denominacion();
-$varIdDenom = 0;
-if (isset($varIdDenom)) {
-  $varIdDenom = $_GET['viewD'];
+$dtMon = new Dt_moneda();
+$mon = new Tbl_Moneda();
+$varIdMon = 0;
+if (isset($varIdMon)) {
+  $varIdMon = $_GET['viewAC'];
 }
 
-$denominacion = $denom->obtenerDenominacion($varIdDenom);
+$mon = $dtMon->obtenerMoneda($varIdMon);
 
 ?>
 
@@ -173,6 +173,7 @@ $denominacion = $denom->obtenerDenominacion($varIdDenom);
     </div>
     <!-- /.sidebar -->
   </aside>
+       </nav>
         <!-- /.sidebar-menu -->
       </div>
     </aside>
@@ -184,12 +185,12 @@ $denominacion = $denom->obtenerDenominacion($varIdDenom);
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1> View Denominacion</h1>
+                            <h1> View Moneda</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                                <li class="breadcrumb-item active">Denominacion</li>
+                                <li class="breadcrumb-item active">Moneda</li>
                             </ol>
                         </div>
                     </div>
@@ -205,36 +206,32 @@ $denominacion = $denom->obtenerDenominacion($varIdDenom);
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Denominacion</h3>
+                                    <h3 class="card-title">Moneda</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
                                 <form>
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label>ID Denominacion</label>
-                                            <input readonly type="number" class="form-control" id="id_Denominacion" name="id_Denominacion" placeholder="ID Denominacion" required>
-                                        </div>
-                                        <div class="form-group">
                                             <label>ID Moneda</label>
-                                            <input readonly type="number" class="form-control" id="idMoneda" name="idMoneda" placeholder="ID Moneda" required>
+                                            <input readonly type="number" value="<?php echo $mon->_GET('id_moneda');?>" class="form-control" id="id_moneda" name="id_moneda" placeholder="ID Moneda" required>
                                         </div>
                                         <div class="form-group">
-                                            <label>Valor</label>
-                                            <input readonly type="number" class="form-control" id="valor" name="valor" placeholder="Valor" required>
+                                            <label>Nombre</label>
+                                            <input readonly type="text" value="<?php echo $mon->_GET('nombre');?>" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
                                         </div>
                                         <div class="form-group">
-                                            <label>Valor en letras</label>
-                                            <input readonly type="text" class="form-control" id="valor_letras" name="valor_letras" placeholder="Valor en letras" required>
+                                            <label>Simbolo</label>
+                                            <input readonly type="text" value="<?php echo $mon->_GET('simbolo');?>" class="form-control" id="simbolo" name="simbolo" placeholder="Simbolo" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Estado</label>
-                                            <input readonly type="text" class="form-control" id="estado" name="estado" placeholder="Estado" required>
+                                            <input readonly type="text" value="<?php echo $mon->_GET('estado');?>" class="form-control" id="estado" name="estado" placeholder="Estado" required>
                                         </div>
                                     </div>
 
                                     <div class="card-footer">
-                                        <a href="tbl_denominacion.php"><i class="fas fa-arrow-left"></i> Atras</a>
+                                        <a href="tbl_moneda.php"><i class="fas fa-arrow-left"></i> Atras</a>
 
                                     </div>
                                 </form>
@@ -271,15 +268,14 @@ $denominacion = $denom->obtenerDenominacion($varIdDenom);
         });
     </script>
     <script>
-      function setValoresDenominacion() {
-      $("#id_Denominacion").val("<?php echo $denominacion->__GET('id_Denominacion') ?>")
-      $("#idMoneda").val("<?php echo $denominacion->__GET('idMoneda') ?>")
-      $("#valor").val("<?php echo $denominacion->__GET('valor') ?>")
-      $("#valor_letras").val("<?php echo $denominacion->__GET('valor_letras') ?>")
-      $("#estado").val("<?php echo $denominacion->__GET('estado') ?>")
+      function setValoresMoneda() {
+      $("#id_moneda").val("<?php echo $mon->_GET('id_moneda') ?>")
+      $("#nombre").val("<?php echo $mon->_GET('nombre') ?>")
+      $("#simbolo").val("<?php echo $mon->_GET('simbolo') ?>")
+      $("#estado").val("<?php echo $mon->_GET('estado') ?>")
     }
     $(document).ready(function() {
-          setValoresDenominacion();
+          setValoresMoneda();
         });
   </script>
   </body>

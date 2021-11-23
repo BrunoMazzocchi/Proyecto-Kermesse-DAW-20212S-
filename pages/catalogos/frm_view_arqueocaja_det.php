@@ -1,16 +1,18 @@
 <?php
 error_reporting(0);
-//IMPORTAMOS ENTIDADES Y DATOS
-include '../../entidades/tbl_moneda.php';
-include '../../datos/dt_moneda.php';
 
-$dmtmon = new Dt_moneda();
+include '../../datos/dt_arqueocaja_det.php';
+include '../../entidades/arqueocaja_det.php';
 
-$varMsj = 0;
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
+
+$dtAcd = new Dt_Arqueocaja_Det();
+$acd = new Arqueocaja_Det();
+$varIdAcd = 0;
+if(isset($varIdAcd)) {
+    $varIdAcd = $_GET['msj'];
 }
 
+$ac = $dtAc->obtenerArqueoCajaDet($varIdAc);
 ?>
 
 <!DOCTYPE html>
@@ -105,7 +107,6 @@ if (isset($varMsj)) {
               <i class="nav-icon fas fa-search-dollar"></i>
               <p>
                 Denominación
-                <span class="badge badge-info right">2</span>
               </p>
             </a>
           </li>
@@ -171,56 +172,71 @@ if (isset($varMsj)) {
     <!-- /.sidebar -->
   </aside>
 
-  <!-- Content Wrapper. Contains page content -->
+
+    <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Nueva Moneda</h1>
+            <h1>Arqueocaja Detalle</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Registrar Moneda</li>
+              <li class="breadcrumb-item active">Arqueocaja Detalle</li>
             </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
 
-    <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
         <div class="row">
           <!-- left column -->
-          <div class="col-md-6">
+          <div class="col-md-12">
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Ingresar Moneda</h3>
+                <h3 class="card-title">Editar Arqueocaja Det</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="POST" action="../../negocio/ng_Moneda.php">
+              <form method="POST" action="../../negocio/ng_Arqueocaja_Det.php">
                 <div class="card-body">
+                 <div class="form-group">
+                    <label>ID Arqueo Caja Detalle</label>
+                    <input readonly type="number" value="<?php echo $acd->_GET('id_ArqueoCaja_Det'); ?>" class="form-control" id="id_ArqueoCaja_Det" name="id_ArqueoCaja_Det" placeholder="ID ArqueoCaja Det">
+                    <input type="hidden" value="2" name="txtaccion" id="txtaccion"/>
+                  </div>
+                  <div class="form-group">
+                    <label>ID Arqueo Caja</label>
+                    <input type="number" value="<?php echo $acd->_GET('idArqueoCaja'); ?>" class="form-control" id="idArqueoCaja" name="idKermesse"placeholder="ID Arqueo Caja">
+                  </div>
                   <div class="form-group">
                     <label>ID Moneda</label>
-                    <input type="number" class="form-control" id="id_moneda" name="id_moneda"placeholder="Digite ID de moneda">
-                    <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
+                    <input readonly type="number" value="<?php echo $acd->_GET('idMoneda'); ?>" class="form-control" id="idMoneda" name="idMoneda"placeholder="ID Moneda">
                   </div>
                   <div class="form-group">
-                    <label>Nombre</label>
-                    <input type="text" class="form-control" id="" name="nombre"placeholder="Ingrese el nombre de la moneda">
+                    <label>ID Denominacion</label>
+                    <input readonly type="number" value="<?php echo $ac->_GET('idDenominacion'); ?>" class="form-control" id="idDenominacion" name="idDenominacion" placeholder="ID Denominacion">
                   </div>
                   <div class="form-group">
-                    <label>Simbolo</label>
-                    <input type="text" class="form-control" id="" name="simbolo"placeholder="Ingrese el simbolo de la moneda">
+                    <label>Usuario Creacion</label>
+                    <input readonly type="text" value="<?php echo $acd->_GET('usuario_creacion'); ?>" class="form-control" id="usuario_creacion" name="usuario_creacion"placeholder="Usuario Creacion">
+                  </div>
+                  <div class="form-group">
+                    <label>Fecha Creacion</label>
+                    <input readonly type="number" value="<?php echo $acd->_GET('cantidad'); ?>" class="form-control" id="cantidad" name="cantidad"placeholder="Cantidad">
+                  </div>
+                  <div class="form-group">
+                    <label>Subtotal</label>
+                    <input readonly type="number" value="<?php echo $acd->_GET('subtotal'); ?>" class="form-control" id="subtotal" name="subtotal" placeholder="Subtotal">
                   </div>
                 </div>
                 <!-- /.card-body -->
-
                 <div class="card-footer">
                   
                   <button type="submit" class="btn btn-primary">Guardar</button>
@@ -230,7 +246,6 @@ if (isset($varMsj)) {
             </div>
             <!-- /.card -->
 
-            
     </section>
     <!-- /.content -->
   </div>
@@ -255,9 +270,23 @@ if (isset($varMsj)) {
 <script src="../../dist/js/demo.js"></script>
 <!-- Page specific script -->
 <script>
-$(function () {
-  bsCustomFileInput.init();
-});
+    $(function() {
+        bsCustomFileInput.init();
+    });
 </script>
+    <script>
+      function setValoresArqueoCajaDet() {
+      $("#id_ArqueoCaja_Det").val("<?php echo $acd->_GET('id_ArqueoCaja_Det') ?>")
+      $("#id_ArqueoCaja").val("<?php echo $acd->_GET('id_ArqueoCaja') ?>")
+      $("#idMoneda").val("<?php echo $acd->_GET('idMoneda') ?>")
+      $("#idDenominacion").val("<?php echo $acd->_GET('idDenominacion') ?>")
+      $("#usuario_creacion").val("<?php echo $acd->_GET('usuario_creacion') ?>")
+      $("#cantidad").val("<?php echo $acd->_GET('cantidad') ?>")
+      $("#subtotal").val("<?php echo $acd->_GET('subtotal') ?>")
+    }
+    $(document).ready(function() {
+          setValoresArqueoCajaDet();
+        });
+  </script>
 </body>
 </html>

@@ -156,6 +156,22 @@ if(isset($varMsj)) {
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_arqueocaja.php" class="nav-link">
+              <i class="nav-icon fas fa-object-group"></i>
+              <p>
+                ArqueoCaja
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_arqueocaja_det.php" class="nav-link">
+              <i class="nav-icon fas fa-object-group"></i>
+              <p>
+                ArqueoCaja Detalle
+              </p>
+            </a>
+          </li>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
@@ -188,33 +204,12 @@ if(isset($varMsj)) {
               <h3 class="card-title">Arqueocaja</h3>
                 </div>
                 <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
-                  <style>
-                    #menu{
-                      background-color: white;
-                      float: right;
-                    }
-                    #menu ul{
-                      list-style: none;
-                      margin: 0px;
-                      padding: 0px;
-                    }
-                    #menu ul li{
-                      display: inline-block;
-                    }
-                    #menu ul li a{
-                      margin-right: 15px;
-                    }
-                  </style>
-                  <div id="menu">
-                    <ul>
-                      <li><a href="frm_arqueocaja.php">Insertar Arqueocaja</a></li>
-                      <li><a href="frm_editar_arqueocaja.php">Editar Arqueocaja</a></li>
-                      <li><a href="tbl_arqueocaja.php">Ver Arqueocaja</a></li>
-                    </ul>
-                  </div>
+                    <div class="form-group col-md-12" style="text-align: right;">
+                        <a href="frm_arqueocaja.php" title="Registrar un nuevo Arqueo de Caja" target="_blank"><i class="far fa-2x fa-plus-square"></i></a>
+                    </div>
+                    <table id="example1" class="table table-bordered table-striped">
+                  
                   <thead>
-
                   <tr>
                     <th>ID Arqueocaja</th>
                     <th>ID Kermesse</th>
@@ -227,6 +222,7 @@ if(isset($varMsj)) {
                     <th>Usuario Eliminacion</th>
                     <th>Fecha Eliminacion</th>
                     <th>Estado</th>
+                    <th>Acciones</th>
                   </tr>
 
                   </thead>
@@ -234,6 +230,13 @@ if(isset($varMsj)) {
                   <tbody>
                     <?php
                       foreach($ac->listArqueocaja() as $r):
+                        $estado = "";
+                        if ($r->__GET('estado') == 1 || $r->__GET('estado') == 2){
+                          $estado = "Activo";
+                        }
+                        else{
+                          $estado = "Inactivo";
+                        }
                     ?>
                     <tr>
                       <td><?php echo $r->_GET('id_ArqueoCaja'); ?></td>
@@ -246,7 +249,18 @@ if(isset($varMsj)) {
                       <td><?php echo $r->_GET('fecha_modificacion'); ?></td>
                       <td><?php echo $r->_GET('usuario_eliminacion'); ?></td>
                       <td><?php echo $r->_GET('fecha_eliminacion'); ?></td>
-                      <td><?php echo $r->_GET('estado'); ?></td>
+                      <td><?php echo $estado; ?></td>
+
+                      <td> <a href="frm_editar_arqueocaja.php?editAC=<?php echo $r->_GET('id_ArqueoCaja'); ?>" target="blank">
+                            <i class="fas fa-edit" title="Editar Arqueocaja"> Editar</i></a>
+                      &nbsp;&nbsp;
+                      <a href="frm_view_arqueocaja.php?viewAC=<?php echo $r->_GET('id_ArqueoCaja'); ?>" target="blank">
+                            <i class="fas fa-eye" title="Ver Arqueocaja"> Ver</i></a>
+                      &nbsp;&nbsp;
+                            <a href="#" target="_blank">
+                                <i class="fas fa-trash-alt" title="Eliminar Arqueocaja"> Eliminar</i>
+                            </a>
+                      </td>
                     </tr>
                     <?php
                       endforeach;

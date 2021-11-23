@@ -50,3 +50,19 @@ if ($_POST){
 
     }
 }
+
+if ($_GET)
+            {
+                try
+                {
+                    $bono->__SET('id_bono', $_GET['delB']);
+                    $dtBono->deleteBono($bono->__GET('id_bono'));
+                    header("Location: ../pages/catalogos/tbl_control_bonos.php?msj=5");
+            
+                }
+                catch(Exception $e)
+                {
+                    header("Location: ../pages/catalogos/tbl_control_bonos.php?msj=6");
+                    die($e->getMessage());
+                }
+            }

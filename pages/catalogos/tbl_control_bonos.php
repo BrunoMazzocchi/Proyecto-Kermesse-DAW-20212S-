@@ -25,6 +25,11 @@ if (isset($varMsj)) {
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../../plugins/DataTables1.11.2-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/DataTables1.11.2-/Responsive-2.2.9/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/DataTables1.11.2/Buttons-2.0.0/css/buttons.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
@@ -158,6 +163,14 @@ if (isset($varMsj)) {
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_arqueocaja.php" class="nav-link">
+              <i class="nav-icon fas fa-object-group"></i>
+              <p>
+                ArqueoCaja
+              </p>
+            </a>
+          </li>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
@@ -175,7 +188,7 @@ if (isset($varMsj)) {
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Inicio</a></li>
                                 <li class="breadcrumb-item active">Tabla Control de bonos</li>
                             </ol>
                         </div>
@@ -189,8 +202,10 @@ if (isset($varMsj)) {
                         <div class="card-header">
                             <h3 class="card-title">Tabla Control de bonos</h3>
                         </div>
-
                         <div class="card-body">
+                        <div class="form-group col-md-12" style="text-align:right">
+                        <a href="frm_control_bonos.php" title="Nuevo Bono" target="blank"><i class="far fa-plus-square"></i>Nuevo Bono</a>
+                        </div>
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -204,21 +219,27 @@ if (isset($varMsj)) {
                                 <tbody>
                                     <?php
                                         foreach($dtcb->listControlBonos() as $r):
-                                            
+                                          $estado = "";
+                                            if ($r->__GET('estado') == 1 || $r->__GET('estado') == 2){
+                                          $estado = "Activo";
+                                          }
+                                          else{
+                                          $estado = "Inactivo";
+                                          }
                                     ?>
                                     <tr>
                                         <td><?php echo $r->__GET('id_bono');?></td>
                                         <td><?php echo $r->__GET('nombre');?></td>
                                         <td><?php echo $r->__GET('valor');?></td>
-                                        <td><?php echo $r->__GET('estado');?></td>
+                                        <td><?php echo $estado;?></td>
                                         <td> <a href="frm_editar_control_bonos.php?editB=<?php echo $r->__GET('id_bono'); ?>" target="blank">
-                                            <i class="fas fa-edit" title="Editar Categoria"></i></a>
+                                            <i class="fas fa-edit" title="Editar Categoria"></i>Editar</a>
                                         &nbsp;&nbsp;
                                         <a href="frm_view_control_bonos.php?viewB=<?php echo $r->__GET('id_bono'); ?>" target="blank">
-                                            <i class="fas fa-eye" title="Ver Bonos"></i></a>
+                                            <i class="fas fa-eye" title="Ver Bono"></i>Ver</a>
                                         &nbsp;&nbsp;
-                                        <a href="#" target="_blank">
-                                            <i class="fas fa-trash-alt" title="Eliminar"></i>
+                                        <a href="#" onclick="deleteBono(<?php echo $r->__GET('id_bono'); ?>)">
+                                            <i class="fas fa-trash-alt" title="Eliminar Bono">Eliminar</i>
                                         </a>
                                     </td>
                                     </tr>
@@ -251,18 +272,21 @@ if (isset($varMsj)) {
         <!-- Bootstrap 4 -->
         <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <script src="../../plugins/DT/datatables.min.js"></script>
-        <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
-        <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
-        <script src="../../plugins/DT/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
-        <script src="../../plugins/DT/JSZip-2.5.0/jszip.min.js"></script>
-        <script src="../../plugins/DT/pdfmake-0.1.36/pdfmake.min.js"></script>
-        <script src="../../plugins/DT/pdfmake-0.1.36/vfs_fonts.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.html5.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.print.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
+        <!-- DataTables  & Plugins -->
+<script src="../../plugins/DataTables1.11.2/datatables.min.css"></script>
+<script src="../../plugins/DataTables1.11.2/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/JSZip-2.5.0/jszip.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/pdfmake-0.1.36/pdfmake.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/pdfmake-0.1.36/vfs_fonts.js"></script>
+<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/buttons.html5.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/buttons.print.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
+<script src="../../plugins/jAlert/dist/jAlert.min.js">//optional!!</script>
+<script src="../../plugins/jAlert/dist/jAlert-functions.min.js"></script>
 
 
         <!-- AdminLTE App -->
@@ -271,24 +295,60 @@ if (isset($varMsj)) {
         <script src="../../dist/js/demo.js"></script>
         <!-- Page specific script -->
         <script>
+
+            function deleteBono(idB)
+            {
+              confirm(function(e,btn)
+              {
+                e.preventDefault();
+                window.location.href = "../../negocio/ng_Bono.php?delB="+idB;
+              },
+              function(e,btn)
+              {
+                e.preventDefault();
+              });
+            }
+
+        $(document).ready(function() {
+            var mensaje = 0;
+            mensaje = "<?php echo $varMsj ?>";
+
+            if (mensaje == '1') {
+                sucessAlert('Exito', 'Los datos han sido registrados exitosamente!');
+            }
+            if (mensaje == '3') {
+                sucessAlert('Exito', 'Los datos han sido editado exitosamente!');
+            }
+            if (mensaje == '5') {
+                sucessAlert('Exito', 'Los datos han sido eliminado exitosamente!');
+            }
+            if (mensaje == '2' || mensaje == '4') {
+                errorAlert('Error', 'Error', 'Revise los datos e intente nuevamente!');
+            }
+            if (mensaje == '6') {
+                errorAlert ('Error', 'Verifique que exista el dato');
+            }
+
+
             $(function() {
                 $("#example1").DataTable({
                     "responsive": true,
                     "lengthChange": false,
                     "autoWidth": false,
-                    "buttons": ["excel", "pdf"]
+                    "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
                 }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
                 $('#example2').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": false,
-                    "ordering": true,
-                    "info": true,
-                    "autoWidth": false,
-                    "responsive": true,
+                     "paging": true,
+                     "lengthChange": false,
+                     "searching": false,
+                     "ordering": true,
+                     "info": true,
+                     "autoWidth": false,
+                     "responsive": true,
                 });
             });
-        </script>
+        });
+    </script>
 </body>
 
 </html>

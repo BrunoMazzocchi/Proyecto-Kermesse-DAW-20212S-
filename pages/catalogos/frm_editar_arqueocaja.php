@@ -1,16 +1,18 @@
 <?php
 error_reporting(0);
-//IMPORTAMOS ENTIDADES Y DATOS
-include '../../entidades/tbl_moneda.php';
-include '../../datos/dt_moneda.php';
 
-$dmtmon = new Dt_moneda();
+include '../../datos/dt_arqueocaja.php';
+include '../../entidades/arqueocaja.php';
 
-$varMsj = 0;
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
+
+$dtAc = new Dt_Arqueocaja();
+$ac = new Arqueocaja();
+$varIdAc = 0;
+if(isset($varIdAc)) {
+    $varIdAc = $_GET['msj'];
 }
 
+$ac = $dtAc->obtenerArqueoCaja($varIdAc);
 ?>
 
 <!DOCTYPE html>
@@ -105,7 +107,6 @@ if (isset($varMsj)) {
               <i class="nav-icon fas fa-search-dollar"></i>
               <p>
                 Denominación
-                <span class="badge badge-info right">2</span>
               </p>
             </a>
           </li>
@@ -171,56 +172,83 @@ if (isset($varMsj)) {
     <!-- /.sidebar -->
   </aside>
 
-  <!-- Content Wrapper. Contains page content -->
+
+    <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Nueva Moneda</h1>
+            <h1>Arqueocaja</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Registrar Moneda</li>
+              <li class="breadcrumb-item active">Arqueocaja</li>
             </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
 
-    <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
         <div class="row">
           <!-- left column -->
-          <div class="col-md-6">
+          <div class="col-md-12">
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Ingresar Moneda</h3>
+                <h3 class="card-title">Editar Denominaicon</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="POST" action="../../negocio/ng_Moneda.php">
+              <form method="POST" action="../../negocio/ng_Denominacion.php">
                 <div class="card-body">
+                 <div class="form-group">
+                    <label>ID ArqueoCaja</label>
+                    <input readonly type="number" value="<?php echo $ac->_GET('id_ArqueoCaja'); ?>" class="form-control" id="id_ArqueoCaja" name="id_ArqueoCaja" placeholder="ID ArqueoCaja">
+                    <input type="hidden" value="2" name="txtaccion" id="txtaccion"/>
+                  </div>
                   <div class="form-group">
                     <label>ID Moneda</label>
-                    <input type="number" class="form-control" id="id_moneda" name="id_moneda"placeholder="Digite ID de moneda">
-                    <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
+                    <input type="number" value="<?php echo $ac->_GET('idKermesse'); ?>" class="form-control" id="idKermesse" name="idKermesse"placeholder="Digite el ID de la Kermesse">
                   </div>
                   <div class="form-group">
-                    <label>Nombre</label>
-                    <input type="text" class="form-control" id="" name="nombre"placeholder="Ingrese el nombre de la moneda">
+                    <label>Fecha de Arqueo</label>
+                    <input type="date" value="<?php echo $ac->_GET('fechaArqueo'); ?>" class="form-control" id="fechaArqueo" name="fechaArqueo"placeholder="Fecha de Arqueo">
                   </div>
                   <div class="form-group">
-                    <label>Simbolo</label>
-                    <input type="text" class="form-control" id="" name="simbolo"placeholder="Ingrese el simbolo de la moneda">
+                    <label>Gran Total</label>
+                    <input type="number" value="<?php echo $ac->_GET('granTotal'); ?>" class="form-control" id="granTotal" name="granTotal" placeholder="Gran Total">
+                  </div>
+                  <div class="form-group">
+                    <label>Usuario Creacion</label>
+                    <input type="text" value="<?php echo $ac->_GET('usuario_creacion'); ?>" class="form-control" id="usuario_creacion" name="usuario_creacion"placeholder="Usuario Creacion">
+                  </div>
+                  <div class="form-group">
+                    <label>Fecha Creacion</label>
+                    <input type="date" value="<?php echo $ac->_GET('fecha_creacion'); ?>" class="form-control" id="fecha_creacion" name="fecha_creacion"placeholder="Fecha Creacion">
+                  </div>
+                  <div class="form-group">
+                    <label>Usuario Modificacion</label>
+                    <input type="text" value="<?php echo $ac->_GET('usuario_modificacion'); ?>" class="form-control" id="usuario_modificacion" name="usuario_modificacion" placeholder="Usuario Modificacion">
+                  </div>
+                  <div class="form-group">
+                    <label>Fecha Modificacion</label>
+                    <input type="date" value="<?php echo $ac->_GET('fecha_modificacion'); ?>" class="form-control" id="fecha_modificacion" name="fecha_modificacion"placeholder="Fecha Modificacion">
+                  </div>
+                  <div class="form-group">
+                    <label>Usuario Eliminacion</label>
+                    <input type="number" value="<?php echo $ac->_GET('usuario_eliminacion'); ?>" class="form-control" id="usuario_eliminacion" name="usuario_eliminacion"placeholder="Usuario Eliminacion">
+                  </div>
+                  <div class="form-group">
+                    <label>Fecha Eliminacion</label>
+                    <input type="date" value="<?php echo $ac->_GET('fecha_eliminacion'); ?>" class="form-control" id="fecha_eliminacion" name="fecha_eliminacion" placeholder="Fecha Eliminacion">
                   </div>
                 </div>
                 <!-- /.card-body -->
-
                 <div class="card-footer">
                   
                   <button type="submit" class="btn btn-primary">Guardar</button>
@@ -230,7 +258,6 @@ if (isset($varMsj)) {
             </div>
             <!-- /.card -->
 
-            
     </section>
     <!-- /.content -->
   </div>
@@ -255,9 +282,27 @@ if (isset($varMsj)) {
 <script src="../../dist/js/demo.js"></script>
 <!-- Page specific script -->
 <script>
-$(function () {
-  bsCustomFileInput.init();
-});
+    $(function() {
+        bsCustomFileInput.init();
+    });
 </script>
+    <script>
+      function setValoresArqueoCaja() {
+      $("#id_ArqueoCaja").val("<?php echo $ac->_GET('id_Denominacion') ?>")
+      $("#idKermesse").val("<?php echo $ac->_GET('idKermesse') ?>")
+      $("#fecha_arqueo").val("<?php echo $ac->_GET('fecha_arqueo') ?>")
+      $("#granTotal").val("<?php echo $ac->_GET('granTotal') ?>")
+      $("#usuario_creacion").val("<?php echo $ac->_GET('usuario_creacion') ?>")
+      $("#fecha_creacion").val("<?php echo $ac->_GET('fecha_creacion') ?>")
+      $("#usuario_modificacion").val("<?php echo $ac->_GET('usuario_modificacion') ?>")
+      $("#fecha_modificacion").val("<?php echo $ac->_GET('fecha_modificacion') ?>")
+      $("#usuario_eliminacion").val("<?php echo $ac->_GET('usuario_eliminacion') ?>")
+      $("#fecha_eliminacion").val("<?php echo $ac->_GET('fecha_eliminacion') ?>")
+      $("#estado").val("<?php echo $ac->_GET('estado') ?>")
+    }
+    $(document).ready(function() {
+          setValoresArqueoCaja();
+        });
+  </script>
 </body>
 </html>
