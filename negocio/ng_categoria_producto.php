@@ -2,7 +2,7 @@
 //error_reporting(0);
 
 include_once('../entidades/categoria_producto.php');
-include_once('../datos/dt_categoria_prodcuto.php');
+include_once('../datos/dt_categoria_producto.php');
 
 
 $cpt = new Categoria_Producto();
