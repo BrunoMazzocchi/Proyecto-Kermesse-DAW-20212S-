@@ -155,12 +155,6 @@ if (isset($varMsj)) {
             </a>
           </li>
           <li class="nav-item">
-<<<<<<< HEAD
-            <a href="../catalogos/tbl_arqueocaja.php" class="nav-link">
-              <i class="nav-icon fas fa-object-group"></i>
-              <p>
-                ArqueoCaja
-=======
             <a href="../catalogos/tbl_rol.php" class="nav-link">
               <i class="nav-icon fas fa-lock"></i>
               <p>
@@ -197,7 +191,6 @@ if (isset($varMsj)) {
               <i class="nav-icon fas fa-user-tag"></i>
               <p>
                 Rol-Usuario
->>>>>>> e861b962f6d6fa4686a8b6d8d82b9db48cd05f37
               </p>
             </a>
           </li>
