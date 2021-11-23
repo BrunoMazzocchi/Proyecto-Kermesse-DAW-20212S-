@@ -155,7 +155,7 @@ $p = $dtp->obtenerProductos($varIdProducto);
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Lista Precio</h1>
+                            <h1>Productos</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -193,8 +193,6 @@ $p = $dtp->obtenerProductos($varIdProducto);
                     <label>Selecciona la Comunidad</label>
                     <select name="nombre" id="id_comunidad" required>
                       <option value="">Comunidad</option>
-
-                
 
             
 

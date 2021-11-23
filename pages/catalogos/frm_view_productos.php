@@ -188,7 +188,7 @@ $p = $dtp->obtenerProductos($varIdProducto);
                                             <input readonly type="text" class="form-control" id="id_comunidad" name="id_comunidad" placeholder="ID Comunidad" required>
                                         </div>
                                         <div class="form-group">
-                                            <label> ID Categoria Producto</label>
+                                            <label> Categoria Producto</label>
                                             <input readonly type="text" class="form-control" id="id_categoria_producto" name="id_categoria_producto" placeholder="ID Categoria Producto" required>
                                         </div>
                                         

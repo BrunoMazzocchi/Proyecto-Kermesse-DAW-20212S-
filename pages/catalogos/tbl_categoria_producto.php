@@ -241,8 +241,8 @@ if(isset($varMsj))
     </footer>
 
 
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
+ <!-- Control Sidebar -->
+ <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->
     </aside>
     <!-- /.control-sidebar -->
@@ -265,7 +265,7 @@ if(isset($varMsj))
     <script src="../../plugins/pdfmake/vfs_fonts.js"></script>
     <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
-    <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
 
        <!-- AdminLTE App -->
     <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>

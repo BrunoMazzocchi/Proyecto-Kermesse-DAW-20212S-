@@ -262,23 +262,9 @@ $cmn = $dtCmn->obtenerComunidad($varIdComunidad);
 <script src="../../dist/js/demo.js"></script>
 <!-- Page specific script -->
 <script>
-$(function () {
-  bsCustomFileInput.init();
-});
-</script>
-<script>
-function setComunidad(){
-
-$("#nombre").val("<?php echo $cat-> _GET('nombre')?>");
-$("#responsable").val("<?php echo $cat-> _GET('responsable')?>");
-$("#desc_contribucion").val("<?php echo $cat-> _GET('desc_contribucion')?>");
-$("#estado").val("<?php echo $cat-> _GET('estado')?>");
-
-}
-
-$(document).ready(function()
-{
-  setCategoriasg();
-});
+    $(function() {
+      bsCustomFileInput.init();
+    });
+  </script>
 </body>
 </html>
