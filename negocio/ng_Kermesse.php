@@ -56,7 +56,7 @@ if ($_POST) {
 
 if ($_GET) {
     try {
-        $kerme->__SET('id_lista_precio', $_GET['delK']);
+        $kerme->__SET('id_kermesse', $_GET['delK']);
         $kerme->__SET('usuario_eliminacion', $_POST['1']);
         $kerme->__SET('fecha_eliminacion', date("Y-m-d H:i:s"));
 

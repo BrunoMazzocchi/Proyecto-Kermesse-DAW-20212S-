@@ -139,9 +139,10 @@ class Dt_gastos extends Conexion
     {
         try {
             $this->myCon = parent::conectar();
-            $querySQL = "DELETE FROM tbl_gastos WHERE id_registro_gastos = ?";
+            $querySQL = "UPDATE dbkermesse.tbl_gastos SET estado = 3 WHERE id_registro_gastos = ?;";
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute(array($id));
+
             $this->myCon = parent::desconectar();
         } catch (Exception $e) {
             die($e->getMessage());

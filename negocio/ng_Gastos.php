@@ -54,11 +54,12 @@ if ($_POST) {
 
 if ($_GET) {
     try {
-        $gt->__SET('id_lista_precio', $_GET['delC']);
-        $dtGast->deleteGastos($lista->__GET('id_lista_precio'));
+        $gt->__SET('id_registro_gastos', $_GET['delC']);
 
+        $dtGast->deleteGastos($gt->__GET('id_registro_gastos'));
         header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_gastos.php?msj=5");
     } catch (Exception $e) {
-        header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_gastos.php?msj=6 ");
+        header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_gastos.php?msj=6");
+        die($e->getMessage());
     }
 }
