@@ -275,7 +275,13 @@ if (isset($varMsj)) {
 
             <tfoot>
               <tr>
-
+                <th>Parroquia ID</th>
+                <th>Nombre</th>
+                <th>Direccion</th>
+                <th>Telefono</th>
+                <th>Parroco</th>
+                <th>Logo</th>
+                <th>Sitio Web</th>
               </tr>
             </tfoot>
           </table>

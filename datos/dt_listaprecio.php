@@ -34,9 +34,9 @@ class Dt_ListaPrecio extends Conexion
         }
     }
 
-    public function obtenerLista($id){
-        try
-        {
+    public function obtenerLista($id)
+    {
+        try {
             $this->myCon = parent::conectar();
             $querySQL = "SELECT * FROM dbkermesse.vw_listaprecio_kermesse WHERE id_lista_precio = ?";
             $stm = $this->myCon->prepare($querySQL);
@@ -53,7 +53,6 @@ class Dt_ListaPrecio extends Conexion
 
             $this->myCon = parent::desconectar();
             return $lstPrecio;
-            
         } catch (Exception $e) {
             die($e->getMessage());
         }
@@ -106,9 +105,10 @@ class Dt_ListaPrecio extends Conexion
     {
         try {
             $this->myCon = parent::conectar();
-            $querySQL = "DELETE FROM tbl_lista_precio WHERE id_lista_precio = ?";
+            $querySQL = "UPDATE dbkermesse.tbl_lista_precio SET estado = 3 WHERE id_lista_precio = ?;";
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute(array($id));
+
             $this->myCon = parent::desconectar();
         } catch (Exception $e) {
             die($e->getMessage());
