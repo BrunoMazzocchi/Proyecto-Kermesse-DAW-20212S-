@@ -210,7 +210,7 @@ $kermesse = $dtkerme->obtenerKerme($varIdKermesse);
                                         </div>
                                         <div class="form-group">
                                             <label>Seleccione una parroquia</label>
-                                            <select id="IdParroquia" name="idParroquia" class="form-control">
+                                            <select id="idParroquia" name="idParroquia" class="form-control">
                                                 <option value="">Seleccione...</option>
 
 

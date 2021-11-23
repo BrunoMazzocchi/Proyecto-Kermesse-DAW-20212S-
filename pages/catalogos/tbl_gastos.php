@@ -208,8 +208,8 @@ if (isset($varMsj)) {
                             ?>
                                 <tr>
                                     <td><?php echo $r->__GET('id_registro_gastos') ?></td>
-                                    <td><?php echo $r->__GET('idKermesse') ?></td>
-                                    <td><?php echo $r->__GET('idCatGastos') ?></td>
+                                    <td><?php echo $r->__GET('nombreKermesse') ?></td>
+                                    <td><?php echo $r->__GET('nombreCat') ?></td>
                                     <td><?php echo $r->__GET('fechaGasto') ?></td>
                                     <td><?php echo $r->__GET('concepto') ?></td>
                                     <td><?php echo $r->__GET('monto') ?></td>
