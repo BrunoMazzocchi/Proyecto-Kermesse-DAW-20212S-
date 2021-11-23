@@ -252,13 +252,13 @@ if (isset($varMsj)) {
                                     <td><?php echo $r->__GET('descripcion') ?></td>
                                     <td><?php echo $r->__GET('estado') ?></td>
 
-                                    <td> <a href="frm_editar_listaprecio.php?editCg=<?php echo $r->__GET('id_lista_precio'); ?>" target="blank">
+                                    <td> <a href="frm_editar_listaprecio.php?editC=<?php echo $r->__GET('id_lista_precio'); ?>" target="blank">
                                             <i class="far fa-edit" title="Editar lista precio"></i></a>
                                         &nbsp;&nbsp;
-                                        <a href="frm_view_listaprecio.php?viewCyG=<?php echo $r->__GET('id_lista_precio'); ?>" target="blank">
+                                        <a href="frm_view_listaprecio.php?viewC=<?php echo $r->__GET('id_lista_precio'); ?>" target="blank">
                                             <i class="far fa-eye" title="Ver lista precio"></i></a>
                                         &nbsp;&nbsp;
-                                        <a href="#" target="_blank">
+                                        <a href="../../negocio/ng_ListaPrecio.php?delC=<?php echo $r->__GET('id_lista_precio') ?>" target="_blank">
                                             <i class="far fa-trash-alt" title="Eliminar"></i>
                                         </a>
                                     </td>

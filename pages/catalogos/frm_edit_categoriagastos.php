@@ -1,17 +1,17 @@
 <?php
 error_reporting(0);
 
-include '../../entidades/parroquia.php';
-include '../../datos/dt_parroquia.php';
+include '../../entidades/categoria_gastos.php';
+include '../../datos/dt_categoria_gastos.php';
 
-$dtParro = new Dt_Parroquia();
-$parroquia = new Parroquia();
-$varIdParroquia = 0;
-if (isset($varIdParroquia)) {
-  $varIdParroquia = $_GET['editC'];
+$dtCat = new Dt_categoria_gastos();
+$cat = new Categoria_Gastos();
+$varIdCat = 0;
+if (isset($varIdCat)) {
+  $varIdCat = $_GET['editC'];
 }
 
-$parroquia = $dtParro->obtenerParro($varIdParroquia);
+$cat = $dtCat->obtenerCategoriaGastos($varIdCat);
 ?>
 
 <!DOCTYPE html>
@@ -171,12 +171,12 @@ $parroquia = $dtParro->obtenerParro($varIdParroquia);
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Parroquia</h1>
+              <h1>Categoria Gastos</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                <li class="breadcrumb-item active">Editar Parroquia</li>
+                <li class="breadcrumb-item active">Editar Categoria Gastos</li>
               </ol>
             </div>
           </div>
@@ -192,43 +192,28 @@ $parroquia = $dtParro->obtenerParro($varIdParroquia);
               <!-- general form elements -->
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Editar Parroquia</h3>
+                  <h3 class="card-title">Editar Categoria Gastos</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="POST" action="../../negocio/ng_Parroquia.php">
+                <form method="POST" action="../../negocio/ng_CategoriaGastos.php">
                   <div class="card-body">
                   <div class="form-group">
-                      <label>ID parroquia</label>
-                      <input type="text" value="<?php echo $parroquia->__GET('idParroquia') ?>" class="form-control" id="idParroquia" name="idParroquia" placeholder="Nombre de parroquia" readonly required>
+                      <label>ID Categoria Gastos</label>
+                      <input type="text" class="form-control" id="id_categoria_gastos" name="id_categoria_gastos" placeholder="Categoria Gastos" readonly required>
                       <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
 
                     </div>
                     <div class="form-group">
                       <label>Nombre</label>
-                      <input type="text" value="<?php echo $parroquia->__GET('nombre') ?>" class="form-control" id="nombre" name="nombre" placeholder="Nombre de parroquia"  required>
+                      <input type="text"class="form-control" id="nombre_categoria" name="nombre_categoria" placeholder="Nombre de categoria"  required>
 
                     </div>
                     <div class="form-group">
-                      <label>Direccion</label>
-                      <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion" required>
+                      <label>Descripcion</label>
+                      <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" required>
                     </div>
-                    <div class="form-group">
-                      <label>Telefono</label>
-                      <input type="number" class="form-control" id="telefono" name="telefono" placeholder="Telefono" required>
-                    </div>
-                    <div class="form-group">
-                      <label>Parroco</label>
-                      <input type="text" class="form-control" id="parroco" name="parroco" placeholder="Parroco" required>
-                    </div>
-                    <div class="form-group">
-                      <label >Logo</label>
-                      <input type="text" class="form-control" id="logo" name="logo" placeholder="Logo web" required>
-                    </div>
-                    <div class="form-group">
-                      <label >Sitio web</label>
-                      <input type="text" class="form-control" id="sitio_web" name="sitio_web" placeholder="Sitio web" required>
-                    </div>
+                 
                   <!-- /.card-body -->
 
                   <div class="card-footer">
@@ -271,16 +256,13 @@ $parroquia = $dtParro->obtenerParro($varIdParroquia);
   </script>
 
     <script>
-      function setValoresParroquia() {
-      $("#nombre").val("<?php echo $parroquia->__GET('nombre') ?>")
-      $("#direccion").val("<?php echo $parroquia->__GET('direccion') ?>")
-      $("#telefono").val("<?php echo $parroquia->__GET('telefono') ?>")
-      $("#parroco").val("<?php echo $parroquia->__GET('parroco') ?>")
-      $("#logo").val("<?php echo $parroquia->__GET('logo') ?>")
-      $("#sitio_web").val("<?php echo $parroquia->__GET('sitio_web') ?>")
+      function setValoresCat() {
+      $("#id_categoria_gastos").val("<?php echo $cat->__GET('id_categoria_gastos') ?>")
+      $("#descripcion").val("<?php echo $cat->__GET('descripcion') ?>")
+      $("#nombre_categoria").val("<?php echo $cat->__GET('nombre_categoria') ?>")
     }
     $(document).ready(function() {
-          setValoresParroquia();
+          setValoresCat();
         });
   </script>
   </script>

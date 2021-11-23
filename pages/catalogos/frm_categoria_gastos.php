@@ -165,24 +165,7 @@ if(isset($varMsj))
     <!-- /.sidebar -->
   </aside>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Nuevo Rol Opcion</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Registrar Rol Opcion</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
+
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -208,7 +191,7 @@ if(isset($varMsj))
       <div class="container-fluid">
         <div class="row">
           <!-- left column -->
-          <div class="col-md-6">
+          <div class="col-md-12">
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
@@ -216,8 +199,14 @@ if(isset($varMsj))
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form>
+              <form method="POST" action="../../negocio/ng_CategoriaGastos.php">
                 <div class="card-body">
+                <div class="form-group">
+                    <label>ID Categoria</label>
+                    <input type="number" class="form-control" id="id_categoria_gastos" name="id_categoria_gastos"placeholder="Digite la categoria gastos ID">
+                    <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
+
+                  </div>
                   <div class="form-group">
                     <label>Nombre Categoria</label>
                     <input type="text" class="form-control" id="nombre_categoria" name="nombre_categoria"placeholder="Digite el Nombre">
