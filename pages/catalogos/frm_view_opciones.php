@@ -157,6 +157,46 @@ $varIdop = 0;
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_rol.php" class="nav-link">
+              <i class="nav-icon fas fa-lock"></i>
+              <p>
+                Rol
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_opciones.php" class="nav-link">
+              <i class="nav-icon fas fa-align-justify"></i>
+              <p>
+                Opciones
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_usuario.php" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Usuarios
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_rol_opciones.php" class="nav-link">
+              <i class="nav-icon fas fa-unlock-alt"></i>
+              <p>
+                Rol-Opcion
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_rol_usuario.php" class="nav-link">
+              <i class="nav-icon fas fa-user-tag"></i>
+              <p>
+                Rol-Usuario
+              </p>
+            </a>
+          </li>
       </nav>
       <!-- /.sidebar-menu -->
     </div>

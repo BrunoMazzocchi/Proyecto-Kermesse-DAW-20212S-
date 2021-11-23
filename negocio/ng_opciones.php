@@ -53,3 +53,19 @@ if ($_POST)
 
     }
 }
+
+if ($_GET)
+{
+    try
+    {
+        $opc->_SET('id_opciones', $_GET['delO']);
+        $dtOpc->deleteOpc($opc->_GET('id_opciones'));
+        header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_opciones.php?msj=5");
+
+    }
+    catch(Exception $e)
+    {
+        header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_opciones.php?msj=6");
+        die($e->getMessage());
+    }
+}

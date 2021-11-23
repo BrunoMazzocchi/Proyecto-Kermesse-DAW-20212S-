@@ -1,18 +1,17 @@
 <?php
 error_reporting(0);
 
-include '../../entidades/usuario.php';
-include '../../datos/dt_usuario.php';
+include '../../entidades/categoria_gastos.php';
+include '../../datos/dt_categoria_gastos.php';
 
-$dtUser = new Dt_usuario();
-$user = new Usuario();
-
-$varIdUs = 0;
-if (isset($varIdUs)) {
-  $varIdUs = $_GET['EditU'];
+$dtCat = new Dt_categoria_gastos();
+$cat = new Categoria_Gastos();
+$varIdCat = 0;
+if (isset($varIdCat)) {
+  $varIdCat = $_GET['editC'];
 }
 
-$user = $dtUser->obtenerUser($varIdUs);
+$cat = $dtCat->obtenerCategoriaGastos($varIdCat);
 ?>
 
 <!DOCTYPE html>
@@ -158,70 +157,12 @@ $user = $dtUser->obtenerUser($varIdUs);
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_rol.php" class="nav-link">
-              <i class="nav-icon fas fa-lock"></i>
-              <p>
-                Rol
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_opciones.php" class="nav-link">
-              <i class="nav-icon fas fa-align-justify"></i>
-              <p>
-                Opciones
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_usuario.php" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
-              <p>
-                Usuarios
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_rol_opciones.php" class="nav-link">
-              <i class="nav-icon fas fa-unlock-alt"></i>
-              <p>
-                Rol-Opcion
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_rol_usuario.php" class="nav-link">
-              <i class="nav-icon fas fa-user-tag"></i>
-              <p>
-                Rol-Usuario
-              </p>
-            </a>
-          </li>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
   </aside>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Nuevo Rol Opcion</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Registrar Rol Opcion</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -230,12 +171,12 @@ $user = $dtUser->obtenerUser($varIdUs);
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Editar Usuarios </h1>
+              <h1>Categoria Gastos</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                <li class="breadcrumb-item active">Editar Usuario</li>
+                <li class="breadcrumb-item active">Editar Categoria Gastos</li>
               </ol>
             </div>
           </div>
@@ -251,62 +192,42 @@ $user = $dtUser->obtenerUser($varIdUs);
               <!-- general form elements -->
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Editar Usuario</h3>
+                  <h3 class="card-title">Editar Categoria Gastos</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="POST" action="../../negocio/ng_usuario.php">
+                <form method="POST" action="../../negocio/ng_CategoriaGastos.php">
                   <div class="card-body">
-                    <div class="form-group">
-                      <label>Codigo Usuario</label>
-                      <input type="text" value="<?php echo $user->_GET('id_usuario'); ?>" class="form-control" id="id_usuario" name="id_usuario" placeholder="Codigo de Usuario" readonly>
-                      <input type="hidden" value="2" name="txtaccion" id="txtaccion"/>
+                  <div class="form-group">
+                      <label>ID Categoria Gastos</label>
+                      <input type="text" class="form-control" id="id_categoria_gastos" name="id_categoria_gastos" placeholder="Categoria Gastos" readonly required>
+                      <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
+
                     </div>
                     <div class="form-group">
-                      <label>Username</label>
-                      <input type="text" value="<?php echo $user->_GET('usuario'); ?>" class="form-control" id="usuario" name="usuario" placeholder="Username" required>
+                      <label>Nombre</label>
+                      <input type="text"class="form-control" id="nombre_categoria" name="nombre_categoria" placeholder="Nombre de categoria"  required>
+
                     </div>
                     <div class="form-group">
-                      <label>Contraseña</label>
-                      <input type="text" value="<?php echo $user->_GET('pwd'); ?>" class="form-control" id="pwd" name="pwd" placeholder="Contraseña" required>
+                      <label>Descripcion</label>
+                      <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" required>
                     </div>
-                    <div class="form-group">
-                      <label>Nombres</label>
-                      <input type="text" value="<?php echo $user->_GET('nombres'); ?>" class="form-control" id="nombres" name="nombres" placeholder="Nombres" required>
-                    </div>
-                    <div class="form-group">
-                      <label>Apellidos</label>
-                      <input type="text" value="<?php echo $user->_GET('apellidos'); ?>" class="form-control" id="apellidos" name="apellidos" placeholder="Apellidos" required>
-                    </div>
-                    <div class="form-group">
-                      <label>Email</label>
-                      <input type="text" value="<?php echo $user->_GET('email'); ?>" class="form-control" id="email" name="email" placeholder="Email" required>
-                    </div>
+                 
+                  <!-- /.card-body -->
+
+                  <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Editar</button>
+                    <button type="reset" class="btn btn-danger">Cancelar</button>
                   </div>
+                </form>
               </div>
-              <!-- /.card-body -->
-
-              <div class="card-footer">
-
-                <button type="submit" class="btn btn-primary">Guardar</button>
-                <button type="reset" class="btn btn-danger">Cancelar</button>
-              </div>
-              </form>
-            </div>
-            <!-- /.card -->
+              <!-- /.card -->
 
 
       </section>
       <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
-    <footer class="main-footer">
-      <div class="float-right d-none d-sm-block">
-        <b>Version</b> 3.1.0-rc
-      </div>
-      <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-    </footer>
-
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
       <!-- Control sidebar content goes here -->
@@ -326,10 +247,24 @@ $user = $dtUser->obtenerUser($varIdUs);
   <!-- AdminLTE for demo purposes -->
   <script src="../../dist/js/demo.js"></script>
   <!-- Page specific script -->
+
+
   <script>
     $(function() {
       bsCustomFileInput.init();
     });
+  </script>
+
+    <script>
+      function setValoresCat() {
+      $("#id_categoria_gastos").val("<?php echo $cat->__GET('id_categoria_gastos') ?>")
+      $("#descripcion").val("<?php echo $cat->__GET('descripcion') ?>")
+      $("#nombre_categoria").val("<?php echo $cat->__GET('nombre_categoria') ?>")
+    }
+    $(document).ready(function() {
+          setValoresCat();
+        });
+  </script>
   </script>
 </body>
 

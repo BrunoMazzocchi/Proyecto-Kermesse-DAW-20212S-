@@ -163,10 +163,49 @@ if(isset($varMsj))
             </a>
           </li>
           <li class="nav-item">
+<<<<<<< HEAD
             <a href="../catalogos/tbl_arqueocaja.php" class="nav-link">
               <i class="nav-icon fas fa-object-group"></i>
               <p>
                 ArqueoCaja
+=======
+            <a href="../catalogos/tbl_rol.php" class="nav-link">
+              <i class="nav-icon fas fa-lock"></i>
+              <p>
+                Rol
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_opciones.php" class="nav-link">
+              <i class="nav-icon fas fa-align-justify"></i>
+              <p>
+                Opciones
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_usuario.php" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Usuarios
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_rol_opciones.php" class="nav-link">
+              <i class="nav-icon fas fa-unlock-alt"></i>
+              <p>
+                Rol-Opcion
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_rol_usuario.php" class="nav-link">
+              <i class="nav-icon fas fa-user-tag"></i>
+              <p>
+                Rol-Usuario
+>>>>>>> e861b962f6d6fa4686a8b6d8d82b9db48cd05f37
               </p>
             </a>
           </li>

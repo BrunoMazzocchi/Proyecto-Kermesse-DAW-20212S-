@@ -154,6 +154,46 @@ if (isset($varMsj)) {
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_rol.php" class="nav-link">
+              <i class="nav-icon fas fa-lock"></i>
+              <p>
+                Rol
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_opciones.php" class="nav-link">
+              <i class="nav-icon fas fa-align-justify"></i>
+              <p>
+                Opciones
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_usuario.php" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Usuarios
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_rol_opciones.php" class="nav-link">
+              <i class="nav-icon fas fa-unlock-alt"></i>
+              <p>
+                Rol-Opcion
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_rol_usuario.php" class="nav-link">
+              <i class="nav-icon fas fa-user-tag"></i>
+              <p>
+                Rol-Usuario
+              </p>
+            </a>
+          </li>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
@@ -212,13 +252,13 @@ if (isset($varMsj)) {
                                     <td><?php echo $r->__GET('descripcion') ?></td>
                                     <td><?php echo $r->__GET('estado') ?></td>
 
-                                    <td> <a href="frm_editar_listaprecio.php?editCg=<?php echo $r->__GET('id_lista_precio'); ?>" target="blank">
+                                    <td> <a href="frm_editar_listaprecio.php?editC=<?php echo $r->__GET('id_lista_precio'); ?>" target="blank">
                                             <i class="far fa-edit" title="Editar lista precio"></i></a>
                                         &nbsp;&nbsp;
-                                        <a href="frm_view_listaprecio.php?viewCyG=<?php echo $r->__GET('id_lista_precio'); ?>" target="blank">
+                                        <a href="frm_view_listaprecio.php?viewC=<?php echo $r->__GET('id_lista_precio'); ?>" target="blank">
                                             <i class="far fa-eye" title="Ver lista precio"></i></a>
                                         &nbsp;&nbsp;
-                                        <a href="#" target="_blank">
+                                        <a href="../../negocio/ng_ListaPrecio.php?delC=<?php echo $r->__GET('id_lista_precio') ?>" target="_blank">
                                             <i class="far fa-trash-alt" title="Eliminar"></i>
                                         </a>
                                     </td>

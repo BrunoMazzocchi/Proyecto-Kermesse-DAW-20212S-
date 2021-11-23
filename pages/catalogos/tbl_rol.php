@@ -25,6 +25,11 @@ if(isset($varMsj))
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../../plugins/DataTables1.11.2-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/DataTables1.11.2-/Responsive-2.2.9/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/DataTables1.11.2/Buttons-2.0.0/css/buttons.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
@@ -157,6 +162,46 @@ if(isset($varMsj))
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_rol.php" class="nav-link">
+              <i class="nav-icon fas fa-lock"></i>
+              <p>
+                Rol
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_opciones.php" class="nav-link">
+              <i class="nav-icon fas fa-align-justify"></i>
+              <p>
+                Opciones
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_usuario.php" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Usuarios
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_rol_opciones.php" class="nav-link">
+              <i class="nav-icon fas fa-unlock-alt"></i>
+              <p>
+                Rol-Opcion
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_rol_usuario.php" class="nav-link">
+              <i class="nav-icon fas fa-user-tag"></i>
+              <p>
+                Rol-Usuario
+              </p>
+            </a>
+          </li>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
@@ -207,20 +252,27 @@ if(isset($varMsj))
                   <tbody>
                     <?php
                       foreach($dtRol->listRol() as $r):
+                        $estadoRol = "";
+                        if ($r->_GET('estado') == 1 || $r->_GET('estado') == 2){
+                            $estadoRol = "Activo";
+                        }
+                        else{
+                            $estadoRol = "Inactivo";
+                        }
                     ?>
                     <tr>
                       <td><?php echo $r->_GET('id_rol'); ?></td>
                       <td><?php echo $r->_GET('rol_descripcion'); ?></td>
-                      <td><?php echo $r->_GET('estado'); ?></td>
+                      <td><?php echo $estadoRol; ?></td>
                       <td> 
                     <a href="frm_edit_rol.php?editR=<?php echo $r->_GET('id_rol');?>" target="_blank">
-                    <i class="far fa-edit" title="Editar Rol"></i></a>
+                      <i class="far fa-edit" title="Editar Rol"></i></a>
                     &nbsp;&nbsp;
                     <a href="frm_view_rol.php?viewR=<?php echo $r->_GET('id_rol');?>" target="_blank">
-                    <i class="far fa-eye" title="Ver Rol"></i></a>
+                      <i class="far fa-eye" title="Ver Rol"></i></a>
                     &nbsp;&nbsp;
-                    <a href="" target="_blank">
-                      <i class="far fa-trash-alt" title="Eliminar"></i>
+                    <a href="#" onclick="deleteRol(<?php echo $r->_GET('id_rol');?>);">
+                      <i class="far fa-trash-alt" title="Eliminar Rol"></i>
                     </a>
                     </td>
                     </tr>
@@ -298,6 +350,18 @@ if(isset($varMsj))
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
     <script>
+        function deleteRol(idR)
+        {
+            confirm(function(e,btn)
+            {
+                e.preventDefault();
+                window.location.href = "../../negocio/ng_rol.php?delR="+idR;
+            },
+            function(e,btn)
+            {
+                e.preventDefault();      
+            });
+        }
         $(document).ready(function()
         {
             var mensaje = 0;
@@ -306,13 +370,17 @@ if(isset($varMsj))
                         {
                             successAlert('Exito', 'Los datos han sido registrados exitosamente');
                         }
-                        if(mensaje == "2" || mensaje =="4")
+                        if(mensaje == "2" || mensaje =="4" || mensaje =="6")
                         {
                             errorAlert('Error', 'Revise los datos e intente de nuevo');
                         }
                         if(mensaje == "3")
                         {
                             successAlert('Exito', 'Los datos han sido actualizados exitosamente');
+                        }
+                        if(mensaje == "5")
+                        {
+                            successAlert('Exito', 'Los datos han sido eliminados exitosamente');
                         }
                     
                         

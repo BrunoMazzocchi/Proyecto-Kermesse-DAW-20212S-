@@ -1,19 +1,19 @@
 <?php
 error_reporting(0);
 
-include '../../entidades/lista_precio.php';
-include '../../datos/dt_listaprecio.php';
+include '../../entidades/categoria_gastos.php';
+include '../../datos/dt_categoria_gastos.php';
 
-$dtlist = new Dt_ListaPrecio();
-
-$lista = new Lista_Precio();
-$varIdLista = 0;
-if (isset($varIdLista)) {
-  $varIdLista = $_GET['viewC'];
+$dtCat = new Dt_categoria_gastos();
+$cat = new Categoria_Gastos();
+$varIdCat = 0;
+if (isset($varIdCat)) {
+  $varIdCat = $_GET['viewC'];
 }
 
-$lista = $dtlist->obtenerLista($varIdLista);
+$cat = $dtCat->obtenerCategoriaGastos($varIdCat);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -165,6 +165,7 @@ $lista = $dtlist->obtenerLista($varIdLista);
       <!-- /.sidebar -->
     </aside>
 
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
@@ -172,12 +173,12 @@ $lista = $dtlist->obtenerLista($varIdLista);
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1> View Listas Precio</h1>
+              <h1>Categoria Gastos</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                <li class="breadcrumb-item active">Lista Precio</li>
+                <li class="breadcrumb-item active">Editar Categoria Gastos</li>
               </ol>
             </div>
           </div>
@@ -193,35 +194,29 @@ $lista = $dtlist->obtenerLista($varIdLista);
               <!-- general form elements -->
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Lista Precio</h3>
+                  <h3 class="card-title">Editar Categoria Gastos</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
                 <form>
                   <div class="card-body">
                     <div class="form-group">
-                      <label>Lista Precio ID</label>
-                      <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
-                      <input readonly type="text" class="form-control" id="id_lista_precio" name="id_lista_precio" placeholder="Lista precio ID" required>
-                    </div>
-                    <div class="form-group">
-                      <label>Kermesse ID</label>
-                      <input readonly type="text" class="form-control" id="id_kermesse" name="id_kermesse" placeholder="Kermesse ID" required>
+                      <label>ID Categoria Gastos</label>
+                      <input readonly type="text" class="form-control" id="id_categoria_gastos" name="id_categoria_gastos" placeholder="Categoria Gastos" readonly required>
+
                     </div>
                     <div class="form-group">
                       <label>Nombre</label>
-                      <input readonly type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
+                      <input readonly type="text" class="form-control" id="nombre_categoria" name="nombre_categoria" placeholder="Nombre de categoria" required>
+
                     </div>
                     <div class="form-group">
                       <label>Descripcion</label>
                       <input readonly type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" required>
                     </div>
+
                     <!-- /.card-body -->
 
-                    <div class="card-footer">
-                      <a href="tbl_listaprecio.php"><i class="fas fa-arrow-left"></i> Atras</a>
-
-                    </div>
                 </form>
               </div>
               <!-- /.card -->
@@ -230,14 +225,6 @@ $lista = $dtlist->obtenerLista($varIdLista);
       </section>
       <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
-    <footer class="main-footer">
-      <div class="float-right d-none d-sm-block">
-        <b>Version</b> 3.1.0-rc
-      </div>
-      <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-    </footer>
-
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
       <!-- Control sidebar content goes here -->
@@ -258,6 +245,7 @@ $lista = $dtlist->obtenerLista($varIdLista);
   <script src="../../dist/js/demo.js"></script>
   <!-- Page specific script -->
 
+
   <script>
     $(function() {
       bsCustomFileInput.init();
@@ -265,15 +253,15 @@ $lista = $dtlist->obtenerLista($varIdLista);
   </script>
 
   <script>
-    function setValoresLista() {
-      $("#id_lista_precio").val("<?php echo $lista->__GET('id_lista_precio') ?>")
-      $("#id_kermesse").val("<?php echo $lista->__GET('nombreKermesse') ?>")
-      $("#nombre").val("<?php echo $lista->__GET('nombre') ?>")
-      $("#descripcion").val("<?php echo $lista->__GET('descripcion') ?>")
+    function setValoresCat() {
+      $("#id_categoria_gastos").val("<?php echo $cat->__GET('id_categoria_gastos') ?>")
+      $("#descripcion").val("<?php echo $cat->__GET('descripcion') ?>")
+      $("#nombre_categoria").val("<?php echo $cat->__GET('nombre_categoria') ?>")
     }
     $(document).ready(function() {
-      setValoresLista();
+      setValoresCat();
     });
+  </script>
   </script>
 </body>
 
