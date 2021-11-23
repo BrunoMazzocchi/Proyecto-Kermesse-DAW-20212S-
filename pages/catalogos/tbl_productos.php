@@ -12,6 +12,7 @@ if (isset($varMsj)) {
 }
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -155,6 +156,46 @@ if (isset($varMsj)) {
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_rol.php" class="nav-link">
+              <i class="nav-icon fas fa-lock"></i>
+              <p>
+                Rol
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_opciones.php" class="nav-link">
+              <i class="nav-icon fas fa-align-justify"></i>
+              <p>
+                Opciones
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_usuario.php" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Usuarios
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_rol_opciones.php" class="nav-link">
+              <i class="nav-icon fas fa-unlock-alt"></i>
+              <p>
+                Rol-Opcion
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_rol_usuario.php" class="nav-link">
+              <i class="nav-icon fas fa-user-tag"></i>
+              <p>
+                Rol-Usuario
+              </p>
+            </a>
+          </li>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
@@ -168,7 +209,7 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Prodcutos</h1>
+                            <h1>Productos</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -244,13 +285,6 @@ if (isset($varMsj)) {
                 </div>
             </div>
 
-            <!-- /.content-wrapper -->
-            <footer class="main-footer">
-                <div class="float-right d-none d-sm-block">
-                    <b>Version</b> 3.1.0-rc
-                </div>
-                <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-            </footer>
 
             <!-- Control Sidebar -->
             <aside class="control-sidebar control-sidebar-dark">

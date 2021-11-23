@@ -1,21 +1,23 @@
 <?php
-error_reporting(0);
+//error_reporting(0);
 
-include '../../entidades/usuario.php';
-include '../../datos/dt_usuario.php';
+include '../../entidades/tbl_moneda.php';
+include '../../datos/dt_moneda.php';
 
-$dtUser = new Dt_usuario();
-$user = new Usuario();
+$dtMon = new Dt_moneda();
+$mon = new Tbl_Moneda();
+$varIdMon = 0;
+if (isset($varIdMon)) {
+  $varIdMon = $_GET['viewAC'];
+}
 
-$varIdUs = 0;
-  if (isset($varIdUs)) {
-    $varIdUs = $_GET['viewU'];
-  } 
+$mon = $dtMon->obtenerMoneda($varIdMon);
 
-  $user = $dtUser->obtenerUser($varIdUs);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,6 +30,7 @@ $varIdUs = 0;
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
+
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
   <!-- Navbar -->
@@ -46,16 +49,16 @@ $varIdUs = 0;
     </ul>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
-      <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
+        <form class="form-inline ml-3">
+            <div class="input-group input-group-sm">
+                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-navbar" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -70,18 +73,18 @@ $varIdUs = 0;
         </a>
       </li>
     </ul>
-  </nav>
-  <!-- /.navbar -->
+        </nav>
+        <!-- /.navbar -->
 
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="../../index.html" class="brand-link">
-      <img src="../../dist/img/Kermesse_Logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Kermesse</span>
-    </a>
+        <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+     <!-- Brand Logo -->
+      <a href="../../index.html" class="brand-link">
+        <img src="../../dist/img/Kermesse_Logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">Kermesse</span>
+      </a>
 
-    <!-- Sidebar -->
+            <!-- Sidebar -->
     <div class="sidebar">
       <!-- SidebarSearch Form -->
       <div class="form-inline">
@@ -158,42 +161,10 @@ $varIdUs = 0;
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_rol.php" class="nav-link">
-              <i class="nav-icon fas fa-lock"></i>
+            <a href="../catalogos/tbl_arqueocaja.php" class="nav-link">
+              <i class="nav-icon fas fa-object-group"></i>
               <p>
-                Rol
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_opciones.php" class="nav-link">
-              <i class="nav-icon fas fa-align-justify"></i>
-              <p>
-                Opciones
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_usuario.php" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
-              <p>
-                Usuarios
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_rol_opciones.php" class="nav-link">
-              <i class="nav-icon fas fa-unlock-alt"></i>
-              <p>
-                Rol-Opcion
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_rol_usuario.php" class="nav-link">
-              <i class="nav-icon fas fa-user-tag"></i>
-              <p>
-                Rol-Usuario
+                ArqueoCaja
               </p>
             </a>
           </li>
@@ -202,6 +173,10 @@ $varIdUs = 0;
     </div>
     <!-- /.sidebar -->
   </aside>
+       </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+    </aside>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -210,12 +185,12 @@ $varIdUs = 0;
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1> View Usuario</h1>
+                            <h1> View Moneda</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                                <li class="breadcrumb-item active">Lista Usuario</li>
+                                <li class="breadcrumb-item active">Moneda</li>
                             </ol>
                         </div>
                     </div>
@@ -231,44 +206,32 @@ $varIdUs = 0;
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Usuario</h3>
+                                    <h3 class="card-title">Moneda</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
                                 <form>
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label>Codigo Usuario</label>
-                                            <input type="text" value="<?php echo $user->_GET('id_usuario'); ?>" class="form-control" id="id_usuario" name="id_usuario" placeholder="Codigo de Usuario" disabled>
+                                            <label>ID Moneda</label>
+                                            <input readonly type="number" value="<?php echo $mon->_GET('id_moneda');?>" class="form-control" id="id_moneda" name="id_moneda" placeholder="ID Moneda" required>
                                         </div>
                                         <div class="form-group">
-                                            <label>Username</label>
-                                            <input type="text" value="<?php echo $user->_GET('usuario'); ?>" class="form-control" id="usuario" name="usuario" placeholder="Username" disabled>
+                                            <label>Nombre</label>
+                                            <input readonly type="text" value="<?php echo $mon->_GET('nombre');?>" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
                                         </div>
                                         <div class="form-group">
-                                            <label>Contraseña</label>
-                                            <input type="text" value="<?php echo $user->_GET('pwd'); ?>" class="form-control" id="pwd" name="pwd" placeholder="Contraseña" disabled>
+                                            <label>Simbolo</label>
+                                            <input readonly type="text" value="<?php echo $mon->_GET('simbolo');?>" class="form-control" id="simbolo" name="simbolo" placeholder="Simbolo" required>
                                         </div>
                                         <div class="form-group">
-                                            <label>Nombres</label>
-                                            <input type="text" value="<?php echo $user->_GET('nombres'); ?>" class="form-control" id="nombres" name="nombres" placeholder="Nombres" disabled>
+                                            <label>Estado</label>
+                                            <input readonly type="text" value="<?php echo $mon->_GET('estado');?>" class="form-control" id="estado" name="estado" placeholder="Estado" required>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Apellidos</label>
-                                            <input type="text" value="<?php echo $user->_GET('apellidos'); ?>" class="form-control" id="apellidos" name="apellidos" placeholder="Apellidos" disabled>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Email</label>
-                                            <input type="text" value="<?php echo $user->_GET('email'); ?>" class="form-control" id="email" name="email" placeholder="Email" disabled>
-                                        </div>
-                                        <div class="form-group">
-                                             <label>Estado</label>
-                                             <input type="number" value="<?php echo $user->_GET('estado'); ?>" class="form-control" id="estado" placeholder="Estado"disabled>
-                                         </div>
                                     </div>
 
                                     <div class="card-footer">
-                                        <a href="tbl_usuario.php"><i class="fas fa-arrow-left"></i> Atras</a>
+                                        <a href="tbl_moneda.php"><i class="fas fa-arrow-left"></i> Atras</a>
 
                                     </div>
                                 </form>
@@ -279,14 +242,6 @@ $varIdUs = 0;
             </section>
             <!-- /.content -->
         </div>
-        <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <div class="float-right d-none d-sm-block">
-                <b>Version</b> 3.1.0-rc
-            </div>
-            <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-        </footer>
-
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
@@ -312,6 +267,16 @@ $varIdUs = 0;
             bsCustomFileInput.init();
         });
     </script>
-</body>
-
+    <script>
+      function setValoresMoneda() {
+      $("#id_moneda").val("<?php echo $mon->_GET('id_moneda') ?>")
+      $("#nombre").val("<?php echo $mon->_GET('nombre') ?>")
+      $("#simbolo").val("<?php echo $mon->_GET('simbolo') ?>")
+      $("#estado").val("<?php echo $mon->_GET('estado') ?>")
+    }
+    $(document).ready(function() {
+          setValoresMoneda();
+        });
+  </script>
+  </body>
 </html>

@@ -1,20 +1,18 @@
 <?php
 error_reporting(0);
-//IMPORTAMOS ENTIDADES Y DATOS
-include '../../entidades/rol.php';
-include '../../datos/dt_rol.php';
 
-include '../../entidades/usuario.php';
-include '../../datos/dt_usuario.php';
-
-$dtRol = new Dt_rol();
-$dtUser = new Dt_usuario();
+include '../../datos/dt_arqueocaja.php';
+include '../../entidades/arqueocaja.php';
 
 
-$varMsj = 0;
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
+$dtAc = new Dt_Arqueocaja();
+$ac = new Arqueocaja();
+$varIdAc = 0;
+if(isset($varIdAc)) {
+    $varIdAc = $_GET['msj'];
 }
+
+$ac = $dtAc->obtenerArqueoCaja($varIdAc);
 ?>
 
 <!DOCTYPE html>
@@ -161,42 +159,10 @@ if (isset($varMsj)) {
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_rol.php" class="nav-link">
-              <i class="nav-icon fas fa-lock"></i>
+            <a href="../catalogos/tbl_arqueocaja.php" class="nav-link">
+              <i class="nav-icon fas fa-object-group"></i>
               <p>
-                Rol
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_opciones.php" class="nav-link">
-              <i class="nav-icon fas fa-align-justify"></i>
-              <p>
-                Opciones
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_usuario.php" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
-              <p>
-                Usuarios
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_rol_opciones.php" class="nav-link">
-              <i class="nav-icon fas fa-unlock-alt"></i>
-              <p>
-                Rol-Opcion
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_rol_usuario.php" class="nav-link">
-              <i class="nav-icon fas fa-user-tag"></i>
-              <p>
-                Rol-Usuario
+                ArqueoCaja
               </p>
             </a>
           </li>
@@ -206,26 +172,26 @@ if (isset($varMsj)) {
     <!-- /.sidebar -->
   </aside>
 
-  <!-- Content Wrapper. Contains page content -->
+
+    <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Nuevo Rol Usuario</h1>
+            <h1>Arqueocaja</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Registrar Rol Usuario</li>
+              <li class="breadcrumb-item active">Arqueocaja</li>
             </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
 
-    <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
         <div class="row">
@@ -234,70 +200,67 @@ if (isset($varMsj)) {
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Registrar Rol Usuario</h3>
+                <h3 class="card-title">Editar Denominaicon</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="POST" action="../../negocio/ng_rol_usuario.php">
+              <form method="POST" action="../../negocio/ng_Denominacion.php">
                 <div class="card-body">
-                  <div class="form-group">
-                    <label>ID Rol Usuario</label>
-                    <input type="number" class="form-control" id="id_rol_usuario" name="id_rol_usuario"placeholder="Digite numero de Rol Usuario">
-                    <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
+                 <div class="form-group">
+                    <label>ID ArqueoCaja</label>
+                    <input readonly type="number" value="<?php echo $ac->_GET('id_ArqueoCaja'); ?>" class="form-control" id="id_ArqueoCaja" name="id_ArqueoCaja" placeholder="ID ArqueoCaja">
+                    <input type="hidden" value="2" name="txtaccion" id="txtaccion"/>
                   </div>
                   <div class="form-group">
-                    <label>Seleccione el Rol</label>
-                    <select class="form-control" id="tbl_rol_id_rol" name="tbl_rol_id_rol" required>
-                        <option value="">Seleccione...</option>
-                        <?php
-                            foreach($dtRol->listRol() as $r):
-                        ?>
-                        <option value="<?php echo $r->_GET('id_rol'); ?>"><?php echo $r->_GET('rol_descripcion'); ?></option>
-                        <?php
-                            endforeach;
-                            ?>
-                    </select>
+                    <label>ID Moneda</label>
+                    <input type="number" value="<?php echo $ac->_GET('idKermesse'); ?>" class="form-control" id="idKermesse" name="idKermesse"placeholder="Digite el ID de la Kermesse">
                   </div>
                   <div class="form-group">
-                    <label>Seleccione el Usuario</label>
-                    <select class="form-control" id="tbl_usuario_id_usuario" name="tbl_usuario_id_usuario" required>
-                        <option value="">Seleccione...</option>
-                        <?php
-                            foreach($dtUser->listUsuario() as $r):
-                        ?>
-                        <option value="<?php echo $r->_GET('id_usuario'); ?>"><?php echo $r->_GET('usuario'); ?></option>
-                        <?php
-                            endforeach;
-                            ?>
-                    </select>
+                    <label>Fecha de Arqueo</label>
+                    <input type="date" value="<?php echo $ac->_GET('fechaArqueo'); ?>" class="form-control" id="fechaArqueo" name="fechaArqueo"placeholder="Fecha de Arqueo">
+                  </div>
+                  <div class="form-group">
+                    <label>Gran Total</label>
+                    <input type="number" value="<?php echo $ac->_GET('granTotal'); ?>" class="form-control" id="granTotal" name="granTotal" placeholder="Gran Total">
+                  </div>
+                  <div class="form-group">
+                    <label>Usuario Creacion</label>
+                    <input type="text" value="<?php echo $ac->_GET('usuario_creacion'); ?>" class="form-control" id="usuario_creacion" name="usuario_creacion"placeholder="Usuario Creacion">
+                  </div>
+                  <div class="form-group">
+                    <label>Fecha Creacion</label>
+                    <input type="date" value="<?php echo $ac->_GET('fecha_creacion'); ?>" class="form-control" id="fecha_creacion" name="fecha_creacion"placeholder="Fecha Creacion">
+                  </div>
+                  <div class="form-group">
+                    <label>Usuario Modificacion</label>
+                    <input type="text" value="<?php echo $ac->_GET('usuario_modificacion'); ?>" class="form-control" id="usuario_modificacion" name="usuario_modificacion" placeholder="Usuario Modificacion">
+                  </div>
+                  <div class="form-group">
+                    <label>Fecha Modificacion</label>
+                    <input type="date" value="<?php echo $ac->_GET('fecha_modificacion'); ?>" class="form-control" id="fecha_modificacion" name="fecha_modificacion"placeholder="Fecha Modificacion">
+                  </div>
+                  <div class="form-group">
+                    <label>Usuario Eliminacion</label>
+                    <input type="number" value="<?php echo $ac->_GET('usuario_eliminacion'); ?>" class="form-control" id="usuario_eliminacion" name="usuario_eliminacion"placeholder="Usuario Eliminacion">
+                  </div>
+                  <div class="form-group">
+                    <label>Fecha Eliminacion</label>
+                    <input type="date" value="<?php echo $ac->_GET('fecha_eliminacion'); ?>" class="form-control" id="fecha_eliminacion" name="fecha_eliminacion" placeholder="Fecha Eliminacion">
                   </div>
                 </div>
                 <!-- /.card-body -->
-
                 <div class="card-footer">
                   
                   <button type="submit" class="btn btn-primary">Guardar</button>
                   <button type="reset" class="btn btn-danger">Cancelar</button>
                 </div>
               </form>
-              <div class="card-footer">
-                                        <a href="tbl_rol_usuario.php"><i class="fas fa-arrow-left"></i> Atras</a>
-
-                                    </div>
             </div>
             <!-- /.card -->
 
-            
     </section>
     <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.1.0-rc
-    </div>
-    <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -313,18 +276,33 @@ if (isset($varMsj)) {
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- bs-custom-file-input -->
 <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-<!-- jAlert -->
-<script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
-    <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> //optional!! </script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
 <!-- Page specific script -->
 <script>
-$(function () {
-  bsCustomFileInput.init();
-});
+    $(function() {
+        bsCustomFileInput.init();
+    });
 </script>
+    <script>
+      function setValoresArqueoCaja() {
+      $("#id_ArqueoCaja").val("<?php echo $ac->_GET('id_Denominacion') ?>")
+      $("#idKermesse").val("<?php echo $ac->_GET('idKermesse') ?>")
+      $("#fecha_arqueo").val("<?php echo $ac->_GET('fecha_arqueo') ?>")
+      $("#granTotal").val("<?php echo $ac->_GET('granTotal') ?>")
+      $("#usuario_creacion").val("<?php echo $ac->_GET('usuario_creacion') ?>")
+      $("#fecha_creacion").val("<?php echo $ac->_GET('fecha_creacion') ?>")
+      $("#usuario_modificacion").val("<?php echo $ac->_GET('usuario_modificacion') ?>")
+      $("#fecha_modificacion").val("<?php echo $ac->_GET('fecha_modificacion') ?>")
+      $("#usuario_eliminacion").val("<?php echo $ac->_GET('usuario_eliminacion') ?>")
+      $("#fecha_eliminacion").val("<?php echo $ac->_GET('fecha_eliminacion') ?>")
+      $("#estado").val("<?php echo $ac->_GET('estado') ?>")
+    }
+    $(document).ready(function() {
+          setValoresArqueoCaja();
+        });
+  </script>
 </body>
 </html>

@@ -157,6 +157,14 @@ if (isset($varMsj)) {
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_arqueocaja.php" class="nav-link">
+              <i class="nav-icon fas fa-object-group"></i>
+              <p>
+                ArqueoCaja
+              </p>
+            </a>
+          </li>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
@@ -195,11 +203,12 @@ if (isset($varMsj)) {
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form>
+              <form method="POST" action="../../negocio/ng_Moneda.php">
                 <div class="card-body">
                   <div class="form-group">
                     <label>ID Moneda</label>
                     <input type="number" class="form-control" id="id_moneda" name="id_moneda"placeholder="Digite ID de moneda">
+                    <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
                   </div>
                   <div class="form-group">
                     <label>Nombre</label>

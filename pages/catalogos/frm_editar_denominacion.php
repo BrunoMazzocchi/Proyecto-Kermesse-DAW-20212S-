@@ -1,15 +1,17 @@
 <?php
-error_reporting(0);
+//error_reporting(0);
 
 include '../../entidades/tbl_denominacion.php';
 include '../../datos/dt_denominacion.php';
 
-$denom = new Dt_denominacion();
-$denominacion = new Tbl_Denominacion();
+$den = new Dt_denominacion();
+$dtDen = new Tbl_Denominacion();
 $varIdDenom = 0;
 if (isset($varIdDenom)) {
   $varIdDenom = $_GET['editD'];
 }
+
+$dtDen = $den->obtenerDenominacion($varIdDenom);
 ?>
 
 <!DOCTYPE html>
@@ -157,6 +159,14 @@ if (isset($varIdDenom)) {
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_arqueocaja.php" class="nav-link">
+              <i class="nav-icon fas fa-object-group"></i>
+              <p>
+                ArqueoCaja
+              </p>
+            </a>
+          </li>
        </nav>
         <!-- /.sidebar-menu -->
       </div>
@@ -198,20 +208,20 @@ if (isset($varIdDenom)) {
                 <div class="card-body">
                  <div class="form-group">
                     <label>ID Denominacion</label>
-                    <input readonly type="number" value="<?php echo $denominacion->__GET('id_Denominacion'); ?>" class="form-control" id="id_Denominacion" name="id_Denominacion" placeholder="ID Denominacion">
+                    <input readonly type="number" value="<?php echo $dtDen->__GET('id_Denominacion'); ?>" class="form-control" id="id_Denominacion" name="id_Denominacion" placeholder="ID Denominacion">
                     <input type="hidden" value="2" name="txtaccion" id="txtaccion"/>
                   </div>
                   <div class="form-group">
                     <label>ID Moneda</label>
-                    <input type="text" value="<?php echo $denominacion->__GET('idMoneda'); ?>" class="form-control" id="idMoneda" name="idMoneda"placeholder="Digite el ID de la Moneda">
+                    <input type="text" value="<?php echo $dtDen->__GET('idMoneda'); ?>" class="form-control" id="idMoneda" name="idMoneda"placeholder="Digite el ID de la Moneda">
                   </div>
                   <div class="form-group">
                     <label>Valor de la moneda</label>
-                    <input type="text" value="<?php echo $denominacion->__GET('valor'); ?>" class="form-control" id="valor" name="valor"placeholder="Valor">
+                    <input type="number" value="<?php echo $dtDen->__GET('valor'); ?>" class="form-control" id="valor" name="valor"placeholder="Valor">
                   </div>
                   <div class="form-group">
                     <label>Valor en letras</label>
-                    <input type="text" value="<?php echo $denominacion->__GET('valor_letras'); ?>" class="form-control" id="valor_letras" name="valor_letras" placeholder="Valor">
+                    <input type="text" value="<?php echo $dtDen->__GET('valor_letras'); ?>" class="form-control" id="valor_letras" name="valor_letras" placeholder="Valor">
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -257,17 +267,17 @@ if (isset($varIdDenom)) {
 <!-- Page specific script -->
 
 <script>
-        $(function() {
-            bsCustomFileInput.init();
-        });
-    </script>
+    $(function() {
+        bsCustomFileInput.init();
+    });
+</script>
     <script>
       function setValoresDenominacion() {
-      $("#id_Denominacion").val("<?php echo $denominacion->__GET('id_Denominacion') ?>")
-      $("#idMoneda").val("<?php echo $denominacion->__GET('idMoneda') ?>")
-      $("#valor").val("<?php echo $denominacion->__GET('valor') ?>")
-      $("#valor_letras").val("<?php echo $denominacion->__GET('valor_letras') ?>")
-      $("#estado").val("<?php echo $denominacion->__GET('estado') ?>")
+      $("#id_Denominacion").val("<?php echo $dtDen->__GET('id_Denominacion') ?>")
+      $("#idMoneda").val("<?php echo $dtDen->__GET('idMoneda') ?>")
+      $("#valor").val("<?php echo $dtDen->__GET('valor') ?>")
+      $("#valor_letras").val("<?php echo $dtDen->__GET('valor_letras') ?>")
+      $("#estado").val("<?php echo $dtDen->__GET('estado') ?>")
     }
     $(document).ready(function() {
           setValoresDenominacion();

@@ -1,10 +1,10 @@
 <?php
 
-include_once("../entidades/tbl_denominacion.php.php");
-include_once("../datos/dt_denominacion.php.php");
+include_once("../entidades/tbl_denominacion.php");
+include_once("../datos/dt_denominacion.php");
 
-$denom = new Tbl_Denominacion();
-$denominacion = new Dt_denominacion();
+$den = new Tbl_Denominacion();
+$dtDen = new Dt_denominacion;
 
 if ($_POST){
     $varAccion = $_POST['txtaccion'];
@@ -12,13 +12,13 @@ if ($_POST){
     {
         case '1':
             try{
-                $denom->__SET('id_Denominacion',$_POST['id_Denominacion']);
-                $denom->__SET('idMoneda',$_POST['idMoneda']);
-                $denom->__SET('valor',$_POST['valor']);
-                $denom->__SET('valor_letras',$_POST['valor_letras']);
-                $denom->__SET('estado','1');
+                $den->__SET('id_Denominacion',$_POST['id_Denominacion']);
+                $den->__SET('idMoneda',$_POST['idMoneda']);
+                $den->__SET('valor',$_POST['valor']);
+                $den->__SET('valor_letras',$_POST['valor_letras']);
+                $den->__SET('estado', '1');
 
-                $denominacion->regDenominacion($denom);
+                $dtDen->regDenominacion($den);
                 header("Location: ../pages/catalogos/tbl_denominacion.php?msj=1");
             }
             catch (Exception $e)
@@ -30,13 +30,13 @@ if ($_POST){
         case '2':
             try
             {
-                $denom->__SET('id_Denominacion',$_POST['id_Denominacion']);
-                $denom->__SET('idMoneda',$_POST['idMoneda']);
-                $denom->__SET('valor',$_POST['valor']);
-                $denom->__SET('valor_letras',$_POST['valor_letras']);
-                $denom->__SET('estado','2');
+                $den->__SET('id_Denominacion',$_POST['id_Denominacion']);
+                $den->__SET('idMoneda',$_POST['idMoneda']);
+                $den->__SET('valor',$_POST['valor']);
+                $den->__SET('valor_letras',$_POST['valor_letras']);
+                $den->__SET('estado','2');
 
-                $denominacion->regDenominacion($denom);
+                $dtDen->editDenominacion($den);
                 header("Location: ../pages/catalogos/tbl_denominacion.php?msj=3");
             }
             catch (Exception $e)
@@ -51,3 +51,19 @@ if ($_POST){
 
     }
 }
+
+if ($_GET)
+            {
+                try
+                {
+                    $den->__SET('id_Denominacion', $_GET['delD']);
+                    $dtDen->deleteDenominacion($den->__GET('id_Denominacion'));
+                    header("Location: ../pages/catalogos/tbl_denominacion.php?msj=5");
+            
+                }
+                catch(Exception $e)
+                {
+                    header("Location: ../pages/catalogos/tbl_denominacion.php?msj=6");
+                    die($e->getMessage());
+                }
+            }

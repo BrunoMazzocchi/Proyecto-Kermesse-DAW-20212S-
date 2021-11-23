@@ -160,6 +160,14 @@ $denominacion = $denom->obtenerDenominacion($varIdDenom);
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_arqueocaja.php" class="nav-link">
+              <i class="nav-icon fas fa-object-group"></i>
+              <p>
+                ArqueoCaja
+              </p>
+            </a>
+          </li>
       </nav>
       <!-- /.sidebar-menu -->
     </div>

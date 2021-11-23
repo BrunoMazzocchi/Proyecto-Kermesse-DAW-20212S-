@@ -160,11 +160,23 @@ if(isset($varMsj))
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_arqueocaja.php" class="nav-link">
+              <i class="nav-icon fas fa-object-group"></i>
+              <p>
+                ArqueoCaja
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_arqueocaja_det.php" class="nav-link">
+              <i class="nav-icon fas fa-object-group"></i>
+              <p>
+                ArqueoCaja Detalle
+              </p>
+            </a>
+          </li>
       </nav>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
@@ -202,11 +214,12 @@ if(isset($varMsj))
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form>
+              <form method="$_POST" action="../../negocio/ng_ArqueoCaja.php">
                 <div class="card-body">
                   <div class="form-group">
                     <label>ID Kermesse</label>
                     <input type="number" class="form-control" id="idKermesse" name = "idKermesse" placeholder="Ingrese el ID Kermesse">
+                    <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
                   </div>
                   <div class="form-group">
                     <label>Fecha Arqueo</label>

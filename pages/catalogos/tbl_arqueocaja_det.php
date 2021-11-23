@@ -1,18 +1,14 @@
 <?php
 error_reporting(0);
-//IMPORTAMOS ENTIDADES Y DATOS
-include '../../entidades/rol.php';
-include '../../datos/dt_rol.php';
 
-include '../../entidades/usuario.php';
-include '../../datos/dt_usuario.php';
+include '../../datos/dt_arqueocaja_det.php';
+include '../../entidades/arqueocaja_det.php';
 
-$dtRol = new Dt_rol();
-$dtUser = new Dt_usuario();
 
+$ac= new Dt_Arqueocaja_Det();
 
 $varMsj = 0;
-if (isset($varMsj)) {
+if(isset($varMsj)) {
     $varMsj = $_GET['msj'];
 }
 ?>
@@ -161,42 +157,18 @@ if (isset($varMsj)) {
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_rol.php" class="nav-link">
-              <i class="nav-icon fas fa-lock"></i>
+            <a href="../catalogos/tbl_arqueocaja.php" class="nav-link">
+              <i class="nav-icon fas fa-object-group"></i>
               <p>
-                Rol
+                ArqueoCaja
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_opciones.php" class="nav-link">
-              <i class="nav-icon fas fa-align-justify"></i>
+            <a href="../catalogos/tbl_arqueocaja_det.php" class="nav-link">
+              <i class="nav-icon fas fa-object-group"></i>
               <p>
-                Opciones
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_usuario.php" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
-              <p>
-                Usuarios
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_rol_opciones.php" class="nav-link">
-              <i class="nav-icon fas fa-unlock-alt"></i>
-              <p>
-                Rol-Opcion
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_rol_usuario.php" class="nav-link">
-              <i class="nav-icon fas fa-user-tag"></i>
-              <p>
-                Rol-Usuario
+                ArqueoCaja Detalle
               </p>
             </a>
           </li>
@@ -206,98 +178,96 @@ if (isset($varMsj)) {
     <!-- /.sidebar -->
   </aside>
 
-  <!-- Content Wrapper. Contains page content -->
+
+    <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Nuevo Rol Usuario</h1>
+            <h1>Arqueocaja</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Registrar Rol Usuario</li>
+              <li class="breadcrumb-item active">Arqueocaja Detalle</li>
             </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
         <div class="row">
-          <!-- left column -->
-          <div class="col-md-12">
-            <!-- general form elements -->
-            <div class="card card-primary">
+          <div class="col-12">
+            <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Registrar Rol Usuario</h3>
-              </div>
-              <!-- /.card-header -->
-              <!-- form start -->
-              <form method="POST" action="../../negocio/ng_rol_usuario.php">
+              <h3 class="card-title">Arqueocaja Detalle</h3>
+                </div>
                 <div class="card-body">
-                  <div class="form-group">
-                    <label>ID Rol Usuario</label>
-                    <input type="number" class="form-control" id="id_rol_usuario" name="id_rol_usuario"placeholder="Digite numero de Rol Usuario">
-                    <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
-                  </div>
-                  <div class="form-group">
-                    <label>Seleccione el Rol</label>
-                    <select class="form-control" id="tbl_rol_id_rol" name="tbl_rol_id_rol" required>
-                        <option value="">Seleccione...</option>
-                        <?php
-                            foreach($dtRol->listRol() as $r):
-                        ?>
-                        <option value="<?php echo $r->_GET('id_rol'); ?>"><?php echo $r->_GET('rol_descripcion'); ?></option>
-                        <?php
-                            endforeach;
-                            ?>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label>Seleccione el Usuario</label>
-                    <select class="form-control" id="tbl_usuario_id_usuario" name="tbl_usuario_id_usuario" required>
-                        <option value="">Seleccione...</option>
-                        <?php
-                            foreach($dtUser->listUsuario() as $r):
-                        ?>
-                        <option value="<?php echo $r->_GET('id_usuario'); ?>"><?php echo $r->_GET('usuario'); ?></option>
-                        <?php
-                            endforeach;
-                            ?>
-                    </select>
-                  </div>
-                </div>
-                <!-- /.card-body -->
-
-                <div class="card-footer">
+                    <div class="form-group col-md-12" style="text-align: right;">
+                        <a href="frm_arqueocaja_det.php" title="Registrar un nuevo Arqueo de Caja" target="_blank"><i class="far fa-2x fa-plus-square"></i></a>
+                    </div>
+                    <table id="example1" class="table table-bordered table-striped">
                   
-                  <button type="submit" class="btn btn-primary">Guardar</button>
-                  <button type="reset" class="btn btn-danger">Cancelar</button>
+                  <thead>
+                  <tr>
+                    <th>ID Arqueocaja Det</th>
+                    <th>ID ArqueoCaja</th>
+                    <th>ID Moneda</th>
+                    <th>ID Denominacion</th>
+                    <th>Usuario Creacion</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                    <th>Accion</th>
+                  </tr>
+
+                  </thead>
+
+                  <tbody>
+                    <?php
+                      foreach($acd->listArqueocajaDet() as $r):
+                        $estado = "";
+                        if ($r->__GET('estado') == 1 || $r->__GET('estado') == 2){
+                          $estado = "Activo";
+                        }
+                        else{
+                          $estado = "Inactivo";
+                        }
+                    ?>
+                    <tr>
+                      <td><?php echo $r->_GET('id_ArqueoCaja_Det'); ?></td>
+                      <td><?php echo $r->_GET('idArqueoCaja'); ?></td>
+                      <td><?php echo $r->_GET('idMoneda'); ?></td>
+                      <td><?php echo $r->_GET('idDenominacion'); ?></td>
+                      <td><?php echo $r->_GET('usuario_creacion'); ?></td>
+                      <td><?php echo $r->_GET('cantidad'); ?></td>
+                      <td><?php echo $r->_GET('subtotal'); ?></td>
+                      <td><?php echo $estado; ?></td>
+
+                      <td> <a href="frm_editar_arqueocaja.php?editACD=<?php echo $r->_GET('id_ArqueoCaja_Det'); ?>" target="blank">
+                            <i class="fas fa-edit" title="Editar Arqueo Caja Detalle"> Editar</i></a>
+                      &nbsp;&nbsp;
+                      <a href="frm_view_arqueocaja.php?viewACD=<?php echo $r->_GET('id_ArqueoCaja'); ?>" target="blank">
+                            <i class="fas fa-eye" title="Ver Arqueo Caja Detalle"> Ver</i></a>
+                      &nbsp;&nbsp;
+                            <a href="#" target="_blank">
+                                <i class="fas fa-trash-alt" title="Eliminar Arqueo Caja Detalle"> Eliminar</i>
+                            </a>
+                      </td>
+                    </tr>
+                    <?php
+                      endforeach;
+                    ?>
+                  </tbody>
+                  </table>
                 </div>
-              </form>
-              <div class="card-footer">
-                                        <a href="tbl_rol_usuario.php"><i class="fas fa-arrow-left"></i> Atras</a>
-
-                                    </div>
             </div>
-            <!-- /.card -->
-
+        </div>
+    </div>
             
     </section>
     <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.1.0-rc
-    </div>
-    <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -313,9 +283,6 @@ if (isset($varMsj)) {
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- bs-custom-file-input -->
 <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-<!-- jAlert -->
-<script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
-    <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> //optional!! </script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
