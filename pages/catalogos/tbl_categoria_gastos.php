@@ -99,125 +99,6 @@ if (isset($varMsj)) {
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-<<<<<<< HEAD
-          <li class="nav-header">TABLAS</li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_denominacion.php" class="nav-link">
-              <i class="nav-icon fas fa-search-dollar"></i>
-              <p>
-                Denominación
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_Moneda.php" class="nav-link">
-              <i class="nav-icon fas fa-coins"></i>
-              <p>
-                Moneda
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_productos.php" class="nav-link">
-              <i class="nav-icon fas fa-shopping-basket"></i>
-              <p>
-                Productos
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../../pages/catalogos/tbl_gastos.php" class="nav-link">
-              <i class="nav-icon fas fa-file-invoice-dollar"></i>
-              <p>
-                Gastos
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_parroquia.php" class="nav-link">
-              <i class="nav-icon fas fa-church"></i>
-              <p>
-                Parroquia
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_kermesse.php" class="nav-link">
-              <i class="nav-icon fas fa-map-pin"></i>
-              <p>
-                Kermesse
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_control_bonos.php" class="nav-link">
-              <i class="nav-icon fas fa-money-bill-wave"></i>
-              <p>
-                Bonos
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_rol.php" class="nav-link">
-              <i class="nav-icon fas fa-lock"></i>
-              <p>
-                Rol
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_opciones.php" class="nav-link">
-              <i class="nav-icon fas fa-align-justify"></i>
-              <p>
-                Opciones
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_usuario.php" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
-              <p>
-                Usuarios
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_rol_opciones.php" class="nav-link">
-              <i class="nav-icon fas fa-unlock-alt"></i>
-              <p>
-                Rol-Opcion
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_rol_usuario.php" class="nav-link">
-              <i class="nav-icon fas fa-user-tag"></i>
-              <p>
-                Rol-Usuario
-              </p>
-            </a>
-          </li>
-      </nav>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>DataTables</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Regions</li>
-            </ol>
-=======
             <li class="nav-header">TABLAS</li>
             <li class="nav-item">
               <a href="../catalogos/tbl_denominacion.php" class="nav-link">
@@ -296,7 +177,6 @@ if (isset($varMsj)) {
                 <li class="breadcrumb-item active">Categoria Gastos</li>
               </ol>
             </div>
->>>>>>> 3252ba53c9c303cc5d8d728bae264c55a9f29975
           </div>
         </div><!-- /.container-fluid -->
       </section>

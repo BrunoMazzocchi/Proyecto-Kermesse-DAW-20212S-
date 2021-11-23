@@ -26,7 +26,7 @@ if ($_POST) {
             }
             break;
         case '2':
-            try {                
+            try {
                 $lista->__SET('id_lista_precio', $_POST['id_lista_precio']);
                 $lista->__SET('id_kermesse', $_POST['id_kermesse']);
                 $lista->__SET('nombre', $_POST['nombre']);
@@ -43,11 +43,11 @@ if ($_POST) {
 
 if ($_GET) {
     try {
-        $lista->__SET('id_lista_precio', $_GET['delC']);
+        $lista->__SET('id_lista_precio', $_GET['delL']);
         $dtLista->deleteLista($lista->__GET('id_lista_precio'));
-
         header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_listaprecio.php?msj=5");
     } catch (Exception $e) {
-        header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_listaprecio.php?msj=6 ");
+        header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_listaprecio.php?msj=6");
+        die($e->getMessage());
     }
 }

@@ -131,17 +131,16 @@ class Dt_Kermesse extends Conexion
             die($e->getMessage());
         }
     }
-    public function deleteKerme($id)
+    public function deleteKermesse($id)
     {
-        try
-        {
+        try {
             $this->myCon = parent::conectar();
-            $querySQL = "DELETE FROM tbl_kermesse WHERE id_kermesse = ?";
+            $querySQL = "UPDATE dbkermesse.tbl_kermesse SET estado = 3 WHERE id_kermesse = ?;";
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute(array($id));
+
             $this->myCon = parent::desconectar();
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             die($e->getMessage());
         }
     }

@@ -199,28 +199,6 @@ if (isset($varMsj)) {
     </div>
     <!-- /.sidebar -->
   </aside>
-<<<<<<< HEAD
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Gastos</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Gastos</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
-=======
->>>>>>> e861b962f6d6fa4686a8b6d8d82b9db48cd05f37
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -302,10 +280,6 @@ if (isset($varMsj)) {
             </div>
             <!-- /.card -->
         </div>
-<<<<<<< HEAD
-      </div>
-  </div>
-=======
         <!-- /.col -->
     </div>
     <!-- /.row -->
@@ -315,7 +289,6 @@ if (isset($varMsj)) {
     <!-- /.content -->
     </div>
 
->>>>>>> e861b962f6d6fa4686a8b6d8d82b9db48cd05f37
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
