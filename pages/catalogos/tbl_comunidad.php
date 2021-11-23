@@ -4,14 +4,15 @@ error_reporting(0);
 include '../../entidades/comunidad.php';
 include '../../datos/dt_comunidad.php';
 
-$dtcmn = new Dt_Comunidad();
+$dtCmn = new Dt_Comunidad();
 
 $varMsj = 0;
-if (isset($varMsj)) {
+if (isset($varMsj))
+ {
     $varMsj = $_GET['msj'];
 }
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -93,113 +94,49 @@ if (isset($varMsj)) {
         </div>
       </div>
 
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
+          <!-- Sidebar Menu -->
+          <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-header">TABLAS</li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_denominacion.php" class="nav-link">
+            <a href="../catalogos/tbl_comunidad.php" class="nav-link">
               <i class="nav-icon fas fa-search-dollar"></i>
               <p>
-                Denominación
+                Comunidad
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_Moneda.php" class="nav-link">
+            <a href="../catalogos/tbl_ingreso_comunidad.php" class="nav-link">
               <i class="nav-icon fas fa-coins"></i>
               <p>
-                Moneda
+                Ingreso Comunidad
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_productos.php" class="nav-link">
+            <a href="../catalogos/tbl_ingreso_comunidad_det.php" class="nav-link">
               <i class="nav-icon fas fa-shopping-basket"></i>
+              <p>
+                Ingreso Comunidad Det
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../../pages/catalogos/tbl_productos.php" class="nav-link">
+              <i class="nav-icon fas fa-file-invoice-dollar"></i>
               <p>
                 Productos
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="../../pages/catalogos/tbl_gastos.php" class="nav-link">
+            <a href="../../pages/catalogos/tbl_categoria_producto.php" class="nav-link">
               <i class="nav-icon fas fa-file-invoice-dollar"></i>
               <p>
-                Gastos
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_parroquia.php" class="nav-link">
-              <i class="nav-icon fas fa-church"></i>
-              <p>
-                Parroquia
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_kermesse.php" class="nav-link">
-              <i class="nav-icon fas fa-map-pin"></i>
-              <p>
-                Kermesse
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_control_bonos.php" class="nav-link">
-              <i class="nav-icon fas fa-money-bill-wave"></i>
-              <p>
-                Bonos
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_control_bonos.php" class="nav-link">
-              <i class="nav-icon fas fa-money-bill-wave"></i>
-              <p>
-                Bonos
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_rol.php" class="nav-link">
-              <i class="nav-icon fas fa-lock"></i>
-              <p>
-                Rol
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_opciones.php" class="nav-link">
-              <i class="nav-icon fas fa-align-justify"></i>
-              <p>
-                Opciones
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_usuario.php" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
-              <p>
-                Usuarios
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_rol_opciones.php" class="nav-link">
-              <i class="nav-icon fas fa-unlock-alt"></i>
-              <p>
-                Rol-Opcion
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_rol_usuario.php" class="nav-link">
-              <i class="nav-icon fas fa-user-tag"></i>
-              <p>
-                Rol-Usuario
+                Categoria Productos
               </p>
             </a>
           </li>
@@ -209,6 +146,7 @@ if (isset($varMsj)) {
     <!-- /.sidebar -->
   </aside>
 
+
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -216,11 +154,11 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Comunidad</h1>
+                            <h1>Tablas</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Inicio</a></li>
                                 <li class="breadcrumb-item active">Tabla Comunidad</li>
                             </ol>
                         </div>
@@ -232,118 +170,160 @@ if (isset($varMsj)) {
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Tabla Comunidad</h3>
+                            <h3 class="card-title">Comunidad</h3>
                         </div>
 
                         <div class="card-body">
+                        <div class="form-group col-md-12" style="text-align: right;">
+                        <a href="frm_comunidad.php" title="Registrar una nueva Comunidad" target="_blank"><i class="far fa-2x fa-plus-square"></i></a>
+                    </div>
+                    <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>ID Comunidad</th>
-                                        <th>Comunidad</th>
                                         <th>Nombre</th>
                                         <th>Responsable</th>
-                                        <th>Desc Distribucion</th>
+                                        <th>Descripcion de la Contribucion</th>
                                         <th>Estado</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                        foreach($dtcmn->listComunidad() as $r):
+                                        foreach($dtCmn->listComunidad() as $r):
                                 
                                     ?>
                                     <tr>
                                         <td><?php echo $r->__GET('id_comunidad');?></td>
-                                        <td><?php echo $r->__GET('comunidad');?></td>
                                         <td><?php echo $r->__GET('nombre');?></td>
                                         <td><?php echo $r->__GET('responsable');?></td>
-                                        <td><?php echo $r->__GET('desc_distribucion');?></td>
+                                        <td><?php echo $r->__GET('desc_contribucion');?></td>
                                         <td><?php echo $r->__GET('estado');?></td>
-                                        <td> <a href="frm_editar_comunidad.php?editCg=<?php echo $r->__GET('id_comunidad'); ?>" target="blank">
-                                            <i class="far fa-edit" title="Editar Categoria"></i></a>
+
+                                        <td> <a href="frm_editar_comunidad.php?editC=<?php echo $r->__GET('id_comunidad'); ?>" target="blank">
+                                            <i class="far fa-edit" title="Editar Comunidad"></i></a>
                                         &nbsp;&nbsp;
-                                        <a href="frm_view_comunidad.php?viewCyG=<?php echo $r->__GET('id_comunidad'); ?>" target="blank">
-                                            <i class="far fa-eye" title="Ver Comunidades"></i></a>
+                                        <a href="frm_view_comunidad.php?viewC=<?php echo $r->__GET('id_comunidad'); ?>" target="blank">
+                                            <i class="far fa-eye" title="Ver Comunidad"></i></a>
                                         &nbsp;&nbsp;
-                                        <a href="#" target="_blank">
+                                        <a href="../../negocio/ng_comunidad.php?delC=<?php echo $r->__GET('id_comunidad') ?>" target="_blank">
                                             <i class="far fa-trash-alt" title="Eliminar"></i>
                                         </a>
-                                    </td>
-                                    </tr>
-                                    <?php
-                                    endforeach; 
-                                    ?>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                        </td>
+                                </tr>
+                            <?php
+                            endforeach;
+                            ?>
+    </tbody>
 
-            <!-- /.content-wrapper -->
-            <footer class="main-footer">
-                <div class="float-right d-none d-sm-block">
-                    <b>Version</b> 3.1.0-rc
-                </div>
-                <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-            </footer>
+<tfoot>
+<tr>
 
-            <!-- Control Sidebar -->
-            <aside class="control-sidebar control-sidebar-dark">
-                <!-- Control sidebar content goes here -->
-            </aside>
-            <!-- /.control-sidebar -->
-        </div>
-        <!-- ./wrapper -->
-
-        <!-- jQuery -->
-        <script src="../../plugins/jquery/jquery.min.js"></script>
-        <!-- Bootstrap 4 -->
-        <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-        <script src="../../plugins/DT/datatables.min.js"></script>
-        <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
-        <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
-        <script src="../../plugins/DT/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
-        <script src="../../plugins/DT/JSZip-2.5.0/jszip.min.js"></script>
-        <script src="../../plugins/DT/pdfmake-0.1.36/pdfmake.min.js"></script>
-        <script src="../../plugins/DT/pdfmake-0.1.36/vfs_fonts.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.html5.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.print.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
+ 
+</tr>
+</tfoot>
+  </table>
+</div>
+<!-- /.card-body -->
+</div>
+<!-- /.card -->
+</div>
+<!-- /.col -->
+</div>
+<!-- /.row -->
+</div>
+<!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<footer class="main-footer">
+<div class="float-right d-none d-sm-block">
+<b>Version</b> 3.1.0-rc
+</div>
+<strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+</footer>
 
 
-        <!-- AdminLTE App -->
-        <script src="../../dist/js/adminlte.min.js"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="../../dist/js/demo.js"></script>
-        <!-- Page specific script -->
-        <script>
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+<!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="../../plugins/jszip/jszip.min.js"></script>
+<script src="../../plugins/pdfmake/pdfmake.min.js"></script>
+<script src="../../plugins/pdfmake/vfs_fonts.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+<!-- AdminLTE App -->
+<script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+<script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> //optional!! </script>
+
+
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+    <!-- Page specific script -->
+    <script>
+        $(document).ready(function() {
+            var mensaje = 0;
+            mensaje = "<?php echo $varMsj ?>";
+            if (mensaje == "1") {
+                successAlert('Exito', 'Los datos han sido registrado exitosamente');
+            }
+            if (mensaje == "2" || mensaje == '4') {
+                errorAlert('Error', 'Revise los datos e intente de nuevo');
+            }
+            if (mensaje == "3") {
+                successAlert('Exito', 'Los datos han sido editado exitosamente');
+            }
+            if (mensaje == "5") {
+                successAlert('Exito', 'Los datos han sido eliminado exitosamente');
+            }
+            if (mensaje == "6") {
+                errorAlert('Error', 'Revise que los datos existan');
+            }
+
             $(function() {
-                $("#example1").DataTable({
-                    "responsive": true,
-                    "lengthChange": false,
-                    "autoWidth": false,
-                    "buttons": ["excel", "pdf"]
-                }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-                $('#example2').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": false,
-                    "ordering": true,
-                    "info": true,
-                    "autoWidth": false,
-                    "responsive": true,
-                });
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["excel", "pdf"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
             });
-        </script>
+        });
+    }); // FIN DOC READY FUN
+    </script>
+
 </body>
+
+
 
 </html>

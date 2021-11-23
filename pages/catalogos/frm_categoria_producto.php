@@ -4,15 +4,17 @@ error_reporting(0);
 include '../../entidades/categoria_producto.php';
 include '../../datos/dt_categoria_producto.php';
 
-$dtcp = new dt_categoria_producto();
+$dtCpt = new Dt_Categoria_Producto();
+$cpt = new Categoria_Producto();
 
-$varMsj = 0;
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
+$varIdCategoria = 0;
+if(isset($varIdCategoria))
+{
+    $varIdCategoria = $_GET['editCP'];
 }
+$cpt = $dtCpt->obtenerCategoria($varIdCategoria);
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -95,30 +97,40 @@ if (isset($varMsj)) {
         </div>
       </div>
 
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
+          <!-- Sidebar Menu -->
+          <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-header">TABLAS</li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_denominacion.php" class="nav-link">
+            <a href="../catalogos/tbl_comunidad.php" class="nav-link">
               <i class="nav-icon fas fa-search-dollar"></i>
               <p>
-                Denominación
+                Comunidad
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_Moneda.php" class="nav-link">
+            <a href="../catalogos/tbl_ingreso_comunidad.php" class="nav-link">
               <i class="nav-icon fas fa-coins"></i>
+              
               <p>
-                Moneda
+                Ingreso Comunidad
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_productos.php" class="nav-link">
+            <a href="../catalogos/tbl_ingreso_comunidad_det.php" class="nav-link">
+              <i class="nav-icon fas fa-money-bill"></i>
+  
+              <p>
+                Ingreso Comunidad Det
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../../pages/catalogos/tbl_productos.php" class="nav-link">
               <i class="nav-icon fas fa-shopping-basket"></i>
               <p>
                 Productos
@@ -126,34 +138,11 @@ if (isset($varMsj)) {
             </a>
           </li>
           <li class="nav-item">
-            <a href="../../pages/catalogos/tbl_gastos.php" class="nav-link">
-              <i class="nav-icon fas fa-file-invoice-dollar"></i>
+            <a href="../../pages/catalogos/tbl_categoria_producto.php" class="nav-link">
+              <i class="nav-icon fas fa-cookie"></i>
+   
               <p>
-                Gastos
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_parroquia.php" class="nav-link">
-              <i class="nav-icon fas fa-church"></i>
-              <p>
-                Parroquia
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_kermesse.php" class="nav-link">
-              <i class="nav-icon fas fa-map-pin"></i>
-              <p>
-                Kermesse
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_control_bonos.php" class="nav-link">
-              <i class="nav-icon fas fa-money-bill-wave"></i>
-              <p>
-                Bonos
+                Categoria Productos
               </p>
             </a>
           </li>
@@ -162,25 +151,7 @@ if (isset($varMsj)) {
     </div>
     <!-- /.sidebar -->
   </aside>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Nuevo Rol Opcion</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Registrar Rol Opcion</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
+  </aside>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -219,25 +190,27 @@ if (isset($varMsj)) {
                   <div class="form-group">
                     <label> ID </label>
                     <input type="number" class="form-control" id="id_categoria_producto" name= "id_categoria_producto"  maxlenght= "2"
-                    placeholder="Ingrese el ID" title= "Ingrese el ID" required>
+                    placeholder="Ingrese el ID"  required>
+                    <input type="hidden" value = "1"  name= "txtaccion"  id= "txtaccion"
+                    placeholder="Ingrese el ID"  required>
                   </div>
                   
                   <div class="form-group">
                     <label>Nombre</label>
                     <input type="text" class="form-control" id="nombre" name= "nombre"  maxlenght= "45"
-                    placeholder="Ingrese el nombre de la categoria" title= "Ingrese el nombre de la categoria" required>
+                    placeholder="Nombre de la categoria"  required>
                   </div>
 
                   <div class="form-group">
                     <label>Descripcion</label>
                     <input type="text" class="form-control" id="descripcion" name= "descripcion"  maxlenght= "100"
-                    placeholder="Ingrese la descripcion de la categoria" title= "Ingrese la descripcion de la categoria" required>
+                    placeholder="Descripcion de la categoria"  required>
                   </div>
 
                   <div class="form-group">
                     <label>Estado</label>
                     <input type="number" class="form-control" id="estado" name= "estado"  maxlenght= "1"
-                    placeholder="Ingrese el estado de la categoria" title= "Ingrese el estado de la categoria" required>
+                    placeholder="Estado de la categoria"  required>
                   </div>
 
                   
@@ -252,6 +225,10 @@ if (isset($varMsj)) {
                   <button type="reset" class="btn btn-danger">Cancelar</button>
                 </div>
               </form>
+              <div class="card-footer">
+                                        <a href="tbl_categoria_producto.php"><i class="fas fa-arrow-left"></i> Atras</a>
+
+                                    </div>
             </div>
             <!-- /.card -->
 

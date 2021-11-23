@@ -4,8 +4,8 @@ error_reporting(0);
 include '../../entidades/productos.php';
 include '../../datos/dt_productos.php';
 
-$dtpt = new Dt_Productos();
-
+$dtp = new Dt_Productos();
+$p = new Productos();
 $varMsj = 0;
 if (isset($varMsj)) {
     $varMsj = $_GET['msj'];
@@ -94,30 +94,40 @@ if (isset($varMsj)) {
         </div>
       </div>
 
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
+          <!-- Sidebar Menu -->
+          <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-header">TABLAS</li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_denominacion.php" class="nav-link">
+            <a href="../catalogos/tbl_comunidad.php" class="nav-link">
               <i class="nav-icon fas fa-search-dollar"></i>
               <p>
-                Denominación
+                Comunidad
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_Moneda.php" class="nav-link">
+            <a href="../catalogos/tbl_ingreso_comunidad.php" class="nav-link">
               <i class="nav-icon fas fa-coins"></i>
+              
               <p>
-                Moneda
+                Ingreso Comunidad
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_productos.php" class="nav-link">
+            <a href="../catalogos/tbl_ingreso_comunidad_det.php" class="nav-link">
+              <i class="nav-icon fas fa-money-bill"></i>
+  
+              <p>
+                Ingreso Comunidad Det
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../../pages/catalogos/tbl_productos.php" class="nav-link">
               <i class="nav-icon fas fa-shopping-basket"></i>
               <p>
                 Productos
@@ -125,34 +135,11 @@ if (isset($varMsj)) {
             </a>
           </li>
           <li class="nav-item">
-            <a href="../../pages/catalogos/tbl_gastos.php" class="nav-link">
-              <i class="nav-icon fas fa-file-invoice-dollar"></i>
+            <a href="../../pages/catalogos/tbl_categoria_producto.php" class="nav-link">
+              <i class="nav-icon fas fa-cookie"></i>
+   
               <p>
-                Gastos
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_parroquia.php" class="nav-link">
-              <i class="nav-icon fas fa-church"></i>
-              <p>
-                Parroquia
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_kermesse.php" class="nav-link">
-              <i class="nav-icon fas fa-map-pin"></i>
-              <p>
-                Kermesse
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_control_bonos.php" class="nav-link">
-              <i class="nav-icon fas fa-money-bill-wave"></i>
-              <p>
-                Bonos
+                Categoria Productos
               </p>
             </a>
           </li>
@@ -162,43 +149,7 @@ if (isset($varMsj)) {
     <!-- /.sidebar -->
   </aside>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Nuevo Rol Opcion</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Registrar Rol Opcion</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Nueva Producto</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Registrar Producto</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
 
     <!-- Main content -->
     <section class="content">
@@ -213,86 +164,53 @@ if (isset($varMsj)) {
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form>
+              <form method="POST" action="../../negocio/ng_productos.php">
                 <div class="card-body">
                   <div class="form-group">
                     <label> ID </label>
-                    <input type="number" class="form-control" id="id_producto" name= "id_producto"  maxlenght= "2"
-                    placeholder="Ingrese el ID" title= "Ingrese el ID" required>
+                    <input type="number" class="form-control" id="id_producto" name="id_producto" placeholder="Numero de kermesse" required>
+                      <input type="hidden" value="1" name="txtaccion" id="txtaccion" required>
                   </div>
 
                   <div class="form-group">
-                      <label>Seleccione la comunidad</label>
-                      <select id="id_comunidad" name="id_comunidad" class="form-control">
-                        <option value="">Seleccione...</option>
-
-
-                        <?php
-
-                        foreach ($dtkerme->listComunidad() as $r) :
-                        ?>
-                          <tr>
-                            <option value="<?php echo $r->__GET('id_comunidad'); ?>"><?php echo $r->__GET('id_comunidad'); ?></option>
-                          </tr>
-                        <?php
-                        endforeach;
-
-                        ?>
-                      </select>
-
-                
-
-                      <div class="form-group">
-                      <label>Seleccione la categoria del producto</label>
-                      <select id="id_categoria_producto" name="id_categoria_producto" class="form-control">
-                        <option value="">Seleccione...</option>
-
-
-                        <?php
-
-                        foreach ($dtkerme->listKermesse() as $r) :
-                        ?>
-                          <tr>
-                            <option value="<?php echo $r->__GET('id_categoria_producto'); ?>"><?php echo $r->__GET('id_categoria_producto'); ?></option>
-                          </tr>
-                        <?php
-                        endforeach;
-
-                        ?>
-
-
-                      </select>
-
+                    <label>Selecciona la Comunidad</label>
+                    <select name="nombre" id="id_comunidad" required>
+                      <option value="">Comunidad</option>
 
                   
                   <div class="form-group">
                     <label>Nombre</label>
                     <input type="text" class="form-control" id="nombre" name= "nombre"  maxlenght= "45"
-                    placeholder="Ingrese el nombre del producto" title= "Ingrese el nombre del prodcuto" required>
+                    placeholder="Nombre"  required>
                   </div>
+                  
+                  <div class="form-group">
+                    <label>Selecciona la Categoria del producto</label>
+                    <select name="nombre" id="id_categoria_producto" required>
+                      <option value="">Categoria Producto</option>
 
                   <div class="form-group">
                     <label>Descripcion</label>
                     <input type="text" class="form-control" id="descripcion" name= "descripcion"  maxlenght= "100"
-                    placeholder="Ingrese la descripcion del producto" title= "Ingrese la descripcion del producto" required>
+                    placeholder="Cantidad" required>
                   </div>
 
                   <div class="form-group">
                     <label>Cantidad</label>
                     <input type="number" class="form-control" id="cantidad" name= "cantidad"  maxlenght= "10"
-                    placeholder="Ingrese la cantidad del producto" title= "Ingrese la cantidad del producto" required>
+                    placeholder="Cantidad"  required>
                   </div>
 
                   <div class="form-group">
                     <label>Precio Sugerido</label>
                     <input type="number" class="form-control" id="preciov_sugerido" name= "preciov_sugerido" step="any" maxlenght= "10"
-                    placeholder="Ingrese el precio sugerido" title= "Ingrese el precio sugerido" required>
+                    placeholder="Precio Sugerido"  required>
                   </div>
 
                   <div class="form-group">
                     <label>Estado</label>
                     <input type="text" class="form-control" id="estado" name= "estado"  maxlenght= "1"
-                    placeholder="Ingrese el estado del producto" title= "Ingrese el estado del producto" required>
+                    placeholder="Estado" required>
                   </div>
 
                   
@@ -306,11 +224,13 @@ if (isset($varMsj)) {
                   <button type="reset" class="btn btn-danger">Cancelar</button>
                 </div>
               </form>
-            </div>
-            <!-- /.card -->
+              <div class="card-footer">
+                <a href="tbl_productos.php"><i class="fas fa-arrow-left"></i> Atras</a>
+
+              </div>
 
                 
-          </div>        
+            </div>        
       </div>
     </section>
     <!-- /.content -->

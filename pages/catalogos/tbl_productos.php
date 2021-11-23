@@ -3,6 +3,7 @@ error_reporting(0);
 //IMPORTAMOS ENTIDADES Y DATOS
 include '../../entidades/productos.php';
 include '../../datos/dt_productos.php';
+include_once("../entidades/vw_productos_comunidad_categoriaproducto.php");
 
 $dtp = new Dt_Productos();
 
@@ -12,7 +13,6 @@ if (isset($varMsj)) {
 }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,105 +94,49 @@ if (isset($varMsj)) {
         </div>
       </div>
 
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
+          <!-- Sidebar Menu -->
+          <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-header">TABLAS</li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_denominacion.php" class="nav-link">
+            <a href="../catalogos/tbl_comunidad.php" class="nav-link">
               <i class="nav-icon fas fa-search-dollar"></i>
               <p>
-                Denominación
+                Comunidad
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_Moneda.php" class="nav-link">
+            <a href="../catalogos/tbl_ingreso_comunidad.php" class="nav-link">
               <i class="nav-icon fas fa-coins"></i>
               <p>
-                Moneda
+                Ingreso Comunidad
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_productos.php" class="nav-link">
+            <a href="../catalogos/tbl_ingreso_comunidad_det.php" class="nav-link">
               <i class="nav-icon fas fa-shopping-basket"></i>
+              <p>
+                Ingreso Comunidad Det
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../../pages/catalogos/tbl_productos.php" class="nav-link">
+              <i class="nav-icon fas fa-file-invoice-dollar"></i>
               <p>
                 Productos
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="../../pages/catalogos/tbl_gastos.php" class="nav-link">
+            <a href="../../pages/catalogos/tbl_categoria_producto.php" class="nav-link">
               <i class="nav-icon fas fa-file-invoice-dollar"></i>
               <p>
-                Gastos
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_parroquia.php" class="nav-link">
-              <i class="nav-icon fas fa-church"></i>
-              <p>
-                Parroquia
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_kermesse.php" class="nav-link">
-              <i class="nav-icon fas fa-map-pin"></i>
-              <p>
-                Kermesse
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_control_bonos.php" class="nav-link">
-              <i class="nav-icon fas fa-money-bill-wave"></i>
-              <p>
-                Bonos
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_rol.php" class="nav-link">
-              <i class="nav-icon fas fa-lock"></i>
-              <p>
-                Rol
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_opciones.php" class="nav-link">
-              <i class="nav-icon fas fa-align-justify"></i>
-              <p>
-                Opciones
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_usuario.php" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
-              <p>
-                Usuarios
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_rol_opciones.php" class="nav-link">
-              <i class="nav-icon fas fa-unlock-alt"></i>
-              <p>
-                Rol-Opcion
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_rol_usuario.php" class="nav-link">
-              <i class="nav-icon fas fa-user-tag"></i>
-              <p>
-                Rol-Usuario
+                Categoria Productos
               </p>
             </a>
           </li>
@@ -243,6 +187,7 @@ if (isset($varMsj)) {
                                         <th>Cantidad</th>
                                         <th>Precio Sugerido</th>
                                         <th>Estado</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -259,13 +204,13 @@ if (isset($varMsj)) {
                                         <td><?php echo $r->__GET('cantidad');?></td>
                                         <td><?php echo $r->__GET('preciov_sugerido');?></td>
                                         <td><?php echo $r->__GET('estado');?></td>
-                                        <td> <a href="frm_editar_productos.php?editCg=<?php echo $r->__GET('id_productos'); ?>" target="blank">
+                                        <td> <a href="frm_editar_productos.php?editP=<?php echo $r->__GET('id_producto'); ?>" target="blank">
                                             <i class="far fa-edit" title="Editar Categoria"></i></a>
                                         &nbsp;&nbsp;
-                                        <a href="frm_view_productos.php?viewCyG=<?php echo $r->__GET('id_productos'); ?>" target="blank">
+                                        <a href="frm_view_productos.php?viewP=<?php echo $r->__GET('id_producto'); ?>" target="blank">
                                             <i class="far fa-eye" title="Ver Productos"></i></a>
                                         &nbsp;&nbsp;
-                                        <a href="#" target="_blank">
+                                        <a href="../../negocio/ng_productos.php?delP=<?php echo $r->__GET('id_producto') ?>" target="_blank">
                                             <i class="far fa-trash-alt" title="Eliminar"></i>
                                         </a>
                                     </td>
@@ -273,70 +218,114 @@ if (isset($varMsj)) {
                                     <?php
                                     endforeach; 
                                     ?>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                       
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                </tbody>
+
+<tfoot>
+<tr>
+
+ 
+</tr>
+</tfoot>
+  </table>
+</div>
+<!-- /.card-body -->
+</div>
+<!-- /.card -->
+</div>
+<!-- /.col -->
+</div>
+<!-- /.row -->
+</div>
+<!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<footer class="main-footer">
+<div class="float-right d-none d-sm-block">
+<b>Version</b> 3.1.0-rc
+</div>
+<strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+</footer>
 
 
-            <!-- Control Sidebar -->
-            <aside class="control-sidebar control-sidebar-dark">
-                <!-- Control sidebar content goes here -->
-            </aside>
-            <!-- /.control-sidebar -->
-        </div>
-        <!-- ./wrapper -->
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+<!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
 
-        <!-- jQuery -->
-        <script src="../../plugins/jquery/jquery.min.js"></script>
-        <!-- Bootstrap 4 -->
-        <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="../../plugins/jszip/jszip.min.js"></script>
+<script src="../../plugins/pdfmake/pdfmake.min.js"></script>
+<script src="../../plugins/pdfmake/vfs_fonts.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
-        <script src="../../plugins/DT/datatables.min.js"></script>
-        <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
-        <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
-        <script src="../../plugins/DT/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
-        <script src="../../plugins/DT/JSZip-2.5.0/jszip.min.js"></script>
-        <script src="../../plugins/DT/pdfmake-0.1.36/pdfmake.min.js"></script>
-        <script src="../../plugins/DT/pdfmake-0.1.36/vfs_fonts.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.html5.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.print.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+<script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> //optional!! </script>
 
 
-        <!-- AdminLTE App -->
-        <script src="../../dist/js/adminlte.min.js"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="../../dist/js/demo.js"></script>
-        <!-- Page specific script -->
-        <script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+    <!-- Page specific script -->
+    <script>
+        $(document).ready(function() {
+            var mensaje = 0;
+            mensaje = "<?php echo $varMsj ?>";
+            if (mensaje == "1") {
+                successAlert('Exito', 'Los datos han sido registrado exitosamente');
+            }
+            if (mensaje == "2" || mensaje == '4') {
+                errorAlert('Error', 'Revise los datos e intente de nuevo');
+            }
+            if (mensaje == "3") {
+                successAlert('Exito', 'Los datos han sido editado exitosamente');
+            }
+            if (mensaje == "5") {
+                successAlert('Exito', 'Los datos han sido eliminado exitosamente');
+            }
+            if (mensaje == "6") {
+                errorAlert('Error', 'Revise que los datos existan');
+            }
+
             $(function() {
-                $("#example1").DataTable({
-                    "responsive": true,
-                    "lengthChange": false,
-                    "autoWidth": false,
-                    "buttons": ["excel", "pdf"]
-                }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-                $('#example2').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": false,
-                    "ordering": true,
-                    "info": true,
-                    "autoWidth": false,
-                    "responsive": true,
-                });
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["excel", "pdf"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
             });
-        </script>
+        });
+    }); // FIN DOC READY FUN
+    </script>
+
 </body>
+
 
 </html>
