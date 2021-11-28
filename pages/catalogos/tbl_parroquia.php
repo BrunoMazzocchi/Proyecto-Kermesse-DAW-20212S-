@@ -211,12 +211,12 @@ if (isset($varMsj)) {
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>DataTables</h1>
+              <h1>Tablas</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                <li class="breadcrumb-item active">Parroquia</li>
+                <li class="breadcrumb-item active">Usuarios</li>
               </ol>
             </div>
           </div>
@@ -224,14 +224,15 @@ if (isset($varMsj)) {
       </section>
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Parroquia</h3>
+          <h3 class="card-title">Usuarios</h3>
         </div>
-        <!-- /.card-header -->
         <div class="card-body">
-          <div class="form-group col-md-12" style="text-align: right;">
-            <a href="frm_parroquia.php" title="Registrar una nueva parroquia" target="_blank"><i class="far fa-2x fa-plus-square"></i></a>
+          <div class="form-group col-md-12" style="text-align:right">
+            <a href="frm_usuario.php" title="Nuevo Usuario" target="blank"><i class="far fa-plus-square"></i></a>
           </div>
-          <table id="example1" class="table table-bordered table-striped">
+          <!-- /.card-header -->
+          <div class="card-body">
+            <table id="example1" class="table table-bordered table-striped">
             <thead>
               <tr>
                 <th>Parroquia ID</th>
@@ -284,20 +285,27 @@ if (isset($varMsj)) {
                 <th>Sitio Web</th>
               </tr>
             </tfoot>
-          </table>
+            </table>
+          </div>
+          <!-- /.card-body -->
         </div>
-        <!-- /.card-body -->
+        <!-- /.card -->
       </div>
-      <!-- /.card -->
+      <!-- /.col -->
     </div>
-    <!-- /.col -->
-  </div>
-  <!-- /.row -->
+    <!-- /.row -->
   </div>
   <!-- /.container-fluid -->
   </section>
   <!-- /.content -->
   </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+      <b>Version</b> 3.1.0-rc
+    </div>
+    <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+  </footer>
 
 
   <!-- Control Sidebar -->
@@ -324,6 +332,7 @@ if (isset($varMsj)) {
   <script src="../../plugins/pdfmake/vfs_fonts.js"></script>
   <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
   <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
+  <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
   <!-- jAlert -->
   <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
