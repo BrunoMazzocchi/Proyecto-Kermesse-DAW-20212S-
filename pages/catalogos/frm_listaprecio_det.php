@@ -3,8 +3,15 @@ error_reporting(0);
 
 include '../../entidades/listaprecio_det.php';
 include '../../datos/dt_listaprecio_det.php';
+include '../../entidades/lista_precio.php';
+include '../../entidades/productos.php';
+include '../../datos/dt_listaprecio.php';
+include '../../datos/dt_productos.php';
 
+$dtLista = new Dt_ListaPrecio();
+$dtProd = new Dt_Productos();
 $dtlist = new Dt_ListaPrecioDet();
+$list = new Lista_Precio_Det();
 
 $varMsj = 0;
 if (isset($varMsj)) {
@@ -160,24 +167,6 @@ if (isset($varMsj)) {
     <!-- /.sidebar -->
   </aside>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Nuevo Rol Opcion</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Registrar Rol Opcion</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -211,24 +200,25 @@ if (isset($varMsj)) {
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form>
+                <form method="POST" action="../../negocio/ng_ListaPrecioDet.php">
                   <div class="card-body">
                     <div class="form-group">
                       <label>Lista Precio Det ID</label>
-                      <input type="number" class="form-control" id="id_lista_precio" name="id_lista_precio" placeholder="Lista precio Det ID" required>
+                      <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
+                      <input type="number" class="form-control" id="id_listaprecio_det" name="id_listaprecio_det" placeholder="Lista precio Det ID" required>
                     </div>
                     <div class="form-group">
                       <label>Seleccione una lista precio</label>
-                      <select id="id_kermesse" name="id_kermesse" class="form-control">
+                      <select id="id_lista_precio" name="id_lista_precio" class="form-control">
                         <option value="">Seleccione...</option>
 
 
                         <?php
 
-                        foreach ($dtlist->listListaPrecioDet() as $r) :
+                        foreach ($dtLista->listListaPrecio() as $r) :
                         ?>
                           <tr>
-                            <option value="<?php echo $r->__GET('id_lista_precio'); ?>"><?php echo $r->__GET('nombreListaPrecio'); ?></option>
+                            <option value="<?php echo $r->__GET('id_lista_precio'); ?>"><?php echo $r->__GET('nombre'); ?></option>
                           </tr>
                         <?php
                         endforeach;
@@ -247,10 +237,10 @@ if (isset($varMsj)) {
 
                         <?php
 
-                        foreach ($dtlist->listListaPrecioDet() as $r) :
+                        foreach ($dtProd->listProductos() as $r) :
                         ?>
                           <tr>
-                            <option value="<?php echo $r->__GET('id_producto'); ?>"><?php echo $r->__GET('nombreProducto'); ?></option>
+                            <option value="<?php echo $r->__GET('id_producto'); ?>"><?php echo $r->__GET('nombre'); ?></option>
                           </tr>
                         <?php
                         endforeach;
