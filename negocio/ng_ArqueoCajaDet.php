@@ -3,7 +3,7 @@
 include_once("../entidades/arqueocaja_det.php");
 include_once("../datos/dt_arqueocaja_det.php");
 
-$ac = new Arqueocaja_Det();
+$acd = new Arqueocaja_Det();
 $dtAcd = new Dt_Arqueocaja_Det();
 
 if ($_POST){
@@ -21,11 +21,11 @@ if ($_POST){
                 $acd->_SET('subtotal', $_POST['subtotal']);
                 
                 $dtAcd->regArqueoCajaDet($acd);
-                header("Location: ../pages/catalogos/tbl_arqueocaja_det.php?msj=1");
+                header("Location: ../../pages/catalogos/tbl_arqueocaja_det.php?msj=1");
             }
             catch (Exception $e)
             {
-                header("Location: ../pages/catalogos/tbl_arqueocaja_det.php?msj=2");
+                header("Location: ../../pages/catalogos/tbl_arqueocaja_det.php?msj=2");
             }
             break;
 
@@ -41,11 +41,11 @@ if ($_POST){
                 $acd->_SET('subtotal', $_POST['subtotal']);
 
                 $dtAcd->editArqueoCajaDet($acd);
-                header("Location: ../pages/catalogos/tbl_arqueocaja_det.php?msj=3");
+                header("Location: ../../pages/catalogos/tbl_arqueocaja_det.php?msj=3");
             }
             catch (Exception $e)
             {
-                header("Location: ../pages/catalogos/tbl_arqueocaja_det.php?msj=4");
+                header("Location: ../../pages/catalogos/tbl_arqueocaja_det.php?msj=4");
                 die($e->getMessage());
             }
             break;
@@ -60,14 +60,14 @@ if ($_GET)
             {
                 try
                 {
-                    $acd->__SET('id_ArqueoCaja_Det', $_GET['delACD']);
-                    $dtAcd->deleteArqueoCajaDet($acd->__GET('id_ArqueoCaja_Det'));
-                    header("Location: ../pages/catalogos/tbl_arqueocaja_det.php?msj=5");
+                    $acd->_SET('idArqueoCaja_Det', $_GET['delACD']);
+                    $dtAcd->deleteArqueoCajaDet($acd->_GET('idArqueoCaja_Det'));
+                    header("Location: ../../pages/catalogos/tbl_arqueocaja_det.php?msj=5");
             
                 }
                 catch(Exception $e)
                 {
-                    header("Location: ../pages/catalogos/tbl_arqueocaja_det.php?msj=6");
+                    header("Location: ../../pages/catalogos/tbl_arqueocaja_det.php?msj=6");
                     die($e->getMessage());
                 }
             }

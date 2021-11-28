@@ -1,10 +1,10 @@
 <?php
 error_reporting(0);
 
-include '../../datos/dt_arqueocaja.php';
-include '../../entidades/arqueocaja.php';
+include '../../datos/dt_arqueocaja_det.php';
+include '../../entidades/arqueocaja_det.php';
 
-$dtg = new Dt_Arqueocaja();
+$dtAcd = new Dt_Arqueocaja_Det();
 
 $varMsj = 0;
 if(isset($varMsj))
@@ -12,7 +12,6 @@ if(isset($varMsj))
     $varMsj = $_GET['msj'];
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +27,6 @@ if(isset($varMsj))
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
-
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
   <!-- Navbar -->
@@ -166,40 +164,32 @@ if(isset($varMsj))
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_arqueocaja_det.php" class="nav-link">
-              <i class="nav-icon fas fa-object-group"></i>
-              <p>
-                ArqueoCaja Detalle
-              </p>
-            </a>
-          </li>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
   </aside>
 
-  <!-- Content Wrapper. Contains page content -->
+
+    <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Arqueo de Caja</h1>
+            <h1>Arqueocaja Detalle</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="../catalogos/tbl_arqueocaja.php">Volver</a></li>
-              <li class="breadcrumb-item active">Arqueo de Caja</li>
+              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+              <li class="breadcrumb-item active">Arqueocaja Detalle</li>
             </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
 
-    <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
         <div class="row">
@@ -208,65 +198,55 @@ if(isset($varMsj))
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Registrar Arqueo de Caja</h3>
+                <h3 class="card-title">Nuevo Arqueocaja Det</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="$_POST" action="../../negocio/ng_ArqueoCaja.php">
+              <form method="POST" action="../../negocio/ng_ArqueoCajaDet.php">
                 <div class="card-body">
-                  <div class="form-group">
-                    <label>ID Kermesse</label>
-                    <input type="number" class="form-control" id="idKermesse" name = "idKermesse" placeholder="Ingrese el ID Kermesse">
+                 <div class="form-group">
+                    <label>ID Arqueo Caja Detalle</label>
+                    <input type="number" class="form-control" id="id_ArqueoCaja_Det" name="id_ArqueoCaja_Det" placeholder="ID ArqueoCaja Det">
                     <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
                   </div>
                   <div class="form-group">
-                    <label>Fecha Arqueo</label>
-                    <input type="date" class="form-control" id="fechaArqueo" name = "Fecha Arqueo"placeholder="Fecha Arqueo">
+                    <label>ID Arqueo Caja</label>
+                    <input type="number"  class="form-control" id="idArqueoCaja" name="idKermesse"placeholder="ID Arqueo Caja">
                   </div>
                   <div class="form-group">
-                    <label>Gran Total</label>
-                    <input type="number" class="form-control" id="granTotal" name="Gran Total" placeholder="Gran Total">
+                    <label>ID Moneda</label>
+                    <input type="number" class="form-control" id="idMoneda" name="idMoneda"placeholder="ID Moneda">
+                  </div>
+                  <div class="form-group">
+                    <label>ID Denominacion</label>
+                    <input type="number" class="form-control" id="idDenominacion" name="idDenominacion" placeholder="ID Denominacion">
                   </div>
                   <div class="form-group">
                     <label>Usuario Creacion</label>
-                    <input type="number" class="form-control" id="usuario_creacion" name="usuario_creacion" placeholder="Usuario creacion">
+                    <input type="number" class="form-control" id="usuario_creacion" name="usuario_creacion"placeholder="Usuario Creacion">
                   </div>
                   <div class="form-group">
-                    <label>Fecha Creacion</label>
-                    <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" placeholder="Fecha creacion">
+                    <label>Cantidad</label>
+                    <input type="number" class="form-control" id="cantidad" name="cantidad"placeholder="Cantidad">
                   </div>
                   <div class="form-group">
-                    <label>Usuario Modificacion</label>
-                    <input type="number" class="form-control" id="usuario_modificacion" name="usuario_modificacion" placeholder="Usuario Modificacion">
-                  </div>
-                  <div class="form-group">
-                    <label>Fecha modificacion</label>
-                    <input type="date" class="form-control" id="fecha_modificacion" name="granTotal" placeholder="Fecha de modificacion">
-                  </div>
-                  <div class="form-group">
-                    <label>Usuario Eliminacion</label>
-                    <input type="number" class="form-control" id="usuario_eliminacion" name="usuario_eliminacion" placeholder="Usuario Eliminacion">
-                  </div>
-                  <div class="form-group">
-                    <label>Fecha eliminacion</label>
-                    <input type="date" class="form-control" id="fecha_eliminacion" name="granTotal" placeholder="Fecha Eliminacion">
+                    <label>Subtotal</label>
+                    <input type="number" class="form-control" id="subtotal" name="subtotal" placeholder="Subtotal">
                   </div>
                 </div>
-                  
                 <!-- /.card-body -->
-
                 <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Guardar</button>
+                  
+                  <button type="submit" class="btn btn-primary">Guardar</button>
                   <button type="reset" class="btn btn-danger">Cancelar</button>
                 </div>
               </form>
             </div>
             <!-- /.card -->
+
     </section>
     <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -288,9 +268,9 @@ if(isset($varMsj))
 <script src="../../dist/js/demo.js"></script>
 <!-- Page specific script -->
 <script>
-$(function () {
-  bsCustomFileInput.init();
-});
+    $(function() {
+        bsCustomFileInput.init();
+    });
 </script>
 </body>
 </html>

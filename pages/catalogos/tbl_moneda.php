@@ -17,6 +17,49 @@ if(isset($varMsj))
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+<style>
+.dropbtn {
+  background-color: #343a40;
+  color: #C2C7D0;
+  padding-left: 20px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 16px;
+  border: none;
+  text-align: left;
+  width: 234px;
+  height: 40px;
+  border-radius: 3px;
+
+}
+.dropdown {
+  position: relative;
+  display: content-box;
+}
+.dropdown-content {
+  display: none;
+  position: relative;
+  background-color: #343a40;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  color: #212529;
+}
+.dropdown-content a {
+  color: #212529;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: content-box;
+}
+
+.dropdown-content a:hover {background-color: #495057;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #494E53;}
+</style>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AdminLTE 3 | General Form Elements</title>
@@ -162,20 +205,30 @@ if(isset($varMsj))
               </p>
             </a>
           </li>
-          <li class="nav-item">
-<<<<<<< HEAD
-            <a href="../catalogos/tbl_arqueocaja.php" class="nav-link">
-              <i class="nav-icon fas fa-object-group"></i>
-              <p>
-                ArqueoCaja
-=======
-            <a href="../catalogos/tbl_rol.php" class="nav-link">
-              <i class="nav-icon fas fa-lock"></i>
-              <p>
-                Rol
-              </p>
-            </a>
-          </li>
+
+          <!--Dropdown Arqueocaja -->
+          <div class="dropdown">
+          <button class="dropbtn"><i class="nav-icon fas fa-cash-register"></i> ArqueoCaja</button>
+              <div class="dropdown-content">
+                <li class="nav-item">
+                  <a href="../catalogos/tbl_arqueocaja.php" class="nav-link">
+                    <i class="nav-icon fas fa-object-group"></i>
+                    <p>
+                      ArqueoCaja
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../catalogos/tbl_arqueocaja_det.php" class="nav-link">
+                    <i class="nav-icon fas fa-layer-group"></i>
+                    <p>
+                      ArqueoCaja Detalle
+                    </p>
+                  </a>
+                </li>
+              </div>
+          </div>
+
           <li class="nav-item">
             <a href="../catalogos/tbl_opciones.php" class="nav-link">
               <i class="nav-icon fas fa-align-justify"></i>
@@ -192,23 +245,37 @@ if(isset($varMsj))
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_rol_opciones.php" class="nav-link">
-              <i class="nav-icon fas fa-unlock-alt"></i>
-              <p>
-                Rol-Opcion
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_rol_usuario.php" class="nav-link">
-              <i class="nav-icon fas fa-user-tag"></i>
-              <p>
-                Rol-Usuario
->>>>>>> e861b962f6d6fa4686a8b6d8d82b9db48cd05f37
-              </p>
-            </a>
-          </li>
+
+          <!--Dropdown Menu Rol -->
+          <div class="dropdown">
+              <button class="dropbtn"><i class="nav-icon fas fa-lock"></i> Rol</button>
+              <div class="dropdown-content">
+                <li class="nav-item">
+                  <a href="../catalogos/tbl_rol.php" class="nav-link">
+                  <i class="nav-icon fas fa-lock"></i>
+                    <p>
+                      Rol
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../catalogos/tbl_rol_opciones.php" class="nav-link">
+                    <i class="nav-icon fas fa-unlock-alt"></i>
+                    <p>
+                      Rol-Opcion
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../catalogos/tbl_rol_usuario.php" class="nav-link">
+                    <i class="nav-icon fas fa-user-tag"></i>
+                    <p>
+                      Rol-Usuario
+                    </p>
+                  </a>
+                </li>
+              </div>
+          </div>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
@@ -389,6 +456,6 @@ if(isset($varMsj))
                 });
             });
         });
-        </script>
+</script>
 </body>
 </html>
