@@ -14,15 +14,15 @@ if ($_POST) {
     switch ($varAccion) {
         case '1':
             try {
-                $lista->__SET('id_registro_gastos', $_POST['id_registro_gastos']);
-                $lista->__SET('idKermesse', $_POST['idKermesse']);
-                $lista->__SET('idCatGastos', $_POST['idCatGastos']);
-                $lista->__SET('fechaGasto', $_POST['fechaGasto']);
-                $lista->__SET('concepto', $_POST['concepto']);
-                $lista->__SET('monto', $_POST['monto']);
-                $lista->__SET('usuario_creacion', 1);
-                $lista->__SET('fecha_creacion', date("Y-m-d H:i:s"));
-                $lista->__SET('estado', 1);
+                $gt->__SET('id_registro_gastos', $_POST['id_registro_gastos']);
+                $gt->__SET('idKermesse', $_POST['idKermesse']);
+                $gt->__SET('idCatGastos', $_POST['idCatGastos']);
+                $gt->__SET('fechaGasto', $_POST['fechaGasto']);
+                $gt->__SET('concepto', $_POST['concepto']);
+                $gt->__SET('monto', $_POST['monto']);
+                $gt->__SET('usuario_creacion', 1);
+                $gt->__SET('fecha_creacion', date("Y-m-d H:i:s"));
+                $gt->__SET('estado', 1);
 
 
                 $dtGast->regGastos($gt);
@@ -33,15 +33,17 @@ if ($_POST) {
             break;
         case '2':
             try {                
-                $lista->__SET('id_registro_gastos', $_POST['id_registro_gastos']);
-                $lista->__SET('idKermesse', $_POST['idKermesse']);
-                $lista->__SET('idCatGastos', $_POST['idCatGastos']);
-                $lista->__SET('fechaGasto', $_POST['fechaGasto']);
-                $lista->__SET('concepto', $_POST['concepto']);
-                $lista->__SET('monto', $_POST['monto']);
-                $lista->__SET('usuario_modificacion', 1);
-                $lista->__SET('fecha_modificacion', date("Y-m-d H:i:s"));
-                $lista->__SET('estado', 2);
+                $gt->__SET('idKermesse', $_POST['idKermesse']);
+                $gt->__SET('idCatGastos', $_POST['idCatGastos']);
+                $gt->__SET('fechaGasto', $_POST['fechaGasto']);
+                $gt->__SET('concepto', $_POST['concepto']);
+                $gt->__SET('monto', $_POST['monto']);
+                $gt->__SET('usuario_modificacion', 1);
+                $gt->__SET('fecha_modificacion', date("Y-m-d H:i:s"));
+                $gt->__SET('estado', 2);
+                $gt->__SET('id_registro_gastos', $_POST['id_registro_gastos']);
+
+                $dtGast->editGastos($gt);
                 header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_gastos.php?msj=3");
             } catch (Exception $e) {
                 header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_gastos.php?msj=4 ");
@@ -52,11 +54,12 @@ if ($_POST) {
 
 if ($_GET) {
     try {
-        $gt->__SET('id_lista_precio', $_GET['delC']);
-        $dtGast->deleteGastos($lista->__GET('id_lista_precio'));
+        $gt->__SET('id_registro_gastos', $_GET['delC']);
 
+        $dtGast->deleteGastos($gt->__GET('id_registro_gastos'));
         header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_gastos.php?msj=5");
     } catch (Exception $e) {
-        header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_gastos.php?msj=6 ");
+        header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_gastos.php?msj=6");
+        die($e->getMessage());
     }
 }

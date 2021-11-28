@@ -100,13 +100,14 @@ class Dt_categoria_gastos extends Conexion
     }
 
 
-    public function deleteCategoriaGastos($id)
+    public function deleteCat($id)
     {
         try {
             $this->myCon = parent::conectar();
-            $querySQL = "DELETE FROM tbl_categoria_gastos WHERE id_categoria_gastos = ?";
+            $querySQL = "UPDATE dbkermesse.tbl_categoria_gastos SET estado = 3 WHERE id_categoria_gastos = ?;";
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute(array($id));
+
             $this->myCon = parent::desconectar();
         } catch (Exception $e) {
             die($e->getMessage());

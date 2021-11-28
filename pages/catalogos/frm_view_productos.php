@@ -5,13 +5,16 @@ include '../../entidades/productos.php';
 include '../../datos/dt_productos.php';
 
 $dtp = new Dt_Productos();
+$p = new Productos();
 
-$varMsj = 0;
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
+$varIdProducto = 0;
+if (isset($varIdProducto)) {
+    $varIdProducto = $_GET['viewP'];
 }
 
+$p = $dtp->obtenerProductos($varIdProducto);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -94,65 +97,49 @@ if (isset($varMsj)) {
         </div>
       </div>
 
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
+          <!-- Sidebar Menu -->
+          <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-header">TABLAS</li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_denominacion.php" class="nav-link">
+            <a href="../catalogos/tbl_comunidad.php" class="nav-link">
               <i class="nav-icon fas fa-search-dollar"></i>
               <p>
-                Denominación
+                Comunidad
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_Moneda.php" class="nav-link">
+            <a href="../catalogos/tbl_ingreso_comunidad.php" class="nav-link">
               <i class="nav-icon fas fa-coins"></i>
               <p>
-                Moneda
+                Ingreso Comunidad
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_productos.php" class="nav-link">
+            <a href="../catalogos/tbl_ingreso_comunidad_det.php" class="nav-link">
               <i class="nav-icon fas fa-shopping-basket"></i>
+              <p>
+                Ingreso Comunidad Det
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../../pages/catalogos/tbl_productos.php" class="nav-link">
+              <i class="nav-icon fas fa-file-invoice-dollar"></i>
               <p>
                 Productos
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="../../pages/catalogos/tbl_gastos.php" class="nav-link">
+            <a href="../../pages/catalogos/tbl_categoria_producto.php" class="nav-link">
               <i class="nav-icon fas fa-file-invoice-dollar"></i>
               <p>
-                Gastos
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_parroquia.php" class="nav-link">
-              <i class="nav-icon fas fa-church"></i>
-              <p>
-                Parroquia
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_kermesse.php" class="nav-link">
-              <i class="nav-icon fas fa-map-pin"></i>
-              <p>
-                Kermesse
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_control_bonos.php" class="nav-link">
-              <i class="nav-icon fas fa-money-bill-wave"></i>
-              <p>
-                Bonos
+                Categoria Productos
               </p>
             </a>
           </li>
@@ -169,12 +156,12 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1> View Listas Precio</h1>
+                            <h1> Ver Lista Productos</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                                <li class="breadcrumb-item active">Lista Precio</li>
+                                <li class="breadcrumb-item active">Lista Productos</li>
                             </ol>
                         </div>
                     </div>
@@ -198,32 +185,32 @@ if (isset($varMsj)) {
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label> ID Comunidad</label>
-                                            <input type="text" class="form-control" id="id_comunidad" name="id_comunidad" placeholder="ID Comunidad" required>
+                                            <input readonly type="text" class="form-control" id="id_comunidad" name="id_comunidad" placeholder="ID Comunidad" required>
                                         </div>
                                         <div class="form-group">
-                                            <label> ID Categoria Producto</label>
-                                            <input type="text" class="form-control" id="id_categoria_producto" name="id_categoria_producto" placeholder="ID Categoria Producto" required>
+                                            <label> Categoria Producto</label>
+                                            <input readonly type="text" class="form-control" id="id_categoria_producto" name="id_categoria_producto" placeholder="ID Categoria Producto" required>
                                         </div>
                                         
                                         <div class="form-group">
                                             <label>Nombre</label>
-                                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
+                                            <input readonly type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Descripcion</label>
-                                            <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" required>
+                                            <input readonly type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Cantidad</label>
-                                            <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Cantidad" required>
+                                            <input readonly type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Cantidad" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Precio Sugerido</label>
-                                            <input type="text" class="form-control" id="preciov_sugerido" name="preciov_sugerido" placeholder="Precio Sugerido" required>
+                                            <input readonly type="text" class="form-control" id="preciov_sugerido" name="preciov_sugerido" placeholder="Precio Sugerido" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Estado</label>
-                                            <input type="number" class="form-control" id="estado" name="estado" placeholder="Estado" required>
+                                            <input readonly type="number" class="form-control" id="estado" name="estado" placeholder="Estado" required>
                                         </div>
                                         <!-- /.card-body -->
 
@@ -271,6 +258,22 @@ if (isset($varMsj)) {
         $(function() {
             bsCustomFileInput.init();
         });
+    </script>
+
+    <script>
+        function setValoresProducto() {
+            $("#id_producto").val("<?php echo $p->__GET('id_producto') ?>")
+            $("#id_comunidad").val("<?php echo $p->__GET('id_comunidad') ?>")
+            $("#id_categoria_producto").val("<?php echo $p->__GET('id_categoria_producto') ?>")
+            $("#nombre").val("<?php echo $p->__GET('nombre') ?>")
+            $("#descripcion").val("<?php echo $p->__GET('descripcion') ?>")
+            $("#cantidad").val("<?php echo $p->__GET('cantidad') ?>")
+            $("#preciov_sugerido").val("<?php echo $p->__GET('preciov_sugerido') ?>")
+        }
+        $(document).ready(function() {
+            setValoresProducto();
+        });
+    
     </script>
 </body>
 

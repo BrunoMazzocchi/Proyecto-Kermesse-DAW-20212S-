@@ -4,14 +4,17 @@ error_reporting(0);
 include '../../entidades/comunidad.php';
 include '../../datos/dt_comunidad.php';
 
-$dtcmn = new Dt_Comunidad();
+$dtCmn = new Dt_comunidad();
+$cmn = new Comunidad();
 
-$varMsj = 0;
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
+$varIdComunidad = 0;
+if (isset($varIdComunidad)) {
+    $varIdComunidad = $_GET['viewC'];
 }
 
+$cmn = $dtCmn->obtenerComunidad($varIdComunidad);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -94,65 +97,49 @@ if (isset($varMsj)) {
         </div>
       </div>
 
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
+          <!-- Sidebar Menu -->
+          <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-header">TABLAS</li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_denominacion.php" class="nav-link">
+            <a href="../catalogos/tbl_comunidad.php" class="nav-link">
               <i class="nav-icon fas fa-search-dollar"></i>
               <p>
-                Denominación
+                Comunidad
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_Moneda.php" class="nav-link">
+            <a href="../catalogos/tbl_ingreso_comunidad.php" class="nav-link">
               <i class="nav-icon fas fa-coins"></i>
               <p>
-                Moneda
+                Ingreso Comunidad
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_productos.php" class="nav-link">
+            <a href="../catalogos/tbl_ingreso_comunidad_det.php" class="nav-link">
               <i class="nav-icon fas fa-shopping-basket"></i>
+              <p>
+                Ingreso Comunidad Det
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../../pages/catalogos/tbl_productos.php" class="nav-link">
+              <i class="nav-icon fas fa-file-invoice-dollar"></i>
               <p>
                 Productos
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="../../pages/catalogos/tbl_gastos.php" class="nav-link">
+            <a href="../../pages/catalogos/tbl_categoria_producto.php" class="nav-link">
               <i class="nav-icon fas fa-file-invoice-dollar"></i>
               <p>
-                Gastos
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_parroquia.php" class="nav-link">
-              <i class="nav-icon fas fa-church"></i>
-              <p>
-                Parroquia
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_kermesse.php" class="nav-link">
-              <i class="nav-icon fas fa-map-pin"></i>
-              <p>
-                Kermesse
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_control_bonos.php" class="nav-link">
-              <i class="nav-icon fas fa-money-bill-wave"></i>
-              <p>
-                Bonos
+                Categoria Productos
               </p>
             </a>
           </li>
@@ -169,7 +156,7 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1> View Listas Comunidad</h1>
+                            <h1> View Comunidad</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -190,35 +177,32 @@ if (isset($varMsj)) {
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Lista Comunidad</h3>
+                                    <h3 class="card-title">Comunidad</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
                                 <form>
                                     <div class="card-body">
+                                            
                                         <div class="form-group">
-                                            <label> ID Comunidad</label>
-                                            <input type="number" class="form-control" id="id_comunidad" name="id_comunidad" placeholder="ID Comunidad" required>
+                                            <label>ID Comunidad</label>
+                                            <input readonly type="text" class="form-control" id="id_comunidad" name="id_comunidad" placeholder="ID Comunidad" required>
                                         </div>
-        
-                                        
                                         <div class="form-group">
                                             <label>Nombre</label>
-                                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
+                                            <input readonly type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre de la Comunidad" required>
                                         </div>
+
                                         <div class="form-group">
                                             <label>Responsable</label>
-                                            <input type="text" class="form-control" id="responsable" name="responsable" placeholder="Responsable" required>
+                                            <input readonly type="text" class="form-control" id="responsable" name="responsable" placeholder="Nombre del Responsable" required>
                                         </div>
                                         <div class="form-group">
-                                            <label>Desc Contribucion</label>
-                                            <input type="text" class="form-control" id="desc_contribucion" name="desc_contribucion" placeholder="Desc Contribucion" required>
+                                            <label>Descripcion de la Contribucion</label>
+                                            <input readonly type="text" class="form-control" id="desc_contribucion" name="desc_contribucion" placeholder="Descripcion de la Contribucion" required>
                                         </div>
                                        
-                                        <div class="form-group">
-                                            <label>Estado</label>
-                                            <input type="number" class="form-control" id="estado" name="estado" placeholder="Estado" required>
-                                        </div>
+                                      </div> 
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
@@ -265,6 +249,19 @@ if (isset($varMsj)) {
         $(function() {
             bsCustomFileInput.init();
         });
+    </script>
+
+    <script>
+        function setValoresComunidad() {
+            $("#id_comunidad").val("<?php echo $cmn->__GET('id_comunidad') ?>")
+            $("#nombre").val("<?php echo $cmn->__GET('nombre') ?>")
+            $("#responsable").val("<?php echo $cmn->__GET('responsable') ?>")
+            $("#desc_contribucion").val("<?php echo $cmn->__GET('desc_contribucion') ?>")
+        }
+        $(document).ready(function() {
+            setValoresComunidad();
+        });
+    
     </script>
 </body>
 

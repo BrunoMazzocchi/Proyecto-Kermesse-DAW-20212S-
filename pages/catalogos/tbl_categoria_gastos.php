@@ -23,6 +23,8 @@ if (isset($varMsj)) {
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <!-- jAlert -->
+  <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
@@ -99,125 +101,6 @@ if (isset($varMsj)) {
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-<<<<<<< HEAD
-          <li class="nav-header">TABLAS</li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_denominacion.php" class="nav-link">
-              <i class="nav-icon fas fa-search-dollar"></i>
-              <p>
-                Denominación
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_Moneda.php" class="nav-link">
-              <i class="nav-icon fas fa-coins"></i>
-              <p>
-                Moneda
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_productos.php" class="nav-link">
-              <i class="nav-icon fas fa-shopping-basket"></i>
-              <p>
-                Productos
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../../pages/catalogos/tbl_gastos.php" class="nav-link">
-              <i class="nav-icon fas fa-file-invoice-dollar"></i>
-              <p>
-                Gastos
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_parroquia.php" class="nav-link">
-              <i class="nav-icon fas fa-church"></i>
-              <p>
-                Parroquia
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_kermesse.php" class="nav-link">
-              <i class="nav-icon fas fa-map-pin"></i>
-              <p>
-                Kermesse
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_control_bonos.php" class="nav-link">
-              <i class="nav-icon fas fa-money-bill-wave"></i>
-              <p>
-                Bonos
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_rol.php" class="nav-link">
-              <i class="nav-icon fas fa-lock"></i>
-              <p>
-                Rol
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_opciones.php" class="nav-link">
-              <i class="nav-icon fas fa-align-justify"></i>
-              <p>
-                Opciones
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_usuario.php" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
-              <p>
-                Usuarios
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_rol_opciones.php" class="nav-link">
-              <i class="nav-icon fas fa-unlock-alt"></i>
-              <p>
-                Rol-Opcion
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_rol_usuario.php" class="nav-link">
-              <i class="nav-icon fas fa-user-tag"></i>
-              <p>
-                Rol-Usuario
-              </p>
-            </a>
-          </li>
-      </nav>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>DataTables</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Regions</li>
-            </ol>
-=======
             <li class="nav-header">TABLAS</li>
             <li class="nav-item">
               <a href="../catalogos/tbl_denominacion.php" class="nav-link">
@@ -296,7 +179,6 @@ if (isset($varMsj)) {
                 <li class="breadcrumb-item active">Categoria Gastos</li>
               </ol>
             </div>
->>>>>>> 3252ba53c9c303cc5d8d728bae264c55a9f29975
           </div>
         </div><!-- /.container-fluid -->
       </section>
@@ -324,12 +206,18 @@ if (isset($varMsj)) {
 
               <?php
               foreach ($dtCat->ListaCG() as $r) :
+                $estado = "";
+                if ($r->__GET('estado') == 1 || $r->__GET('estado') == 2) {
+                  $estado = "Activo";
+                } else {
+                  $estado = "Inactivo";
+                }
               ?>
                 <tr>
                   <td><?php echo $r->__GET('id_categoria_gastos') ?></td>
                   <td><?php echo $r->__GET('nombre_categoria') ?></td>
                   <td><?php echo $r->__GET('descripcion') ?></td>
-                  <td><?php echo $r->__GET('estado') ?></td>
+                  <td><?php echo $estado ?></td>
 
                   <td> <a href="frm_edit_categoriagastos.php?editC=<?php echo $r->__GET('id_categoria_gastos') ?>" target="blank">
                       <i class="far fa-edit" title="Editar Categoria Gastos"></i></a>
@@ -337,7 +225,7 @@ if (isset($varMsj)) {
                     <a href="frm_view_categoriagastos.php?viewC=<?php echo $r->__GET('id_categoria_gastos') ?>" target="blank">
                       <i class="far fa-eye" title="Ver Categoria gastos"></i></a>
                     &nbsp;&nbsp;
-                    <a href="../../negocio/ng_CategoriaGastos.php?delC=<?php echo $r->__GET('id_categoria_gastos') ?>" target="_blank">
+                    <a href="#" onclick="deleteCat(<?php echo $r->__GET('id_categoria_gastos'); ?>);">
                       <i class="far fa-trash-alt" title="Eliminar"></i>
                     </a>
                   </td>
@@ -348,7 +236,10 @@ if (isset($varMsj)) {
 
             <tfoot>
               <tr>
-
+                <th>Categoria ID</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Estado</th>
               </tr>
             </tfoot>
           </table>
@@ -365,7 +256,6 @@ if (isset($varMsj)) {
   </section>
   <!-- /.content -->
   </div>
-
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -397,33 +287,32 @@ if (isset($varMsj)) {
   <script src="../../plugins/jAlert/dist/jAlert-functions.min.js">
     //optional!! 
   </script>
-
-
-
-  <!-- AdminLTE App -->
-  <script src="../../dist/js/adminlte.min.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="../../dist/js/demo.js"></script>
-  <!-- Page specific script -->
   <script>
+    function deleteCat(id) {
+      confirm(function(e, btn) {
+          e.preventDefault();
+          window.location.href = "../../negocio/ng_CategoriaGastos.php?delC=" + id;
+        },
+        function(e, btn) {
+          e.preventDefault();
+        });
+    }
     $(document).ready(function() {
       var mensaje = 0;
       mensaje = "<?php echo $varMsj ?>";
       if (mensaje == "1") {
-        successAlert('Exito', 'Los datos han sido registrado exitosamente');
+        successAlert('Exito', 'Los datos han sido registrados exitosamente');
       }
-      if (mensaje == "2" || mensaje == '4') {
+      if (mensaje == "2" || mensaje == "4" || mensaje == "6") {
         errorAlert('Error', 'Revise los datos e intente de nuevo');
       }
       if (mensaje == "3") {
-        successAlert('Exito', 'Los datos han sido editado exitosamente');
+        successAlert('Exito', 'Los datos han sido actualizados exitosamente');
       }
       if (mensaje == "5") {
-        successAlert('Exito', 'Los datos han sido eliminado exitosamente');
+        successAlert('Exito', 'Los datos han sido eliminados exitosamente');
       }
-      if (mensaje == "6") {
-        errorAlert('Error', 'Revise que los datos existan');
-      }
+
 
       $(function() {
         $("#example1").DataTable({

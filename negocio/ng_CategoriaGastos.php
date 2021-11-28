@@ -38,14 +38,15 @@ if ($_POST) {
             break;
     }
 }
-
 if ($_GET) {
     try {
         $cat->__SET('id_categoria_gastos', $_GET['delC']);
-        $dtCat->deleteCategoriaGastos($cat->__GET('id_categoria_gastos'));
 
+
+        $dtCat->deleteCat($cat->__GET('id_categoria_gastos'));
         header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_categoria_gastos.php?msj=5");
     } catch (Exception $e) {
-        header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_categoria_gastos.php?msj=6 ");
+        header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_categoria_gastos.php?msj=6");
+        die($e->getMessage());
     }
 }

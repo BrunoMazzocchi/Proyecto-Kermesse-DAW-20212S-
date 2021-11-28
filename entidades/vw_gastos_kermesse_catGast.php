@@ -1,11 +1,13 @@
 <?php
 
-class Gastos{
+class vw_gastos_kermesse_catGast{
     //Atributos
     
     private $id_registro_gastos;
     private $idKermesse;
     private $idCatGastos;
+    private $nombreCat;
+    private $nombreKermesse;
     private $fechaGasto;
     private $concepto;
     private $monto;

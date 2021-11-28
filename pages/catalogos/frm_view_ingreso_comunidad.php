@@ -4,14 +4,22 @@ error_reporting(0);
 include '../../entidades/ingreso_comunidad.php';
 include '../../datos/dt_ingreso_comunidad.php';
 
+
+$ic = new Ingreso_Comunidad();
 $dtic = new Dt_Ingreso_Comunidad();
 
-$varMsj = 0;
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
+
+
+$varIdIngresoC = 0;
+
+if (isset($varIdIngresoC)) {
+  $varIdIngresoC = $_GET['viewIC'];
 }
 
+$ic = $dtic->obtenerIngresoComunidad($varIdIngresoC);
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -93,30 +101,40 @@ if (isset($varMsj)) {
         </div>
       </div>
 
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
+          <!-- Sidebar Menu -->
+          <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-header">TABLAS</li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_denominacion.php" class="nav-link">
+            <a href="../catalogos/tbl_comunidad.php" class="nav-link">
               <i class="nav-icon fas fa-search-dollar"></i>
               <p>
-                Denominación
+                Comunidad
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_Moneda.php" class="nav-link">
+            <a href="../catalogos/tbl_ingreso_comunidad.php" class="nav-link">
               <i class="nav-icon fas fa-coins"></i>
+              
               <p>
-                Moneda
+                Ingreso Comunidad
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_productos.php" class="nav-link">
+            <a href="../catalogos/tbl_ingreso_comunidad_det.php" class="nav-link">
+              <i class="nav-icon fas fa-money-bill"></i>
+  
+              <p>
+                Ingreso Comunidad Det
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../../pages/catalogos/tbl_productos.php" class="nav-link">
               <i class="nav-icon fas fa-shopping-basket"></i>
               <p>
                 Productos
@@ -124,34 +142,11 @@ if (isset($varMsj)) {
             </a>
           </li>
           <li class="nav-item">
-            <a href="../../pages/catalogos/tbl_gastos.php" class="nav-link">
-              <i class="nav-icon fas fa-file-invoice-dollar"></i>
+            <a href="../../pages/catalogos/tbl_categoria_producto.php" class="nav-link">
+              <i class="nav-icon fas fa-cookie"></i>
+   
               <p>
-                Gastos
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_parroquia.php" class="nav-link">
-              <i class="nav-icon fas fa-church"></i>
-              <p>
-                Parroquia
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_kermesse.php" class="nav-link">
-              <i class="nav-icon fas fa-map-pin"></i>
-              <p>
-                Kermesse
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_control_bonos.php" class="nav-link">
-              <i class="nav-icon fas fa-money-bill-wave"></i>
-              <p>
-                Bonos
+                Categoria Productos
               </p>
             </a>
           </li>
@@ -159,6 +154,7 @@ if (isset($varMsj)) {
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
+  </aside>
   </aside>
 
         <!-- Content Wrapper. Contains page content -->
@@ -168,7 +164,7 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1> View Ingreso Comunidad</h1>
+                            <h1>Ver Ingreso Comunidad</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -197,82 +193,46 @@ if (isset($varMsj)) {
                                     <div class="card-body">
                                     <div class="form-group">
                     <label> ID Ingresos </label>
-                    <input type="number" class="form-control" id="id_ingreso_comunidad" name= "id_ingreso_comunidad"  maxlenght= "2"
-                    placeholder="Ingrese el ID del Ingreso" title= "Ingrese el ID del Ingreso" required>
+                    <input readonly type="number" class="form-control" id="id_ingreso_comunidad" name= "id_ingreso_comunidad"  maxlenght= "2"
+                    placeholder=" ID " required>
                   </div>
 
                   <div class="form-group">
-                    <label> ID Kermesse</label>
-                    <input type="text" class="form-control" id="id_categoria_producto" name= "id_categoria_producto"  maxlenght= "2"
-                    placeholder="Ingrese el ID de la Kermesse" title= "Ingrese el ID de la Kermesse" required>
+                    <label> Kermesse</label>
+                    <input readonly type="text" class="form-control" id="id_categoria_producto" name= "id_categoria_producto"  maxlenght= "2"
+                    placeholder="Kermesse"  required>
                   </div>
 
                   <div class="form-group">
-                    <label> ID Comunidad </label>
-                    <input type="text" class="form-control" id="id_categoria_producto" name= "id_categoria_producto"  maxlenght= "2"
-                    placeholder="Ingrese el ID de la Comunidad" title= "Ingrese el ID de la COmunidad" required>
+                    <label>Comunidad </label>
+                    <input readonly type="text" class="form-control" id="id_categoria_producto" name= "id_categoria_producto"  maxlenght= "2"
+                    placeholder=" Comunidad" required>
                   </div>
 
                   <div class="form-group">
                     <label> ID Producto</label>
-                    <input type="text" class="form-control" id="id_categoria_producto" name= "id_categoria_producto"  maxlenght= "2"
-                    placeholder="Ingrese el ID del Producto" title= "Ingrese el ID del Producto" required>
+                    <input readonly type="text" class="form-control" id="id_categoria_producto" name= "id_categoria_producto"  maxlenght= "2"
+                    placeholder="Producto"  required>
                   </div>
 
                   <div class="form-group">
                     <label>Cantidad de Productos</label>
-                    <input type="number" class="form-control" id="cant_productos" name= "cant_productos"  maxlenght= "10"
-                    placeholder="Ingrese la cantidad de productos" title= "Ingrese la cantidad de productos" required>
+                    <input readonly type="number" class="form-control" id="cant_productos" name= "cant_productos"  maxlenght= "10"
+                    placeholder="Cantidad de productos"  required>
                   </div>
 
                   <div class="form-group">
                     <label>Total de Bonos</label>
-                    <input type="number" class="form-control" id="total_bonos" name= "total_bonos" step="any" maxlenght= "10"
-                    placeholder="Ingrese el total de Bonos" title= "Ingrese el total de Bonos" required>
+                    <input readonly type="number" class="form-control" id="total_bonos" name= "total_bonos" step="any" maxlenght= "10"
+                    placeholder="Total de Bonos" required>
                   </div>
 
-                  <div class="form-group">
-                    <label>Usuario Creacion</label>
-                    <input type="number" class="form-control" id="usuario_creacion" name= "usuario_creacion"  maxlenght= "10"
-                    placeholder="Creacion del usuario" required>
-                  </div>
+                 
+              
+                               <div class="card-footer">
+                                            <a href="tbl_ingreso_comunidad.php"><i class="fas fa-arrow-left"></i> Atras</a>
 
-                  <div class="form-group">
-                    <label>Fecha de Crecion</label>
-                    <input type="date" class="form-control" id="fecha_creacion" name= "fecha_creacion"  maxlenght= "8"
-                    placeholder="Fecha de creacion" required>
-
-                    <div class="form-group">
-                    <label>Usuario Modifiacion</label>
-                    <input type="number" class="form-control" id="usuario_modificacion" name= "usuario_modificacion"  maxlenght= "10"
-                    placeholder="Modificacion del usuario" required>
-                  </div>
-
-                  <div class="form-group">
-                    <label>Fecha de Modificacion</label>
-                    <input type="date" class="form-control" id="fecha_modificacion" name= "fecha_modificacion"  maxlenght= "8"
-                    placeholder="Fecha de modificacion" required>
-                    </div>
-                    
-                    <div class="form-group">
-                    <label>Usuario Eliminacion</label>
-                    <input type="number" class="form-control" id="usuario_eliminacion" name= "usuario_eliminacion"  maxlenght= "10"
-                    placeholder="Eliminacion del usuario" required>
-                  </div>
-
-                  <div class="form-group">
-                    <label>Fecha de Eliminacion</label>
-                    <input type="date" class="form-control" id="fecha_eliminacion" name= "fecha_eliminacion"  maxlenght= "8"
-                    placeholder="Fecha de eliminacion" required>
-                </div>
-
-               </div>
-                                    <!-- /.card-body -->
-
-                                    <div class="card-footer">
-                                        <a href="tbl_ingreso_comunidad.php"><i class="fas fa-arrow-left"></i> Atras</a>
-
-                                    </div>
+                                        </div>
                                 </form>
                             </div>
                             <!-- /.card -->
@@ -313,6 +273,21 @@ if (isset($varMsj)) {
         $(function() {
             bsCustomFileInput.init();
         });
+    </script>
+    <script>
+    function setValoresIngresoC() {
+      $("#id_ingreso_comunidad").val("<?php echo $ic->__GET('id_ingreso_comunidad') ?>")
+      $("#id_kermesse").val("<?php echo $ic->__GET('id_kermesse') ?>")
+      $("#id_comunidad").val("<?php echo $ic->__GET('id_comunidad') ?>")
+      $("#id_producto").val("<?php echo $ic->__GET('id_producto') ?>")
+      $("#cant_productos").val("<?php echo $ic->__GET('cant_productos') ?>")
+      $("#total_bonos").val("<?php echo $ic->__GET('total_bonos') ?>")
+  
+
+    }
+    $(document).ready(function() {
+      setValoresIngresoC();
+    });
     </script>
 </body>
 

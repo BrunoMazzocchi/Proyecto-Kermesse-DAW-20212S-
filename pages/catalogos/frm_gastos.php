@@ -7,18 +7,18 @@ include '../../datos/dt_gastos.php';
 include '../../entidades/gastos.php';
 include '../../datos/dt_categoria_gastos.php';
 include '../../entidades/categoria_gastos.php';
-
+include '../../entidades/kermesse.php';
+include '../../datos/dt_kermesse.php';
 $dtg = new Dt_gastos();
 $dtcg = new Dt_categoria_gastos();
+$gts = new Gastos();
+$kerme = new Dt_Kermesse();
 
 $varMsj = 0;
-if(isset($varMsj))
-{
-    $varMsj = $_GET['msj'];
+if (isset($varMsj)) {
+  $varMsj = $_GET['msj'];
 }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -167,10 +167,6 @@ if(isset($varMsj))
     </div>
     <!-- /.sidebar -->
   </aside>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -179,118 +175,142 @@ if(isset($varMsj))
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>General Form</h1>
+            <h1>Nueva gasto</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Gastos</li>
+              <li class="breadcrumb-item active">Registrar un nuevo gasto</li>
             </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
 
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <!-- left column -->
-          <div class="col-md-12">
-            <!-- general form elements -->
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">Registrar Gasto</h3>
+      <!-- Main content -->
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+              <!-- general form elements -->
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Registrar un nuevo gasto</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form method="POST" action="../../negocio/ng_Gastos.php">
+                  <div class="card-body">
+                  <div class="form-group">
+                      <label>Gasto ID</label>
+                      <input type="number" class="form-control" id="id_registro_gastos" name="id_registro_gastos" placeholder="Lista Precio ID" required>
+                      <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Kermesse</label>
+                        <select name="idKermesse" id="idKermesse" class="form-control" required>
+                          <option value="">Kermesse</option>
+
+                          <?php
+                          foreach ($kerme->listKermesse() as $r) :
+                          ?>
+
+                            <tr>
+                              <option value="<?php echo $r->__GET('id_kermesse');  ?>"><?php echo $r->__GET('nombreKermesse');  ?></option>
+
+
+                            </tr>
+                          <?php
+                          endforeach;
+                          ?>
+
+
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label>Categoria de gasto</label>
+                        <select name="idCatGastos" id="idCatGastos" class="form-control" required>
+                          <option value="">Categoria</option>
+
+                          <?php
+                          foreach ($dtcg->ListaCG() as $r) :
+                          ?>
+
+                            <tr>
+                              <option value="<?php echo $r->__GET('id_categoria_gastos');  ?>"><?php echo $r->__GET('nombre_categoria');  ?></option>
+
+
+                            </tr>
+                          <?php
+                          endforeach;
+                          ?>
+
+
+                        </select>
+                      </div>
+                    <div class="form-group">
+                      <label>Fecha de gasto</label>
+                      <input type="date" class="form-control" id="fechaGasto" name="fechaGasto" placeholder="Fecha del gasto" required>
+                    </div>                    <div class="form-group">
+                      <label>Concepto</label>
+                      <input type="text" class="form-control" id="concepto" name="concepto" placeholder="Concepto" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Monto</label>
+                      <input type="number" class="form-control" id="monto" name="monto" placeholder="Monto" required>
+                    </div>
+                  </div>
+                  <!-- /.card-body -->
+
+                  <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="reset" class="btn btn-danger">Cancelar</button>
+
+                  </div>
+                </form>
               </div>
-              <!-- /.card-header -->
-              <!-- form start -->
-              <form>
-                <div class="card-body">
-                  <div class="form-group">
-                    <label>Fecha Gasto</label>
-                    <input type="date" class="form-control" id="fechaGasto" name = "fechaGasto"placeholder="Ingrese la fecha">
-                  </div>
-                  <div class="form-group">
-                    <label>Concepto</label>
-                    <input type="text" class="form-control" id="concepto" name = "concepto"placeholder="Concepto">
-                  </div>
-                  <div class="form-group">
-                    <label>Monto</label>
-                    <input type="number" class="form-control" id="monto" placeholder="Monto">
-                  </div>
-                  <div class="form-group">
-                    <label>Fecha Creacion</label>
-                    <input type="date" class="form-control" id="fecha_creacion" placeholder="Fecha de creacion">
-                  </div>
-                  <div class="form-group">
-                    <label>Fecha modificacion</label>
-                    <input type="date" class="form-control" id="fecha_modificacion" placeholder="Fecha de modificacion">
-                  </div>
-                  <div class="form-group">
-                    <label>Fecha eliminacion</label>
-                    <input type="date" class="form-control" id="fecha_eliminacion" placeholder="Fecha de eliminacion">
-                  </div>
-                  <div class="form-group">
-                    <label>Selecciona la Categoria</label>
-                    <select name="nombre_categoria" id="id_categoria_gastos" required>
-                      <option value="">Categorias</option>
-                     
-                      <?php
-                  foreach($dtcg -> ListaCG() as $r):
-                  ?>
-
-                  <tr>
-                    <option value="<?php echo $r->__GET('id_categoria_gastos');  ?>"><?php echo $r->__GET('nombre_categoria');  ?></option>
-                 
-                
-                  </tr>
-                  <?php
-                  endforeach;
-                  ?>
-
-
-                    </select>
-                  </div>
-                </div>
-                  
-                <!-- /.card-body -->
-
-                <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Guardar</button>
-                  <button type="reset" class="btn btn-danger">Cancelar</button>
-                </div>
-              </form>
+              <!-- /.card -->
             </div>
-            <!-- /.card -->
-    </section>
-    <!-- /.content -->
+          </div>
+        </div>
+
+
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+      <div class="float-right d-none d-sm-block">
+        <b>Version</b> 3.1.0-rc
+      </div>
+      <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
   </div>
-  <!-- /.content-wrapper -->
+  <!-- ./wrapper -->
 
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
-
-<!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- bs-custom-file-input -->
-<script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
-<!-- Page specific script -->
-<script>
-$(function () {
-  bsCustomFileInput.init();
-});
-</script>
+  <!-- jQuery -->
+  <script src="../../plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- bs-custom-file-input -->
+  <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="../../dist/js/adminlte.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="../../dist/js/demo.js"></script>
+  <!-- Page specific script -->
+  <script>
+    $(function() {
+      bsCustomFileInput.init();
+    });
+  </script>
 </body>
+
 </html>

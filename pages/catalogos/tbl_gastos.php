@@ -13,6 +13,7 @@ if (isset($varMsj)) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,6 +23,8 @@ if (isset($varMsj)) {
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <!-- jAlert -->
+  <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
@@ -155,12 +158,6 @@ if (isset($varMsj)) {
             </a>
           </li>
           <li class="nav-item">
-<<<<<<< HEAD
-            <a href="../catalogos/tbl_arqueocaja.php" class="nav-link">
-              <i class="nav-icon fas fa-object-group"></i>
-              <p>
-                ArqueoCaja
-=======
             <a href="../catalogos/tbl_rol.php" class="nav-link">
               <i class="nav-icon fas fa-lock"></i>
               <p>
@@ -197,7 +194,6 @@ if (isset($varMsj)) {
               <i class="nav-icon fas fa-user-tag"></i>
               <p>
                 Rol-Usuario
->>>>>>> e861b962f6d6fa4686a8b6d8d82b9db48cd05f37
               </p>
             </a>
           </li>
@@ -206,28 +202,6 @@ if (isset($varMsj)) {
     </div>
     <!-- /.sidebar -->
   </aside>
-<<<<<<< HEAD
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Gastos</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Gastos</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
-=======
->>>>>>> e861b962f6d6fa4686a8b6d8d82b9db48cd05f37
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -274,15 +248,21 @@ if (isset($varMsj)) {
 
                             <?php
                             foreach ($dtGastos->listGastos() as $r) :
+                              $estado = "";
+                              if ($r->__GET('estado') == 1 || $r->__GET('estado') == 2) {
+                                $estado = "Activo";
+                              } else {
+                                $estado = "Inactivo";
+                              }
                             ?>
                                 <tr>
                                     <td><?php echo $r->__GET('id_registro_gastos') ?></td>
-                                    <td><?php echo $r->__GET('idKermesse') ?></td>
-                                    <td><?php echo $r->__GET('idCatGastos') ?></td>
+                                    <td><?php echo $r->__GET('nombreKermesse') ?></td>
+                                    <td><?php echo $r->__GET('nombreCat') ?></td>
                                     <td><?php echo $r->__GET('fechaGasto') ?></td>
                                     <td><?php echo $r->__GET('concepto') ?></td>
                                     <td><?php echo $r->__GET('monto') ?></td>
-                                    <td><?php echo $r->__GET('estado') ?></td>
+                                    <td><?php echo $estado ?></td>
                                     <td> <a href="frm_editar_gastos.php?editC=<?php echo $r->__GET('id_registro_gastos') ?>" target="blank">
                                             <i class="far fa-edit" title="Editar Gastos"></i></a>
                                         &nbsp;&nbsp;
@@ -300,7 +280,13 @@ if (isset($varMsj)) {
 
                         <tfoot>
                             <tr>
-
+                            <th>Registro ID</th>
+                                <th>Kermesse</th>
+                                <th>Categoria</th>
+                                <th>Fecha Gastos</th>
+                                <th>Concepto</th>
+                                <th>Monto</th>
+                                <th>Estado</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -309,10 +295,6 @@ if (isset($varMsj)) {
             </div>
             <!-- /.card -->
         </div>
-<<<<<<< HEAD
-      </div>
-  </div>
-=======
         <!-- /.col -->
     </div>
     <!-- /.row -->
@@ -322,7 +304,6 @@ if (isset($varMsj)) {
     <!-- /.content -->
     </div>
 
->>>>>>> e861b962f6d6fa4686a8b6d8d82b9db48cd05f37
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
@@ -349,58 +330,57 @@ if (isset($varMsj)) {
     <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
 
-    <!-- jAlert -->
-    <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
-    <script src="../../plugins/jAlert/dist/jAlert-functions.min.js">
-        //optional!! 
-    </script>
+     <!-- jAlert -->
+   <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+  <script src="../../plugins/jAlert/dist/jAlert-functions.min.js">
+    //optional!! 
+  </script>
+  <script>
+    function deleteGastos(id) {
+      confirm(function(e, btn) {
+          e.preventDefault();
+          window.location.href = "../../negocio/ng_Gastos.php?delG=" + id;
+        },
+        function(e, btn) {
+          e.preventDefault();
+        });
+    }
+    $(document).ready(function() {
+      var mensaje = 0;
+      mensaje = "<?php echo $varMsj ?>";
+      if (mensaje == "1") {
+        successAlert('Exito', 'Los datos han sido registrados exitosamente');
+      }
+      if (mensaje == "2" || mensaje == "4" || mensaje == "6") {
+        errorAlert('Error', 'Revise los datos e intente de nuevo');
+      }
+      if (mensaje == "3") {
+        successAlert('Exito', 'Los datos han sido actualizados exitosamente');
+      }
+      if (mensaje == "5") {
+        successAlert('Exito', 'Los datos han sido eliminados exitosamente');
+      }
 
 
-
-    <!-- AdminLTE App -->
-    <script src="../../dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="../../dist/js/demo.js"></script>
-    <!-- Page specific script -->
-    <script>
-        $(document).ready(function() {
-            var mensaje = 0;
-            mensaje = "<?php echo $varMsj ?>";
-            if (mensaje == "1") {
-                successAlert('Exito', 'Los datos han sido registrado exitosamente');
-            }
-            if (mensaje == "2" || mensaje == '4') {
-                errorAlert('Error', 'Revise los datos e intente de nuevo');
-            }
-            if (mensaje == "3") {
-                successAlert('Exito', 'Los datos han sido editado exitosamente');
-            }
-            if (mensaje == "5") {
-                successAlert('Exito', 'Los datos han sido eliminado exitosamente');
-            }
-            if (mensaje == "6") {
-                errorAlert('Error', 'Revise que los datos existan');
-            }
-
-            $(function() {
-                $("#example1").DataTable({
-                    "responsive": true,
-                    "lengthChange": false,
-                    "autoWidth": false,
-                    "buttons": ["excel", "pdf"]
-                }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-                $('#example2').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": false,
-                    "ordering": true,
-                    "info": true,
-                    "autoWidth": false,
-                    "responsive": true,
-                });
-            });
-        }); // FIN DOC READY FUN
-    </script>
+      $(function() {
+        $("#example1").DataTable({
+          "responsive": true,
+          "lengthChange": false,
+          "autoWidth": false,
+          "buttons": ["excel", "pdf"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+          "paging": true,
+          "lengthChange": false,
+          "searching": false,
+          "ordering": true,
+          "info": true,
+          "autoWidth": false,
+          "responsive": true,
+        });
+      });
+    }); // FIN DOC READY FUN
+  </script>
 
 </body>
 
