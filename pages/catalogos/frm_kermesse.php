@@ -5,7 +5,7 @@ include '../../entidades/kermesse.php';
 include '../../datos/dt_kermesse.php';
 include '../../entidades/parroquia.php';
 include '../../datos/dt_parroquia.php';
-
+$dtParro = new Dt_Parroquia();
 $dtkerme = new Dt_Kermesse();
 $varMsj = 0;
 if (isset($varMsj)) {
@@ -215,10 +215,10 @@ if (isset($varMsj)) {
 
                         <?php
 
-                        foreach ($dtkerme->listKermesse() as $r) :
+                        foreach ($dtParro->listParroquia() as $r) :
                         ?>
                           <tr>
-                            <option value="<?php echo $r->__GET('idParroquia'); ?>"><?php echo $r->__GET('nombreParroquia'); ?></option>
+                            <option value="<?php echo $r->__GET('idParroquia'); ?>"><?php echo $r->__GET('nombre'); ?></option>
                           </tr>
                         <?php
                         endforeach;

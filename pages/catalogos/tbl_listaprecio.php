@@ -3,7 +3,10 @@ error_reporting(0);
 
 include '../../entidades/lista_precio.php';
 include '../../datos/dt_listaprecio.php';
+include '../../entidades/listaprecio_det.php';
+include '../../datos/dt_listaprecio_det.php';
 
+$dtlistdet = new Dt_ListaPrecioDet();
 $dtlist = new Dt_ListaPrecio();
 
 $varMsj = 0;
@@ -257,7 +260,7 @@ if (isset($varMsj)) {
               ?>
                 <tr>
                   <td><?php echo $r->__GET('id_lista_precio') ?></td>
-                  <td><?php echo $r->__GET('id_kermesse') ?></td>
+                  <td><?php echo $r->__GET('nombreKermesse') ?></td>
                   <td><?php echo $r->__GET('nombre') ?></td>
                   <td><?php echo $r->__GET('descripcion') ?></td>
                   <td><?php echo $estado ?></td>
@@ -284,6 +287,66 @@ if (isset($varMsj)) {
                 <th>Nombre</th>
                 <th>Descripcion</th>
                 <th>Estado</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Listas Precio Det</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <div class="form-group col-md-12" style="text-align: right;">
+            <a href="frm_listaprecio_det.php" title="Registrar una nueva lista precio" target="_blank"><i class="far fa-2x fa-plus-square"></i></a>
+          </div>
+          <table id="example1" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Lista Precio Det</th>
+                <th>Lista precio</th>
+                <th>Producto</th>
+                <th>Precio Venta</th>
+
+              </tr>
+            </thead>
+            </thead>
+
+            <tbody>
+
+              <?php
+              foreach ($dtlistdet->listListaPrecioDet() as $r) :
+              ?>
+                <tr>
+                  <td><?php echo $r->__GET('id_listaprecio_det') ?></td>
+                  <td><?php echo $r->__GET('nombreProducto') ?></td>
+                  <td><?php echo $r->__GET('nombreListaPrecio') ?></td>
+                  <td><?php echo $r->__GET('precio_venta') ?></td>
+
+                  <td> <a href="frm_editar_listaprecio_det.php?editC=<?php echo $r->__GET('id_lista_precio'); ?>" target="blank">
+                      <i class="far fa-edit" title="Editar lista precio"></i></a>
+                    &nbsp;&nbsp;
+                    <a href="frm_view_listaprecio_det.php?viewC=<?php echo $r->__GET('id_lista_precio'); ?>" target="blank">
+                      <i class="far fa-eye" title="Ver lista precio"></i></a>
+                    &nbsp;&nbsp;
+                    <a href="#" onclick="deleteLista(<?php echo $r->__GET('id_lista_precio'); ?>);">
+                      <i class="far fa-trash-alt" title="Eliminar"></i>
+                    </a>
+                  </td>
+                </tr>
+              <?php
+              endforeach;
+              ?>
+
+            <tfoot>
+              <tr>
+                <th>Lista Precio Det</th>
+                <th>Lista precio</th>
+                <th>Producto</th>
+                <th>Precio Venta</th>
               </tr>
             </tfoot>
           </table>

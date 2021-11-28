@@ -160,24 +160,6 @@ if (isset($varMsj)) {
     <!-- /.sidebar -->
   </aside>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Nuevo Rol Opcion</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Registrar Rol Opcion</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -211,15 +193,16 @@ if (isset($varMsj)) {
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form>
+                <form method="POST" action="../../negocio/ng_ListaPrecioDet.php">
                   <div class="card-body">
                     <div class="form-group">
                       <label>Lista Precio Det ID</label>
-                      <input type="number" class="form-control" id="id_lista_precio" name="id_lista_precio" placeholder="Lista precio Det ID" required>
+                      <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
+                      <input type="number" class="form-control" id="id_listaprecio_det" name="id_listaprecio_det" placeholder="Lista precio Det ID" required>
                     </div>
                     <div class="form-group">
                       <label>Seleccione una lista precio</label>
-                      <select id="id_kermesse" name="id_kermesse" class="form-control">
+                      <select id="id_lista_precio" name="id_lista_precio" class="form-control">
                         <option value="">Seleccione...</option>
 
 
