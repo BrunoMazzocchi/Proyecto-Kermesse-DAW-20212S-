@@ -258,7 +258,7 @@ if (isset($varMsj)) {
                     <a href="frm_view_listaprecio_det.php?viewCyG=<?php echo $r->__GET('id_listaprecio_det'); ?>" target="blank">
                       <i class="far fa-eye" title="Ver Lista Precio Det"></i></a>
                     &nbsp;&nbsp;
-                    <a href="#" target="_blank">
+                    <a href="../../negocio/ng_ListaPrecio.php?delC=<?php echo $r->__GET('id_listaprecio_det') ?>" target="_blank">
                       <i class="far fa-trash-alt" title="Eliminar"></i>
                     </a>
                   </td>

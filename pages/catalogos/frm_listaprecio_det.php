@@ -3,8 +3,15 @@ error_reporting(0);
 
 include '../../entidades/listaprecio_det.php';
 include '../../datos/dt_listaprecio_det.php';
+include '../../entidades/lista_precio.php';
+include '../../entidades/productos.php';
+include '../../datos/dt_listaprecio.php';
+include '../../datos/dt_productos.php';
 
+$dtLista = new Dt_ListaPrecio();
+$dtProd = new Dt_Productos();
 $dtlist = new Dt_ListaPrecioDet();
+$list = new Lista_Precio_Det();
 
 $varMsj = 0;
 if (isset($varMsj)) {
@@ -208,10 +215,10 @@ if (isset($varMsj)) {
 
                         <?php
 
-                        foreach ($dtlist->listListaPrecioDet() as $r) :
+                        foreach ($dtLista->listListaPrecio() as $r) :
                         ?>
                           <tr>
-                            <option value="<?php echo $r->__GET('id_lista_precio'); ?>"><?php echo $r->__GET('nombreListaPrecio'); ?></option>
+                            <option value="<?php echo $r->__GET('id_lista_precio'); ?>"><?php echo $r->__GET('nombre'); ?></option>
                           </tr>
                         <?php
                         endforeach;
@@ -230,10 +237,10 @@ if (isset($varMsj)) {
 
                         <?php
 
-                        foreach ($dtlist->listListaPrecioDet() as $r) :
+                        foreach ($dtProd->listProductos() as $r) :
                         ?>
                           <tr>
-                            <option value="<?php echo $r->__GET('id_producto'); ?>"><?php echo $r->__GET('nombreProducto'); ?></option>
+                            <option value="<?php echo $r->__GET('id_producto'); ?>"><?php echo $r->__GET('nombre'); ?></option>
                           </tr>
                         <?php
                         endforeach;

@@ -67,8 +67,8 @@ class Dt_ListaPrecioDet extends Conexion
             $this->myCon->prepare($sql)
                 ->execute(array(
 
+                    $lstPrecio->__GET('id_listaprecio_det'),
                     $lstPrecio->__GET('id_lista_precio'),
-                    $lstPrecio->__GET('id_kermesse'),
                     $lstPrecio->__GET('id_producto'),
                     $lstPrecio->__GET('precio_venta'),
                 ));
@@ -98,5 +98,18 @@ class Dt_ListaPrecioDet extends Conexion
             die($e->getMessage());
         }
     }
-
+    public function deleteList($id)
+    {
+        try
+        {
+            $this->myCon = parent::conectar();
+            $querySQL = "DELETE FROM vw_listapreciodet_listaprecio_producto WHERE id_listaprecio_det = ?";
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute(array($id));
+            $this->myCon = parent::desconectar();
+        }
+        catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }

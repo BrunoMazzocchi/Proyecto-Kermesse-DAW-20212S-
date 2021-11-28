@@ -332,7 +332,7 @@ if (isset($varMsj)) {
                     <a href="frm_view_listaprecio_det.php?viewC=<?php echo $r->__GET('id_lista_precio'); ?>" target="blank">
                       <i class="far fa-eye" title="Ver lista precio"></i></a>
                     &nbsp;&nbsp;
-                    <a href="#" onclick="deleteLista(<?php echo $r->__GET('id_lista_precio'); ?>);">
+                    <a href="../../negocio/ng_ListaPrecio.php?delC=<?php echo $r->__GET('id_listaprecio_det') ?>" target="_blank">
                       <i class="far fa-trash-alt" title="Eliminar"></i>
                     </a>
                   </td>
