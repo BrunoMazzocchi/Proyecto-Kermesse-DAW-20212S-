@@ -1,30 +1,20 @@
 <?php
 error_reporting(0);
 //IMPORTAMOS ENTIDADES Y DATOS
-include '../../entidades/rol.php';
-include '../../datos/dt_rol.php';
+include '../../entidades/tasacambio.php';
+include '../../datos/dt_tasacambio.php';
 
-include '../../entidades/usuario.php';
-include '../../datos/dt_usuario.php';
+include '../../entidades/tbl_moneda.php';
+include '../../datos/dt_moneda.php';
 
-include '../../entidades/vw_rol_usuario.php';
-include '../../datos/dt_rol_usuario.php';
-include '../../entidades/rol_usuario.php';
-
-$dtRol = new Dt_rol();
-$dtUser = new Dt_usuario();
+$dtTasaC = new Dt_tasacambio();
+$dtMoneda = new Dt_moneda();
 
 
-$dtRolUser = new Dt_rol_usuario();
-$rolUs = new Rol_usuario();
-
-$varIdRolU = 0;
-if (isset($varIdRolU)) {
-    $varIdRolU = $_GET['EditRU'];
+$varMsj = 0;
+if (isset($varMsj)) {
+    $varMsj = $_GET['msj'];
 }
-
-$rolUs = $dtRolUser->obtenerRolUser($varIdRolU);
-
 ?>
 
 <!DOCTYPE html>
@@ -223,31 +213,12 @@ $rolUs = $dtRolUser->obtenerRolUser($varIdRolU);
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Nuevo Rol Opcion</h1>
+            <h1>Nuevo Rol Usuario</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Registrar Rol Opcion</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Editar Rol Usuario</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Editar Rol Usuario</li>
+              <li class="breadcrumb-item active">Registrar Rol Usuario</li>
             </ol>
           </div>
         </div>
@@ -263,43 +234,52 @@ $rolUs = $dtRolUser->obtenerRolUser($varIdRolU);
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Editar Rol Usuario</h3>
+                <h3 class="card-title">Registrar Rol Usuario</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="POST" action="../../negocio/ng_rol_usuario.php">
+              <form method="POST" action="../../negocio/ng_tasacambio.php">
                 <div class="card-body">
                   <div class="form-group">
-                    <label>ID Rol Usuario</label>
-                    <input type="number"  value="<?php echo $rolUs->_GET('id_rol_usuario'); ?>" class="form-control" id="id_rol_usuario" name="id_rol_usuario"placeholder="Digite numero de Rol Usuario" readonly>
-                    <input type="hidden" value="2" name="txtaccion" id="txtaccion"/>
+                    <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
                   </div>
                   <div class="form-group">
-                    <label>Seleccione el Rol</label>
-                    <select class="form-control" id="tbl_rol_id_rol" name="tbl_rol_id_rol" required>
-                        <option value=""><?php echo $rolUs->_GET('rol_descripcion'); ?>.</option>
+                    <label>Seleccione la Moneda Origen</label>
+                    <select class="form-control" id="id_monedaO" name="id_monedaO" required>
+                        <option value="">Seleccione...</option>
                         <?php
-                            foreach($dtRol->listRol() as $r):
+                            foreach($dtMoneda->listMoneda() as $r):
                         ?>
-                        <option value="<?php echo $r->_GET('id_rol'); ?>"><?php echo $r->_GET('rol_descripcion'); ?></option>
+                        <option value="<?php echo $r->_GET('id_moneda'); ?>"><?php echo $r->_GET('nombre'); ?></option>
                         <?php
                             endforeach;
                             ?>
                     </select>
                   </div>
                   <div class="form-group">
-                    <label>Seleccione el Usuario</label>
-                    <select class="form-control" id="tbl_usuario_id_usuario" name="tbl_usuario_id_usuario" required>
-                        <option value=""><?php echo $rolUs->_GET('usuario'); ?>.</option>
+                    <label>Seleccione la Moneda Cambio</label>
+                    <select class="form-control" id="id_monedaC" name="id_monedaC" required>
+                        <option value="">Seleccione...</option>
                         <?php
-                            foreach($dtUser->listUsuario() as $r):
+                            foreach($dtMoneda->listMoneda() as $r):
                         ?>
-                        <option value="<?php echo $r->_GET('id_usuario'); ?>"><?php echo $r->_GET('usuario'); ?></option>
+                        <option value="<?php echo $r->_GET('id_moneda'); ?>"><?php echo $r->_GET('nombre'); ?></option>
                         <?php
-                            endforeach;
+                        endforeach;
                             ?>
                     </select>
                   </div>
+                  <div class="form-group">
+                    <label>Mes</label>
+                    <input type="text" class="form-control" id="mes" name="mes" maxlength="45" placeholder="Mes" title="Ingrese el mes" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Año</label>
+                    <input type="number" class="form-control" id="anio" name="anio" maxlength="45" placeholder="Año" title="Ingrese el año" required>
+                  </div>
+
+                </div>
                 </div>
                 <!-- /.card-body -->
 
@@ -310,7 +290,7 @@ $rolUs = $dtRolUser->obtenerRolUser($varIdRolU);
                 </div>
               </form>
               <div class="card-footer">
-                                        <a href="tbl_rol_usuario.php"><i class="fas fa-arrow-left"></i> Atras</a>
+                                        <a href="tbl_tasacambio.php"><i class="fas fa-arrow-left"></i> Atras</a>
 
                                     </div>
             </div>
@@ -342,6 +322,9 @@ $rolUs = $dtRolUser->obtenerRolUser($varIdRolU);
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- bs-custom-file-input -->
 <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<!-- jAlert -->
+<script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+    <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> //optional!! </script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->

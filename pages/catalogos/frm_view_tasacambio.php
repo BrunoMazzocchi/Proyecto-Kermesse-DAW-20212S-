@@ -1,30 +1,20 @@
 <?php
-error_reporting(0);
+//error_reporting(0);
 //IMPORTAMOS ENTIDADES Y DATOS
-include '../../entidades/rol.php';
-include '../../datos/dt_rol.php';
-
-include '../../entidades/usuario.php';
-include '../../datos/dt_usuario.php';
-
-include '../../entidades/vw_rol_usuario.php';
-include '../../datos/dt_rol_usuario.php';
-include '../../entidades/rol_usuario.php';
-
-$dtRol = new Dt_rol();
-$dtUser = new Dt_usuario();
+include '../../entidades/vw_tasacambio.php';
+include '../../datos/dt_tasacambio.php';
+include '../../entidades/tasacambio.php';
 
 
-$dtRolUser = new Dt_rol_usuario();
-$rolUs = new Rol_usuario();
+$dtTasa = new Dt_tasacambio();
+$tasacambio = new Tasacambio();
 
-$varIdRolU = 0;
-if (isset($varIdRolU)) {
-    $varIdRolU = $_GET['EditRU'];
+$varIdTC = 0;
+if (isset($varIdTC)) {
+    $varIdTC = $_GET['viewTC'];
 }
 
-$rolUs = $dtRolUser->obtenerRolUser($varIdRolU);
-
+$tasacambio = $dtTasa->obtenerTasacambio($varIdTC);
 ?>
 
 <!DOCTYPE html>
@@ -223,31 +213,12 @@ $rolUs = $dtRolUser->obtenerRolUser($varIdRolU);
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Nuevo Rol Opcion</h1>
+            <h1>Visualizar Tasa Cambio</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Registrar Rol Opcion</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Editar Rol Usuario</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Editar Rol Usuario</li>
+              <li class="breadcrumb-item active">Visualizar Tasa Cambio</li>
             </ol>
           </div>
         </div>
@@ -263,54 +234,37 @@ $rolUs = $dtRolUser->obtenerRolUser($varIdRolU);
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Editar Rol Usuario</h3>
+                <h3 class="card-title">Visualizar Tasa Cambio</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="POST" action="../../negocio/ng_rol_usuario.php">
+              <form>
                 <div class="card-body">
                   <div class="form-group">
-                    <label>ID Rol Usuario</label>
-                    <input type="number"  value="<?php echo $rolUs->_GET('id_rol_usuario'); ?>" class="form-control" id="id_rol_usuario" name="id_rol_usuario"placeholder="Digite numero de Rol Usuario" readonly>
-                    <input type="hidden" value="2" name="txtaccion" id="txtaccion"/>
+                    <label>ID Tasa Cambio</label>
+                    <input type="number" value="<?php echo $tasacambio->_GET('id_tasaCambio'); ?>" class="form-control" id="id_tasaCambio" name="id_tasaCambio"placeholder="" disabled>
                   </div>
                   <div class="form-group">
-                    <label>Seleccione el Rol</label>
-                    <select class="form-control" id="tbl_rol_id_rol" name="tbl_rol_id_rol" required>
-                        <option value=""><?php echo $rolUs->_GET('rol_descripcion'); ?>.</option>
-                        <?php
-                            foreach($dtRol->listRol() as $r):
-                        ?>
-                        <option value="<?php echo $r->_GET('id_rol'); ?>"><?php echo $r->_GET('rol_descripcion'); ?></option>
-                        <?php
-                            endforeach;
-                            ?>
-                    </select>
+                    <label>Moneda Origen</label>
+                    <input type="text" value="<?php echo $tasacambio->_GET('nombreO'); ?>" class="form-control" id="nombreO" name="nombreO"placeholder="" disabled>
                   </div>
                   <div class="form-group">
-                    <label>Seleccione el Usuario</label>
-                    <select class="form-control" id="tbl_usuario_id_usuario" name="tbl_usuario_id_usuario" required>
-                        <option value=""><?php echo $rolUs->_GET('usuario'); ?>.</option>
-                        <?php
-                            foreach($dtUser->listUsuario() as $r):
-                        ?>
-                        <option value="<?php echo $r->_GET('id_usuario'); ?>"><?php echo $r->_GET('usuario'); ?></option>
-                        <?php
-                            endforeach;
-                            ?>
-                    </select>
+                    <label>Moneda Cambio</label>
+                    <input type="text" value="<?php echo $tasacambio->_GET('nombreC'); ?>" class="form-control" id="nombreC" name="nombreC"placeholder="" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label>Mes</label>
+                    <input type="text" value="<?php echo $tasacambio->_GET('mes'); ?>" class="form-control" id="mes" name="mes"placeholder="" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label>Año</label>
+                    <input type="number" value="<?php echo $tasacambio->_GET('anio'); ?>" class="form-control" id="anio" name="anio"placeholder="" disabled>
                   </div>
                 </div>
                 <!-- /.card-body -->
-
-                <div class="card-footer">
-                  
-                  <button type="submit" class="btn btn-primary">Guardar</button>
-                  <button type="reset" class="btn btn-danger">Cancelar</button>
-                </div>
               </form>
               <div class="card-footer">
-                                        <a href="tbl_rol_usuario.php"><i class="fas fa-arrow-left"></i> Atras</a>
+                                        <a href="tbl_tasacambio.php"><i class="fas fa-arrow-left"></i> Atras</a>
 
                                     </div>
             </div>
