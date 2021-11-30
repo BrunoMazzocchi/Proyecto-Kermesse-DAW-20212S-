@@ -457,7 +457,7 @@ $dtu = new Dt_Usuario();
 
                         <?php
 
-                        foreach ($dtProd->listProductos() as $r) :
+                        foreach ($dtProd->listProducto() as $r) :
                         ?>
                           <tr>
                             <option value="<?php echo $r->__GET('id_producto'); ?>"><?php echo $r->__GET('nombre'); ?></option>
