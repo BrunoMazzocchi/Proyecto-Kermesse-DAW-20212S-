@@ -123,5 +123,25 @@ class Dt_rol extends Conexion{
         }
     }
 
+    public function getIdRol($username)
+    {
+        try
+        {
+            $this->myCon = parent::conectar();
+            $querySQL = "select id_rol from  dbkermesse.vw_rol_usuario where usuario = :usuario;";
+
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->bindParam(':usuario', $username, PDO::PARAM_STR, 40);
+            $stm->execute();
+
+            $result = $stm->fetchColumn(0);
+            $this->myCon = parent::desconectar();
+            return $result;
+        }
+        catch (Exception $e)
+        {
+            die($e->getMessage());
+        }
+    }
 
 }

@@ -223,25 +223,6 @@ $rolUs = $dtRolUser->obtenerRolUser($varIdRolU);
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Nuevo Rol Opcion</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Registrar Rol Opcion</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
             <h1>Editar Rol Usuario</h1>
           </div>
           <div class="col-sm-6">
@@ -271,7 +252,7 @@ $rolUs = $dtRolUser->obtenerRolUser($varIdRolU);
                 <div class="card-body">
                   <div class="form-group">
                     <label>ID Rol Usuario</label>
-                    <input type="number"  value="<?php echo $rolUs->_GET('id_rol_usuario'); ?>" class="form-control" id="id_rol_usuario" name="id_rol_usuario"placeholder="Digite numero de Rol Usuario">
+                    <input type="number"  value="<?php echo $rolUs->_GET('id_rol_usuario'); ?>" class="form-control" id="id_rol_usuario" name="id_rol_usuario"placeholder="Digite numero de Rol Usuario" readonly>
                     <input type="hidden" value="2" name="txtaccion" id="txtaccion"/>
                   </div>
                   <div class="form-group">

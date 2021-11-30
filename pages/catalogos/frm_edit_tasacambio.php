@@ -1,18 +1,23 @@
 <?php
-error_reporting(0);
+//error_reporting(0);
+//IMPORTAMOS ENTIDADES Y DATOS
+include '../../entidades/vw_tasacambio.php';
+include '../../datos/dt_tasacambio.php';
+include '../../entidades/tasacambio.php';
+include '../../entidades/tbl_moneda.php';
+include '../../datos/dt_moneda.php';
 
-include '../../entidades/opciones.php';
-include '../../datos/dt_opciones.php';
 
-$dtOp = new Dt_opciones();
-$opc = new Opciones();
+$dtTasa = new Dt_tasacambio();
+$tasacambio = new Tasacambio();
+$dtMoneda = new Dt_moneda();
 
-$varIdop = 0;
-  if (isset($varIdop)) {
-    $varIdop = $_GET['EditO'];
-  } 
+$varIdTC = 0;
+if (isset($varIdTC)) {
+    $varIdTC = $_GET['editTC'];
+}
 
-  $opc = $dtOp->obtenerOpc($varIdop);
+$tasacambio = $dtTasa->obtenerTasacambio($varIdTC);
 ?>
 
 <!DOCTYPE html>
@@ -211,12 +216,12 @@ $varIdop = 0;
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Editar Opciones</h1>
+            <h1>Editar Tasa Cambio</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Editar Opcion</li>
+              <li class="breadcrumb-item active">Editar Tasa Cambio</li>
             </ol>
           </div>
         </div>
@@ -232,31 +237,62 @@ $varIdop = 0;
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Editar Opcion</h3>
+                <h3 class="card-title">Editar Tasa Cambio</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="POST" action="../../negocio/ng_opciones.php"> 
+              <form method="POST" action="../../negocio/ng_tasacambio.php">
                 <div class="card-body">
                   <div class="form-group">
-                    <label>ID Opciones</label>
-                    <input type="number" value="<?php echo $opc->_GET('id_opciones'); ?>" class="form-control" id="id_opciones" name="id_opciones"placeholder="Digite numero de opcion" readonly>
+                  <input type="number" value="<?php echo $tasacambio->_GET('id_tasaCambio'); ?>" class="form-control" id="id_tasaCambio" name="id_tasaCambio"placeholder="" readonly>
                     <input type="hidden" value="2" name="txtaccion" id="txtaccion"/>
-
                   </div>
                   <div class="form-group">
-                    <label>Descripcion</label>
-                    <input type="text" value="<?php echo $opc->_GET('opcion_descripcion'); ?>" class="form-control" id="opcion_descripcion" name="opcion_descripcion"placeholder="Ingrese la descripcion">
+                    <label>Seleccione la Moneda Origen</label>
+                    <select class="form-control" id="id_monedaO" name="id_monedaO" required>
+                        <option value=""><?php echo $tasacambio->_GET('nombreO'); ?>.</option>
+                        <?php
+                            foreach($dtMoneda->listMoneda() as $r):
+                        ?>
+                        <option value="<?php echo $r->_GET('id_moneda'); ?>"><?php echo $r->_GET('nombre'); ?></option>
+                        <?php
+                            endforeach;
+                            ?>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Seleccione la Moneda Cambio</label>
+                    <select class="form-control" id="id_monedaC" name="id_monedaC" required>
+                        <option value=""><?php echo $tasacambio->_GET('nombreC'); ?>.</option>
+                        <?php
+                            foreach($dtMoneda->listMoneda() as $r):
+                        ?>
+                        <option value="<?php echo $r->_GET('id_moneda'); ?>"><?php echo $r->_GET('nombre'); ?></option>
+                        <?php
+                        endforeach;
+                            ?>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Mes</label>
+                    <input type="text" value="<?php echo $tasacambio->_GET('mes'); ?>" class="form-control" id="mes" name="mes"placeholder="" >
+                  </div>
+                  <div class="form-group">
+                    <label>Año</label>
+                    <input type="number" value="<?php echo $tasacambio->_GET('anio'); ?>" class="form-control" id="anio" name="anio"placeholder="" >
                   </div>
                 </div>
                 <!-- /.card-body -->
-
                 <div class="card-footer">
                   
                   <button type="submit" class="btn btn-primary">Guardar</button>
                   <button type="reset" class="btn btn-danger">Cancelar</button>
                 </div>
               </form>
+              <div class="card-footer">
+                                        <a href="tbl_tasacambio.php"><i class="fas fa-arrow-left"></i> Atras</a>
+
+                                    </div>
             </div>
             <!-- /.card -->
 
