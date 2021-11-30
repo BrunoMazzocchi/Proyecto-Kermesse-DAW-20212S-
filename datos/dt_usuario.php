@@ -128,25 +128,26 @@ class Dt_usuario extends Conexion
         }
     }
 
-    public function obtenerUsuario($usuario)
+    public function ObtenerUsuario($user)
     {
         try {
             $this->myCon = parent::conectar();
-            $querySQL = "SELECT * FROM dbkermesse.tbl_usuario WHERE usuario = ?;";
+            $querySQL = "SELECT * FROM dbkermesse.tbl_usuario WHERE usuario = ?";
             $stm = $this->myCon->prepare($querySQL);
-            $stm->execute(array($usuario));
+            $stm->execute(array($user));
 
             $r = $stm->fetch(PDO::FETCH_OBJ);
 
             $us = new Usuario();
 
+            //_SET(CAMPOBD, atributoEntidad)			
             $us->_SET('id_usuario', $r->id_usuario);
             $us->_SET('usuario', $r->usuario);
-            $us->_SET('pwd', $r->pwd);
             $us->_SET('nombres', $r->nombres);
             $us->_SET('apellidos', $r->apellidos);
             $us->_SET('email', $r->email);
             $us->_SET('estado', $r->estado);
+
 
             $this->myCon = parent::desconectar();
             return $us;
@@ -154,23 +155,22 @@ class Dt_usuario extends Conexion
             die($e->getMessage());
         }
     }
-
     public function validarUser($user, $pwd)
     {
         try {
             $this->myCon = parent::conectar();
-            $querySQL = "SELECT * FROM tbl_usuario WHERE usuario=? AND pwd=? AND estado <> 3;";
+
+            $querySQL = "SELECT * FROM dbkermesse.tbl_usuario WHERE usuario=? AND pwd=? AND estado<>3;";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute(array($user, $pwd));
 
             $resultado = $stm->fetchAll(PDO::FETCH_CLASS, "Usuario");
+
             $this->myCon = parent::desconectar();
             return $resultado;
         } catch (Exception $e) {
             die($e->getMessage());
         }
     }
-
-    
 }

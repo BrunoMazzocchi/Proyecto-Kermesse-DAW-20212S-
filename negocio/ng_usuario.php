@@ -50,31 +50,29 @@ if ($_POST) {
             break;
 
         case '3':
-            try {
-                //obtenemos los valores 
-                $usuario = $_POST["user"];
-                $password = $_POST["pwd"];
 
-                if (empty($usuario) and empty($pwd)) {
-                    //nos envia al inicio
-                    header("Location: /login.php?msj=403");
+            //obtenemos los valores 
+            $usuario = $_POST["user"];
+            $password = $_POST["pwd"];
+
+            if (empty($usuario) and empty($password)) {
+                //nos envia al inicio
+                header("Location: ../login.php?msj=403");
+            } else {
+                $us = $dtUs->validarUser($usuario, $password);
+                if (empty($us)) {
+                    header("Location: ../login.php?msj=401");
                 } else {
-                    $us = $dtUs->validarUser($usuario, $password);
-                    if (empty($us)) {
-                        header("Location: /login.php?msj=401");
+                    session_start();
+                    $_SESSION['acceso'] = $us;
+                    if (!isset($_SESSION['acceso'])) {
+                        header("Location: ../login.php?msj=400");
                     } else {
-                        session_start();
-                        $_SESSION['acceso'] = $us;
-                        if (!isset($_SESSION['acceso'])) {
-                            header("Location: /login.php?msj=400");
-                        } else {
-                            header("Location: ../sistema-kermesse.php?msj=1");
-                        }
+                        header("Location: ../sistema-kermesse.php?msj=1");
                     }
                 }
-            } catch (Exception $e) {
-              
             }
+
             break;
 
         default:

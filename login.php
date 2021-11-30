@@ -1,3 +1,19 @@
+<?php
+error_reporting(0);
+
+session_start();
+session_unset();
+
+if (session_destroy()) {
+
+  echo "La sesion ha sido cerrada correctamente";
+} else {
+  echo "Error al destruir la sesion";
+}
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,9 +42,9 @@
       <div class="card-body login-card-body">
         <p class="login-box-msg">Ingresar datos de accesso para iniciar sesion</p>
 
-        <form action="./negocio/ng_usuario.php" method="post">
+        <form method="POST" action="./negocio/ng_usuario.php" >
           <div class="input-group mb-3">
-            <input type="hidden" name="txtaccion" value="3">
+            <input type="hidden" name="txtaccion" value="3" id="txtaccion">
             <input type="text" class="form-control" name="user" placeholder="Usuario" required>
             <div class="input-group-append">
               <div class="input-group-text">
