@@ -84,9 +84,6 @@ if (!$acceso) {
 }
 
 // 
-$dtu = new Dt_Usuario();
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -122,21 +119,43 @@ $dtu = new Dt_Usuario();
           <a href="#" class="nav-link">Contact</a>
         </li>
       </ul>
-
-      <ul class="navbar-nav ml-auto">
+    <!-- SEARCH FORM -->
+    <form class="form-inline ml-3">
+      <div class="input-group input-group-sm">
+        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+        <div class="input-group-append">
+          <button class="btn btn-navbar" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+          <i class="fas fa-marker"></i>
+        </a>
+      </li>
+    </ul>
+  <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <a class="nav-link" href="../../login.php" title="Cerrar Sesion">
             <i class="fas fa-power-off"></i> Cerrar Sesion
           </a>
         </li>
       </ul>
-    </nav>
-    <!-- /.navbar -->
+  </nav>
 
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="../../index.html" class="brand-link">
+      <a href="../../sistema-kermesse.php" class="brand-link">
         <img src="../../dist/img/Kermesse_Logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">Kermesse</span>
       </a>
@@ -257,6 +276,14 @@ $dtu = new Dt_Usuario();
                 </p>
               </a>
             </li>
+            <li class="nav-item">
+            <a href="../catalogos/tbl_tasacambio.php" class="nav-link">
+              <i class="nav-icon fas fa-hand-holding-usd"></i>
+              <p>
+                Tasa Cambio
+              </p>
+            </a>
+          </li>
         </nav>
         <!-- /.sidebar-menu -->
       </div>

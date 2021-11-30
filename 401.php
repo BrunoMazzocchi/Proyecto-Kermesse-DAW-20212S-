@@ -43,6 +43,7 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+<<<<<<< HEAD
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
@@ -59,14 +60,27 @@
         </a>
       </li>
     </ul>
+=======
+        <li class="nav-item">
+          <a class="nav-link" href="login.php" title="Cerrar Sesion">
+            <i class="fas fa-power-off"></i> Cerrar Sesion
+          </a>
+        </li>
+      </ul>
+>>>>>>> 56322a0f02b5abf9fa3db1cd6f413f9ecd4c28da
   </nav>
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
+<<<<<<< HEAD
     <a href="../Proyecto-Kermesse-DAW-20212S-/sistema-kermesse.php" class="brand-link">
       <img src="../Proyecto-Kermesse-DAW-20212S-/dist/img/Kermesse_Logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+=======
+    <a href="./sistema-kermesse.php" class="brand-link">
+    <img src="./dist/img/Kermesse_Logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+>>>>>>> 56322a0f02b5abf9fa3db1cd6f413f9ecd4c28da
       <span class="brand-text font-weight-light">Kermesse</span>
     </a>
 
@@ -194,12 +208,18 @@
                 </p>
               </a>
             </li>
-        </nav>
-        <!-- /.sidebar-menu -->
-      </div>
-      <!-- /.sidebar -->
+            <li class="nav-item">
+            <a href="../Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_tasacambio.php" class="nav-link">
+              <i class="nav-icon fas fa-hand-holding-usd"></i>
+              <p>
+                Tasa Cambio
+              </p>
+            </a>
+          </li>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
     </aside>
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -207,12 +227,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>404 Error Page</h1>
+            <h1>401 Error Page</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">404 Error Page</li>
+              <li class="breadcrumb-item active">401 Error Page</li>
             </ol>
           </div>
         </div>

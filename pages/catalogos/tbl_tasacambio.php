@@ -8,6 +8,14 @@ include '../../entidades/vw_tasacambio.php';
 include '../../entidades/tasacambio_det.php';
 include '../../datos/dt_tasacambio_det.php';
 
+include '../../entidades/usuario.php';
+include '../../entidades/rol.php';
+include '../../entidades/opciones.php';
+
+include '../../datos/dt_Usuario.php';
+include '../../datos/dt_Rol.php';
+include '../../datos/dt_Opciones.php';
+
 $dtTasacambio = new Dt_tasacambio();
 $dtTasacambioDet = new Dt_tasacambio_det();
 
@@ -16,6 +24,72 @@ if(isset($varMsj))
 {
     $varMsj = $_GET['msj'];
 }
+
+//SEGURIDAD//
+
+$usuario = new Usuario();
+$rol = new Rol();
+$listOpc = new Opciones();
+//DATOS
+$dtr = new Dt_Rol();
+$dtOpc = new Dt_Opciones();
+
+//MANEJO Y CONTROL DE LA SESION
+session_start(); // INICIAMOS LA SESION
+
+//VALIDAMOS SI LA SESION ESTÁ VACÍA
+if (empty($_SESSION['acceso'])) {
+  //nos envía al inicio
+  header("Location: ../../login.php?msj=2");
+}
+
+$usuario = $_SESSION['acceso']; // OBTENEMOS EL VALOR DE LA SESION
+
+//OBTENEMOS EL ROL
+$rol->_SET('id_rol', $dtr->getIdRol($usuario[0]->_GET('usuario')));
+
+//OBTENEMOS LAS OPCIONES DEL ROL
+$listOpc = $dtOpc->getOpciones($rol->_GET('id_rol'));
+
+//OBTENEMOS LA OPCION ACTUAL
+$url = $_SERVER['REQUEST_URI'];
+// var_dump($url);
+$inicio = strrpos($url, '/') + 1;
+// var_dump($inicio); //6
+// $total= strlen($url); 
+// var_dump($total); //28
+$fin = strripos($url, '?');
+// var_dump($fin); //22
+if ($fin > 0) {
+  $miPagina = substr($url, $inicio, $fin - $inicio);
+  // var_dump($miPagina);
+} else {
+  $miPagina = substr($url, $inicio);
+  // var_dump($miPagina);
+}
+
+////// VALIDAMOS LA OPCIÓN ACTUAL CON LA MATRIZ DE OPCIONES //////
+//obtenemos el numero de elementos
+$longitud = count($listOpc);
+$acceso = false; // VARIABLE DE CONTROL
+
+//Recorro todos los elementos de la matriz de opciones
+for ($i = 0; $i < $longitud; $i++) {
+  //obtengo el valor de cada elemento
+  $opcion = $listOpc[$i]->_GET('opcion_descripcion');
+  if (strcmp($miPagina, $opcion) == 0) //COMPARO LA OPCION ACTUAL CON CADA OPCIÓN DE LA MATRIZ
+  {
+    $acceso = true; //ACCESO CONCEDIDO
+    break;
+  }
+}
+
+if (!$acceso) {
+  //ACCESO NO CONCEDIDO 
+  header("Location: ../../401.php"); //REDIRECCIONAMOS A LA PAGINA DE ACCESO RESTRINGIDO
+}
+
+// 
 ?>
 
 
@@ -80,13 +154,21 @@ if(isset($varMsj))
         </a>
       </li>
     </ul>
+  <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="../../login.php" title="Cerrar Sesion">
+            <i class="fas fa-power-off"></i> Cerrar Sesion
+          </a>
+        </li>
+      </ul>
   </nav>
+  
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="../../index.html" class="brand-link">
+    <a href="../../sistema-kermesse.php" class="brand-link">
       <img src="../../dist/img/Kermesse_Logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Kermesse</span>
     </a>
@@ -204,6 +286,14 @@ if(isset($varMsj))
               <i class="nav-icon fas fa-user-tag"></i>
               <p>
                 Rol-Usuario
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_tasacambio.php" class="nav-link">
+              <i class="nav-icon fas fa-hand-holding-usd"></i>
+              <p>
+                Tasa Cambio
               </p>
             </a>
           </li>

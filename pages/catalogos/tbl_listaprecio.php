@@ -1,4 +1,5 @@
 <?php
+
 error_reporting(0);
 
 include '../../entidades/lista_precio.php';
@@ -212,7 +213,7 @@ $dtu = new Dt_Usuario();
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="../../index.html" class="brand-link">
+      <a href="../../sistema-kermesse.php" class="brand-link">
         <img src="../../dist/img/Kermesse_Logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">Kermesse</span>
       </a>
@@ -505,13 +506,13 @@ $dtu = new Dt_Usuario();
                   <td><?php echo $r->__GET('nombreListaPrecio') ?></td>
                   <td><?php echo $r->__GET('precio_venta') ?></td>
 
-                  <td> <a href="frm_editar_listaprecio_det.php?editC=<?php echo $r->__GET('id_lista_precio'); ?>" target="blank">
+                  <td> <a href="frm_editar_listaprecio_det.php?editC=<?php echo $r->__GET('id_listaprecio_det'); ?>" target="blank">
                       <i class="far fa-edit" title="Editar lista precio"></i></a>
                     &nbsp;&nbsp;
-                    <a href="frm_view_listaprecio_det.php?viewC=<?php echo $r->__GET('id_lista_precio'); ?>" target="blank">
+                    <a href="frm_view_listaprecio_det.php?viewC=<?php echo $r->__GET('id_listaprecio_det'); ?>" target="blank">
                       <i class="far fa-eye" title="Ver lista precio"></i></a>
                     &nbsp;&nbsp;
-                    <a href="../../negocio/ng_ListaPrecio.php?delC=<?php echo $r->__GET('id_listaprecio_det') ?>" target="_blank">
+                    <a href="#"  onclick="deleteListaDet(<?php echo $r->__GET('id_listaprecio_det'); ?>);">
                       <i class="far fa-trash-alt" title="Eliminar"></i>
                     </a>
                   </td>
@@ -597,6 +598,20 @@ $dtu = new Dt_Usuario();
           e.preventDefault();
         });
     }
+
+    function deleteListaDet(id)
+        {
+            confirm(function(e,btn)
+            {
+                e.preventDefault();
+                window.location.href = "../../negocio/ng_ListaPrecioDet.php?delC="+id;
+            },
+            function(e,btn)
+            {
+                e.preventDefault();      
+            });
+        }
+
     $(document).ready(function() {
       var mensaje = 0;
       mensaje = "<?php echo $varMsj ?>";

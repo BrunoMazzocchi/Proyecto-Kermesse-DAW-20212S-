@@ -38,3 +38,13 @@ if ($_POST) {
             break;
     }
 }
+if ($_GET) {
+    try {
+        $listaDet->__SET('id_listaprecio_det', $_GET['delC']);
+        $dtLista->deleteList($listaDet->__GET('id_listaprecio_det'));
+
+        header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_listaPrecio.php?msj=5");
+    } catch (Exception $e) {
+        header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_listaPrecio.php?msj=6 ");
+    }
+}

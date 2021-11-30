@@ -1,7 +1,5 @@
 <?php
 include_once("conexion.php");
-include_once("../entidades/lista_precio.php");
-include_once("../entidades/vw_listaprecio_kermesse.php");
 
 class Dt_ListaPrecio extends Conexion
 {

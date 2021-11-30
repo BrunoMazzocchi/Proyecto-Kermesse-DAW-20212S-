@@ -1,6 +1,5 @@
 <?php
 include_once("conexion.php");
-include_once("../entidades/listaprecio_det.php");
 
 class Dt_ListaPrecioDet extends Conexion
 {
@@ -100,15 +99,13 @@ class Dt_ListaPrecioDet extends Conexion
     }
     public function deleteList($id)
     {
-        try
-        {
+        try {
             $this->myCon = parent::conectar();
-            $querySQL = "DELETE FROM vw_listapreciodet_listaprecio_producto WHERE id_listaprecio_det = ?";
+            $querySQL = "DELETE FROM dbkermesse.tbl_listaprecio_det WHERE id_listaprecio_det = ?";
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute(array($id));
             $this->myCon = parent::desconectar();
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             die($e->getMessage());
         }
     }
