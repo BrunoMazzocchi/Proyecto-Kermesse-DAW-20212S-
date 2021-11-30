@@ -197,7 +197,7 @@ $lista = $dtlist->obtenerLista($varIdLista);
                 <div class="card-header">
                   <h3 class="card-title">Editar Lista Precio Det</h3>
                 </div>
-                <form >
+                <form>
                   <div class="card-body">
                     <div class="form-group">
                       <label>Lista Precio Det ID</label>
@@ -216,14 +216,12 @@ $lista = $dtlist->obtenerLista($varIdLista);
                       <input readonly type="number" class="form-control" id="precio_venta" name="precio_venta" placeholder="Precio Venta" required>
                     </div>
                     <!-- /.card-body -->
-
                     <div class="card-footer">
-                      <button type="submit" class="btn btn-primary">Editar</button>
-                      <button type="reset" class="btn btn-danger">Cancelar</button>
+                      <a href="tbl_listaprecio.php"><i class="fas fa-arrow-left"></i> Atras</a>
+
                     </div>
-                </form>
-              </div>
-              <!-- /.card -->
+                  </div>
+                  <!-- /.card -->
 
 
       </section>
