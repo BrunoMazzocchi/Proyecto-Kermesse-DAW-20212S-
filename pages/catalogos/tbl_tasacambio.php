@@ -316,7 +316,7 @@ if(isset($varMsj))
                 </div>
                 <div class="card-body">
                     <div class="form-group col-md-12" style="text-align:right">
-                    <a href="" title="Nuevo" target="blank"><i class="far fa-plus-square"></i></a>
+                    <a href="frm_tasacambio_det.php" title="Nuevo" target="blank"><i class="far fa-plus-square"></i></a>
                     </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -351,16 +351,15 @@ if(isset($varMsj))
                       <td><?php echo $r->_GET('id_tasaCambio'); ?></td>
                       <td><?php echo $r->_GET('fecha'); ?></td>
                       <td><?php echo $r->_GET('tipoCambio'); ?></td>
-                      <td><?php echo $r->_GET('estado'); ?></td>
                       <td><?php echo $estado; ?></td>
                       <td> 
-                    <a href="" target="_blank">
+                    <a href="frm_edit_tasacambio_det.php?editTCD=<?php echo $r->_GET('id_tasaCambio_det');?>" target="_blank">
                       <i class="far fa-edit" title="Editar"></i></a>
                     &nbsp;&nbsp;
-                    <a href="" target="_blank">
+                    <a href="frm_view_tasacambio_det.php?viewTCD=<?php echo $r->_GET('id_tasaCambio_det');?>" target="_blank">
                       <i class="far fa-eye" title="Ver"></i></a>
                     &nbsp;&nbsp;
-                    <a href="#" onclick="">
+                    <a href="#" onclick="deleteTCD(<?php echo $r->_GET('id_tasaCambio_det'); ?>);">
                       <i class="far fa-trash-alt" title="Eliminar"></i>
                     </a>
                     </td>
@@ -454,6 +453,20 @@ if(isset($varMsj))
                 e.preventDefault();      
             });
         }
+
+        function deleteTCD(idTCD)
+        {
+            confirm(function(e,btn)
+            {
+                e.preventDefault();
+                window.location.href = "../../negocio/ng_tasacambio_det.php?delTCD="+idTCD;
+            },
+            function(e,btn)
+            {
+                e.preventDefault();      
+            });
+        }
+
         $(document).ready(function()
         {
             var mensaje = 0;

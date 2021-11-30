@@ -1,18 +1,22 @@
 <?php
-error_reporting(0);
+//error_reporting(0);
+//IMPORTAMOS ENTIDADES Y DATOS
+include '../../entidades/vw_tasacambio.php';
+include '../../datos/dt_tasacambio_det.php';
+include '../../entidades/tasacambio_det.php';
+include '../../entidades/tasacambio.php';
+include '../../datos/dt_tasacambio.php';
 
-include '../../entidades/opciones.php';
-include '../../datos/dt_opciones.php';
+$dtTasaC = new Dt_tasacambio();
+$dtTasaDet = new Dt_tasacambio_det();
+$tasacambioDet = new Tasacambio_Det();
 
-$dtOp = new Dt_opciones();
-$opc = new Opciones();
+$varIdTCD = 0;
+if (isset($varIdTCD)) {
+    $varIdTCD = $_GET['editTCD'];
+}
 
-$varIdop = 0;
-  if (isset($varIdop)) {
-    $varIdop = $_GET['EditO'];
-  } 
-
-  $opc = $dtOp->obtenerOpc($varIdop);
+$tasacambioDet = $dtTasaDet->obtenerTasacambioDet($varIdTCD);
 ?>
 
 <!DOCTYPE html>
@@ -211,12 +215,12 @@ $varIdop = 0;
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Editar Opciones</h1>
+            <h1>Visualizar Tasa Cambio Detalle</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Editar Opcion</li>
+              <li class="breadcrumb-item active">Visualizar Tasa Cambio Detalle</li>
             </ol>
           </div>
         </div>
@@ -232,22 +236,41 @@ $varIdop = 0;
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Editar Opcion</h3>
+                <h3 class="card-title">Visualizar Tasa Cambio Detalle</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="POST" action="../../negocio/ng_opciones.php"> 
+              <form method="POST" action="../../negocio/ng_tasacambio_det.php">
                 <div class="card-body">
                   <div class="form-group">
-                    <label>ID Opciones</label>
-                    <input type="number" value="<?php echo $opc->_GET('id_opciones'); ?>" class="form-control" id="id_opciones" name="id_opciones"placeholder="Digite numero de opcion" readonly>
+                  <input type="number" value="<?php echo $tasacambioDet->_GET('id_tasaCambio_det'); ?>" class="form-control" id="id_tasaCambio_det" name="id_tasaCambio_det"placeholder="" readonly>
                     <input type="hidden" value="2" name="txtaccion" id="txtaccion"/>
-
                   </div>
                   <div class="form-group">
-                    <label>Descripcion</label>
-                    <input type="text" value="<?php echo $opc->_GET('opcion_descripcion'); ?>" class="form-control" id="opcion_descripcion" name="opcion_descripcion"placeholder="Ingrese la descripcion">
+                    <label>Seleccione la Tasa Cambio (ID)</label>
+                    <select class="form-control" id="id_tasaCambio" name="id_tasaCambio" required>
+                    <option value=""><?php echo $tasacambioDet->_GET('id_tasaCambio'); ?></option>
+                        <?php
+                            foreach($dtTasaC->listTasacambio() as $r):
+                        ?>
+                        
+                        <option value="<?php echo $r->_GET('id_tasaCambio'); ?>"><?php echo $r->_GET('id_tasaCambio'); ?><?php echo ' / '?><?php echo $r->_GET('nombreO');?><?php echo ' / '?><?php echo $r->_GET('nombreC');?></option>
+                        <?php
+                            endforeach;
+                            ?>
+                    </select>
                   </div>
+                  <div class="form-group">
+                    <label>Fecha</label>
+                    <input type="date" value="<?php echo $tasacambioDet->_GET('fecha'); ?>" class="form-control" id="fecha" name="fecha" maxlength="45" placeholder="fecha" title="Ingrese la fecha" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Tasa Cambio</label>
+                    <input type="decimal" value="<?php echo $tasacambioDet->_GET('tipoCambio'); ?>" class="form-control" id="tipoCambio" name="tipoCambio" maxlength="45" placeholder="Tipo Cambio" title="Ingrese la tasa de cambio" required>
+                  </div>
+
+                </div>
                 </div>
                 <!-- /.card-body -->
 
@@ -257,6 +280,10 @@ $varIdop = 0;
                   <button type="reset" class="btn btn-danger">Cancelar</button>
                 </div>
               </form>
+              <div class="card-footer">
+                                        <a href="tbl_tasacambio.php"><i class="fas fa-arrow-left"></i> Atras</a>
+
+                                    </div>
             </div>
             <!-- /.card -->
 
