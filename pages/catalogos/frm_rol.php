@@ -142,7 +142,7 @@ if (!$acceso) {
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="../../index.html" class="brand-link">
+    <a href="../../sistema-kermesse.php" class="brand-link">
       <img src="../../dist/img/Kermesse_Logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Kermesse</span>
     </a>
@@ -312,7 +312,6 @@ if (!$acceso) {
               <form method="POST" action="../../negocio/ng_rol.php">
                 <div class="card-body">
                   <div class="form-group">
-                    <label>ID Rol</label>
                     <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
                   </div>
                   <div class="form-group">
