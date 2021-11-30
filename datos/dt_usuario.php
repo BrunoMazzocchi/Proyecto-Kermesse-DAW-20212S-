@@ -40,7 +40,6 @@ class Dt_usuario extends Conexion
             VALUES(?,?,?,?,?,?);";
 
             $this->myCon->prepare($sql)
-<<<<<<< HEAD
              ->execute(array(
                 $us->_GET('usuario'),
                 $us->_GET('pwd'),
@@ -54,20 +53,6 @@ class Dt_usuario extends Conexion
         }
         catch (Exception $e)
         {
-=======
-                ->execute(array(
-                    $us->_GET('id_usuario'),
-                    $us->_GET('usuario'),
-                    $us->_GET('pwd'),
-                    $us->_GET('nombres'),
-                    $us->_GET('apellidos'),
-                    $us->_GET('email'),
-                    $us->_GET('estado'),
-                ));
-
-            $this->myCon = parent::desconectar();
-        } catch (Exception $e) {
->>>>>>> 661108d20789982f0d85646ca0ef362808395589
             die($e->getMessage());
         }
     }
