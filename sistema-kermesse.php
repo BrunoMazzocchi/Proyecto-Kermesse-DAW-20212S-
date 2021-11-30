@@ -280,6 +280,14 @@ if (!$acceso) {
                 </p>
               </a>
             </li>
+            <li class="nav-item">
+            <a href="../Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_tasacambio.php" class="nav-link">
+              <i class="nav-icon fas fa-hand-holding-usd"></i>
+              <p>
+                Tasa Cambio
+              </p>
+            </a>
+          </li>
         </nav>
         <!-- /.sidebar-menu -->
       </div>
