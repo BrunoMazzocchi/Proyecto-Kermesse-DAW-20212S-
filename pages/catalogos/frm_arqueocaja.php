@@ -3,8 +3,15 @@ error_reporting(0);
 
 include '../../datos/dt_arqueocaja.php';
 include '../../entidades/arqueocaja.php';
+include '../../datos/dt_kermesse.php';
+include '../../entidades/kermesse.php';
+include '../../entidades/vw_kermesse_parroquia.php';
+include '../../datos/dt_usuario.php';
+include '../../entidades/usuario.php';
 
 $dtg = new Dt_Arqueocaja();
+$dtk = new Dt_Kermesse();
+$dtu = new Dt_usuario();
 
 $varMsj = 0;
 if(isset($varMsj))
@@ -216,7 +223,18 @@ if(isset($varMsj))
                 <div class="card-body">
                   <div class="form-group">
                     <label>ID Kermesse</label>
-                    <input type="number" class="form-control" id="idKermesse" name = "idKermesse" placeholder="Ingrese el ID Kermesse">
+                    <select id="id_kermesse" name="id_kermesse" class="form-control">
+                        <option value="">Seleccione...</option>
+                        <?php
+                          foreach ($dtk->listKermesse() as $r) :
+                        ?>
+                          <tr>
+                            <option value="<?php echo $r->__GET('id_kermesse'); ?>"><?php echo $r->__GET('nombreKermesse'); ?></option>
+                          </tr>
+                        <?php
+                          endforeach;
+                        ?>
+                      </select>
                     <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
                   </div>
                   <div class="form-group">
@@ -226,30 +244,6 @@ if(isset($varMsj))
                   <div class="form-group">
                     <label>Gran Total</label>
                     <input type="number" class="form-control" id="granTotal" name="Gran Total" placeholder="Gran Total">
-                  </div>
-                  <div class="form-group">
-                    <label>Usuario Creacion</label>
-                    <input type="number" class="form-control" id="usuario_creacion" name="usuario_creacion" placeholder="Usuario creacion">
-                  </div>
-                  <div class="form-group">
-                    <label>Fecha Creacion</label>
-                    <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" placeholder="Fecha creacion">
-                  </div>
-                  <div class="form-group">
-                    <label>Usuario Modificacion</label>
-                    <input type="number" class="form-control" id="usuario_modificacion" name="usuario_modificacion" placeholder="Usuario Modificacion">
-                  </div>
-                  <div class="form-group">
-                    <label>Fecha modificacion</label>
-                    <input type="date" class="form-control" id="fecha_modificacion" name="granTotal" placeholder="Fecha de modificacion">
-                  </div>
-                  <div class="form-group">
-                    <label>Usuario Eliminacion</label>
-                    <input type="number" class="form-control" id="usuario_eliminacion" name="usuario_eliminacion" placeholder="Usuario Eliminacion">
-                  </div>
-                  <div class="form-group">
-                    <label>Fecha eliminacion</label>
-                    <input type="date" class="form-control" id="fecha_eliminacion" name="granTotal" placeholder="Fecha Eliminacion">
                   </div>
                 </div>
                   

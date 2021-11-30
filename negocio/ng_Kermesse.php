@@ -28,9 +28,9 @@ if ($_POST) {
 
 
                 $dtKerme->regKermesse($kerme);
-                header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_kermesse.php?msj=1");
+                header("Location: ../pages/catalogos/tbl_kermesse.php?msj=1");
             } catch (Exception $e) {
-                header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_kermesse.php?msj=2 ");
+                header("Location: ../pages/catalogos/tbl_kermesse.php?msj=2 ");
             }
             break;
         case '2':
@@ -46,9 +46,9 @@ if ($_POST) {
                 $kerme->__SET('fecha_modificacion', date("Y-m-d H:i:s"));
                 
                 $dtKerme->editKerme($kerme);
-                header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_kermesse.php?msj=3");
+                header("Location: ../pages/catalogos/tbl_kermesse.php?msj=3");
             } catch (Exception $e) {
-                header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_kermesse.php?msj=4 ");
+                header("Location: ../pages/catalogos/tbl_kermesse.php?msj=4 ");
             }
             break;
     }
@@ -58,10 +58,12 @@ if ($_GET) {
     try {
         $kerme->__SET('id_kermesse', $_GET['delK']);
 
+        $dtKerme->deleteKermesse($kerme->__GET('id_lista_precio'));
+        header("Location: ../pages/catalogos/tbl_kermesse.php?msj=5");
         $dtKerme->deleteKermesse($kerme->__GET('id_kermesse'));
         header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_kermesse.php?msj=5");
     } catch (Exception $e) {
-        header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_kermesse.php?msj=6");
+        header("Location: ../pages/catalogos/tbl_kermesse.php?msj=6");
         die($e->getMessage());
     }
 }

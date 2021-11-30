@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+//error_reporting(0);
 
 include '../../datos/dt_arqueocaja_det.php';
 include '../../entidades/arqueocaja_det.php';
@@ -9,10 +9,10 @@ $dtAcd = new Dt_Arqueocaja_Det();
 $acd = new Arqueocaja_Det();
 $varIdAcd = 0;
 if(isset($varIdAcd)) {
-    $varIdAcd = $_GET['msj'];
+    $varIdAcd = $_GET['editACD'];
 }
 
-$ac = $dtAc->obtenerArqueoCajaDet($varIdAc);
+$acd = $dtAcd->obtenerArqueoCajaDet($varIdAcd);
 ?>
 
 <!DOCTYPE html>
@@ -204,11 +204,11 @@ $ac = $dtAc->obtenerArqueoCajaDet($varIdAc);
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="POST" action="../../negocio/ng_Arqueocaja_Det.php">
+              <form method="POST" action="../../negocio/ng_ArqueocajaDet.php">
                 <div class="card-body">
                  <div class="form-group">
                     <label>ID Arqueo Caja Detalle</label>
-                    <input readonly type="number" value="<?php echo $acd->_GET('id_ArqueoCaja_Det'); ?>" class="form-control" id="id_ArqueoCaja_Det" name="id_ArqueoCaja_Det" placeholder="ID ArqueoCaja Det">
+                    <input readonly type="number" value="<?php echo $acd->_GET('idArqueoCaja_Det'); ?>" class="form-control" id="id_ArqueoCaja_Det" name="id_ArqueoCaja_Det" placeholder="ID ArqueoCaja Det">
                     <input type="hidden" value="2" name="txtaccion" id="txtaccion"/>
                   </div>
                   <div class="form-group">
@@ -221,11 +221,7 @@ $ac = $dtAc->obtenerArqueoCajaDet($varIdAc);
                   </div>
                   <div class="form-group">
                     <label>ID Denominacion</label>
-                    <input type="number" value="<?php echo $ac->_GET('idDenominacion'); ?>" class="form-control" id="idDenominacion" name="idDenominacion" placeholder="ID Denominacion">
-                  </div>
-                  <div class="form-group">
-                    <label>Usuario Creacion</label>
-                    <input type="text" value="<?php echo $acd->_GET('usuario_creacion'); ?>" class="form-control" id="usuario_creacion" name="usuario_creacion"placeholder="Usuario Creacion">
+                    <input type="number" value="<?php echo $acd->_GET('idDenominacion'); ?>" class="form-control" id="idDenominacion" name="idDenominacion" placeholder="ID Denominacion">
                   </div>
                   <div class="form-group">
                     <label>Fecha Creacion</label>
@@ -276,11 +272,10 @@ $ac = $dtAc->obtenerArqueoCajaDet($varIdAc);
 </script>
     <script>
       function setValoresArqueoCajaDet() {
-      $("#id_ArqueoCaja_Det").val("<?php echo $acd->_GET('id_ArqueoCaja_Det') ?>")
+      $("#id_ArqueoCaja_Det").val("<?php echo $acd->_GET('idArqueoCaja_Det') ?>")
       $("#id_ArqueoCaja").val("<?php echo $acd->_GET('id_ArqueoCaja') ?>")
       $("#idMoneda").val("<?php echo $acd->_GET('idMoneda') ?>")
       $("#idDenominacion").val("<?php echo $acd->_GET('idDenominacion') ?>")
-      $("#usuario_creacion").val("<?php echo $acd->_GET('usuario_creacion') ?>")
       $("#cantidad").val("<?php echo $acd->_GET('cantidad') ?>")
       $("#subtotal").val("<?php echo $acd->_GET('subtotal') ?>")
     }

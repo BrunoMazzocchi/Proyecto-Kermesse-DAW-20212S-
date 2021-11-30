@@ -307,14 +307,14 @@ if(isset($varMsj)) {
                 <!-- /.card-header -->
                 <div class="card-body">
                     <div class="form-group col-md-12" style="text-align: right;">
-                        <a href="frm_denominacion.php" title="Nueva denominacion" target="_blank"><i class="far fa-2x fa-plus-square"></i>Nueva Denominacion</a>
+                        <a href="frm_denominacion.php" title="Nueva denominacion" target="_blank"><i class="far fa-plus-square"></i>Nueva Denominacion</a>
                     </div>
                     <table id="example1" class="table table-bordered table-striped">
 
                 <thead>
                   <tr>
                     <th>ID Denominacion</th>
-                    <th>ID Moneda</th>
+                    <th>Moneda</th>
                     <th>Valor</th>
                     <th>Valor en Letras</th>
                     <th>Estado</th>
@@ -335,7 +335,7 @@ if(isset($varMsj)) {
                     ?>
                     <tr>
                       <td><?php echo $r->__GET('id_Denominacion'); ?></td>
-                      <td><?php echo $r->__GET('idMoneda'); ?></td>
+                      <td><?php echo $r->__GET('Moneda'); ?></td>
                       <td><?php echo $r->__GET('valor'); ?></td>
                       <td><?php echo $r->__GET('valor_letras'); ?></td>
                       <td><?php echo $estado; ?></td>

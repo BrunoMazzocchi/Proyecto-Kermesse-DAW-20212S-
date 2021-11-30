@@ -34,7 +34,7 @@ if ($_POST){
                     $mon->_SET('simbolo', $_POST['simbolo']);
                     $mon->_SET('estado', '2');
 
-                    $dtMon->regMoneda($mon);
+                    $dtMon->editMoneda($mon);
                     header("Location: ../pages/catalogos/tbl_moneda.php?msj=3");
                 }
                 catch (Exception $e)

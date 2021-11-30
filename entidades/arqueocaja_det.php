@@ -7,7 +7,6 @@ class Arqueocaja_Det{
     private $idArqueoCaja;
     private $idMoneda;
     private $idDenominacion;
-    private $usuario_creacion;
     private $cantidad;
     private $subtotal;
 

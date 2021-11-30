@@ -1,5 +1,5 @@
 <?php
-//error_reporting(0);
+error_reporting(0);
 //IMPORTAMOS ENTIDADES Y DATOS
 include '../../entidades/tbl_moneda.php';
 include '../../datos/dt_moneda.php';
@@ -18,6 +18,49 @@ $mon = $dtMon->obtenerMoneda($varIdMoneda);
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+<style>
+.dropbtn {
+  background-color: #343a40;
+  color: #C2C7D0;
+  padding-left: 20px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 16px;
+  border: none;
+  text-align: left;
+  width: 234px;
+  height: 40px;
+  border-radius: 3px;
+
+}
+.dropdown {
+  position: relative;
+  display: content-box;
+}
+.dropdown-content {
+  display: none;
+  position: relative;
+  background-color: #343a40;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  color: #212529;
+}
+.dropdown-content a {
+  color: #212529;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: content-box;
+}
+
+.dropdown-content a:hover {background-color: #495057;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #494E53;}
+</style>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AdminLTE 3 | General Form Elements</title>
@@ -26,6 +69,11 @@ $mon = $dtMon->obtenerMoneda($varIdMoneda);
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../../plugins/DataTables1.11.2-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/DataTables1.11.2-/Responsive-2.2.9/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/DataTables1.11.2/Buttons-2.0.0/css/buttons.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
@@ -158,16 +206,82 @@ $mon = $dtMon->obtenerMoneda($varIdMoneda);
               </p>
             </a>
           </li>
+
+          <!--Dropdown Arqueocaja -->
+          <div class="dropdown">
+          <button class="dropbtn"><i class="nav-icon fas fa-cash-register"></i> ArqueoCaja</button>
+              <div class="dropdown-content">
+                <li class="nav-item">
+                  <a href="../catalogos/tbl_arqueocaja.php" class="nav-link">
+                    <i class="nav-icon fas fa-object-group"></i>
+                    <p>
+                      ArqueoCaja
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../catalogos/tbl_arqueocaja_det.php" class="nav-link">
+                    <i class="nav-icon fas fa-layer-group"></i>
+                    <p>
+                      ArqueoCaja Detalle
+                    </p>
+                  </a>
+                </li>
+              </div>
+          </div>
+
+          <li class="nav-item">
+            <a href="../catalogos/tbl_opciones.php" class="nav-link">
+              <i class="nav-icon fas fa-align-justify"></i>
+              <p>
+                Opciones
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_usuario.php" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Usuarios
+              </p>
+            </a>
+          </li>
+
+          <!--Dropdown Menu Rol -->
+          <div class="dropdown">
+              <button class="dropbtn"><i class="nav-icon fas fa-lock"></i> Rol</button>
+              <div class="dropdown-content">
+                <li class="nav-item">
+                  <a href="../catalogos/tbl_rol.php" class="nav-link">
+                  <i class="nav-icon fas fa-lock"></i>
+                    <p>
+                      Rol
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../catalogos/tbl_rol_opciones.php" class="nav-link">
+                    <i class="nav-icon fas fa-unlock-alt"></i>
+                    <p>
+                      Rol-Opcion
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../catalogos/tbl_rol_usuario.php" class="nav-link">
+                    <i class="nav-icon fas fa-user-tag"></i>
+                    <p>
+                      Rol-Usuario
+                    </p>
+                  </a>
+                </li>
+              </div>
+          </div>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
   </aside>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
-
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -203,8 +317,8 @@ $mon = $dtMon->obtenerMoneda($varIdMoneda);
                                 <form method ="POST" action="../../negocio/ng_Moneda.php">
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label>Moneda ID</label>
-                                            <input readonly type="text" value="<?php echo $mon->_GET('id_moneda')?>" class="form-control" id="id_moneda" name="id_moneda" placeholder="Moneda ID" required>
+                                            <label>ID Moneda</label>
+                                            <input readonly type="text" value="<?php echo $mon->_GET('id_moneda')?>" class="form-control" id="id_moneda" name="id_moneda" placeholder="ID Moneda" required>
                                             <input type="hidden" value="2" name="txtaccion" id="txtaccion"/>
                                           </div>
                                         <div class="form-group">
@@ -258,7 +372,7 @@ $mon = $dtMon->obtenerMoneda($varIdMoneda);
     </script>
     <script>
       function setValoresMoneda() {
-      $("#id_moneda").val("<?php echo $mon->_GET('id_Denominacion')?>")
+      $("#id_moneda").val("<?php echo $mon->_GET('id_moneda')?>")
       $("#nombre").val("<?php echo $mon->_GET('nombre')?>")
       $("#simbolo").val("<?php echo $mon->_GET('simbolo')?>")
     }

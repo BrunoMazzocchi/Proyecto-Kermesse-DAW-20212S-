@@ -205,11 +205,11 @@ $lista = $dtlist->obtenerLista($varIdLista);
                     </div>
                     <div class="form-group">
                       <label>Lista Precio</label>
-                      <input readonly type="number" class="form-control" id="id_lista_precio" name="id_lista_precio" placeholder="Lista precio" required>
+                      <input readonly type="text" class="form-control" id="id_lista_precio" name="id_lista_precio" placeholder="Lista precio" required>
                     </div>
                     <div class="form-group">
                       <label>Producto</label>
-                      <input readonly type="number" class="form-control" id="id_producto" name="id_producto" placeholder="Producto" required>
+                      <input readonly type="text" class="form-control" id="id_producto" name="id_producto" placeholder="Producto" required>
                     </div>
                     <div class="form-group">
                       <label>Precio Venta</label>

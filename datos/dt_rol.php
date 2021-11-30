@@ -1,12 +1,12 @@
 <?php
 include_once("conexion.php");
 
-class Dt_rol extends Conexion{
+class Dt_rol extends Conexion
+{
     private $myCon;
     public function listRol()
     {
-        try
-        {
+        try {
             $this->myCon = parent::conectar();
             $result = array();
             $querySQL = "SELECT * FROM dbkermesse.tbl_rol WHERE estado <> 3;";
@@ -14,48 +14,50 @@ class Dt_rol extends Conexion{
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
 
-            foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r) {
+            foreach ($stm->fetchAll(PDO::FETCH_OBJ) as $r) {
                 $rol = new Rol();
                 $rol->_SET('id_rol', $r->id_rol);
                 $rol->_SET('rol_descripcion', $r->rol_descripcion);
                 $rol->_SET('estado', $r->estado);
-                $result[] = $rol; 
+                $result[] = $rol;
             }
             $this->myCon = parent::desconectar();
             return $result;
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             die($e->getMessage());
         }
     }
 
-    public function RegistrarRol(Rol $rol){
-        try
-        {
+    public function RegistrarRol(Rol $rol)
+    {
+        try {
             $this->myCon = parent::conectar();
             $sql = "INSERT INTO dbkermesse.tbl_rol (rol_descripcion,estado)
             VALUES (?,?)";
 
             $this->myCon->prepare($sql)
+<<<<<<< HEAD
              ->execute(array(
                 $rol->_GET('rol_descripcion'),
                 $rol->_GET('estado')
              ));
+=======
+                ->execute(array(
+                    $rol->_GET('id_rol'),
+                    $rol->_GET('rol_descripcion'),
+                    $rol->_GET('estado')
+                ));
+>>>>>>> 661108d20789982f0d85646ca0ef362808395589
 
-             $this->myCon = parent::desconectar();
-        }
-        catch (Exception $e)
-        {
+            $this->myCon = parent::desconectar();
+        } catch (Exception $e) {
             die($e->getMessage());
         }
-
     }
 
     public function editRol(Rol $rol)
     {
-        try
-        {
+        try {
             $this->myCon = parent::conectar();
             $sql = "UPDATE dbkermesse.tbl_rol SET
             rol_descripcion = ?,
@@ -63,26 +65,22 @@ class Dt_rol extends Conexion{
             WHERE id_rol = ?;";
 
             $this->myCon->prepare($sql)
-             ->execute(
-            array(
-                $rol->_GET('rol_descripcion'),
-                $rol->_GET('estado'),
-                $rol->_GET('id_rol')
-             )
-            );
-             $this->myCon = parent::desconectar();
-        }
-        catch (Exception $e)
-        {
+                ->execute(
+                    array(
+                        $rol->_GET('rol_descripcion'),
+                        $rol->_GET('estado'),
+                        $rol->_GET('id_rol')
+                    )
+                );
+            $this->myCon = parent::desconectar();
+        } catch (Exception $e) {
             die($e->getMessage());
         }
-
     }
 
     public function obtenerRol($id)
     {
-        try
-        {   
+        try {
             $this->myCon = parent::conectar();
             $querySQL = "SELECT * FROM dbkermesse.tbl_rol WHERE id_rol = ?;";
             $stm = $this->myCon->prepare($querySQL);
@@ -98,29 +96,42 @@ class Dt_rol extends Conexion{
 
             $this->myCon = parent::desconectar();
             return $rol;
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             die($e->getMessage());
         }
     }
 
     public function deleteRol($idR)
     {
-        try
-        {
+        try {
             $this->myCon = parent::conectar();
             $querySQL = "UPDATE dbkermesse.tbl_rol SET estado = 3 WHERE id_rol = ?;";
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute(array($idR));
 
             $this->myCon = parent::desconectar();
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             die($e->getMessage());
         }
     }
 
+    public function getIdRol($user)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $result = array();
+            $querySQL = "SELECT tbl_rol_id_rol FROM dbkermesse.vw_rol_usuario WHERE usuario= :usuario;";
 
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->bindParam(':usuario', $user, PDO::PARAM_STR, 40);
+            $stm->execute();
+
+            $result = $stm->fetchColumn(0);
+
+            $this->myCon = parent::desconectar();
+            return $result;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }
