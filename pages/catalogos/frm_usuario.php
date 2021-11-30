@@ -225,8 +225,6 @@
               <form method="POST" action="../../negocio/ng_usuario.php">
                 <div class="card-body">
                   <div class="form-group">
-                    <label>ID Usuario</label>
-                    <input type="number" class="form-control" id="id_usuario" name="id_usuario"placeholder="Digite numero de usuario">
                     <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
                   </div>
                   <div class="form-group">

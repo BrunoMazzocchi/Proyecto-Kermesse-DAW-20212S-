@@ -34,12 +34,11 @@ class Dt_rol extends Conexion{
         try
         {
             $this->myCon = parent::conectar();
-            $sql = "INSERT INTO dbkermesse.tbl_rol (id_rol,rol_descripcion,estado)
-            VALUES (?,?,?)";
+            $sql = "INSERT INTO dbkermesse.tbl_rol (rol_descripcion,estado)
+            VALUES (?,?)";
 
             $this->myCon->prepare($sql)
              ->execute(array(
-                $rol->_GET('id_rol'),
                 $rol->_GET('rol_descripcion'),
                 $rol->_GET('estado')
              ));

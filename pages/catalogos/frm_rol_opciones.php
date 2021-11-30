@@ -241,8 +241,6 @@ if (isset($varMsj)) {
               <form method="POST" action="../../negocio/ng_rol_opciones.php">
                 <div class="card-body">
                   <div class="form-group">
-                    <label>ID Rol Opcion</label>
-                    <input type="number" class="form-control" id="id_rol_opciones" name="id_rol_opciones"placeholder="Digite numero de Rol Opcion">
                     <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
                   </div>
                   <div class="form-group">
