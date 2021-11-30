@@ -1,11 +1,12 @@
 <?php
-error_reporting(0);
+//error_reporting(0);
 
 include '../../datos/dt_arqueocaja_det.php';
 include '../../entidades/arqueocaja_det.php';
+include '../../entidades/vw_arqueocaja_det_moneda_denom.php';
 
 
-$ac= new Dt_Arqueocaja_Det();
+$acd= new Dt_Arqueocaja_Det();
 
 $varMsj = 0;
 if(isset($varMsj)) {
@@ -316,9 +317,9 @@ if(isset($varMsj)) {
                   <tr>
                     <th>ID Arqueocaja Det</th>
                     <th>ID ArqueoCaja</th>
-                    <th>ID Moneda</th>
-                    <th>ID Denominacion</th>
-                    <th>Usuario Creacion</th>
+                    <th>Simbolo</th>
+                    <th>Moneda</th>
+                    <th>Denominacion</th>
                     <th>Cantidad</th>
                     <th>Subtotal</th>
                     <th>Accion</th>
@@ -329,31 +330,23 @@ if(isset($varMsj)) {
                   <tbody>
                     <?php
                       foreach($acd->listArqueocajaDet() as $r):
-                        $estado = "";
-                        if ($r->__GET('estado') == 1 || $r->__GET('estado') == 2){
-                          $estado = "Activo";
-                        }
-                        else{
-                          $estado = "Inactivo";
-                        }
                     ?>
                     <tr>
-                      <td><?php echo $r->_GET('id_ArqueoCaja_Det'); ?></td>
-                      <td><?php echo $r->_GET('idArqueoCaja'); ?></td>
-                      <td><?php echo $r->_GET('idMoneda'); ?></td>
-                      <td><?php echo $r->_GET('idDenominacion'); ?></td>
-                      <td><?php echo $r->_GET('usuario_creacion'); ?></td>
+                      <td><?php echo $r->_GET('idArqueoCaja_Det'); ?></td>
+                      <td><?php echo $r->_GET('id_ArqueoCaja'); ?></td>
+                      <td><?php echo $r->_GET('simbolo'); ?></td>
+                      <td><?php echo $r->_GET('moneda'); ?></td>
+                      <td><?php echo $r->_GET('denominacion'); ?></td>
                       <td><?php echo $r->_GET('cantidad'); ?></td>
                       <td><?php echo $r->_GET('subtotal'); ?></td>
-                      <td><?php echo $estado; ?></td>
 
-                      <td> <a href="frm_editar_arqueocaja.php?editACD=<?php echo $r->_GET('id_ArqueoCaja_Det'); ?>" target="blank">
+                      <td> <a href="frm_editar_arqueocaja_det.php?editACD=<?php echo $r->_GET('idArqueoCaja_Det'); ?>" target="blank">
                             <i class="fas fa-edit" title="Editar Arqueo Caja Detalle"> Editar</i></a>
                       &nbsp;&nbsp;
-                      <a href="frm_view_arqueocaja.php?viewACD=<?php echo $r->_GET('id_ArqueoCaja'); ?>" target="blank">
+                      <a href="frm_view_arqueocaja_det.php?viewACD=<?php echo $r->_GET('idArqueoCaja_Det'); ?>" target="blank">
                             <i class="fas fa-eye" title="Ver Arqueo Caja Detalle"> Ver</i></a>
                       &nbsp;&nbsp;
-                            <a href="#" target="_blank">
+                            <a href="" onclick="deleteArqueoCajaDet(<?php echo $r->_GET('idArqueoCaja_Det'); ?>);">
                                 <i class="fas fa-trash-alt" title="Eliminar Arqueo Caja Detalle"> Eliminar</i>
                             </a>
                       </td>
@@ -384,6 +377,26 @@ if(isset($varMsj)) {
 <script src="../../plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+<!-- DataTables  & Plugins -->
+<script src="../../plugins/DataTables1.11.2/datatables.min.css"></script>
+<script src="../../plugins/DataTables1.11.2/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/JSZip-2.5.0/jszip.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/pdfmake-0.1.36/pdfmake.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/pdfmake-0.1.36/vfs_fonts.js"></script>
+<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/buttons.html5.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/buttons.print.min.js"></script>
+<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
+<script src="../../plugins/jAlert/dist/jAlert.min.js">//optional!!</script>
+<script src="../../plugins/jAlert/dist/jAlert-functions.min.js"></script>
+
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- bs-custom-file-input -->
 <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <!-- AdminLTE App -->
@@ -392,12 +405,12 @@ if(isset($varMsj)) {
 <script src="../../dist/js/demo.js"></script>
 <!-- Page specific script -->
 <script>
-            function deleteMoneda(idM)
+            function deleteArqueoCajaDet(idACD)
             {
               confirm(function(e,btn)
               {
                 e.preventDefault();
-                window.location.href = "../../negocio/ng_Moneda.php?delM="+idM;
+                window.location.href = "../../negocio/ng_ArqueoCajaDet.php?delACD="+idACD;
               },
               function(e,btn)
               {

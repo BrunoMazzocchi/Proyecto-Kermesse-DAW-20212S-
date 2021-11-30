@@ -5,6 +5,7 @@ include_once("../datos/dt_arqueocaja.php");
 
 $ac = new Arqueocaja();
 $dtAc = new Dt_Arqueocaja();
+date_default_timezone_set("America/Managua");
 
 if ($_POST){
     $varAccion = $_POST['txtaccion'];
@@ -14,14 +15,10 @@ if ($_POST){
             try{
                 $ac->_SET('id_ArqueoCaja', $_POST['id_ArqueoCaja']);
                 $ac->_SET('idKermesse', $_POST['idKermesse']);
-                $ac->_SET('fechaArqueo', $_POST['fechaArqueo']);
+                $ac->_SET('fechaArqueo', date("Y-m-d H:i:s"));
                 $ac->_SET('granTotal', $_POST['granTotal']);
                 $ac->_SET('usuario_creacion', $_POST['usuario_creacion']);
-                $ac->_SET('fecha_creacion', $_POST['fecha_creacion']);
-                $ac->_SET('usuario_modificacion', $_POST['usuario_modificacion']);
-                $ac->_SET('fecha_modificacion', $_POST['fecha_modificacion']);
-                $ac->_SET('usuario_eliminacion', $_POST['usuario_eliminacion']);
-                $ac->_SET('fecha_eliminacion', $_POST['fecha_eliminacion']);
+                $ac->_SET('fecha_creacion', date("Y-m-d H:i:s"));
                 $ac->_SET('estado', '1');
 
                 $dtAc->regArqueoCaja($ac);
@@ -40,15 +37,11 @@ if ($_POST){
                 $ac->_SET('idKermesse', $_POST['idKermesse']);
                 $ac->_SET('fechaArqueo', $_POST['fechaArqueo']);
                 $ac->_SET('granTotal', $_POST['granTotal']);
-                $ac->_SET('usuario_creacion', $_POST['usuario_creacion']);
-                $ac->_SET('fecha_creacion', $_POST['fecha_creacion']);
                 $ac->_SET('usuario_modificacion', $_POST['usuario_modificacion']);
-                $ac->_SET('fecha_modificacion', $_POST['fecha_modificacion']);
-                $ac->_SET('usuario_eliminacion', $_POST['usuario_eliminacion']);
-                $ac->_SET('fecha_eliminacion', $_POST['fecha_eliminacion']);
+                $ac->_SET('fecha_modificacion', date("Y-m-d H:i:s"));
                 $ac->_SET('estado', '2');
 
-                $dtBono->editBono($bono);
+                $dtAc->editArqueoCaja($ac);
                 header("Location: ../pages/catalogos/tbl_arqueocaja.php?msj=3");
             }
             catch (Exception $e)

@@ -1,11 +1,17 @@
 <?php
-error_reporting(0);
+//error_reporting(0);
 
 include '../../datos/dt_arqueocaja.php';
 include '../../entidades/arqueocaja.php';
+include '../../entidades/vw_arqueocaja_det_arqueocaja.php';
+
+include '../../datos/dt_arqueocaja_det.php';
+include '../../entidades/arqueocaja_det.php';
+include '../../entidades/vw_arqueocaja_det_moneda_denom.php';
 
 
 $ac= new Dt_Arqueocaja();
+$acd= new Dt_Arqueocaja_Det();
 
 $varMsj = 0;
 if(isset($varMsj)) {
@@ -205,28 +211,14 @@ if(isset($varMsj)) {
             </a>
           </li>
 
-          <!--Dropdown Arqueocaja -->
-          <div class="dropdown">
-          <button class="dropbtn"><i class="nav-icon fas fa-cash-register"></i> ArqueoCaja</button>
-              <div class="dropdown-content">
-                <li class="nav-item">
-                  <a href="../catalogos/tbl_arqueocaja.php" class="nav-link">
-                    <i class="nav-icon fas fa-object-group"></i>
-                    <p>
-                      ArqueoCaja
-                    </p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../catalogos/tbl_arqueocaja_det.php" class="nav-link">
-                    <i class="nav-icon fas fa-layer-group"></i>
-                    <p>
-                      ArqueoCaja Detalle
-                    </p>
-                  </a>
-                </li>
-              </div>
-          </div>
+          <li class="nav-item">
+             <a href="../catalogos/tbl_arqueocaja.php" class="nav-link">
+              <i class="nav-icon fas fa-cash-register"></i>
+               <p>
+                ArqueoCaja
+               </p>
+            </a>
+          </li>
 
           <li class="nav-item">
             <a href="../catalogos/tbl_opciones.php" class="nav-link">
@@ -308,22 +300,22 @@ if(isset($varMsj)) {
                 </div>
                 <div class="card-body">
                     <div class="form-group col-md-12" style="text-align: right;">
-                        <a href="frm_arqueocaja.php" title="Registrar un nuevo Arqueo de Caja" target="_blank"><i class="far fa-2x fa-plus-square"></i></a>
+                        <a href="frm_arqueocaja.php" title="Registrar un nuevo Arqueo de Caja" target="_blank"><i class="far fa-plus-square">Nuevo</i></a>
                     </div>
                     <table id="example1" class="table table-bordered table-striped">
                   
                   <thead>
                   <tr>
-                    <th>ID Arqueocaja</th>
-                    <th>ID Kermesse</th>
+                    <th>ID ArqueoCaja</th>
+                    <th>ID ArqueoCajaDetalle</th>
+                    <th>Kermesse</th>
                     <th>Fecha Arqueo</th>
                     <th>Gran Total</th>
                     <th>Usuario Creacion</th>
-                    <th>Fecha Creacion</th>
-                    <th>Usuario Modificacion</th>
-                    <th>Fecha Modificacion</th>
-                    <th>Usuario Eliminacion</th>
-                    <th>Fecha Eliminacion</th>
+                    <th>Moneda</th>
+                    <th>Simbolo</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                   </tr>
@@ -334,7 +326,7 @@ if(isset($varMsj)) {
                     <?php
                       foreach($ac->listArqueocaja() as $r):
                         $estado = "";
-                        if ($r->__GET('estado') == 1 || $r->__GET('estado') == 2){
+                        if ($r->_GET('estado') == 1 || $r->_GET('estado') == 2){
                           $estado = "Activo";
                         }
                         else{
@@ -343,15 +335,15 @@ if(isset($varMsj)) {
                     ?>
                     <tr>
                       <td><?php echo $r->_GET('id_ArqueoCaja'); ?></td>
-                      <td><?php echo $r->_GET('idKermesse'); ?></td>
-                      <td><?php echo $r->_GET('fechaArqueo'); ?></td>
+                      <td><?php echo $r->_GET('idArqueoCaja_Det'); ?></td>
+                      <td><?php echo $r->_GET('Kermesse'); ?></td>
+                      <td><?php echo $r->_GET('fArq'); ?></td>
                       <td><?php echo $r->_GET('granTotal'); ?></td>
                       <td><?php echo $r->_GET('usuario_creacion'); ?></td>
-                      <td><?php echo $r->_GET('fecha_creacion'); ?></td>
-                      <td><?php echo $r->_GET('usuario_modificacion'); ?></td>
-                      <td><?php echo $r->_GET('fecha_modificacion'); ?></td>
-                      <td><?php echo $r->_GET('usuario_eliminacion'); ?></td>
-                      <td><?php echo $r->_GET('fecha_eliminacion'); ?></td>
+                      <td><?php echo $r->_GET('moneda'); ?></td>
+                      <td><?php echo $r->_GET('simbolo'); ?></td>
+                      <td><?php echo $r->_GET('cantidad'); ?></td>
+                      <td><?php echo $r->_GET('subtotal'); ?></td>
                       <td><?php echo $estado; ?></td>
 
                       <td> <a href="frm_editar_arqueocaja.php?editAC=<?php echo $r->_GET('id_ArqueoCaja'); ?>" target="blank">
@@ -360,7 +352,7 @@ if(isset($varMsj)) {
                       <a href="frm_view_arqueocaja.php?viewAC=<?php echo $r->_GET('id_ArqueoCaja'); ?>" target="blank">
                             <i class="fas fa-eye" title="Ver Arqueocaja"> Ver</i></a>
                       &nbsp;&nbsp;
-                            <a href="#" target="_blank">
+                      <a href="" onclick="deleteArqueoCaja(<?php echo $r->_GET('id_ArqueoCaja'); ?>);">
                                 <i class="fas fa-trash-alt" title="Eliminar Arqueocaja"> Eliminar</i>
                             </a>
                       </td>
@@ -371,6 +363,59 @@ if(isset($varMsj)) {
                   </tbody>
                   </table>
                 </div>
+
+              <div class="card-header">
+              <h3 class="card-title">Detalle</h3>
+                </div>
+                <div class="card-body">
+                    <div class="form-group col-md-12" style="text-align: right;">
+                        <a href="frm_arqueocaja_det.php" title="Registrar un nuevo Arqueo de Caja" target="_blank"><i class="far fa-plus-square"></i>Nuevo</a>
+                    </div>
+                    <table id="example1" class="table table-bordered table-striped">
+                  
+                  <thead>
+                  <tr>
+                    <th>ID Arqueocaja Det</th>
+                    <th>ID ArqueoCaja</th>
+                    <th>Simbolo</th>
+                    <th>Moneda</th>
+                    <th>Denominacion</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                    <th>Accion</th>
+                  </tr>
+
+                  </thead>
+
+                  <tbody>
+                    <?php
+                      foreach($acd->listArqueocajaDet() as $r):
+                    ?>
+                    <tr>
+                      <td><?php echo $r->_GET('idArqueoCaja_Det'); ?></td>
+                      <td><?php echo $r->_GET('id_ArqueoCaja'); ?></td>
+                      <td><?php echo $r->_GET('simbolo'); ?></td>
+                      <td><?php echo $r->_GET('moneda'); ?></td>
+                      <td><?php echo $r->_GET('denominacion'); ?></td>
+                      <td><?php echo $r->_GET('cantidad'); ?></td>
+                      <td><?php echo $r->_GET('subtotal'); ?></td>
+
+                      <td> <a href="frm_editar_arqueocaja_det.php?editACD=<?php echo $r->_GET('idArqueoCaja_Det'); ?>" target="blank">
+                            <i class="fas fa-edit" title="Editar Arqueo Caja Detalle"> Editar</i></a>
+                      &nbsp;&nbsp;
+                      <a href="frm_view_arqueocaja_det.php?viewACD=<?php echo $r->_GET('idArqueoCaja_Det'); ?>" target="blank">
+                            <i class="fas fa-eye" title="Ver Arqueo Caja Detalle"> Ver</i></a>
+                      &nbsp;&nbsp;
+                            <a href="#" onclick="deleteArqueoCajaDet(<?php echo $r->_GET('idArqueoCaja_Det'); ?>);">
+                                <i class="fas fa-trash-alt" title="Eliminar Arqueo Caja Detalle"> Eliminar</i>
+                            </a>
+                      </td>
+                    </tr>
+                    <?php
+                      endforeach;
+                    ?>
+                  </tbody>
+                  </table>
             </div>
         </div>
     </div>
@@ -378,6 +423,7 @@ if(isset($varMsj)) {
     </section>
     <!-- /.content -->
   </div>
+  
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -417,12 +463,25 @@ if(isset($varMsj)) {
 <!-- Page specific script -->
 <script>
 
-            function deleteDenominacion(idD)
+            function deleteArqueoCajaDet(idACD)
             {
               confirm(function(e,btn)
               {
                 e.preventDefault();
-                window.location.href = "../../negocio/ng_Denominacion.php?delD="+idD;
+                window.location.href = "../../negocio/ng_ArqueoCajaDet.php?delACD="+idACD;
+              },
+              function(e,btn)
+              {
+                e.preventDefault();
+              });
+            }
+
+            function deleteArqueoCaja(idAC)
+            {
+              confirm(function(e,btn)
+              {
+                e.preventDefault();
+                window.location.href = "../../negocio/ng_ArqueoCaja.php?delAC="+idAC;
               },
               function(e,btn)
               {

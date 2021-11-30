@@ -3,22 +3,65 @@
 
 include '../../entidades/tbl_denominacion.php';
 include '../../datos/dt_denominacion.php';
+include '../../entidades/vw_denominacion_moneda.php';
 
-$denom = new Dt_denominacion();
-$denominacion = new Tbl_Denominacion();
+$dtDen = new Dt_denominacion();
+$den = new Tbl_Denominacion();
 $varIdDenom = 0;
 if (isset($varIdDenom)) {
   $varIdDenom = $_GET['viewD'];
 }
 
-$denominacion = $denom->obtenerDenominacion($varIdDenom);
+$den = $dtDen->obtenerVwDenominacion($varIdDenom);
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+
+<style>
+.dropbtn {
+  background-color: #343a40;
+  color: #C2C7D0;
+  padding-left: 20px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 16px;
+  border: none;
+  text-align: left;
+  width: 234px;
+  height: 40px;
+  border-radius: 3px;
+
+}
+.dropdown {
+  position: relative;
+  display: content-box;
+}
+.dropdown-content {
+  display: none;
+  position: relative;
+  background-color: #343a40;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  color: #212529;
+}
+.dropdown-content a {
+  color: #212529;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: content-box;
+}
+
+.dropdown-content a:hover {background-color: #495057;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #494E53;}
+</style>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AdminLTE 3 | General Form Elements</title>
@@ -27,10 +70,14 @@ $denominacion = $denom->obtenerDenominacion($varIdDenom);
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../../plugins/DataTables1.11.2-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/DataTables1.11.2-/Responsive-2.2.9/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/DataTables1.11.2/Buttons-2.0.0/css/buttons.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
-
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
   <!-- Navbar -->
@@ -49,16 +96,16 @@ $denominacion = $denom->obtenerDenominacion($varIdDenom);
     </ul>
 
     <!-- SEARCH FORM -->
-        <form class="form-inline ml-3">
-            <div class="input-group input-group-sm">
-                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                <div class="input-group-append">
-                    <button class="btn btn-navbar" type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
+    <form class="form-inline ml-3">
+      <div class="input-group input-group-sm">
+        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+        <div class="input-group-append">
+          <button class="btn btn-navbar" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -73,18 +120,18 @@ $denominacion = $denom->obtenerDenominacion($varIdDenom);
         </a>
       </li>
     </ul>
-        </nav>
-        <!-- /.navbar -->
+  </nav>
+  <!-- /.navbar -->
 
-        <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
-     <!-- Brand Logo -->
-      <a href="../../index.html" class="brand-link">
-        <img src="../../dist/img/Kermesse_Logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">Kermesse</span>
-      </a>
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="../../index.html" class="brand-link">
+      <img src="../../dist/img/Kermesse_Logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Kermesse</span>
+    </a>
 
-            <!-- Sidebar -->
+    <!-- Sidebar -->
     <div class="sidebar">
       <!-- SidebarSearch Form -->
       <div class="form-inline">
@@ -160,22 +207,82 @@ $denominacion = $denom->obtenerDenominacion($varIdDenom);
               </p>
             </a>
           </li>
+
+          <!--Dropdown Arqueocaja -->
+          <div class="dropdown">
+          <button class="dropbtn"><i class="nav-icon fas fa-cash-register"></i> ArqueoCaja</button>
+              <div class="dropdown-content">
+                <li class="nav-item">
+                  <a href="../catalogos/tbl_arqueocaja.php" class="nav-link">
+                    <i class="nav-icon fas fa-object-group"></i>
+                    <p>
+                      ArqueoCaja
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../catalogos/tbl_arqueocaja_det.php" class="nav-link">
+                    <i class="nav-icon fas fa-layer-group"></i>
+                    <p>
+                      ArqueoCaja Detalle
+                    </p>
+                  </a>
+                </li>
+              </div>
+          </div>
+
           <li class="nav-item">
-            <a href="../catalogos/tbl_arqueocaja.php" class="nav-link">
-              <i class="nav-icon fas fa-object-group"></i>
+            <a href="../catalogos/tbl_opciones.php" class="nav-link">
+              <i class="nav-icon fas fa-align-justify"></i>
               <p>
-                ArqueoCaja
+                Opciones
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_usuario.php" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Usuarios
+              </p>
+            </a>
+          </li>
+
+          <!--Dropdown Menu Rol -->
+          <div class="dropdown">
+              <button class="dropbtn"><i class="nav-icon fas fa-lock"></i> Rol</button>
+              <div class="dropdown-content">
+                <li class="nav-item">
+                  <a href="../catalogos/tbl_rol.php" class="nav-link">
+                  <i class="nav-icon fas fa-lock"></i>
+                    <p>
+                      Rol
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../catalogos/tbl_rol_opciones.php" class="nav-link">
+                    <i class="nav-icon fas fa-unlock-alt"></i>
+                    <p>
+                      Rol-Opcion
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../catalogos/tbl_rol_usuario.php" class="nav-link">
+                    <i class="nav-icon fas fa-user-tag"></i>
+                    <p>
+                      Rol-Usuario
+                    </p>
+                  </a>
+                </li>
+              </div>
+          </div>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
   </aside>
-        <!-- /.sidebar-menu -->
-      </div>
-    </aside>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -213,23 +320,19 @@ $denominacion = $denom->obtenerDenominacion($varIdDenom);
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label>ID Denominacion</label>
-                                            <input readonly type="number" class="form-control" id="id_Denominacion" name="id_Denominacion" placeholder="ID Denominacion" required>
+                                            <input readonly type="number" value="<?php echo $den->__GET('id_Denominacion') ?>" class="form-control" id="id_Denominacion" name="id_Denominacion" placeholder="ID Denominacion" required>
                                         </div>
                                         <div class="form-group">
-                                            <label>ID Moneda</label>
-                                            <input readonly type="number" class="form-control" id="idMoneda" name="idMoneda" placeholder="ID Moneda" required>
+                                            <label>Moneda</label>
+                                            <input readonly type="text" value="<?php echo $den->__GET('Moneda') ?>" class="form-control" id="Moneda" name="Moneda" placeholder="Moneda" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Valor</label>
-                                            <input readonly type="number" class="form-control" id="valor" name="valor" placeholder="Valor" required>
+                                            <input readonly type="number" value="<?php echo $den->__GET('valor') ?>" class="form-control" id="valor" name="valor" placeholder="Valor" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Valor en letras</label>
-                                            <input readonly type="text" class="form-control" id="valor_letras" name="valor_letras" placeholder="Valor en letras" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Estado</label>
-                                            <input readonly type="text" class="form-control" id="estado" name="estado" placeholder="Estado" required>
+                                            <input readonly type="text" value="<?php echo $den->__GET('valor_letras') ?>" class="form-control" id="valor_letras" name="valor_letras" placeholder="Valor en letras" required>
                                         </div>
                                     </div>
 
@@ -272,11 +375,10 @@ $denominacion = $denom->obtenerDenominacion($varIdDenom);
     </script>
     <script>
       function setValoresDenominacion() {
-      $("#id_Denominacion").val("<?php echo $denominacion->__GET('id_Denominacion') ?>")
-      $("#idMoneda").val("<?php echo $denominacion->__GET('idMoneda') ?>")
-      $("#valor").val("<?php echo $denominacion->__GET('valor') ?>")
-      $("#valor_letras").val("<?php echo $denominacion->__GET('valor_letras') ?>")
-      $("#estado").val("<?php echo $denominacion->__GET('estado') ?>")
+      $("#id_Denominacion").val("<?php echo $den->__GET('id_Denominacion') ?>")
+      $("#Moneda").val("<?php echo $den->__GET('Moneda') ?>")
+      $("#valor").val("<?php echo $den->__GET('valor') ?>")
+      $("#valor_letras").val("<?php echo $den->__GET('valor_letras') ?>")
     }
     $(document).ready(function() {
           setValoresDenominacion();

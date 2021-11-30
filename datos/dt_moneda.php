@@ -81,17 +81,16 @@ class Dt_moneda extends Conexion{
     {
         try{
             $this->myCon = parent::conectar();
-            $sql = "UPDATE tbl_control_bonos SET
+            $sql = "UPDATE tbl_moneda SET
             nombre = ?,
             simbolo = ?,
-            estado = ? WHERE id_bono = ?";
+            estado = ? WHERE id_moneda = ?";
             $this->myCon->prepare($sql)
                 ->execute(array(
                     
                     $mon->_GET('nombre'),
-                    $mon->_GET('valor'),
                     $mon->_GET('simbolo'),
-                    $mon->_GET('id_bono')
+                    $mon->_GET('id_moneda')
 
                 ));
         }
@@ -100,14 +99,14 @@ class Dt_moneda extends Conexion{
         }
     }
 
-    public function deleteMoneda($idB)
+    public function deleteMoneda($idM)
     {
         try
         {
             $this->myCon = parent::conectar();
             $querySQL = "UPDATE tbl_moneda SET estado = 3 WHERE id_moneda = ?";
             $stm = $this->myCon->prepare($querySQL);
-            $stm->execute(array($idB));
+            $stm->execute(array($idM));
             $this->myCon = parent::desconectar();
         }
         catch(Exception $e)

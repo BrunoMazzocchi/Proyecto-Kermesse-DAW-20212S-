@@ -9,7 +9,7 @@ class Dt_denominacion extends Conexion{
         {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT * FROM dbkermesse.tbl_denominacion;";
+            $querySQL = "SELECT * FROM dbkermesse.vw_denominacion_moneda;";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
@@ -17,7 +17,7 @@ class Dt_denominacion extends Conexion{
             foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)  {
                 $denom = new Tbl_Denominacion();
                 $denom->__SET('id_Denominacion',$r->id_Denominacion);
-                $denom->__SET('idMoneda', $r->idMoneda);
+                $denom->__SET('Moneda', $r->Moneda);
                 $denom->__SET('valor', $r->valor);
                 $denom->__SET('valor_letras', $r->valor_letras);
                 $denom->__SET('estado', $r->estado);
@@ -113,6 +113,29 @@ class Dt_denominacion extends Conexion{
         }
         catch(Exception $e)
         {
+            die($e->getMessage());
+        }
+    }
+
+    public function obtenerVwDenominacion($id)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $querySQL = "SELECT * FROM dbkermesse.vw_denominacion_moneda WHERE id_Denominacion = ?";
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute(array($id));
+
+            $r = $stm->fetch(PDO::FETCH_OBJ);
+            $den = new Tbl_Denominacion();
+
+            $den->__SET('id_Denominacion',$r->id_Denominacion);
+            $den->__SET('Moneda', $r->Moneda);
+            $den->__SET('valor', $r->valor);
+            $den->__SET('valor_letras', $r->valor_letras);
+
+                $this->myCon = parent::desconectar();
+            return $den;
+        } catch (Exception $e) {
             die($e->getMessage());
         }
     }

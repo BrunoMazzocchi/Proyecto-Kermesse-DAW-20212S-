@@ -1,23 +1,66 @@
 <?php
-error_reporting(0);
+//error_reporting(0);
 
 include '../../datos/dt_arqueocaja_det.php';
 include '../../entidades/arqueocaja_det.php';
-
+include '../../entidades/vw_arqueocaja_det_moneda_denom.php';
 
 $dtAcd = new Dt_Arqueocaja_Det();
 $acd = new Arqueocaja_Det();
 $varIdAcd = 0;
 if(isset($varIdAcd)) {
-    $varIdAcd = $_GET['msj'];
+    $varIdAcd = $_GET['viewACD'];
 }
 
-$ac = $dtAc->obtenerArqueoCajaDet($varIdAc);
+$acd = $dtAcd->obtenerVwArqueoCajaDet($varIdAcd);
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+<style>
+.dropbtn {
+  background-color: #343a40;
+  color: #C2C7D0;
+  padding-left: 20px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 16px;
+  border: none;
+  text-align: left;
+  width: 234px;
+  height: 40px;
+  border-radius: 3px;
+
+}
+.dropdown {
+  position: relative;
+  display: content-box;
+}
+.dropdown-content {
+  display: none;
+  position: relative;
+  background-color: #343a40;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  color: #212529;
+}
+.dropdown-content a {
+  color: #212529;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: content-box;
+}
+
+.dropdown-content a:hover {background-color: #495057;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #494E53;}
+</style>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AdminLTE 3 | General Form Elements</title>
@@ -26,6 +69,11 @@ $ac = $dtAc->obtenerArqueoCajaDet($varIdAc);
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../../plugins/DataTables1.11.2-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/DataTables1.11.2-/Responsive-2.2.9/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/DataTables1.11.2/Buttons-2.0.0/css/buttons.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
@@ -158,14 +206,77 @@ $ac = $dtAc->obtenerArqueoCajaDet($varIdAc);
               </p>
             </a>
           </li>
+
+          <!--Dropdown Arqueocaja -->
+          <div class="dropdown">
+          <button class="dropbtn"><i class="nav-icon fas fa-cash-register"></i> ArqueoCaja</button>
+              <div class="dropdown-content">
+                <li class="nav-item">
+                  <a href="../catalogos/tbl_arqueocaja.php" class="nav-link">
+                    <i class="nav-icon fas fa-object-group"></i>
+                    <p>
+                      ArqueoCaja
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../catalogos/tbl_arqueocaja_det.php" class="nav-link">
+                    <i class="nav-icon fas fa-layer-group"></i>
+                    <p>
+                      ArqueoCaja Detalle
+                    </p>
+                  </a>
+                </li>
+              </div>
+          </div>
+
           <li class="nav-item">
-            <a href="../catalogos/tbl_arqueocaja.php" class="nav-link">
-              <i class="nav-icon fas fa-object-group"></i>
+            <a href="../catalogos/tbl_opciones.php" class="nav-link">
+              <i class="nav-icon fas fa-align-justify"></i>
               <p>
-                ArqueoCaja
+                Opciones
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="../catalogos/tbl_usuario.php" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Usuarios
+              </p>
+            </a>
+          </li>
+
+          <!--Dropdown Menu Rol -->
+          <div class="dropdown">
+              <button class="dropbtn"><i class="nav-icon fas fa-lock"></i> Rol</button>
+              <div class="dropdown-content">
+                <li class="nav-item">
+                  <a href="../catalogos/tbl_rol.php" class="nav-link">
+                  <i class="nav-icon fas fa-lock"></i>
+                    <p>
+                      Rol
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../catalogos/tbl_rol_opciones.php" class="nav-link">
+                    <i class="nav-icon fas fa-unlock-alt"></i>
+                    <p>
+                      Rol-Opcion
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../catalogos/tbl_rol_usuario.php" class="nav-link">
+                    <i class="nav-icon fas fa-user-tag"></i>
+                    <p>
+                      Rol-Usuario
+                    </p>
+                  </a>
+                </li>
+              </div>
+          </div>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
@@ -208,27 +319,26 @@ $ac = $dtAc->obtenerArqueoCajaDet($varIdAc);
                 <div class="card-body">
                  <div class="form-group">
                     <label>ID Arqueo Caja Detalle</label>
-                    <input readonly type="number" value="<?php echo $acd->_GET('id_ArqueoCaja_Det'); ?>" class="form-control" id="id_ArqueoCaja_Det" name="id_ArqueoCaja_Det" placeholder="ID ArqueoCaja Det">
-                    <input type="hidden" value="2" name="txtaccion" id="txtaccion"/>
+                    <input readonly type="number" value="<?php echo $acd->_GET('idArqueoCaja_Det'); ?>" class="form-control" id="idArqueoCaja_Det" name="idArqueoCaja_Det" placeholder="ID ArqueoCaja Det">
                   </div>
                   <div class="form-group">
                     <label>ID Arqueo Caja</label>
-                    <input type="number" value="<?php echo $acd->_GET('idArqueoCaja'); ?>" class="form-control" id="idArqueoCaja" name="idKermesse"placeholder="ID Arqueo Caja">
+                    <input readonly type="number" value="<?php echo $acd->_GET('id_ArqueoCaja'); ?>" class="form-control" id="id_ArqueoCaja" name="id_ArqueoCaja"placeholder="ID Arqueo Caja">
                   </div>
                   <div class="form-group">
-                    <label>ID Moneda</label>
-                    <input readonly type="number" value="<?php echo $acd->_GET('idMoneda'); ?>" class="form-control" id="idMoneda" name="idMoneda"placeholder="ID Moneda">
+                    <label>Simbolo</label>
+                    <input readonly type="text" value="<?php echo $acd->_GET('simbolo'); ?>" class="form-control" id="simbolo" name="simbolo"placeholder="Simbolo">
                   </div>
                   <div class="form-group">
-                    <label>ID Denominacion</label>
-                    <input readonly type="number" value="<?php echo $ac->_GET('idDenominacion'); ?>" class="form-control" id="idDenominacion" name="idDenominacion" placeholder="ID Denominacion">
+                    <label>Moneda</label>
+                    <input readonly type="text" value="<?php echo $acd->_GET('moneda'); ?>" class="form-control" id="moneda" name="moneda"placeholder="Moneda">
                   </div>
                   <div class="form-group">
-                    <label>Usuario Creacion</label>
-                    <input readonly type="text" value="<?php echo $acd->_GET('usuario_creacion'); ?>" class="form-control" id="usuario_creacion" name="usuario_creacion"placeholder="Usuario Creacion">
+                    <label>Denominacion</label>
+                    <input readonly type="number" value="<?php echo $acd->_GET('denominacion'); ?>" class="form-control" id="denominacion" name="denominacion" placeholder="Denominacion">
                   </div>
                   <div class="form-group">
-                    <label>Fecha Creacion</label>
+                    <label>Cantidad</label>
                     <input readonly type="number" value="<?php echo $acd->_GET('cantidad'); ?>" class="form-control" id="cantidad" name="cantidad"placeholder="Cantidad">
                   </div>
                   <div class="form-group">
@@ -276,13 +386,14 @@ $ac = $dtAc->obtenerArqueoCajaDet($varIdAc);
 </script>
     <script>
       function setValoresArqueoCajaDet() {
-      $("#id_ArqueoCaja_Det").val("<?php echo $acd->_GET('id_ArqueoCaja_Det') ?>")
+      $("#idArqueoCaja_Det").val("<?php echo $acd->_GET('idArqueoCaja_Det') ?>")
       $("#id_ArqueoCaja").val("<?php echo $acd->_GET('id_ArqueoCaja') ?>")
-      $("#idMoneda").val("<?php echo $acd->_GET('idMoneda') ?>")
-      $("#idDenominacion").val("<?php echo $acd->_GET('idDenominacion') ?>")
-      $("#usuario_creacion").val("<?php echo $acd->_GET('usuario_creacion') ?>")
+      $("#simbolo").val("<?php echo $acd->_GET('simbolo') ?>")
+      $("#moneda").val("<?php echo $acd->_GET('moneda') ?>")
+      $("#denominacion").val("<?php echo $acd->_GET('denominacion') ?>")
       $("#cantidad").val("<?php echo $acd->_GET('cantidad') ?>")
       $("#subtotal").val("<?php echo $acd->_GET('subtotal') ?>")
+
     }
     $(document).ready(function() {
           setValoresArqueoCajaDet();

@@ -58,13 +58,10 @@ if ($_GET) {
     try {
         $kerme->__SET('id_kermesse', $_GET['delK']);
 
-<<<<<<< HEAD
         $dtKerme->deleteKermesse($kerme->__GET('id_lista_precio'));
         header("Location: ../pages/catalogos/tbl_kermesse.php?msj=5");
-=======
         $dtKerme->deleteKermesse($kerme->__GET('id_kermesse'));
         header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_kermesse.php?msj=5");
->>>>>>> 0a81c89d92073c97107230bcacf90e83d9941595
     } catch (Exception $e) {
         header("Location: ../pages/catalogos/tbl_kermesse.php?msj=6");
         die($e->getMessage());
