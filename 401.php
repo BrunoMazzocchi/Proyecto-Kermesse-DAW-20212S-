@@ -78,13 +78,8 @@
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-<<<<<<< HEAD
-          <li class="nav-header">TABLAS</li>
-          <li class="nav-item">
-=======
             <li class="nav-header">TABLAS</li>
             <li class="nav-item">
->>>>>>> af9cdbedaa792e37afeac8083fcb2806a3411628
               <a href="../Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_denominacion.php" class="nav-link">
                 <i class="nav-icon fas fa-search-dollar"></i>
                 <p>
@@ -188,7 +183,6 @@
                 </p>
               </a>
             </li>
-<<<<<<< HEAD
             <li class="nav-item">
             <a href="../Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_tasacambio.php" class="nav-link">
               <i class="nav-icon fas fa-hand-holding-usd"></i>
@@ -201,14 +195,6 @@
       <!-- /.sidebar-menu -->
     </div>
     </aside>
-=======
-        </nav>
-        <!-- /.sidebar-menu -->
-      </div>
-      <!-- /.sidebar -->
-    </aside>
-
->>>>>>> af9cdbedaa792e37afeac8083fcb2806a3411628
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
