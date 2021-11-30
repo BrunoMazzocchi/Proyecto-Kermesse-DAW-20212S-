@@ -69,7 +69,7 @@ for ($i = 0; $i < $longitud; $i++) {
 
 if (!$acceso) {
   //ACCESO NO CONCEDIDO 
-  header("Location: 401.php"); //REDIRECCIONAMOS A LA PAGINA DE ACCESO RESTRINGIDO
+  header("Location: ../../401.php"); //REDIRECCIONAMOS A LA PAGINA DE ACCESO RESTRINGIDO
 }
 
 
@@ -117,7 +117,7 @@ if (!$acceso) {
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="index3.html" class="nav-link">Home</a>
+          <a href="sistema-kermesse.php" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
           <a href="#" class="nav-link">Contact</a>
@@ -151,7 +151,7 @@ if (!$acceso) {
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="../../index.html" class="brand-link">
+      <a href="../Proyecto-Kermesse-DAW-20212S-/sistema-kermesse.php" class="brand-link">
         <img src="../Proyecto-Kermesse-DAW-20212S-/dist/img/Kermesse_Logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">Kermesse</span>
       </a>

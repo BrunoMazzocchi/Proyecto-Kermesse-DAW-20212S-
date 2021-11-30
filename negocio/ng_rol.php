@@ -22,11 +22,11 @@ if ($_POST)
 
 
                 $dtRol->RegistrarRol($rol);
-                header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_rol.php?msj=1");
+                header("Location: ../Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_rol.php?msj=1");
             }
             catch (Exception $e)
             {
-                header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_rol.php?msj=2");
+                header("Location: ../Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_rol.php?msj=2");
                 die($e->getMessage());
             }
             break;
@@ -40,11 +40,11 @@ if ($_POST)
 
 
                 $dtRol->editRol($rol);
-                header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_rol.php?msj=3");
+                header("Location: ../Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_rol.php?msj=3");
             }
             catch (Exception $e)
             {
-                header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_rol.php?msj=4");
+                header("Location: ../Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_rol.php?msj=4");
                 die($e->getMessage());
             }
             

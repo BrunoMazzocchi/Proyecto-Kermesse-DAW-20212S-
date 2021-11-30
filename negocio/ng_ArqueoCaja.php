@@ -17,7 +17,7 @@ if ($_POST){
                 $ac->_SET('idKermesse', $_POST['idKermesse']);
                 $ac->_SET('fechaArqueo', date("Y-m-d H:i:s"));
                 $ac->_SET('granTotal', $_POST['granTotal']);
-                $ac->_SET('usuario_creacion', $_POST['usuario_creacion']);
+                $ac->_SET('usuario_creacion', '1');
                 $ac->_SET('fecha_creacion', date("Y-m-d H:i:s"));
                 $ac->_SET('estado', '1');
 
@@ -37,7 +37,7 @@ if ($_POST){
                 $ac->_SET('idKermesse', $_POST['idKermesse']);
                 $ac->_SET('fechaArqueo', $_POST['fechaArqueo']);
                 $ac->_SET('granTotal', $_POST['granTotal']);
-                $ac->_SET('usuario_modificacion', $_POST['usuario_modificacion']);
+                $ac->_SET('usuario_modificacion','1');
                 $ac->_SET('fecha_modificacion', date("Y-m-d H:i:s"));
                 $ac->_SET('estado', '2');
 
