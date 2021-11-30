@@ -97,15 +97,15 @@ $cmn = $dtCmn->obtenerComunidad($varIdComunidad);
         </div>
       </div>
 
-          <!-- Sidebar Menu -->
-          <nav class="mt-2">
+           <!-- Sidebar Menu -->
+           <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-header">TABLAS</li>
           <li class="nav-item">
             <a href="../catalogos/tbl_comunidad.php" class="nav-link">
-              <i class="nav-icon fas fa-search-dollar"></i>
+              <i class="nav-icon fas fa-building"></i>
               <p>
                 Comunidad
               </p>
@@ -113,7 +113,7 @@ $cmn = $dtCmn->obtenerComunidad($varIdComunidad);
           </li>
           <li class="nav-item">
             <a href="../catalogos/tbl_ingreso_comunidad.php" class="nav-link">
-              <i class="nav-icon fas fa-coins"></i>
+            <i class="nav-icon fas fa-piggy-bank"></i>
               <p>
                 Ingreso Comunidad
               </p>
@@ -121,7 +121,7 @@ $cmn = $dtCmn->obtenerComunidad($varIdComunidad);
           </li>
           <li class="nav-item">
             <a href="../catalogos/tbl_ingreso_comunidad_det.php" class="nav-link">
-              <i class="nav-icon fas fa-shopping-basket"></i>
+              <i class="nav-icon fas fa-cash-register"></i>
               <p>
                 Ingreso Comunidad Det
               </p>
@@ -129,7 +129,7 @@ $cmn = $dtCmn->obtenerComunidad($varIdComunidad);
           </li>
           <li class="nav-item">
             <a href="../../pages/catalogos/tbl_productos.php" class="nav-link">
-              <i class="nav-icon fas fa-file-invoice-dollar"></i>
+              <i class="nav-icon fas fa-lemon"></i>
               <p>
                 Productos
               </p>
@@ -137,7 +137,7 @@ $cmn = $dtCmn->obtenerComunidad($varIdComunidad);
           </li>
           <li class="nav-item">
             <a href="../../pages/catalogos/tbl_categoria_producto.php" class="nav-link">
-              <i class="nav-icon fas fa-file-invoice-dollar"></i>
+              <i class="nav-icon fas fa-bread-slice"></i>
               <p>
                 Categoria Productos
               </p>

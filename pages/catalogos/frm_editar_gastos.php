@@ -24,12 +24,141 @@ if (isset($varIdGastos)) {
 
 $gast = $dtGast->obtenerGasto($varIdGastos);
 
+include '../../entidades/usuario.php';
+include '../../entidades/rol.php';
+include '../../entidades/opciones.php';
+
+
+include '../../datos/dt_Usuario.php';
+include '../../datos/dt_Rol.php';
+include '../../datos/dt_Opciones.php';
+
+//SEGURIDAD//
+
+$usuario = new Usuario();
+$rol = new Rol();
+$listOpc = new Opciones();
+//DATOS
+$dtr = new Dt_Rol();
+$dtOpc = new Dt_Opciones();
+
+//MANEJO Y CONTROL DE LA SESION
+session_start(); // INICIAMOS LA SESION
+
+//VALIDAMOS SI LA SESION ESTÁ VACÍA
+if (empty($_SESSION['acceso'])) {
+  //nos envía al inicio
+  header("Location: ../../login.php?msj=2");
+}
+
+$usuario = $_SESSION['acceso']; // OBTENEMOS EL VALOR DE LA SESION
+
+//OBTENEMOS EL ROL
+$rol->_SET('id_rol', $dtr->getIdRol($usuario[0]->_GET('usuario')));
+
+//OBTENEMOS LAS OPCIONES DEL ROL
+$listOpc = $dtOpc->getOpciones($rol->_GET('id_rol'));
+
+//OBTENEMOS LA OPCION ACTUAL
+$url = $_SERVER['REQUEST_URI'];
+// var_dump($url);
+$inicio = strrpos($url, '/') + 1;
+// var_dump($inicio); //6
+// $total= strlen($url); 
+// var_dump($total); //28
+$fin = strripos($url, '?');
+// var_dump($fin); //22
+if ($fin > 0) {
+  $miPagina = substr($url, $inicio, $fin - $inicio);
+  // var_dump($miPagina);
+} else {
+  $miPagina = substr($url, $inicio);
+  // var_dump($miPagina);
+}
+
+////// VALIDAMOS LA OPCIÓN ACTUAL CON LA MATRIZ DE OPCIONES //////
+//obtenemos el numero de elementos
+$longitud = count($listOpc);
+$acceso = false; // VARIABLE DE CONTROL
+
+//Recorro todos los elementos de la matriz de opciones
+for ($i = 0; $i < $longitud; $i++) {
+  //obtengo el valor de cada elemento
+  $opcion = $listOpc[$i]->_GET('opcion_descripcion');
+  if (strcmp($miPagina, $opcion) == 0) //COMPARO LA OPCION ACTUAL CON CADA OPCIÓN DE LA MATRIZ
+  {
+    $acceso = true; //ACCESO CONCEDIDO
+    break;
+  }
+}
+
+if (!$acceso) {
+  //ACCESO NO CONCEDIDO 
+  header("Location: ../../401.php"); //REDIRECCIONAMOS A LA PAGINA DE ACCESO RESTRINGIDO
+}
+
+// 
+$dtu = new Dt_Usuario();
+
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
+  <style>
+    .dropbtn {
+      background-color: #343a40;
+      color: #C2C7D0;
+      padding-left: 20px;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      font-size: 16px;
+      border: none;
+      text-align: left;
+      width: 234px;
+      height: 40px;
+      border-radius: 3px;
+
+    }
+
+    .dropdown {
+      position: relative;
+      display: content-box;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: relative;
+      background-color: #343a40;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      color: #212529;
+    }
+
+    .dropdown-content a {
+      color: #212529;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: content-box;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #495057;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+      background-color: #494E53;
+    }
+  </style>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AdminLTE 3 | General Form Elements</title>
@@ -38,6 +167,11 @@ $gast = $dtGast->obtenerGasto($varIdGastos);
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../../plugins/DataTables1.11.2-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/DataTables1.11.2-/Responsive-2.2.9/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/DataTables1.11.2/Buttons-2.0.0/css/buttons.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
@@ -74,13 +208,8 @@ $gast = $dtGast->obtenerGasto($varIdGastos);
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-            <i class="fas fa-expand-arrows-alt"></i>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-            <i class="fas fa-marker"></i>
+          <a class="nav-link" href="../../login.php" title="Cerrar Sesion">
+            <i class="fas fa-power-off"></i> Cerrar Sesion
           </a>
         </li>
       </ul>
@@ -148,6 +277,22 @@ $gast = $dtGast->obtenerGasto($varIdGastos);
               </a>
             </li>
             <li class="nav-item">
+              <a href="../../pages/catalogos/tbl_categoria_gastos.php" class="nav-link">
+                <i class="nav-icon fas fa-file-invoice-dollar"></i>
+                <p>
+                  Categoria Gastos
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../catalogos/tbl_listaprecio.php" class="nav-link">
+                <i class="nav-icon fas fa-coins"></i>
+                <p>
+                  Precios
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="../catalogos/tbl_parroquia.php" class="nav-link">
                 <i class="nav-icon fas fa-church"></i>
                 <p>
@@ -171,6 +316,77 @@ $gast = $dtGast->obtenerGasto($varIdGastos);
                 </p>
               </a>
             </li>
+
+            <!--Dropdown Arqueocaja -->
+            <div class="dropdown">
+              <button class="dropbtn"><i class="nav-icon fas fa-cash-register"></i> ArqueoCaja</button>
+              <div class="dropdown-content">
+                <li class="nav-item">
+                  <a href="../catalogos/tbl_arqueocaja.php" class="nav-link">
+                    <i class="nav-icon fas fa-object-group"></i>
+                    <p>
+                      ArqueoCaja
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../catalogos/tbl_arqueocaja_det.php" class="nav-link">
+                    <i class="nav-icon fas fa-layer-group"></i>
+                    <p>
+                      ArqueoCaja Detalle
+                    </p>
+                  </a>
+                </li>
+              </div>
+            </div>
+
+            <li class="nav-item">
+              <a href="../catalogos/tbl_opciones.php" class="nav-link">
+                <i class="nav-icon fas fa-align-justify"></i>
+                <p>
+                  Opciones
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../catalogos/tbl_usuario.php" class="nav-link">
+                <i class="nav-icon fas fa-users"></i>
+                <p>
+                  Usuarios
+                </p>
+              </a>
+            </li>
+
+            <!--Dropdown Menu Rol -->
+            <div class="dropdown">
+              <button class="dropbtn"><i class="nav-icon fas fa-lock"></i> Rol</button>
+              <div class="dropdown-content">
+                <li class="nav-item">
+                  <a href="../catalogos/tbl_rol.php" class="nav-link">
+                    <i class="nav-icon fas fa-lock"></i>
+                    <p>
+                      Rol
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../catalogos/tbl_rol_opciones.php" class="nav-link">
+                    <i class="nav-icon fas fa-unlock-alt"></i>
+                    <p>
+                      Rol-Opcion
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../catalogos/tbl_rol_usuario.php" class="nav-link">
+                    <i class="nav-icon fas fa-user-tag"></i>
+                    <p>
+                      Rol-Usuario
+                    </p>
+                  </a>
+                </li>
+              </div>
+            </div>
         </nav>
         <!-- /.sidebar-menu -->
       </div>
@@ -216,7 +432,7 @@ $gast = $dtGast->obtenerGasto($varIdGastos);
                       <div class="form-group">
                         <label>Gasto ID</label>
                         <input readonly type="number" class="form-control" id="id_registro_gastos" name="id_registro_gastos" placeholder="ID">
-                        <input type="hidden" value="2" name="txtaccion" id="txtaccion"/>
+                        <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
                       </div>
                       <div class="form-group">
                         <label>Fecha Gasto</label>
@@ -233,7 +449,7 @@ $gast = $dtGast->obtenerGasto($varIdGastos);
                       <div class="form-group">
                         <label>Kermesse</label>
                         <select name="idKermesse" id="idKermesse" class="form-control" required>
-                          <option  value="">Kermesse</option>
+                          <option value="">Kermesse</option>
 
                           <?php
                           foreach ($kerme->listKermesse() as $r) :
@@ -333,7 +549,7 @@ $gast = $dtGast->obtenerGasto($varIdGastos);
     $(document).ready(function() {
       setValoresGast();
     });
-    </script>
+  </script>
 </body>
 
 </html>

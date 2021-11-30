@@ -47,5 +47,6 @@ if ($_GET) {
         header("Location: /AdminLTE/pages/catalogos/tbl_categoria_producto.php?msj=5");
     } catch (Exception $e) {
         header("Location: /AdminLTE/pages/catalogos/tbl_categoria_producto.php?msj=6 ");
+        die($e->getMessage());
     }
 }

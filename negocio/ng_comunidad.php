@@ -62,6 +62,7 @@ if ($_POST)
         catch (Exception $e)
         {
             header("Location: /AdminLTE/pages/catalogos/tbl_comunidad.php?msj=6");
+            die($e->getMessage());
             
         }
     }

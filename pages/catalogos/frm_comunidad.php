@@ -5,14 +5,12 @@ include '../../entidades/comunidad.php';
 include '../../datos/dt_comunidad.php';
 
 $dtCmn = new Dt_Comunidad();
-$cmn = new Comunidad();
 
-$varIdComunidad = 0;
-if(isset($varIdComunidad))
+$varMsj = 0;
+if(isset($varMsj))
 {
-    $varIdComunidad = $_GET['editC'];
+    $varMsj = $_GET['msj'];
 }
-$cmn = $dtCmn->obtenerComunidad($varIdComunidad);
 
 ?>
 
@@ -97,15 +95,15 @@ $cmn = $dtCmn->obtenerComunidad($varIdComunidad);
         </div>
       </div>
 
-          <!-- Sidebar Menu -->
-          <nav class="mt-2">
+         <!-- Sidebar Menu -->
+         <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-header">TABLAS</li>
           <li class="nav-item">
             <a href="../catalogos/tbl_comunidad.php" class="nav-link">
-              <i class="nav-icon fas fa-search-dollar"></i>
+              <i class="nav-icon fas fa-building"></i>
               <p>
                 Comunidad
               </p>
@@ -113,8 +111,7 @@ $cmn = $dtCmn->obtenerComunidad($varIdComunidad);
           </li>
           <li class="nav-item">
             <a href="../catalogos/tbl_ingreso_comunidad.php" class="nav-link">
-              <i class="nav-icon fas fa-coins"></i>
-              
+            <i class="nav-icon fas fa-piggy-bank"></i>
               <p>
                 Ingreso Comunidad
               </p>
@@ -122,8 +119,7 @@ $cmn = $dtCmn->obtenerComunidad($varIdComunidad);
           </li>
           <li class="nav-item">
             <a href="../catalogos/tbl_ingreso_comunidad_det.php" class="nav-link">
-              <i class="nav-icon fas fa-money-bill"></i>
-  
+              <i class="nav-icon fas fa-cash-register"></i>
               <p>
                 Ingreso Comunidad Det
               </p>
@@ -131,7 +127,7 @@ $cmn = $dtCmn->obtenerComunidad($varIdComunidad);
           </li>
           <li class="nav-item">
             <a href="../../pages/catalogos/tbl_productos.php" class="nav-link">
-              <i class="nav-icon fas fa-shopping-basket"></i>
+              <i class="nav-icon fas fa-lemon"></i>
               <p>
                 Productos
               </p>
@@ -139,8 +135,7 @@ $cmn = $dtCmn->obtenerComunidad($varIdComunidad);
           </li>
           <li class="nav-item">
             <a href="../../pages/catalogos/tbl_categoria_producto.php" class="nav-link">
-              <i class="nav-icon fas fa-cookie"></i>
-   
+              <i class="nav-icon fas fa-bread-slice"></i>
               <p>
                 Categoria Productos
               </p>
@@ -209,7 +204,7 @@ $cmn = $dtCmn->obtenerComunidad($varIdComunidad);
                   <div class="form-group">
                     <label>Descripcion de la Contribucion</label>
                     <input type="text" class="form-control" id="desc_contribucion" name= "desc_contribucion"  maxlenght= "100"
-                    placeholder="Descripcion de la contribucion"  required>
+                    placeholder="Descripcion de la contribucion" >
                   </div>
                   
                 </div>
@@ -221,12 +216,14 @@ $cmn = $dtCmn->obtenerComunidad($varIdComunidad);
                     <button type="reset" class="btn btn-danger">Cancelar</button>
 
                   </div>
-                
-              </form>
-              <div class="card-footer">
+
+                  <div class="card-footer">
                                         <a href="tbl_comunidad.php"><i class="fas fa-arrow-left"></i> Atras</a>
 
                                     </div>
+                
+              </form>
+            
             </div>
             <!-- /.card -->               
           </div>        

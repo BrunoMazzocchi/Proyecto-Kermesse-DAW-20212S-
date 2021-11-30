@@ -94,15 +94,15 @@ if(isset($varMsj))
         </div>
       </div>
 
-          <!-- Sidebar Menu -->
-          <nav class="mt-2">
+           <!-- Sidebar Menu -->
+           <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-header">TABLAS</li>
           <li class="nav-item">
             <a href="../catalogos/tbl_comunidad.php" class="nav-link">
-              <i class="nav-icon fas fa-search-dollar"></i>
+              <i class="nav-icon fas fa-building"></i>
               <p>
                 Comunidad
               </p>
@@ -110,7 +110,7 @@ if(isset($varMsj))
           </li>
           <li class="nav-item">
             <a href="../catalogos/tbl_ingreso_comunidad.php" class="nav-link">
-              <i class="nav-icon fas fa-coins"></i>
+            <i class="nav-icon fas fa-piggy-bank"></i>
               <p>
                 Ingreso Comunidad
               </p>
@@ -118,7 +118,7 @@ if(isset($varMsj))
           </li>
           <li class="nav-item">
             <a href="../catalogos/tbl_ingreso_comunidad_det.php" class="nav-link">
-              <i class="nav-icon fas fa-shopping-basket"></i>
+              <i class="nav-icon fas fa-cash-register"></i>
               <p>
                 Ingreso Comunidad Det
               </p>
@@ -126,7 +126,7 @@ if(isset($varMsj))
           </li>
           <li class="nav-item">
             <a href="../../pages/catalogos/tbl_productos.php" class="nav-link">
-              <i class="nav-icon fas fa-file-invoice-dollar"></i>
+              <i class="nav-icon fas fa-lemon"></i>
               <p>
                 Productos
               </p>
@@ -134,7 +134,7 @@ if(isset($varMsj))
           </li>
           <li class="nav-item">
             <a href="../../pages/catalogos/tbl_categoria_producto.php" class="nav-link">
-              <i class="nav-icon fas fa-cookie"></i>
+              <i class="nav-icon fas fa-bread-slice"></i>
               <p>
                 Categoria Productos
               </p>
@@ -145,6 +145,7 @@ if(isset($varMsj))
     </div>
     <!-- /.sidebar -->
   </aside>
+
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -152,12 +153,12 @@ if(isset($varMsj))
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Tabla</h1>
+                            <h1>Tabla Categoria de producto </h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                                <li class="breadcrumb-item active">Categoria</li>
+                                <li class="breadcrumb-item active">Categorias</li>
                             </ol>
                         </div>
                     </div>
@@ -172,7 +173,7 @@ if(isset($varMsj))
                     <a href="frm_categoria_producto.php" title="Nueva Categoria" target="blank"><i class="far fa-2x fa-plus-square"></i></a>
                     </div>
                 <!-- /.card-header -->
-                <div class="card-body">
+          
                     <table id="example1" class="table table-bordered table-striped">
                   <thead>
 
@@ -189,20 +190,26 @@ if(isset($varMsj))
                   <tbody>
                     <?php
                       foreach($dtCpt->listCategoriaProducto() as $r):
+                        $estado = "";
+                        if ($r->__GET('estado') == 1 || $r->__GET('estado') == 2) {
+                          $estado = "Activo";
+                        } else {
+                          $estado = "Inactivo";
+                        } 
                     ?>
                     <tr>
-                      <td><?php echo $r->__GET('id_categoria_producto'); ?></td>
-                      <td><?php echo $r->__GET('nombre'); ?></td>
-                      <td><?php echo $r->__GET('descripcion'); ?></td>
-                      <td><?php echo $r->__GET('estado'); ?></td>
+                      <td><?php echo $r->__GET('id_categoria_producto') ?></td>
+                      <td><?php echo $r->__GET('nombre') ?></td>
+                      <td><?php echo $r->__GET('descripcion') ?></td>
+                      <td><?php echo $estado ?></td>
                       <td> 
-                        <a href="frm_editar_categoria_producto.php?EditCP=<?php echo $r->__GET('id_categoria_producto');?>" target="_blank">
+                        <a href="frm_editar_categoria_producto.php?EditCP=<?php echo $r->__GET('id_categoria_producto')?>" target="blank">
                         <i class="far fa-edit" title="Editar Categoria"></i></a>
                         &nbsp;&nbsp;
-                        <a href="frm_view_categoria_producto.php?viewCP=<?php echo $r->__GET('id_categoria_producto');?>" target="_blank">
+                        <a href="frm_view_categoria_producto.php?viewCP=<?php echo $r->__GET('id_categoria_producto')?>" target="blank">
                         <i class="far fa-eye" title="Ver Categoria"></i></a>
                         &nbsp;&nbsp;
-                        <a href="../../negocio/ng_categoria_producto.php?delCP=<?php echo $r->__GET('id_categoria_producto') ?>" target="_blank">
+                        <a href="#" onclick="deleteCategoria(<?php echo $r->__GET('id_categoria_producto') ?>);">
                         <i class="far fa-trash-alt" title="Eliminar"></i>
                         </a>
                     </td>
@@ -267,57 +274,57 @@ if(isset($varMsj))
     <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
 
 
-       <!-- AdminLTE App -->
-    <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
-    <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> //optional!! </script>
-
-
-    <!-- AdminLTE App -->
-    <script src="../../dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="../../dist/js/demo.js"></script>
-    <!-- Page specific script -->
-    <script>
-        $(document).ready(function()
-        {
-            var mensaje = 0;
-                        mensaje = "<?php echo $varMsj?>";
-                        if (mensaje == "1") {
-                successAlert('Exito', 'Los datos han sido registrado exitosamente');
-            }
-            if (mensaje == "2" || mensaje == '4') {
-                errorAlert('Error', 'Revise los datos e intente de nuevo');
-            }
-            if (mensaje == "3") {
-                successAlert('Exito', 'Los datos han sido editado exitosamente');
-            }
-            if (mensaje == "5") {
-                successAlert('Exito', 'Los datos han sido eliminado exitosamente');
-            }
-            if (mensaje == "6") {
-                errorAlert('Error', 'Revise que los datos existan');
-            }
-                        
-
-        $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["excel", "pdf"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
+     <!-- jAlert -->
+  <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+  <script src="../../plugins/jAlert/dist/jAlert-functions.min.js">
+    //optional!! 
+  </script>
+  <script>
+    function deleteCategoria(idCP) {
+      confirm(function(e, btn) {
+          e.preventDefault();
+          window.location.href = "../../negocio/ng_categoria_producto.php?delCP=" + idCP;
+        },
+        function(e, btn) {
+          e.preventDefault();
         });
+    }
+    $(document).ready(function() {
+      var mensaje = 0;
+      mensaje = "<?php echo $varMsj ?>";
+      if (mensaje == "1") {
+        successAlert('Exito', 'Los datos han sido registrados exitosamente');
+      }
+      if (mensaje == "2" || mensaje == "4" || mensaje == "6") {
+        errorAlert('Error', 'Revise los datos e intente de nuevo');
+      }
+      if (mensaje == "3") {
+        successAlert('Exito', 'Los datos han sido actualizados exitosamente');
+      }
+      if (mensaje == "5") {
+        successAlert('Exito', 'Los datos han sido eliminados exitosamente');
+      }
+
+
+      $(function() {
+        $("#example1").DataTable({
+          "responsive": true,
+          "lengthChange": false,
+          "autoWidth": false,
+          "buttons": ["excel", "pdf"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+          "paging": true,
+          "lengthChange": false,
+          "searching": false,
+          "ordering": true,
+          "info": true,
+          "autoWidth": false,
+          "responsive": true,
+        });
+      });
     }); // FIN DOC READY FUN
-    </script>
+  </script>
 
 </body>
 

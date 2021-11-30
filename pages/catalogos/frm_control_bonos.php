@@ -208,14 +208,9 @@ if (isset($varMsj)) {
               <form method="POST" action="../../negocio/ng_Bono.php">
               <div class="card-body">
                   <div class="form-group">
-                    <label> ID </label>
-                    <input type="number" class="form-control" id="id_bono" name= "id_bono"  maxlenght= "2" placeholder="Ingrese el ID" title= "Ingrese el ID" required>
-                    <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
-                  </div>
-
-                  <div class="form-group">
                     <label>Nombre</label>
                     <input type="text" class="form-control" id="nombre" name= "nombre"  maxlenght= "45" placeholder="Ingrese el nombre del Bono" title= "Ingrese el nombre del Bono" required>
+                    <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
                   </div>
 
                   <div class="form-group">

@@ -1,6 +1,5 @@
 <?php
 include_once("conexion.php");
-include_once("../entidades/comunidad.php");
 
 class Dt_comunidad extends Conexion
 {
@@ -10,7 +9,7 @@ class Dt_comunidad extends Conexion
         try {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT * FROM dbkermesse.tbl_comunidad";
+            $querySQL = "SELECT * FROM dbkermesse.tbl_comunidad; ";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
@@ -45,7 +44,7 @@ class Dt_comunidad extends Conexion
                     $cmn->__GET('id_comunidad'),
                     $cmn->__GET('nombre'),
                     $cmn->__GET('responsable'),
-                    $cmn->__GET('desc_constribucion'),
+                    $cmn->__GET('desc_contribucion'),
                     $cmn->__GET('estado'),
                 ));
 
@@ -59,7 +58,7 @@ class Dt_comunidad extends Conexion
     {
         try {
             $this->myCon = parent::conectar();
-            $querySQL = "SELECT * FROM dbkermesse.tbl_comunidad WHERE id_comunidad = ?;";
+            $querySQL = "SELECT * FROM dbkermesse.tbl_comunidad WHERE id_comunidad = ?";
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute(array($id));
 
@@ -104,14 +103,14 @@ class Dt_comunidad extends Conexion
             die($e->getMessage());
         }
     }
-    public function deleteComunidad($id)
+    public function deleteComunidad($idCm)
     {
         try
         {
             $this->myCon = parent::conectar();
-            $querySQL = "DELETE FROM dbkermesse.tbl_comunidad WHERE id_comunidad = ?";
+            $querySQL = "UPDATE dbkermesse.tbl_comunidad SET estado = 3 WHERE id_comunidad = ?";
             $stm = $this->myCon->prepare($querySQL);
-            $stm->execute(array($id));
+            $stm->execute(array($idCm));
             $this->myCon = parent::desconectar();
         }
         catch (Exception $e) {

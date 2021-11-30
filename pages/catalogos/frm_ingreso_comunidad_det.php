@@ -1,10 +1,11 @@
 <?php
 error_reporting(0);
 //IMPORTAMOS ENTIDADES Y DATOS
-include '../../Entidades/ingreso_comunidad_det.php';
-include '../../Datos/dt_ingreso_comunidad_det.php';
+include '../../entidades/ingreso_comunidad_det.php';
+include '../../datos/dt_ingreso_comunidad_det.php';
 
-$dticd = new dt_ingreso_comunidad_det();
+$icp = new Ingreso_Comunidad_Det();
+$dticd = new Dt_Ingreso_Comunidad_Det();
 
 $varMsj = 0;
 if (isset($varMsj)) {
@@ -12,7 +13,6 @@ if (isset($varMsj)) {
 }
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -94,66 +94,49 @@ if (isset($varMsj)) {
           </div>
         </div>
       </div>
-
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
+  <!-- Sidebar Menu -->
+  <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-header">TABLAS</li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_denominacion.php" class="nav-link">
-              <i class="nav-icon fas fa-search-dollar"></i>
+            <a href="../catalogos/tbl_comunidad.php" class="nav-link">
+              <i class="nav-icon fas fa-building"></i>
               <p>
-                Denominación
+                Comunidad
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_Moneda.php" class="nav-link">
-              <i class="nav-icon fas fa-coins"></i>
+            <a href="../catalogos/tbl_ingreso_comunidad.php" class="nav-link">
+            <i class="nav-icon fas fa-piggy-bank"></i>
               <p>
-                Moneda
+                Ingreso Comunidad
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_productos.php" class="nav-link">
-              <i class="nav-icon fas fa-shopping-basket"></i>
+            <a href="../catalogos/tbl_ingreso_comunidad_det.php" class="nav-link">
+              <i class="nav-icon fas fa-cash-register"></i>
+              <p>
+                Ingreso Comunidad Det
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../../pages/catalogos/tbl_productos.php" class="nav-link">
+              <i class="nav-icon fas fa-lemon"></i>
               <p>
                 Productos
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="../../pages/catalogos/tbl_gastos.php" class="nav-link">
-              <i class="nav-icon fas fa-file-invoice-dollar"></i>
+            <a href="../../pages/catalogos/tbl_categoria_producto.php" class="nav-link">
+              <i class="nav-icon fas fa-bread-slice"></i>
               <p>
-                Gastos
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_parroquia.php" class="nav-link">
-              <i class="nav-icon fas fa-church"></i>
-              <p>
-                Parroquia
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_kermesse.php" class="nav-link">
-              <i class="nav-icon fas fa-map-pin"></i>
-              <p>
-                Kermesse
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_control_bonos.php" class="nav-link">
-              <i class="nav-icon fas fa-money-bill-wave"></i>
-              <p>
-                Bonos
+                Categoria Productos
               </p>
             </a>
           </li>
@@ -170,31 +153,12 @@ if (isset($varMsj)) {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Nuevo Rol Opcion</h1>
+            <h1>Nuevo Ingreso Comunidad Detalle</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Registrar Rol Opcion</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Nuevo Ingreso Comunidad Det</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Registrar Ingreso Comunidad Det</li>
+              <li class="breadcrumb-item active">Registrar Ingreso Comunidad Detalle</li>
             </ol>
           </div>
         </div>
@@ -210,16 +174,17 @@ if (isset($varMsj)) {
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Registrar Ingreso Det</h3>
+                <h3 class="card-title">Registrar Ingreso Detalle</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form>
+              <form method="POST" action="../../negocio/ng_ingreso_comunidad_det.php">
                 <div class="card-body">
                   <div class="form-group">
                     <label> ID </label>
                     <input type="number" class="form-control" id="id_ingreso_comunidad_det" name= "id_ingreso_comunidad_det"  maxlenght= "2"
-                    placeholder="Ingrese el ID" title= "Ingrese el ID" required>
+                    placeholder="Ingrese el ID" required>
+                    <input type="hidden" value="1" name="txtaccion" id="txtaccion" required>
                   </div>
                   
                   <div class="form-group">
@@ -230,7 +195,7 @@ if (isset($varMsj)) {
 
                         <?php
 
-                        foreach ($dtkerme->listIngresoComunidad() as $r) :
+                        foreach ($dtIc->listIngresoComunidad() as $r) :
                         ?>
                           <tr>
                             <option value="<?php echo $r->__GET('id_ingreso_comunidad'); ?>"><?php echo $r->__GET('id_ingreso_comunidad'); ?></option>
@@ -269,19 +234,19 @@ if (isset($varMsj)) {
                   <div class="form-group">
                     <label>Denominacion</label>
                     <input type="text" class="form-control" id="denominacion" name= "denominacion"  maxlenght= "50"
-                    placeholder="Ingrese la denominacion del Ingreso" title= "Ingrese la denominacion del Ingreso" required>
+                    placeholder="Ingrese la denominacion del Ingreso" required>
                   </div>
 
                   <div class="form-group">
                     <label>Cantidad</label>
                     <input type="number" class="form-control" id="cantidad" name= "cantidad"  maxlenght= "20"
-                    placeholder="Ingrese la cantidad del bono" title= "Ingrese la cantidad del bono" required>
+                    placeholder="Cantidad del bono" required>
                   </div>
 
                   <div class="form-group">
                     <label>Subtotal de Bono</label>
                     <input type="number" class="form-control" id="subtotal_bono" name= "subtotal_bono" step="any" maxlenght= "20"
-                    placeholder="Subotal del bono" title= "Subtotal del bono" required>
+                    placeholder="Subotal del bono" required>
                   </div>
 
                   
@@ -296,6 +261,10 @@ if (isset($varMsj)) {
                   <button type="reset" class="btn btn-danger">Cancelar</button>
                 </div>
               </form>
+              <div class="card-footer">
+                <a href="tbl_ingreso_comunidad_det.php"><i class="fas fa-arrow-left"></i> Atras</a>
+
+              </div>
             </div>
             <!-- /.card -->
 

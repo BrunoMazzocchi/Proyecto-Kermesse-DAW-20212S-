@@ -119,6 +119,7 @@ if (!$acceso) {
           <a href="#" class="nav-link">Contact</a>
         </li>
       </ul>
+<<<<<<< HEAD
     <!-- SEARCH FORM -->
     <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
@@ -144,6 +145,10 @@ if (!$acceso) {
       </li>
     </ul>
   <ul class="navbar-nav ml-auto">
+=======
+
+      <ul class="navbar-nav ml-auto">
+>>>>>>> af9cdbedaa792e37afeac8083fcb2806a3411628
         <li class="nav-item">
           <a class="nav-link" href="../../login.php" title="Cerrar Sesion">
             <i class="fas fa-power-off"></i> Cerrar Sesion

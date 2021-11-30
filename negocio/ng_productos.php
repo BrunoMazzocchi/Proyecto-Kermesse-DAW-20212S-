@@ -27,7 +27,7 @@ if ($_POST)
                 $p->__SET('estado', 1);
 
 
-                $dtp->regProductos($p);
+                $dtp->regProducto($p);
                 header("Location: /AdminLTE/pages/catalogos/tbl_productos.php?msj=1");
             }
             catch (Exception $e)
@@ -49,7 +49,7 @@ if ($_POST)
 
     
                     
-                    $dtp->editProductos($p);
+                    $dtp->editProducto($p);
                     header("Location: /AdminLTE/pages/catalogos/tbl_productos.php?msj=3");
             }
             catch (Exception $e)
@@ -63,7 +63,7 @@ if ($_POST)
     if ($_GET) {
         try {
             $p->__SET('id_producto', $_GET['delP']);
-            $dtp->deleteProductos($p->__GET('id_producto'));
+            $dtp->deleteProducto($p->__GET('id_producto'));
     
             header("Location: /AdminLTE/pages/catalogos/tbl_productos.php?msj=5");
         }
