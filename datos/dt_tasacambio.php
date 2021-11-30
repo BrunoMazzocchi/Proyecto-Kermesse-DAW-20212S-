@@ -61,7 +61,7 @@ class Dt_tasacambio extends Conexion{
         }
     }
 
-    public function RegistarTasaCambio(tasaCambio $tc){
+    public function RegistarTasaCambio(TasaCambio $tc){
         try{
             $this->myCon = parent::conectar();
             $querySQL = "INSERT INTO dbkermesse.tbl_tasacambio (id_monedaO, id_monedaC, mes, anio, estado) VALUES(?, ?, ?, ?, 1);";
