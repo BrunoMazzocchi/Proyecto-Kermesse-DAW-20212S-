@@ -57,9 +57,6 @@ if ($_POST) {
 if ($_GET) {
     try {
         $kerme->__SET('id_kermesse', $_GET['delK']);
-
-        $dtKerme->deleteKermesse($kerme->__GET('id_lista_precio'));
-        header("Location: ../pages/catalogos/tbl_kermesse.php?msj=5");
         $dtKerme->deleteKermesse($kerme->__GET('id_kermesse'));
         header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_kermesse.php?msj=5");
     } catch (Exception $e) {

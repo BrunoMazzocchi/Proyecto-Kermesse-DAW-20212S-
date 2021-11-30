@@ -10,7 +10,7 @@ public function listProducto(){
     try {
         $this->myCon = parent::conectar(); 
         $result = array(); 
-        $querySQL = "SELECT * FROM dbkermesse.vw_productos_comunidad_categoriaproducto; ";  
+        $querySQL = "SELECT * FROM dbkermesse.tbl_productos; ";  
         
         $stm = $this->myCon->prepare($querySQL);
         $stm->execute(); 
@@ -21,7 +21,7 @@ public function listProducto(){
             $p->__SET('id_producto', $r->id_producto);
             $p->__SET('id_comunidad', $r->id_comunidad);
             $p->__SET('id_categoria_producto', $r->id_categoria_producto);
-            $p->__SET('nombreProducto', $r->nombreProducto);
+            $p->__SET('nombre', $r->nombre);
             $p->__SET('nombreComunidad', $r->nombreComunidad);
             $p->__SET('nombreCategoria', $r->nombreCategoria);
             $p->__SET('descripcion', $r->descripcion); 

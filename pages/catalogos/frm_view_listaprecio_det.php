@@ -4,9 +4,9 @@ error_reporting(0);
 include '../../entidades/listaprecio_det.php';
 include '../../datos/dt_listaprecio_det.php';
 
-
 $dtlist = new Dt_ListaPrecioDet();
-$list = new Lista_Precio_Det();
+
+$lista = new Lista_Precio_Det();
 $varIdLista = 0;
 if (isset($varIdLista)) {
   $varIdLista = $_GET['viewC'];
