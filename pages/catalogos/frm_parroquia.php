@@ -167,12 +167,12 @@ if (isset($varMsj)) {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Nuevo Rol Opcion</h1>
+            <h1>Nueva parroquia</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Registrar Rol Opcion</li>
+              <li class="breadcrumb-item active">Registrar Parroquia</li>
             </ol>
           </div>
         </div>
@@ -195,13 +195,10 @@ if (isset($varMsj)) {
                 <form method="POST" action="../../negocio/ng_Parroquia.php">
                 <div class="card-body">
                     <div class="form-group">
-                      <label >Numero de parroquia</label>
-                      <input type="number" class="form-control" id="idParroquia" name="idParroquia" placeholder="Numero de parroquia" required>
-                      <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
-                    </div>
-                    <div class="form-group">
                       <label >Nombre</label>
                       <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre de parroquia" required>
+                      <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
+
                     </div>
                     <div class="form-group">
                       <label >Direccion</label>
