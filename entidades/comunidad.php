@@ -4,7 +4,7 @@ class Comunidad {
     private $id_comunidad;
     private $nombre;
     private $responsable; 
-    private $desc_contribucion; 
+    private $desc_contribucion;
     private $estado; 
 
     

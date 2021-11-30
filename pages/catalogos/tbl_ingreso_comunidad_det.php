@@ -94,105 +94,49 @@ if (isset($varMsj)) {
         </div>
       </div>
 
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
+          <!-- Sidebar Menu -->
+          <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-header">TABLAS</li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_denominacion.php" class="nav-link">
-              <i class="nav-icon fas fa-search-dollar"></i>
+            <a href="../catalogos/tbl_comunidad.php" class="nav-link">
+              <i class="nav-icon fas fa-building"></i>
               <p>
-                Denominación
+                Comunidad
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_Moneda.php" class="nav-link">
-              <i class="nav-icon fas fa-coins"></i>
+            <a href="../catalogos/tbl_ingreso_comunidad.php" class="nav-link">
+            <i class="nav-icon fas fa-piggy-bank"></i>
               <p>
-                Moneda
+                Ingreso Comunidad
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_productos.php" class="nav-link">
-              <i class="nav-icon fas fa-shopping-basket"></i>
+            <a href="../catalogos/tbl_ingreso_comunidad_det.php" class="nav-link">
+              <i class="nav-icon fas fa-cash-register"></i>
+              <p>
+                Ingreso Comunidad Det
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../../pages/catalogos/tbl_productos.php" class="nav-link">
+              <i class="nav-icon fas fa-lemon"></i>
               <p>
                 Productos
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="../../pages/catalogos/tbl_gastos.php" class="nav-link">
-              <i class="nav-icon fas fa-file-invoice-dollar"></i>
+            <a href="../../pages/catalogos/tbl_categoria_producto.php" class="nav-link">
+              <i class="nav-icon fas fa-bread-slice"></i>
               <p>
-                Gastos
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_parroquia.php" class="nav-link">
-              <i class="nav-icon fas fa-church"></i>
-              <p>
-                Parroquia
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_kermesse.php" class="nav-link">
-              <i class="nav-icon fas fa-map-pin"></i>
-              <p>
-                Kermesse
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_control_bonos.php" class="nav-link">
-              <i class="nav-icon fas fa-money-bill-wave"></i>
-              <p>
-                Bonos
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_rol.php" class="nav-link">
-              <i class="nav-icon fas fa-lock"></i>
-              <p>
-                Rol
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_opciones.php" class="nav-link">
-              <i class="nav-icon fas fa-align-justify"></i>
-              <p>
-                Opciones
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_usuario.php" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
-              <p>
-                Usuarios
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_rol_opciones.php" class="nav-link">
-              <i class="nav-icon fas fa-unlock-alt"></i>
-              <p>
-                Rol-Opcion
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../catalogos/tbl_rol_usuario.php" class="nav-link">
-              <i class="nav-icon fas fa-user-tag"></i>
-              <p>
-                Rol-Usuario
+                Categoria Productos
               </p>
             </a>
           </li>
@@ -209,12 +153,12 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1> Ingresos Comunidad Det</h1>
+                            <h1> Ingresos Comunidad Detalle</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Tabla Ingreso Comunidad Det</li>
+                                <li class="breadcrumb-item active">Tabla Ingreso Comunidad Detalle</li>
                             </ol>
                         </div>
                     </div>
@@ -225,19 +169,20 @@ if (isset($varMsj)) {
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Tabla Ingreso Comunidad Det</h3>
+                            <h3 class="card-title">Tabla Ingreso Comunidad Detalle</h3>
                         </div>
 
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ID Ingreso Comunidad Det</th>
-                                        <th>ID Ingreso Comunidad</th>
-                                        <th>ID Bono</th>
+                                        <th>ID </th>
+                                        <th>Ingreso Comunidad</th>
+                                        <th> Bono</th>
                                         <th>Denominacion</th>
                                         <th>Cantidad</th>
-                                        <th>Subtotal Bono</th>
+                                        <th>Subtotal del Bono</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -252,13 +197,14 @@ if (isset($varMsj)) {
                                         <td><?php echo $r->__GET('denominación');?></td>
                                         <td><?php echo $r->__GET('cantidad');?></td>
                                         <td><?php echo $r->__GET('subtotal_bono');?></td>
-                                        <td> <a href="frm_editar_ingreso_comunidad_det.php?editCg=<?php echo $r->__GET('id_ingreso_comunidad_det'); ?>" target="blank">
+
+                                        <td> <a href="frm_editar_ingreso_comunidad_det.php?editIDP=<?php echo $r->__GET('id_ingreso_comunidad_det'); ?>" target="blank">
                                             <i class="far fa-edit" title="Editar Ingresos Comunidad Det"></i></a>
                                         &nbsp;&nbsp;
-                                        <a href="frm_view_ingreso_comunidad_det.php?viewCyG=<?php echo $r->__GET('id_ingreso_comunidad_det'); ?>" target="blank">
+                                        <a href="frm_view_ingreso_comunidad_det.php?viewIDP=<?php echo $r->__GET('id_ingreso_comunidad_det'); ?>" target="blank">
                                             <i class="far fa-eye" title="Ver Ingreso Comunidad Det"></i></a>
                                         &nbsp;&nbsp;
-                                        <a href="#" target="_blank">
+                                        <a href="../../negocio/ng_ingreso_comunidad_det.php?delICD=<?php echo $r->__GET('id_ingreso_comunidad_det') ?>" target="_blank">
                                             <i class="far fa-trash-alt" title="Eliminar"></i>
                                         </a>
                                     </td>
@@ -318,25 +264,52 @@ if (isset($varMsj)) {
         <!-- AdminLTE for demo purposes -->
         <script src="../../dist/js/demo.js"></script>
         <!-- Page specific script -->
-        <script>
-            $(function() {
-                $("#example1").DataTable({
-                    "responsive": true,
-                    "lengthChange": false,
-                    "autoWidth": false,
-                    "buttons": ["excel", "pdf"]
-                }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-                $('#example2').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": false,
-                    "ordering": true,
-                    "info": true,
-                    "autoWidth": false,
-                    "responsive": true,
-                });
-            });
-        </script>
+         <script>
+    function deleteIngresoComunidadDet(id) {
+      confirm(function(e, btn) {
+          e.preventDefault();
+          window.location.href = "../../negocio/ng_ingreso_comunidad.php?delIC" + id;
+        },
+        function(e, btn) {
+          e.preventDefault();
+        });
+    }
+    $(document).ready(function() {
+      var mensaje = 0;
+      mensaje = "<?php echo $varMsj ?>";
+      if (mensaje == "1") {
+        successAlert('Exito', 'Los datos han sido registrados exitosamente');
+      }
+      if (mensaje == "2" || mensaje == "4" || mensaje == "6") {
+        errorAlert('Error', 'Revise los datos e intente de nuevo');
+      }
+      if (mensaje == "3") {
+        successAlert('Exito', 'Los datos han sido actualizados exitosamente');
+      }
+      if (mensaje == "5") {
+        successAlert('Exito', 'Los datos han sido eliminados exitosamente');
+      }
+
+
+      $(function() {
+        $("#example1").DataTable({
+          "responsive": true,
+          "lengthChange": false,
+          "autoWidth": false,
+          "buttons": ["excel", "pdf"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+          "paging": true,
+          "lengthChange": false,
+          "searching": false,
+          "ordering": true,
+          "info": true,
+          "autoWidth": false,
+          "responsive": true,
+        });
+      });
+    }); // FIN DOC READY FUN
+  </script>
 </body>
 
 </html>

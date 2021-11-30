@@ -5,7 +5,6 @@ error_reporting(0);
 
 include '../../entidades/categoria_producto.php';
 include '../../datos/dt_categoria_producto.php';
-include '../../entidades/vw_rol_opciones.php';
 
 
 $dtCpt = new Dt_Categoria_Producto();
@@ -196,15 +195,15 @@ $cpt = $dtCpt->obtenerCategoria($varIdCategoriaP);
                         </div>
                     </div>
                 </div>
-     <!-- Sidebar Menu -->
-     <nav class="mt-2">
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-header">TABLAS</li>
           <li class="nav-item">
             <a href="../catalogos/tbl_comunidad.php" class="nav-link">
-              <i class="nav-icon fas fa-search-dollar"></i>
+              <i class="nav-icon fas fa-building"></i>
               <p>
                 Comunidad
               </p>
@@ -212,7 +211,7 @@ $cpt = $dtCpt->obtenerCategoria($varIdCategoriaP);
           </li>
           <li class="nav-item">
             <a href="../catalogos/tbl_ingreso_comunidad.php" class="nav-link">
-              <i class="nav-icon fas fa-coins"></i>
+            <i class="nav-icon fas fa-piggy-bank"></i>
               <p>
                 Ingreso Comunidad
               </p>
@@ -220,7 +219,7 @@ $cpt = $dtCpt->obtenerCategoria($varIdCategoriaP);
           </li>
           <li class="nav-item">
             <a href="../catalogos/tbl_ingreso_comunidad_det.php" class="nav-link">
-              <i class="nav-icon fas fa-shopping-basket"></i>
+              <i class="nav-icon fas fa-cash-register"></i>
               <p>
                 Ingreso Comunidad Det
               </p>
@@ -228,7 +227,7 @@ $cpt = $dtCpt->obtenerCategoria($varIdCategoriaP);
           </li>
           <li class="nav-item">
             <a href="../../pages/catalogos/tbl_productos.php" class="nav-link">
-              <i class="nav-icon fas fa-file-invoice-dollar"></i>
+              <i class="nav-icon fas fa-lemon"></i>
               <p>
                 Productos
               </p>
@@ -236,7 +235,7 @@ $cpt = $dtCpt->obtenerCategoria($varIdCategoriaP);
           </li>
           <li class="nav-item">
             <a href="../../pages/catalogos/tbl_categoria_producto.php" class="nav-link">
-              <i class="nav-icon fas fa-file-invoice-dollar"></i>
+              <i class="nav-icon fas fa-bread-slice"></i>
               <p>
                 Categoria Productos
               </p>
@@ -280,27 +279,23 @@ $cpt = $dtCpt->obtenerCategoria($varIdCategoriaP);
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form>
+                                <form method="POST" action="../../negocio/ng_categoria_producto.php">
                                     <div class="card-body">
-                                        <div class="form-group">
-                                            <label>ID Categoria Producto</label>
+                                    <div class="form-group">
+                                            <label>ID Categoria</label>
+                                            <input readonly type="text" class="form-control" id="id_categoria_producto" name="id_categoria_producto" placeholder="Nombre de la categoria" required>
                                             <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
-                                            <input type="text" class="form-control" id="id_categoria_producto" name="id_categoria_producto" placeholder="ID Categoria Producto" required>
                                         </div>
+                                        
                                         <div class="form-group">
                                             <label>Nombre</label>
-                                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
+                                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre de la categoria" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Descripcion</label>
                                             <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" required>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Estado</label>
-                                            <input type="text" class="form-control" id="estado" name="estado" placeholder="Estado" required>
-                                        </div>
-                                        
-                                        
+                                       
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
@@ -356,9 +351,9 @@ $cpt = $dtCpt->obtenerCategoria($varIdCategoriaP);
 
     <script>
         function setValoresCategoriaP() {
-            $("#id_categoria_producto").val("<?php echo $ctp->__GET('id_categoria_producto') ?>")
-            $("#nombre").val("<?php echo $cpt->__GET('nombre') ?>")
-            $("#descripcion").val("<?php echo $cpt->__GET('descripcion') ?>")
+            $("#id_categoria_producto").val("<?php echo $cpt->__GET('id_categoria_producto') ?>");
+            $("#nombre").val("<?php echo $cpt->__GET('nombre') ?>");
+            $("#descripcion").val("<?php echo $cpt->__GET('descripcion') ?>");
         }
         $(document).ready(function() {
             setValoresCategoriaP();

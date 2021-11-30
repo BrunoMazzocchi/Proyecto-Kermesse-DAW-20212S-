@@ -3,9 +3,15 @@ error_reporting(0);
 //IMPORTAMOS ENTIDADES Y DATOS
 include '../../entidades/productos.php';
 include '../../datos/dt_productos.php';
+include '../../entidades/comunidad.php';
+include '../../datos/dt_comunidad.php';
+include '../../entidades/categoria_producto.php';
+include '../../datos/dt_categoria_producto.php';
+
 
 $dtp = new Dt_Productos();
-$p = new Productos();
+$dtCmn = new Dt_comunidad();
+$dtCpt = new Dt_Categoria_Producto();
 $varMsj = 0;
 if (isset($varMsj)) {
     $varMsj = $_GET['msj'];
@@ -94,15 +100,15 @@ if (isset($varMsj)) {
         </div>
       </div>
 
-          <!-- Sidebar Menu -->
-          <nav class="mt-2">
+           <!-- Sidebar Menu -->
+           <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-header">TABLAS</li>
           <li class="nav-item">
             <a href="../catalogos/tbl_comunidad.php" class="nav-link">
-              <i class="nav-icon fas fa-search-dollar"></i>
+              <i class="nav-icon fas fa-building"></i>
               <p>
                 Comunidad
               </p>
@@ -110,8 +116,7 @@ if (isset($varMsj)) {
           </li>
           <li class="nav-item">
             <a href="../catalogos/tbl_ingreso_comunidad.php" class="nav-link">
-              <i class="nav-icon fas fa-coins"></i>
-              
+            <i class="nav-icon fas fa-piggy-bank"></i>
               <p>
                 Ingreso Comunidad
               </p>
@@ -119,8 +124,7 @@ if (isset($varMsj)) {
           </li>
           <li class="nav-item">
             <a href="../catalogos/tbl_ingreso_comunidad_det.php" class="nav-link">
-              <i class="nav-icon fas fa-money-bill"></i>
-  
+              <i class="nav-icon fas fa-cash-register"></i>
               <p>
                 Ingreso Comunidad Det
               </p>
@@ -128,7 +132,7 @@ if (isset($varMsj)) {
           </li>
           <li class="nav-item">
             <a href="../../pages/catalogos/tbl_productos.php" class="nav-link">
-              <i class="nav-icon fas fa-shopping-basket"></i>
+              <i class="nav-icon fas fa-lemon"></i>
               <p>
                 Productos
               </p>
@@ -136,8 +140,7 @@ if (isset($varMsj)) {
           </li>
           <li class="nav-item">
             <a href="../../pages/catalogos/tbl_categoria_producto.php" class="nav-link">
-              <i class="nav-icon fas fa-cookie"></i>
-   
+              <i class="nav-icon fas fa-bread-slice"></i>
               <p>
                 Categoria Productos
               </p>
@@ -149,6 +152,24 @@ if (isset($varMsj)) {
     <!-- /.sidebar -->
   </aside>
 
+ <!-- Content Wrapper. Contains page content -->
+ <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>Nuevo Producto</h1>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                <li class="breadcrumb-item active">Registrar Producto</li>
+              </ol>
+            </div>
+          </div>
+        </div><!-- /.container-fluid -->
+      </section>
 
 
     <!-- Main content -->
@@ -173,26 +194,60 @@ if (isset($varMsj)) {
                   </div>
 
                   <div class="form-group">
-                    <label>Selecciona la Comunidad</label>
-                    <select name="nombre" id="id_comunidad" required>
-                      <option value="">Comunidad</option>
-
-                  
-                  <div class="form-group">
                     <label>Nombre</label>
                     <input type="text" class="form-control" id="nombre" name= "nombre"  maxlenght= "45"
-                    placeholder="Nombre"  required>
+                    placeholder="Nombre del Producto"  required>
                   </div>
-                  
+
                   <div class="form-group">
-                    <label>Selecciona la Categoria del producto</label>
-                    <select name="nombre" id="id_categoria_producto" required>
-                      <option value="">Categoria Producto</option>
+                      <label>Seleccione una Comunidad</label>
+                      <select id="id_comunidad" name="id_comunidad" class="form-control">
+                        <option value="">Seleccione...</option>
+
+
+                        <?php
+
+                        foreach ($dtCmn->listComunidad() as $r) :
+                        ?>
+                          <tr>
+                            <option value="<?php echo $r->__GET('id_comunidad'); ?>"><?php echo $r->__GET('nombre'); ?></option>
+                          </tr>
+                        <?php
+                        endforeach;
+
+                        ?>
+
+
+                      </select>
+                      </div>
+                  
+                      <div class="form-group">
+                      <label>Seleccione una categoria</label>
+                      <select id="id_categoria_producto" name="id_categoria_producto" class="form-control">
+                        <option value="">Seleccione...</option>
+
+
+                        <?php
+
+                        foreach ($dtCpt->listCategoriaProducto() as $r) :
+                        ?>
+                          <tr>
+                            <option value="<?php echo $r->__GET('id_categoria_producto'); ?>"><?php echo $r->__GET('nombre'); ?></option>
+                          </tr>
+                        <?php
+                        endforeach;
+
+                        ?>
+
+
+                      </select>
+                      </div>
+
 
                   <div class="form-group">
                     <label>Descripcion</label>
                     <input type="text" class="form-control" id="descripcion" name= "descripcion"  maxlenght= "100"
-                    placeholder="Cantidad" required>
+                    placeholder="Descripcion" required>
                   </div>
 
                   <div class="form-group">
@@ -223,12 +278,15 @@ if (isset($varMsj)) {
                   <button type="submit" class="btn btn-primary">Guardar</button>
                   <button type="reset" class="btn btn-danger">Cancelar</button>
                 </div>
-              </form>
-              <div class="card-footer">
+                <div class="card-footer">
                 <a href="tbl_productos.php"><i class="fas fa-arrow-left"></i> Atras</a>
 
               </div>
 
+              </form>
+             
+ </div>
+        </div>
                 
             </div>        
       </div>

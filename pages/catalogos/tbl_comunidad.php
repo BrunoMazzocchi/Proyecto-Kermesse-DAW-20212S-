@@ -4,6 +4,7 @@ error_reporting(0);
 include '../../entidades/comunidad.php';
 include '../../datos/dt_comunidad.php';
 
+$cmn = new Comunidad();
 $dtCmn = new Dt_Comunidad();
 
 $varMsj = 0;
@@ -12,7 +13,6 @@ if (isset($varMsj))
     $varMsj = $_GET['msj'];
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,6 +26,7 @@ if (isset($varMsj))
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -102,7 +103,7 @@ if (isset($varMsj))
           <li class="nav-header">TABLAS</li>
           <li class="nav-item">
             <a href="../catalogos/tbl_comunidad.php" class="nav-link">
-              <i class="nav-icon fas fa-search-dollar"></i>
+              <i class="nav-icon fas fa-building"></i>
               <p>
                 Comunidad
               </p>
@@ -110,7 +111,7 @@ if (isset($varMsj))
           </li>
           <li class="nav-item">
             <a href="../catalogos/tbl_ingreso_comunidad.php" class="nav-link">
-              <i class="nav-icon fas fa-coins"></i>
+            <i class="nav-icon fas fa-piggy-bank"></i>
               <p>
                 Ingreso Comunidad
               </p>
@@ -118,7 +119,7 @@ if (isset($varMsj))
           </li>
           <li class="nav-item">
             <a href="../catalogos/tbl_ingreso_comunidad_det.php" class="nav-link">
-              <i class="nav-icon fas fa-shopping-basket"></i>
+              <i class="nav-icon fas fa-cash-register"></i>
               <p>
                 Ingreso Comunidad Det
               </p>
@@ -126,7 +127,7 @@ if (isset($varMsj))
           </li>
           <li class="nav-item">
             <a href="../../pages/catalogos/tbl_productos.php" class="nav-link">
-              <i class="nav-icon fas fa-file-invoice-dollar"></i>
+              <i class="nav-icon fas fa-lemon"></i>
               <p>
                 Productos
               </p>
@@ -134,7 +135,7 @@ if (isset($varMsj))
           </li>
           <li class="nav-item">
             <a href="../../pages/catalogos/tbl_categoria_producto.php" class="nav-link">
-              <i class="nav-icon fas fa-file-invoice-dollar"></i>
+              <i class="nav-icon fas fa-bread-slice"></i>
               <p>
                 Categoria Productos
               </p>
@@ -154,7 +155,7 @@ if (isset($varMsj))
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Tablas</h1>
+                            <h1>Tabla Comunidad</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -192,62 +193,56 @@ if (isset($varMsj))
                                 <tbody>
                                     <?php
                                         foreach($dtCmn->listComunidad() as $r):
-                                
+                                      
+                                            $estado = "";
+                                            if ($r->__GET('estado') == 1 || $r->__GET('estado') == 2) {
+                                              $estado = "Activo";
+                                            } else {
+                                              $estado = "Inactivo";
+                                            }       
                                     ?>
                                     <tr>
-                                        <td><?php echo $r->__GET('id_comunidad');?></td>
-                                        <td><?php echo $r->__GET('nombre');?></td>
-                                        <td><?php echo $r->__GET('responsable');?></td>
-                                        <td><?php echo $r->__GET('desc_contribucion');?></td>
-                                        <td><?php echo $r->__GET('estado');?></td>
+                                        <td><?php echo $r->__GET('id_comunidad')?></td>
+                                        <td><?php echo $r->__GET('nombre')?></td>
+                                        <td><?php echo $r->__GET('responsable')?></td>
+                                        <td><?php echo $r->__GET('desc_contribucion')?></td>
+                                        <td><?php echo $estado ?></td>
 
-                                        <td> <a href="frm_editar_comunidad.php?editC=<?php echo $r->__GET('id_comunidad'); ?>" target="blank">
+                                        <td>
+                                        <a href="frm_editar_comunidad.php?editC=<?php echo $r->__GET('id_comunidad') ?>" target="blank">
                                             <i class="far fa-edit" title="Editar Comunidad"></i></a>
-                                        &nbsp;&nbsp;
-                                        <a href="frm_view_comunidad.php?viewC=<?php echo $r->__GET('id_comunidad'); ?>" target="blank">
+                                  
+                                        <a href="frm_view_comunidad.php?viewC=<?php echo $r->__GET('id_comunidad') ?>" target="blank">
                                             <i class="far fa-eye" title="Ver Comunidad"></i></a>
-                                        &nbsp;&nbsp;
-                                        <a href="../../negocio/ng_comunidad.php?delC=<?php echo $r->__GET('id_comunidad') ?>" target="_blank">
-                                            <i class="far fa-trash-alt" title="Eliminar"></i>
-                                        </a>
+  
+                                        <a href="#" onclick="deleteComunidad(<?php echo $r->__GET('id_comunidad') ?>);">
+                                            <i class="far fa-trash-alt" title="Eliminar"></i></a>
                                         </td>
                                      </tr>
                             <?php
                             endforeach;
                             ?>
-    </tbody>
-
-<tfoot>
-<tr>
-
- 
-</tr>
-</tfoot>
-  </table>
-</div>
-<!-- /.card-body -->
-</div>
-<!-- /.card -->
-</div>
-<!-- /.col -->
-</div>
-<!-- /.row -->
-</div>
-<!-- /.container-fluid -->
-</section>
-<!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
-<footer class="main-footer">
-<div class="float-right d-none d-sm-block">
-<b>Version</b> 3.1.0-rc
-</div>
-<strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-</footer>
+    <tfoot>
+                          
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+    </div>
 
 
- <!-- Control Sidebar -->
- <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->
     </aside>
     <!-- /.control-sidebar -->
@@ -271,59 +266,58 @@ if (isset($varMsj))
     <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
 
-
-<!-- AdminLTE App -->
-<script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
-<script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> //optional!! </script>
-
-
-<!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
-    <!-- Page specific script -->
-    <script>
-        $(document).ready(function() {
-            var mensaje = 0;
-            mensaje = "<?php echo $varMsj ?>";
-            if (mensaje == "1") {
-                successAlert('Exito', 'Los datos han sido registrado exitosamente');
-            }
-            if (mensaje == "2" || mensaje == '4') {
-                errorAlert('Error', 'Revise los datos e intente de nuevo');
-            }
-            if (mensaje == "3") {
-                successAlert('Exito', 'Los datos han sido editado exitosamente');
-            }
-            if (mensaje == "5") {
-                successAlert('Exito', 'Los datos han sido eliminado exitosamente');
-            }
-            if (mensaje == "6") {
-                errorAlert('Error', 'Revise que los datos existan');
-            }
-
-            $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["excel", "pdf"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
+     <!-- jAlert -->
+   <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+  <script src="../../plugins/jAlert/dist/jAlert-functions.min.js">
+    //optional!! 
+  </script>
+  <script>
+    function deleteComunidad(idCm) {
+      confirm(function(e, btn) {
+          e.preventDefault();
+          window.location.href = "../../negocio/ng_comunidad.php?delC=" + idCm;
+        },
+        function(e, btn) {
+          e.preventDefault();
         });
+    }
+    $(document).ready(function() {
+      var mensaje = 0;
+      mensaje = "<?php echo $varMsj ?>";
+      if (mensaje == "1") {
+        successAlert('Exito', 'Los datos han sido registrados exitosamente');
+      }
+      if (mensaje == "2" || mensaje == "4" || mensaje == "6") {
+        errorAlert('Error', 'Revise los datos e intente de nuevo');
+      }
+      if (mensaje == "3") {
+        successAlert('Exito', 'Los datos han sido actualizados exitosamente');
+      }
+      if (mensaje == "5") {
+        successAlert('Exito', 'Los datos han sido eliminados exitosamente');
+      }
+
+
+      $(function() {
+        $("#example1").DataTable({
+          "responsive": true,
+          "lengthChange": false,
+          "autoWidth": false,
+          "buttons": ["excel", "pdf"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+          "paging": true,
+          "lengthChange": false,
+          "searching": false,
+          "ordering": true,
+          "info": true,
+          "autoWidth": false,
+          "responsive": true,
+        });
+      });
     }); // FIN DOC READY FUN
-    </script>
+  </script>
 
 </body>
-
-
 
 </html>
