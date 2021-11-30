@@ -29,7 +29,7 @@
         <form action="./negocio/ng_usuario.php" method="post">
           <div class="input-group mb-3">
             <input type="hidden" name="txtaccion" value="3">
-            <input type="text" class="form-control" placeholder="Usuario" required>
+            <input type="text" class="form-control" name="user" placeholder="Usuario" required>
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-user"></span>
@@ -37,7 +37,7 @@
             </div>
           </div>
           <div class="input-group mb-3">
-            <input type="password" class="form-control" placeholder="Password" required>
+            <input type="password" class="form-control" name="pwd" placeholder="Password" required>
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>
