@@ -226,7 +226,6 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label>ID Rol</label>
-                    <input type="number" class="form-control" id="id_rol" name="id_rol" placeholder="Digite numero de rol"/>
                     <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
                   </div>
                   <div class="form-group">

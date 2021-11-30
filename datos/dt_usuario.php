@@ -36,22 +36,23 @@ class Dt_usuario extends Conexion
     {
         try {
             $this->myCon = parent::conectar();
-            $sql = "INSERT INTO dbkermesse.tbl_usuario (id_usuario,usuario,pwd,nombres,apellidos,email,estado)
-            VALUES(?,?,?,?,?,?,?);";
+            $sql = "INSERT INTO dbkermesse.tbl_usuario (usuario,pwd,nombres,apellidos,email,estado)
+            VALUES(?,?,?,?,?,?);";
 
             $this->myCon->prepare($sql)
-                ->execute(array(
-                    $us->_GET('id_usuario'),
-                    $us->_GET('usuario'),
-                    $us->_GET('pwd'),
-                    $us->_GET('nombres'),
-                    $us->_GET('apellidos'),
-                    $us->_GET('email'),
-                    $us->_GET('estado'),
-                ));
+             ->execute(array(
+                $us->_GET('usuario'),
+                $us->_GET('pwd'),
+                $us->_GET('nombres'),
+                $us->_GET('apellidos'),
+                $us->_GET('email'),
+                $us->_GET('estado'),
+             ));
 
-            $this->myCon = parent::desconectar();
-        } catch (Exception $e) {
+             $this->myCon = parent::desconectar();
+        }
+        catch (Exception $e)
+        {
             die($e->getMessage());
         }
     }
