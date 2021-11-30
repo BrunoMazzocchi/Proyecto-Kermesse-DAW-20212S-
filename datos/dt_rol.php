@@ -36,18 +36,10 @@ class Dt_rol extends Conexion
             VALUES (?,?)";
 
             $this->myCon->prepare($sql)
-<<<<<<< HEAD
              ->execute(array(
                 $rol->_GET('rol_descripcion'),
                 $rol->_GET('estado')
              ));
-=======
-                ->execute(array(
-                    $rol->_GET('id_rol'),
-                    $rol->_GET('rol_descripcion'),
-                    $rol->_GET('estado')
-                ));
->>>>>>> 661108d20789982f0d85646ca0ef362808395589
 
             $this->myCon = parent::desconectar();
         } catch (Exception $e) {

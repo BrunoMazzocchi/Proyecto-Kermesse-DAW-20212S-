@@ -37,18 +37,10 @@ class Dt_opciones extends Conexion
             VALUES (?,?)";
 
             $this->myCon->prepare($sql)
-<<<<<<< HEAD
              ->execute(array(
                 $opc->_GET('opcion_descripcion'),
                 $opc->_GET('estado')
              ));
-=======
-                ->execute(array(
-                    $opc->_GET('id_opciones'),
-                    $opc->_GET('opcion_descripcion'),
-                    $opc->_GET('estado')
-                ));
->>>>>>> 661108d20789982f0d85646ca0ef362808395589
 
             $this->myCon = parent::desconectar();
         } catch (Exception $e) {
