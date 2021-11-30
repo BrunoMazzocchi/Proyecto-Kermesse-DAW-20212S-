@@ -86,12 +86,6 @@ if (!$acceso) {
 // 
 $dtu = new Dt_Usuario();
 
-//variable de control msj
-$varMsj = 0;
-if (isset($varMsj)) {
-  $varMsj = $_GET['msj'];
-}
-
 
 ?>
 <!DOCTYPE html>

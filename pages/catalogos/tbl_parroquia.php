@@ -4,13 +4,95 @@ error_reporting(0);
 include '../../entidades/parroquia.php';
 include '../../datos/dt_parroquia.php';
 
+
+include '../../entidades/usuario.php';
+include '../../entidades/rol.php';
+include '../../entidades/opciones.php';
+
+
+include '../../datos/dt_Usuario.php';
+include '../../datos/dt_Rol.php';
+include '../../datos/dt_Opciones.php';
+
 $dtParro = new Dt_Parroquia();
+$dtUser = new Dt_usuario();
 
 $varMsj = 0;
 if (isset($varMsj)) {
   $varMsj = $_GET['msj'];
 }
+
+
+//SEGURIDAD//
+
+$usuario = new Usuario();
+$rol = new Rol();
+$listOpc = new Opciones();
+//DATOS
+$dtr = new Dt_Rol();
+$dtOpc = new Dt_Opciones();
+
+//MANEJO Y CONTROL DE LA SESION
+session_start(); // INICIAMOS LA SESION
+
+//VALIDAMOS SI LA SESION ESTÁ VACÍA
+if (empty($_SESSION['acceso'])) {
+  //nos envía al inicio
+  header("Location: ../../login.php?msj=2");
+}
+
+$usuario = $_SESSION['acceso']; // OBTENEMOS EL VALOR DE LA SESION
+
+//OBTENEMOS EL ROL
+$rol->_SET('id_rol', $dtr->getIdRol($usuario[0]->_GET('usuario')));
+
+//OBTENEMOS LAS OPCIONES DEL ROL
+$listOpc = $dtOpc->getOpciones($rol->_GET('id_rol'));
+
+//OBTENEMOS LA OPCION ACTUAL
+$url = $_SERVER['REQUEST_URI'];
+// var_dump($url);
+$inicio = strrpos($url, '/') + 1;
+// var_dump($inicio); //6
+// $total= strlen($url); 
+// var_dump($total); //28
+$fin = strripos($url, '?');
+// var_dump($fin); //22
+if ($fin > 0) {
+  $miPagina = substr($url, $inicio, $fin - $inicio);
+  // var_dump($miPagina);
+} else {
+  $miPagina = substr($url, $inicio);
+  // var_dump($miPagina);
+}
+
+////// VALIDAMOS LA OPCIÓN ACTUAL CON LA MATRIZ DE OPCIONES //////
+//obtenemos el numero de elementos
+$longitud = count($listOpc);
+$acceso = false; // VARIABLE DE CONTROL
+
+//Recorro todos los elementos de la matriz de opciones
+for ($i = 0; $i < $longitud; $i++) {
+  //obtengo el valor de cada elemento
+  $opcion = $listOpc[$i]->_GET('opcion_descripcion');
+  if (strcmp($miPagina, $opcion) == 0) //COMPARO LA OPCION ACTUAL CON CADA OPCIÓN DE LA MATRIZ
+  {
+    $acceso = true; //ACCESO CONCEDIDO
+    break;
+  }
+}
+
+if (!$acceso) {
+  //ACCESO NO CONCEDIDO 
+  header("Location: ../../401.php"); //REDIRECCIONAMOS A LA PAGINA DE ACCESO RESTRINGIDO
+}
+
+// 
+$dtu = new Dt_Usuario();
+
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,16 +140,11 @@ if (isset($varMsj)) {
         </div>
       </form>
 
-      <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
+
         <li class="nav-item">
-          <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-            <i class="fas fa-expand-arrows-alt"></i>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-            <i class="fas fa-marker"></i>
+          <a class="nav-link" href="../../login.php" title="Cerrar Sesion">
+            <i class="fas fa-power-off"></i> Cerrar Sesion
           </a>
         </li>
       </ul>
@@ -216,7 +293,7 @@ if (isset($varMsj)) {
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                <li class="breadcrumb-item active">Usuarios</li>
+                <li class="breadcrumb-item active">Parroquia</li>
               </ol>
             </div>
           </div>
@@ -224,67 +301,67 @@ if (isset($varMsj)) {
       </section>
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Usuarios</h3>
+          <h3 class="card-title">Parroquia</h3>
         </div>
         <div class="card-body">
           <div class="form-group col-md-12" style="text-align:right">
-            <a href="frm_usuario.php" title="Nuevo Usuario" target="blank"><i class="far fa-plus-square"></i></a>
+            <a href="frm_parroquia.php" title="Nuevo parroquia" target="blank"><i class="far fa-plus-square"></i></a>
           </div>
           <!-- /.card-header -->
           <div class="card-body">
             <table id="example1" class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th>Parroquia ID</th>
-                <th>Nombre</th>
-                <th>Direccion</th>
-                <th>Telefono</th>
-                <th>Parroco</th>
-                <th>Logo</th>
-                <th>Sitio Web</th>
-              </tr>
-            </thead>
-            </thead>
-
-            <tbody>
-
-              <?php
-              foreach ($dtParro->listParroquia() as $r) :
-              ?>
+              <thead>
                 <tr>
-                  <td><?php echo $r->__GET('idParroquia') ?></td>
-                  <td><?php echo $r->__GET('nombre') ?></td>
-                  <td><?php echo $r->__GET('direccion') ?></td>
-                  <td><?php echo $r->__GET('telefono') ?></td>
-                  <td><?php echo $r->__GET('parroco') ?></td>
-                  <td><?php echo $r->__GET('logo') ?></td>
-                  <td><?php echo $r->__GET('sitio_web') ?></td>
-                  <td> <a href="frm_editar_parroquia.php?editC=<?php echo $r->__GET('idParroquia') ?>" target="blank">
-                      <i class="far fa-edit" title="Editar Parroquia"></i></a>
-                    &nbsp;&nbsp;
-                    <a href="frm_view_parroquia.php?viewC=<?php echo $r->__GET('idParroquia') ?>" target="blank">
-                      <i class="far fa-eye" title="Ver Parroquia"></i></a>
-                    &nbsp;&nbsp;
-                    <a href="../../negocio/ng_Parroquia.php?delC=<?php echo $r->__GET('idParroquia') ?>" target="_blank">
-                      <i class="far fa-trash-alt" title="Eliminar"></i>
-                    </a>
-                  </td>
+                  <th>Parroquia ID</th>
+                  <th>Nombre</th>
+                  <th>Direccion</th>
+                  <th>Telefono</th>
+                  <th>Parroco</th>
+                  <th>Logo</th>
+                  <th>Sitio Web</th>
                 </tr>
-              <?php
-              endforeach;
-              ?>
+              </thead>
+              </thead>
 
-            <tfoot>
-              <tr>
-                <th>Parroquia ID</th>
-                <th>Nombre</th>
-                <th>Direccion</th>
-                <th>Telefono</th>
-                <th>Parroco</th>
-                <th>Logo</th>
-                <th>Sitio Web</th>
-              </tr>
-            </tfoot>
+              <tbody>
+
+                <?php
+                foreach ($dtParro->listParroquia() as $r) :
+                ?>
+                  <tr>
+                    <td><?php echo $r->__GET('idParroquia') ?></td>
+                    <td><?php echo $r->__GET('nombre') ?></td>
+                    <td><?php echo $r->__GET('direccion') ?></td>
+                    <td><?php echo $r->__GET('telefono') ?></td>
+                    <td><?php echo $r->__GET('parroco') ?></td>
+                    <td><?php echo $r->__GET('logo') ?></td>
+                    <td><?php echo $r->__GET('sitio_web') ?></td>
+                    <td> <a href="frm_editar_parroquia.php?editC=<?php echo $r->__GET('idParroquia') ?>" target="blank">
+                        <i class="far fa-edit" title="Editar Parroquia"></i></a>
+                      &nbsp;&nbsp;
+                      <a href="frm_view_parroquia.php?viewC=<?php echo $r->__GET('idParroquia') ?>" target="blank">
+                        <i class="far fa-eye" title="Ver Parroquia"></i></a>
+                      &nbsp;&nbsp;
+                      <a href="../../negocio/ng_Parroquia.php?delC=<?php echo $r->__GET('idParroquia') ?>" target="_blank">
+                        <i class="far fa-trash-alt" title="Eliminar"></i>
+                      </a>
+                    </td>
+                  </tr>
+                <?php
+                endforeach;
+                ?>
+
+              <tfoot>
+                <tr>
+                  <th>Parroquia ID</th>
+                  <th>Nombre</th>
+                  <th>Direccion</th>
+                  <th>Telefono</th>
+                  <th>Parroco</th>
+                  <th>Logo</th>
+                  <th>Sitio Web</th>
+                </tr>
+              </tfoot>
             </table>
           </div>
           <!-- /.card-body -->

@@ -113,7 +113,7 @@ class Dt_opciones extends Conexion
         try {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT opcion_descripcion FROM dbkermesse.vw_rol_opciones WHERE id_rol= :id_rol;";
+            $querySQL = "SELECT opcion_descripcion FROM dbkermesse.vw_rol_opciones WHERE tbl_rol_id_rol= :id_rol;";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->bindParam(':id_rol', $rol, PDO::PARAM_INT);
