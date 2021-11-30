@@ -124,7 +124,6 @@ $dtu = new Dt_Usuario();
       </ul>
 
       <ul class="navbar-nav ml-auto">
-
         <li class="nav-item">
           <a class="nav-link" href="../../login.php" title="Cerrar Sesion">
             <i class="fas fa-power-off"></i> Cerrar Sesion
