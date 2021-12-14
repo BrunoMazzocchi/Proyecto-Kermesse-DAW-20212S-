@@ -223,7 +223,7 @@
           <h3><i class="fas fa-exclamation-triangle text-warning"></i> Usted no tiene acceso a esta pagina.</h3>
 
           <p>
-           Consulte con el administrador del sistema para que le proporcione los accesos solicitados
+           Consulte con el administrador del sistema para que le proporcione los accesos solicitados.
             Por ahora debe retornar al <a href="./sistema-kermesse.php">Inicio</a> 
           </p>
 

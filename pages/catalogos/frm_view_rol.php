@@ -11,14 +11,14 @@ include '../../datos/dt_Usuario.php';
 include '../../datos/dt_Opciones.php';
 
 $dtRol = new Dt_rol();
-$rol = new Rol();
+$Rol = new Rol();
 
   $varIdrol = 0;
   if (isset($varIdrol)) {
     $varIdrol = $_GET['viewR'];
   } 
 
-  $rol = $dtRol->obtenerRol($varIdrol);
+  $Rol = $dtRol->obtenerRol($varIdrol);
 
 //SEGURIDAD//
 
@@ -285,15 +285,15 @@ if (!$acceso) {
                                     <div class="card-body">
                                     <div class="form-group">
                                         <label>ID Rol</label>
-                                        <input type="number" value="<?php echo $rol->_GET('id_rol'); ?>" class="form-control" id="id_rol" name="id_rol"placeholder="Digite numero de rol" disabled>
+                                        <input type="number" value="<?php echo $Rol->_GET('id_rol'); ?>" class="form-control" id="id_rol" name="id_rol"placeholder="Digite numero de rol" disabled>
                                     </div>
                                     <div class="form-group">
                                         <label>Descripcion</label>
-                                        <input type="text" value="<?php echo $rol->_GET('rol_descripcion'); ?>" class="form-control" id="rol_descripcion" name="rol_descripcion"placeholder="Ingrese la descripcion" disabled>
+                                        <input type="text" value="<?php echo $Rol->_GET('rol_descripcion'); ?>" class="form-control" id="rol_descripcion" name="rol_descripcion"placeholder="Ingrese la descripcion" disabled>
                                     </div>
                                     <div class="form-group">
                                         <label>Estado</label>
-                                        <input type="number" value="<?php echo $rol->_GET('estado'); ?>" class="form-control" id="estado" name="estado"placeholder="Digite el estado" disabled>
+                                        <input type="number" value="<?php echo $Rol->_GET('estado'); ?>" class="form-control" id="estado" name="estado"placeholder="Digite el estado" disabled>
                                     </div>
                                     </div>
                                     
