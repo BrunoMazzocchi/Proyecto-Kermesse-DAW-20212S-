@@ -74,7 +74,7 @@ class Dt_Arqueocaja extends Conexion {
         {
             $this->myCon = parent::conectar();
             $sql = "INSERT INTO tbl_arqueocaja (id_ArqueoCaja,idKermesse,fechaArqueo,granTotal,usuario_creacion,fecha_creacion,estado) 
-            VALUES (?,?,NOW(),?,?,NOW(),?)";
+            VALUES (?,?,?,?,?,NOW(),?)";
             $this->myCon->prepare($sql)
                 ->execute(array(
                     $ac->_GET('id_ArqueoCaja'),

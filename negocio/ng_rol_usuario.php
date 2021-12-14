@@ -21,11 +21,11 @@ if ($_POST)
                 $rolU->_SET('tbl_rol_id_rol', $_POST['tbl_rol_id_rol']);
 
                 $dtRolUs->RegistrarRolUser($rolU);
-                header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_rol_usuario.php?msj=1");
+                header("Location: ../Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_rol_usuario.php?msj=1");
             }
             catch (Exception $e)
             {
-                header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_rol_usuario.php?msj=2");
+                header("Location: ../Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_rol_usuario.php?msj=2");
                 die($e->getMessage());
             }
             break;
@@ -37,11 +37,11 @@ if ($_POST)
                 $rolU->_SET('tbl_rol_id_rol', $_POST['tbl_rol_id_rol']);
 
                 $dtRolUs->editRolUser($rolU);
-                header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_rol_usuario.php?msj=3");
+                header("Location: ../Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_rol_usuario.php?msj=3");
             }
             catch (Exception $e)
             {
-                header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_rol_usuario.php?msj=4");
+                header("Location: ../Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_rol_usuario.php?msj=4");
                 die($e->getMessage());
             }
             break;
@@ -58,12 +58,12 @@ if ($_GET)
     {
         $rolU->_SET('id_rol_usuario', $_GET['delRU']);
         $dtRolUs->deleteRolUser($rolU->_GET('id_rol_usuario'));
-        header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_rol_usuario.php?msj=5");
+        header("Location: ../Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_rol_usuario.php?msj=5");
 
     }
     catch(Exception $e)
     {
-        header("Location: /Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_rol_usuario.php?msj=6");
+        header("Location: ../Proyecto-Kermesse-DAW-20212S-/pages/catalogos/tbl_rol_usuario.php?msj=6");
         die($e->getMessage());
     }
 }

@@ -17,6 +17,78 @@ $varMsj = 0;
 if(isset($varMsj)) {
     $varMsj = $_GET['msj'];
 }
+
+include '../../entidades/usuario.php';
+include '../../entidades/rol.php';
+include '../../entidades/opciones.php';
+
+include '../../datos/dt_rol.php';
+include '../../datos/dt_opciones.php';
+
+//ENTIDADES
+$usuario = new Usuario();
+$rol = new Rol();
+$listOpc = new Opciones();
+//DATOS
+$dtr = new Dt_Rol();
+$dtOpc = new Dt_Opciones();
+
+//MANEJO Y CONTROL DE LA SESION
+session_start(); // INICIAMOS LA SESION
+
+//VALIDAMOS SI LA SESION ESTÁ VACÍA
+if (empty($_SESSION['acceso'])) {
+  //nos envía al inicio
+  header("Location: login.php?msj=2");
+}
+
+$usuario = $_SESSION['acceso']; // OBTENEMOS EL VALOR DE LA SESION
+
+//OBTENEMOS EL ROL
+$rol->_SET('id_rol', $dtr->getIdRol($usuario[0]->_GET('usuario')));
+
+//OBTENEMOS LAS OPCIONES DEL ROL
+$listOpc = $dtOpc->getOpciones($rol->_GET('id_rol'));
+
+//OBTENEMOS LA OPCION ACTUAL
+$url = $_SERVER['REQUEST_URI'];
+// var_dump($url);
+$inicio = strrpos($url, '/') + 1;
+// var_dump($inicio); //6
+// $total= strlen($url); 
+// var_dump($total); //28
+$fin = strripos($url, '?');
+// var_dump($fin); //22
+if ($fin > 0) {
+  $miPagina = substr($url, $inicio, $fin - $inicio);
+  // var_dump($miPagina);
+} else {
+  $miPagina = substr($url, $inicio);
+  // var_dump($miPagina);
+}
+
+////// VALIDAMOS LA OPCIÓN ACTUAL CON LA MATRIZ DE OPCIONES //////
+//obtenemos el numero de elementos
+$longitud = count($listOpc);
+$acceso = false; // VARIABLE DE CONTROL
+
+//Recorro todos los elementos de la matriz de opciones
+for ($i = 0; $i < $longitud; $i++) {
+  //obtengo el valor de cada elemento
+  $opcion = $listOpc[$i]->_GET('opcion_descripcion');
+  if (strcmp($miPagina, $opcion) == 0) //COMPARO LA OPCION ACTUAL CON CADA OPCIÓN DE LA MATRIZ
+  {
+    $acceso = true; //ACCESO CONCEDIDO
+    break;
+  }
+}
+
+if (!$acceso) {
+  //ACCESO NO CONCEDIDO 
+  header("Location: ../../401.php"); //REDIRECCIONAMOS A LA PAGINA DE ACCESO RESTRINGIDO
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -91,7 +163,7 @@ if(isset($varMsj)) {
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="../../index.html" class="nav-link">Home</a>
+        <a href="../../sistema-kermesse.php" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
@@ -122,6 +194,11 @@ if(isset($varMsj)) {
           <i class="fas fa-marker"></i>
         </a>
       </li>
+      <li class="nav-item">
+          <a class="nav-link" href="../../login.php" title="Cerrar Sesion">
+            <i class="fas fa-power-off"></i> Cerrar Sesion
+          </a>
+        </li>
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -129,7 +206,7 @@ if(isset($varMsj)) {
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="../../index.html" class="brand-link">
+    <a href="../../sistema-kermesse.php" class="brand-link">
       <img src="../../dist/img/Kermesse_Logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Kermesse</span>
     </a>
@@ -163,7 +240,7 @@ if(isset($varMsj)) {
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_Moneda.php" class="nav-link">
+            <a href="../../pages/catalogos/tbl_moneda.php" class="nav-link">
               <i class="nav-icon fas fa-coins"></i>
               <p>
                 Moneda
@@ -171,7 +248,7 @@ if(isset($varMsj)) {
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_productos.php" class="nav-link">
+            <a href="../pages/catalogos/tbl_productos.php" class="nav-link">
               <i class="nav-icon fas fa-shopping-basket"></i>
               <p>
                 Productos
@@ -203,20 +280,19 @@ if(isset($varMsj)) {
             </a>
           </li>
           <li class="nav-item">
-            <a href="../catalogos/tbl_control_bonos.php" class="nav-link">
+            <a href="../../pages/catalogos/tbl_control_bonos.php" class="nav-link">
               <i class="nav-icon fas fa-money-bill-wave"></i>
               <p>
                 Bonos
               </p>
             </a>
           </li>
-
           <li class="nav-item">
-             <a href="../catalogos/tbl_arqueocaja.php" class="nav-link">
+            <a href="../../pages/catalogos/tbl_arqueocaja.php" class="nav-link">
               <i class="nav-icon fas fa-cash-register"></i>
                <p>
                 ArqueoCaja
-               </p>
+              </p>
             </a>
           </li>
 
@@ -371,7 +447,7 @@ if(isset($varMsj)) {
                     <div class="form-group col-md-12" style="text-align: right;">
                         <a href="frm_arqueocaja_det.php" title="Registrar un nuevo Arqueo de Caja" target="_blank"><i class="far fa-plus-square"></i>Nuevo</a>
                     </div>
-                    <table id="example1" class="table table-bordered table-striped">
+                    <table id="example3" class="table table-bordered table-striped">
                   
                   <thead>
                   <tr>
@@ -435,26 +511,27 @@ if(isset($varMsj)) {
 
 <!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>
+
 <!-- Bootstrap 4 -->
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-
+    
 <!-- DataTables  & Plugins -->
-<script src="../../plugins/DataTables1.11.2/datatables.min.css"></script>
-<script src="../../plugins/DataTables1.11.2/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
-<script src="../../plugins/DataTables1.11.2/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
-<script src="../../plugins/DataTables1.11.2/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
-<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
-<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
-<script src="../../plugins/DataTables1.11.2/JSZip-2.5.0/jszip.min.js"></script>
-<script src="../../plugins/DataTables1.11.2/pdfmake-0.1.36/pdfmake.min.js"></script>
-<script src="../../plugins/DataTables1.11.2/pdfmake-0.1.36/vfs_fonts.js"></script>
-<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/buttons.html5.min.js"></script>
-<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/buttons.print.min.js"></script>
-<script src="../../plugins/DataTables1.11.2/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
-<script src="../../plugins/jAlert/dist/jAlert.min.js">//optional!!</script>
-<script src="../../plugins/jAlert/dist/jAlert-functions.min.js"></script>
+<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="../../plugins/jszip/jszip.min.js"></script>
+<script src="../../plugins/pdfmake/pdfmake.min.js"></script>
+<script src="../../plugins/pdfmake/vfs_fonts.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
+<!-- jAlert -->
+<script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+<script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> //optional!! </script>
 
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
@@ -515,9 +592,27 @@ if(isset($varMsj)) {
                     "responsive": true,
                     "lengthChange": false,
                     "autoWidth": false,
-                    "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+                    "buttons": ["excel", "pdf"]
                 }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
                 $('#example2').DataTable({
+                     "paging": true,
+                     "lengthChange": false,
+                     "searching": false,
+                     "ordering": true,
+                     "info": true,
+                     "autoWidth": false,
+                     "responsive": true,
+                });
+            });
+
+            $(function() {
+                $("#example3").DataTable({
+                    "responsive": true,
+                    "lengthChange": false,
+                    "autoWidth": false,
+                    "buttons": ["excel", "pdf"]
+                }).buttons().container().appendTo('#example3_wrapper .col-md-6:eq(0)');
+                $('#example4').DataTable({
                      "paging": true,
                      "lengthChange": false,
                      "searching": false,

@@ -43,20 +43,44 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+<<<<<<< HEAD
+      <li class="nav-item">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+          <i class="fas fa-marker"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../login.php" title="Cerrar Sesion">
+          <i class="fas fa-power-off"></i> Cerrar Sesion
+        </a>
+      </li>
+    </ul>
+=======
         <li class="nav-item">
           <a class="nav-link" href="login.php" title="Cerrar Sesion">
             <i class="fas fa-power-off"></i> Cerrar Sesion
           </a>
         </li>
       </ul>
+>>>>>>> 56322a0f02b5abf9fa3db1cd6f413f9ecd4c28da
   </nav>
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
+<<<<<<< HEAD
+    <a href="../Proyecto-Kermesse-DAW-20212S-/sistema-kermesse.php" class="brand-link">
+      <img src="../Proyecto-Kermesse-DAW-20212S-/dist/img/Kermesse_Logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+=======
     <a href="./sistema-kermesse.php" class="brand-link">
     <img src="./dist/img/Kermesse_Logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+>>>>>>> 56322a0f02b5abf9fa3db1cd6f413f9ecd4c28da
       <span class="brand-text font-weight-light">Kermesse</span>
     </a>
 
@@ -73,6 +97,7 @@
           </div>
         </div>
       </div>
+
     <!-- Sidebar Menu -->
     <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">

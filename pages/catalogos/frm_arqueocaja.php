@@ -46,7 +46,7 @@ if(isset($varMsj))
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="../../index.html" class="nav-link">Home</a>
+        <a href="../../sistema-kermesse.php" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
@@ -77,6 +77,11 @@ if(isset($varMsj))
           <i class="fas fa-marker"></i>
         </a>
       </li>
+      <li class="nav-item">
+          <a class="nav-link" href="../../login.php" title="Cerrar Sesion">
+            <i class="fas fa-power-off"></i> Cerrar Sesion
+          </a>
+        </li>
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -84,7 +89,7 @@ if(isset($varMsj))
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="../../index.html" class="brand-link">
+    <a href="../../sistema-kermesse.php" class="brand-link">
       <img src="../../dist/img/Kermesse_Logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Kermesse</span>
     </a>
@@ -219,11 +224,11 @@ if(isset($varMsj))
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="$_POST" action="../../negocio/ng_ArqueoCaja.php">
+              <form method="POST" action="../../negocio/ng_ArqueoCaja.php">
                 <div class="card-body">
                   <div class="form-group">
-                    <label>ID Kermesse</label>
-                    <select id="id_kermesse" name="id_kermesse" class="form-control">
+                    <label>Seleccione una Kermesse</label>
+                    <select id="idKermesse" name="idKermesse" class="form-control">
                         <option value="">Seleccione...</option>
                         <?php
                           foreach ($dtk->listKermesse() as $r) :
@@ -235,15 +240,15 @@ if(isset($varMsj))
                           endforeach;
                         ?>
                       </select>
-                    <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
                   </div>
                   <div class="form-group">
                     <label>Fecha Arqueo</label>
-                    <input type="date" class="form-control" id="fechaArqueo" name = "Fecha Arqueo"placeholder="Fecha Arqueo">
+                    <input type="date" class="form-control" id="fechaArqueo" name = "fechaArqueo"placeholder="Fecha Arqueo">
                   </div>
                   <div class="form-group">
                     <label>Gran Total</label>
-                    <input type="number" class="form-control" id="granTotal" name="Gran Total" placeholder="Gran Total">
+                    <input type="number" class="form-control" id="granTotal" name="granTotal" placeholder="Gran Total">
+                    <input type="hidden" value="1" id="txtaccion" name="txtaccion">
                   </div>
                 </div>
                   
